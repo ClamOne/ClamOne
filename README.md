@@ -2,6 +2,8 @@
 
 An Open Source Linux Frontend to the ClamAV Antivirus Engine. A basic graphical user interface, designed for a Desktop environment, to provide instant feedback when threats are detected on the local system. Features include configuring the clamd daemon directly from the GUI, indication of threats via visual cues as well as notifications, monitoring and updating the virus definitions, monitoring various clam-related event logs and messages, quarantining of detected threats, and visual graphing of antivirus activity.
 
+![GIF IMAGE](https://raw.githubusercontent.com/ClamOne/ClamOne/master/images/clamone_demo_0.102.4-1_beta.gif)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
