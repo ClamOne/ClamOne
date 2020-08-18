@@ -18,7 +18,7 @@ if [ -n "$(which add-apt-repository)" ]; then
   add-apt-repository universe
 fi
 apt-get update
-apt-get -y install clamav clamav-daemon clamdscan libqt5sql5-sqlite libqt5widgets5
+apt-get -y install clamav clamav-daemon clamdscan libqt5sql5-sqlite libqt5widgets5 libqt5charts5
 service clamav-freshclam stop
 freshclam
 service clamav-freshclam start
