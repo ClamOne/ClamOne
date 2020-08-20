@@ -1,10 +1,10 @@
 ﻿#ifndef QAES_H
 #define QAES_H
 
+#include <QObject>
 #if QT_VERSION >= 0x050a00
 #include <QRandomGenerator>
 #endif
-#include <QObject>
 
 class QAES
 {

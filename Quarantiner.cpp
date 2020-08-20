@@ -57,5 +57,5 @@ void Quarantiner::process(){
     }
 
     qDebug() << "end Quarantine process";
-
+    emit finished();
 }
