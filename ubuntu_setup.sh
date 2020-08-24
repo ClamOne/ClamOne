@@ -32,3 +32,5 @@ if [ ! -e /etc/apparmor.d/disable/usr.bin.freshclam ]; then
 fi
 service clamav-daemon restart
 
+#to compile Clam One, these additional packages may be required to be installed:
+#apt-get install qt5-default libqt5charts5-dev g++ libprocps-dev qttools5-dev libzip-dev

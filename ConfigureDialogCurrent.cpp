@@ -9,7 +9,6 @@ ConfigureDialogCurrent::ConfigureDialogCurrent(QString dbLoc, QWidget *parent) :
 
     ui->lineEditLocationOfClamonedb->setText(dbLoc);
 
-    ui->stringListExcludePath->setQStringList(QStringList({"^/proc/", "^/sys/"}));
     ui->stringListExcludePUA->setQStringList(QStringList({"NetTool", "PWTool"}));
     ui->stringListIncludePUA->setQStringList(QStringList({"Spy", "Scanner", "RAT"}));
     ui->stringListTCPAddr->setQStringList(QStringList({"127.0.0.1"}));
@@ -1674,6 +1673,21 @@ bool ConfigureDialogCurrent::fileFreshclamconfToUI(QString filename){
     file.close();
     fileUiToFreshclamconf(&oldFreshclamconf);
     return true;
+}
+
+void ConfigureDialogCurrent::addExclusionClamdconf(QByteArray exclude_filename){
+    ui->listWidgetMain->setCurrentRow(ClamOneConfigStackOrder::ConfigClamdconf);
+    ui->scrollAreaNetSock->verticalScrollBar()->setValue(ui->scrollAreaNetSock->verticalScrollBar()->maximum());
+    ui->checkBoxEnableExcludePath->setChecked(true);
+    QStringList expath = ui->stringListExcludePath->getQStringList();
+    if(expath.contains(QString(exclude_filename))){
+        hide();
+        return;
+    }
+    expath = expath.toSet().toList();
+    expath.append(QString(exclude_filename));
+    ui->stringListExcludePath->setQStringList(expath);
+    on_pushButtonOk_clicked();
 }
 
 bool ConfigureDialogCurrent::fileUiToClamdconf(QByteArray *out){

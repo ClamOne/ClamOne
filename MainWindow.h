@@ -208,6 +208,7 @@ signals:
     void detectedThreatFound(QString msg, QString filename = "");
     void sigProcessReadyRead(QByteArray buffer);
     void initializeFreelanceScan(bool active, QStringList stringlist);
+    void addExclusionClamdconf(QByteArray exclude_filename);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -284,8 +285,10 @@ private:
     QStringList ckExistsOnFs();
     void ckProc(int *pidClamd = Q_NULLPTR, int *pidFreshclam = Q_NULLPTR, int *pidClamonacc = Q_NULLPTR);
     quint32 clamdscanVersion(QByteArray *clamdscan_ver);
+#ifdef CLAMONE_COUNT_ITEMS_SCANNED
     void countTotalScanItems(const QStringList items, quint64 *count = Q_NULLPTR);
     void countScanItem(const QString item, quint64 *count = Q_NULLPTR);
+#endif //CLAMONE_COUNT_ITEMS_SCANNED
     quint8 getQuarantineFileStatus(QString quarantine_name);
     bool getQuarantineInfo(QString quarantine_name, quint32 *timestamp, quint64 *file_size, QByteArray *file_name);
     void setErrorAVReason(QString in);

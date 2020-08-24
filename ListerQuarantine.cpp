@@ -75,7 +75,7 @@ void ListerQuarantine::add_file(QByteArray crypt_filename, QByteArray plain_file
     bool isListEmpty = ui->listWidget->selectedItems().isEmpty();
     QPair<QByteArray, QByteArray> tmp;
     foreach(tmp, internal){
-        if(tmp.second == QString(ui->listWidget->selectedItems()[0]->text())){
+        if(tmp.second == plain_filename){
             doesListAlreadyContain = true;
             break;
         }
@@ -85,6 +85,9 @@ void ListerQuarantine::add_file(QByteArray crypt_filename, QByteArray plain_file
         tmp.first = crypt_filename;
         tmp.second = plain_filename;
         internal.append(tmp);
+        setWindowState( (windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+        raise();  // for MacOS
+        activateWindow(); // for Windows
     }
     if(isListEmpty)
         ui->listWidget->setCurrentRow(0);

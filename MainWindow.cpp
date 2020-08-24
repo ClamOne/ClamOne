@@ -101,6 +101,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(config, &ConfigureDialogCurrent::refreshMessages, this, &MainWindow::initializeMessagesTableWidget);
     connect(config, &ConfigureDialogCurrent::refreshQuarantineDirectory, this, &MainWindow::refreshQuarantineDirectory);
     connect(config, &ConfigureDialogCurrent::setEnabledQuarantine, this, &MainWindow::setEnabledQuarantine);
+    connect(this, &MainWindow::addExclusionClamdconf, config, &ConfigureDialogCurrent::addExclusionClamdconf);
     connect(scanDialog, &ScanDialog::parseClamdscanLine, this, &MainWindow::parseClamdscanLine);
     connect(scanDialog, &ScanDialog::initScanProcess, this, &MainWindow::initScanProcess);
     connect(scanDialog, &ScanDialog::setScanActive, this, &MainWindow::setScanActive);
@@ -703,6 +704,8 @@ void MainWindow::insertIntoFoundOrGeneral(qint64 timestamp, QString message, boo
     if(found && active && !existsInDatabaseAlready){
         emit detectedThreatFound(message, threatMessage);
 
+        allShow();
+
         quint32 ts = (quint32)time(NULL);
         QSqlQuery query;
         query.prepare("INSERT OR IGNORE INTO counts_table(timestamp, state, num) VALUES (:timestamp1, 2, 0);");
@@ -1250,7 +1253,16 @@ qint64 MainWindow::initializeEventsFoundTableWidget(qint64 page, bool reset_posi
             QPushButton *button_e = new QPushButton(tr("Exception"));
             button_e->setFocusPolicy(Qt::NoFocus);
             connect(button_e, &QPushButton::clicked, [=](){
+                QSqlQuery queryButton;
                 qDebug() << "button_e clicked: " << filename;
+                configLaunch();
+                emit addExclusionClamdconf(filename.toLocal8Bit());
+                queryButton.prepare("UPDATE found SET existsonfs = 0 WHERE timestamp = :timestamp1 AND filename = :filename1 ;");
+                queryButton.bindValue(":timestamp1", ts);
+                queryButton.bindValue(":filename1", filename);
+                queryButton.exec();
+                initializeEventsFoundTableWidget(page, false);
+                allHide();
             });
 
             QPushButton *button_i = new QPushButton(tr("Ignore"));
@@ -1375,8 +1387,8 @@ void MainWindow::setScanActive(bool state){
 }
 
 void MainWindow::initScanProcess(QStringList listWidgetToStringList){
-    p->start("clamdscan", QStringList() << "--fdpass" << listWidgetToStringList);
-
+    p->start("clamdscan", QStringList() << "-v" << "--stdout" << "--fdpass" << listWidgetToStringList);
+    emit sigProcessReadyRead("Scan started...\n");
 #ifdef CLAMONE_COUNT_ITEMS_SCANNED
     QTimer::singleShot(250, [=]() {
         QSqlQuery query;
@@ -1445,6 +1457,7 @@ void MainWindow::on_labelUpdateClickUpdateDefs_linkActivated(const QString &link
     ckProc(&rClamd, &rFresh, &rClamonacc);
     if(rFresh > 0){
         QProcess::execute(tr("pkexec kill -USR1 ")+QString::number(rFresh));
+        allHide();
     }
 }
 
@@ -3006,7 +3019,7 @@ quint32 MainWindow::clamdscanVersion(QByteArray *clamdscan_ver){
 
     return QT_VERSION_CHECK(major_i, minor_i, build_i);
 }
-
+#ifdef CLAMONE_COUNT_ITEMS_SCANNED
 void MainWindow::countTotalScanItems(const QStringList items, quint64 *count){
     if(count == Q_NULLPTR)
         return;
@@ -3035,7 +3048,7 @@ void MainWindow::countScanItem(const QString item, quint64 *count){
         countScanItem(qfi.canonicalFilePath(), count);
     }
 }
-
+#endif //CLAMONE_COUNT_ITEMS_SCANNED
 
 quint8 MainWindow::getQuarantineFileStatus(QString quarantine_name){
     quint8 ret = 0;

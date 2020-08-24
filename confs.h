@@ -52,6 +52,12 @@ enum ClamOneEventsStackOrder {
     EventQuarantine = 2
 };
 
+enum ClamOneConfigStackOrder {
+    ConfigBasic = 0,
+    ConfigClamdconf = 1,
+    ConfigFreshclamconf = 2
+};
+
 //#define CLAMONE_DEBUG
 //#define CLAMONE_COUNT_ITEMS_SCANNED
 

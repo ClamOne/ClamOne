@@ -6,6 +6,7 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QCheckBox>
+#include <QScrollBar>
 #include <QProcess>
 
 #include <QDebug>
@@ -281,6 +282,7 @@ public slots:
     //input
     bool fileClamdconfToUI(QString filename);
     bool fileFreshclamconfToUI(QString filename);
+    void addExclusionClamdconf(QByteArray exclude_filename);
     //output
     bool fileUiToClamdconf(QByteArray *out);
     bool fileUiToFreshclamconf(QByteArray *out);
