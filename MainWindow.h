@@ -109,6 +109,7 @@ private slots:
     void historyShow();
     void aboutLaunch();
     void configLaunch();
+    bool find_file(QByteArray *filepath, QString name);
     quint32 checkCurrentClamavVersionInstalled();
     bool setupDb();
     void markClamOneStarted();

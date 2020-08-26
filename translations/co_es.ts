@@ -73,8 +73,8 @@
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="78"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Location on the filesystem where the sqlite database is located containing all Clam One&apos;s configureations and entries&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ubicación en el sistema de archivos donde se encuentra la base de datos sqlite que contiene todas las configuraciones y entradas de Calm One&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Location on the filesystem where the sqlite database is located containing all Clam One&apos;s configurations and entries&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ubicación en el sistema de archivos donde se encuentra la base de datos sqlite que contiene todas las configuraciones y entradas de Clam One&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="81"/>
@@ -134,41 +134,39 @@
         <location filename="../ConfigureDialogCurrent.ui" line="2089"/>
         <location filename="../ConfigureDialogCurrent.ui" line="2226"/>
         <location filename="../ConfigureDialogCurrent.ui" line="2275"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="2429"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="2632"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="2681"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="2730"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3032"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3483"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3740"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3945"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4456"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4505"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4554"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4603"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4652"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4701"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4750"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4852"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="5814"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6020"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6228"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6590"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6704"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6886"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6935"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7030"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7079"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7259"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7308"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7695"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7783"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7832"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="8679"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="8728"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2848"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2858"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2865"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2428"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2631"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2680"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2729"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3031"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3482"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3739"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3944"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4455"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4504"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4553"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4602"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4651"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4700"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4749"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4851"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5813"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6019"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6227"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6589"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6703"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6885"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6934"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7029"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7078"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7258"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7307"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7694"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7782"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7831"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8678"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8727"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2862"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2872"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2879"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2886"/>
@@ -220,10 +218,10 @@
         <location filename="../ConfigureDialogCurrent.cpp" line="3208"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3215"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3222"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3230"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3237"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3245"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3252"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3229"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3236"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3244"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3251"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3259"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3266"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3273"/>
@@ -233,6 +231,8 @@
         <location filename="../ConfigureDialogCurrent.cpp" line="3301"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3308"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3315"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3322"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3329"/>
         <source>no</source>
         <translation>no</translation>
     </message>
@@ -345,33 +345,31 @@ Por defecto: si</translation>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="627"/>
         <location filename="../ConfigureDialogCurrent.ui" line="2324"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="2528"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="2580"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="2867"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3153"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3325"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3378"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3431"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3532"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3584"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3636"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3688"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3893"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="3995"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4048"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4101"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4154"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4207"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4260"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4313"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4404"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="4799"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6277"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6330"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6538"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2844"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2856"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2863"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2527"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2579"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2866"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3152"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3324"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3377"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3430"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3531"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3583"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3635"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3687"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3892"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3994"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4047"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4100"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4153"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4206"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4259"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4312"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4403"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4798"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6276"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6329"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6537"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2858"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2870"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2877"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2884"/>
@@ -423,10 +421,10 @@ Por defecto: si</translation>
         <location filename="../ConfigureDialogCurrent.cpp" line="3206"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3213"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3220"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3228"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3235"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3243"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="3250"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3227"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3234"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3242"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3249"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3257"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3264"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3271"/>
@@ -436,6 +434,8 @@ Por defecto: si</translation>
         <location filename="../ConfigureDialogCurrent.cpp" line="3299"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3306"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3313"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3320"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="3327"/>
         <source>yes</source>
         <translation>si</translation>
     </message>
@@ -631,7 +631,7 @@ Predeterminado: deshabilitado</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1340"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6776"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6775"/>
         <source>Logs</source>
         <translation>Registros</translation>
     </message>
@@ -681,7 +681,7 @@ Predeterminado: 1048576</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1477"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6814"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6813"/>
         <source>LogFileMaxSize</source>
         <translation>LogFileMaxSize</translation>
     </message>
@@ -701,7 +701,7 @@ Por defecto: no</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1535"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6863"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6862"/>
         <source>LogTime</source>
         <translation>LogTime</translation>
     </message>
@@ -732,7 +732,7 @@ Por defecto: no</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1634"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6912"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6911"/>
         <source>LogSyslog</source>
         <translation>LogSyslog</translation>
     </message>
@@ -749,7 +749,7 @@ Por defecto: LOG_LOCAL6</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1684"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="6961"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6960"/>
         <source>LogFacility</source>
         <translation>LogFacility</translation>
     </message>
@@ -769,13 +769,13 @@ Por defecto: no</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1733"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7007"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7006"/>
         <source>LogVerbose</source>
         <translation>LogVerbose</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1777"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7051"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7050"/>
         <source>BOOL&lt;br /&gt;
 Rotate log file. Requires LogFileMaxSize option set prior to this option.&lt;br /&gt;
 Default: no</source>
@@ -785,7 +785,7 @@ Por defecto: no</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1782"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7056"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7055"/>
         <source>LogRotate</source>
         <translation>LogRotate</translation>
     </message>
@@ -819,7 +819,7 @@ Por defecto: deshabilitado &lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1919"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7144"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7143"/>
         <source>PidFile</source>
         <translation>PidFile</translation>
     </message>
@@ -858,7 +858,7 @@ Por defecto: definido en la configuración (/ usr / local / share / clamav)</tra
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2017"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7190"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7189"/>
         <source>DatabaseDirectory</source>
         <translation>DatabaseDirectory</translation>
     </message>
@@ -958,22 +958,20 @@ Por defecto: 600</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2400"/>
-        <source>NUMBER&lt;br /&gt;
+        <source>BOOL&lt;br /&gt;
 This option allows you to disable clamd&apos;s caching feature.&lt;br /&gt;
-Default: no
-</source>
-        <translation>NUMBER&lt;br /&gt;
+Default: no</source>
+        <translation>BOOL &lt;br /&gt;
 Esta opción le permite deshabilitar la función de almacenamiento en caché de clamd. &lt;br /&gt;
-Por defecto: no
-</translation>
+Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2406"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2405"/>
         <source>DisableCache</source>
         <translation>DisableCache</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2450"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2449"/>
         <source>COMMAND&lt;br /&gt;
 Execute a command when a virus is found. In the command string %v will be replaced with the virus name. Additionally, two environment variables will be defined: $CLAM_VIRUSEVENT_FILENAME and $CLAM_VIRUSEVENT_VIRUSNAME.&lt;br /&gt;
 Default: disabled
@@ -984,17 +982,17 @@ Predeterminado: deshabilitado
 </translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2456"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2455"/>
         <source>VirusEvent</source>
         <translation>VirusEvent</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2479"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2478"/>
         <source>/usr/bin/mailx -s &quot;ClamAV VIRUS ALERT: %v&quot; alert &lt; /dev/null</source>
         <translation>/usr/bin/mailx -s &quot;ClamAV VIRUS ALERT: %v&quot; alert &lt; /dev/null</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2500"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2499"/>
         <source>BOOL&lt;br /&gt;
 Stop daemon when libclamav reports out of memory condition.&lt;br /&gt;
 Default: no</source>
@@ -1003,12 +1001,12 @@ Detenga el daemon cuando libclamav informe de una condición de memoria insufici
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2505"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2504"/>
         <source>ExitOnOOM</source>
         <translation>ExitOnOOM</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2552"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2551"/>
         <source>BOOL&lt;br /&gt;
 Permit use of the ALLMATCHSCAN command.&lt;br /&gt;
 Default: yes</source>
@@ -1017,13 +1015,13 @@ Permita el uso del comando ALLMATCHSCAN. &lt;br /&gt;
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2557"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2556"/>
         <source>AllowAllMatchScan</source>
         <translation>AllowAllMatchScan</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2604"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7231"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2603"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7230"/>
         <source>BOOL&lt;br /&gt;
 Don&apos;t fork into background.&lt;br /&gt;
 Default: no</source>
@@ -1032,13 +1030,13 @@ No se bifurque en segundo plano. &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2609"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7236"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2608"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7235"/>
         <source>Foreground</source>
         <translation>Foreground</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2653"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2652"/>
         <source>BOOL&lt;br /&gt;
 Enable debug messages from libclamav.&lt;br /&gt;
 Default: no</source>
@@ -1047,13 +1045,13 @@ Habilite los mensajes de depuración de libclamav. &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2658"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7285"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2657"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7284"/>
         <source>Debug</source>
         <translation>Debug</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2702"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2701"/>
         <source>BOOL&lt;br /&gt;
 Do not remove temporary files (for debugging purpose).&lt;br /&gt;
 Default: no</source>
@@ -1062,17 +1060,17 @@ No elimine archivos temporales (con fines de depuración). &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2707"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2706"/>
         <source>LeaveTemporaryFiles</source>
         <translation>LeaveTemporaryFiles</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2757"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2756"/>
         <source>Scanning</source>
         <translation>Exploración</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2790"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2789"/>
         <source>STRING&lt;br /&gt;
 Run the daemon as a specified user (the process must be started by root).&lt;br /&gt;
 Default: disabled</source>
@@ -1081,17 +1079,17 @@ Ejecute el demonio como un usuario especificado (el proceso debe ser iniciado po
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2795"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2794"/>
         <source>User</source>
         <translation>User</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2818"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2817"/>
         <source>clamav</source>
         <translation>clamav</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2839"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2838"/>
         <source>BOOL&lt;br /&gt;
 With this option enabled ClamAV will load bytecode from the database. It is highly recommended you keep this option turned on, otherwise you may miss detections for many new viruses.&lt;br /&gt;
 Default: yes</source>
@@ -1100,13 +1098,13 @@ Con esta opción habilitada, ClamAV cargará el código de bytes de la base de d
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2844"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="8705"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2843"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8704"/>
         <source>Bytecode</source>
         <translation>Bytecode</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2891"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2890"/>
         <source>STRING&lt;br /&gt;
 Set bytecode security level.&lt;br /&gt;
 &lt;br /&gt;
@@ -1125,22 +1123,22 @@ Recomendado: TrustSigned, porque el código de bytes en los archivos .cvd ya tie
 Predeterminado: TrustSigned</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2901"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2900"/>
         <source>BytecodeSecurity</source>
         <translation>BytecodeSecurity</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2925"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2924"/>
         <source>TrustSigned</source>
         <translation>TrustSigned</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2930"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2929"/>
         <source>Paranoid</source>
         <translation>Paranoid</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2952"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2951"/>
         <source>NUMBER&lt;br /&gt;
 Set bytecode timeout in milliseconds.&lt;br /&gt;
 Default: 5000</source>
@@ -1149,12 +1147,12 @@ Establezca el tiempo de espera del código de bytes en milisegundos. &lt;br /&gt
 Por defecto: 5000</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="2957"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="2956"/>
         <source>BytecodeTimeout</source>
         <translation>BytecodeTimeout</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3004"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3003"/>
         <source>BOOL&lt;br /&gt;
 Allow loading bytecode from outside digitally signed .c[lv]d files.&lt;br /&gt;
 Default: no</source>
@@ -1163,12 +1161,12 @@ Permitir cargar código de bytes desde fuera de archivos .c[lv]d firmados digita
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3009"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3008"/>
         <source>BytecodeUnsigned</source>
         <translation>BytecodeUnsigned</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3053"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3052"/>
         <source>STRING&lt;br /&gt;
 Set bytecode execution mode.&lt;br /&gt;
 &lt;br /&gt;
@@ -1189,32 +1187,32 @@ Prueba: ejecute con JIT e intérprete y compare los resultados. Haz que todas la
 Predeterminado: Auto</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3064"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3063"/>
         <source>BytecodeMode</source>
         <translation>BytecodeMode</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3088"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3087"/>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3093"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3092"/>
         <source>ForceJIT</source>
         <translation>ForceJIT</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3098"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3097"/>
         <source>ForceInterpreter</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3103"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3102"/>
         <source>Test</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3125"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3124"/>
         <source>BOOL&lt;br /&gt;
 Detect Possibly Unwanted Applications.&lt;br /&gt;
 Default: No</source>
@@ -1223,12 +1221,12 @@ Detecte aplicaciones posiblemente no deseadas. &lt;br /&gt;
 Predeterminado: No</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3130"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3129"/>
         <source>DetectPUA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3177"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3176"/>
         <source>CATEGORY&lt;br /&gt;
 Exclude a specific PUA category. This directive can be used multiple times. See https://www.clamav.net/documents/potentially-unwanted-applications-pua for the complete list of PUA categories.&lt;br /&gt;
 Default: disabled</source>
@@ -1237,12 +1235,12 @@ Excluya una categoría de PUA específica. Esta directiva se puede utilizar vari
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3182"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3181"/>
         <source>ExcludePUA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3238"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3237"/>
         <source>CATEGORY&lt;br /&gt;
 Only include a specific PUA category. This directive can be used multiple times. See https://www.clamav.net/documents/potentially-unwanted-applications-pua for the complete list of PUA categories.&lt;br /&gt;
 Default: disabled</source>
@@ -1251,12 +1249,12 @@ Incluya solo una categoría de PUA específica. Esta directiva se puede utilizar
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3243"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3242"/>
         <source>IncludePUA</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3296"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3295"/>
         <source>BOOL&lt;br /&gt;
 PE stands for Portable Executable - it&apos;s an executable file format used in all 32 and 64-bit versions of Windows operating systems. This option allows ClamAV to perform a deeper analysis of executable files and it&apos;s also required for decompression of popular executable packers such as UPX.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
@@ -1267,12 +1265,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3302"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3301"/>
         <source>ScanPE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3349"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3348"/>
         <source>BOOL&lt;br /&gt;
 Executable and Linking Format is a standard format for UN*X executables. This option allows you to control the scanning of ELF files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
@@ -1283,12 +1281,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3355"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3354"/>
         <source>ScanELF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3402"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3401"/>
         <source>BOOL&lt;br /&gt;
 Enable scanning of mail files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without parsing individual messages/attachments.&lt;br /&gt;
@@ -1299,12 +1297,12 @@ Si desactiva esta opción, los archivos originales se seguirán analizando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3408"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3407"/>
         <source>ScanMail</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3455"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3454"/>
         <source>BOOL&lt;br /&gt;
 Scan RFC1341 messages split over many emails. You will need to periodically clean up $TemporaryDirectory/clamav-partial directory. WARNING: This option may open your system to a DoS attack. Never use it on loaded servers.&lt;br /&gt;
 Default: no</source>
@@ -1313,12 +1311,12 @@ Escanee los mensajes RFC1341 divididos en muchos correos electrónicos. Deberá 
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3460"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3459"/>
         <source>ScanPartialMessages</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3504"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3503"/>
         <source>BOOL&lt;br /&gt;
 Enable email signature-based phishing detection.&lt;br /&gt;
 Default: yes</source>
@@ -1327,12 +1325,12 @@ Habilite la detección de phishing basada en firmas de correo electrónico. &lt;
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3509"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3508"/>
         <source>PhishingSignatures</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3556"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3555"/>
         <source>BOOL&lt;br /&gt;
 Enable URL signature-based phishing detection (Phishing.Heuristics.Email.*)&lt;br /&gt;
 Default: yes</source>
@@ -1341,12 +1339,12 @@ Habilite la detección de phishing basada en firmas de URL (Phishing.Heuristics.
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3561"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3560"/>
         <source>PhishingScanURLs</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3608"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3607"/>
         <source>BOOL&lt;br /&gt;
 In some cases (eg. complex malware, exploits in graphic files, and others), ClamAV uses special algorithms to provide accurate detection. This option controls the algorithmic detection.&lt;br /&gt;
 Default: yes</source>
@@ -1355,12 +1353,12 @@ En algunos casos (por ejemplo, malware complejo, exploits en archivos gráficos 
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3613"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3612"/>
         <source>HeuristicAlerts</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3660"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3659"/>
         <source>BOOL&lt;br /&gt;
 Allow heuristic match to take precedence. When enabled, if a heuristic scan (such as phishingScan) detects a possible virus/phishing it will stop scanning immediately. Recommended, saves CPU scan-time. When disabled, virus/phishing detected by heuristic scans will be reported only at the end of a scan. If an archive contains both a heuristically detected virus/phishing, and a real malware, the real malware will be reported. Keep this disabled if you intend to handle &quot;*.Heuristics.*&quot; viruses differently from &quot;real&quot; malware. If a non-heuristically-detected virus (signature-based) is found first, the scan is interrupted immediately, regardless of this config option.&lt;br /&gt;
 Default: no</source>
@@ -1369,12 +1367,12 @@ Permita que la coincidencia heurística tenga prioridad. Cuando está habilitado
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3665"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3664"/>
         <source>HeuristicScanPrecedence</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3712"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3711"/>
         <source>BOOL&lt;br /&gt;
 Enable the DLP module.&lt;br /&gt;
 Default: no</source>
@@ -1383,12 +1381,12 @@ Habilite el módulo DLP. &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3717"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3716"/>
         <source>StructuredDataDetection</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3761"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3760"/>
         <source>NUMBER&lt;br /&gt;
 This option sets the lowest number of Credit Card numbers found in a file to generate a detect.&lt;br /&gt;
 Default: 3</source>
@@ -1397,12 +1395,12 @@ Esta opción establece el número más bajo de números de tarjetas de crédito 
 Predeterminado: 3</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3766"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3765"/>
         <source>StructuredMinCreditCardCount</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3813"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3812"/>
         <source>NUMBER&lt;br /&gt;
 This option sets the lowest number of Social Security Numbers found in a file to generate a detect.&lt;br /&gt;
 Default: 3</source>
@@ -1411,12 +1409,12 @@ Esta opción establece el número más bajo de Números de Seguro Social que se 
 Predeterminado: 3</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3818"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3817"/>
         <source>StructuredMinSSNCount</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3865"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3864"/>
         <source>BOOL&lt;br /&gt;
 With this option enabled the DLP module will search for valid SSNs formatted as xxx-yy-zzzz.&lt;br /&gt;
 Default: Yes</source>
@@ -1425,12 +1423,12 @@ Con esta opción habilitada, el módulo DLP buscará SSN válidos formateados co
 Predeterminado: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3870"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3869"/>
         <source>StructuredSSNFormatNormal</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3917"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3916"/>
         <source>BOOL&lt;br /&gt;
 With this option enabled the DLP module will search for valid SSNs formatted as xxxyyzzzz.&lt;br /&gt;
 Default: No</source>
@@ -1439,12 +1437,12 @@ Con esta opción habilitada, el módulo DLP buscará SSN válidos formateados co
 Predeterminado: No</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3922"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3921"/>
         <source>StructuredSSNFormatStripped</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3966"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3965"/>
         <source>BOOL&lt;br /&gt;
 Perform HTML/JavaScript/ScriptEncoder normalisation and decryption.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
@@ -1455,12 +1453,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="3972"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="3971"/>
         <source>ScanHTML</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4019"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4018"/>
         <source>BOOL&lt;br /&gt;
 This option enables scanning of OLE2 files, such as Microsoft Office documents and .msi files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
@@ -1471,12 +1469,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4025"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4024"/>
         <source>ScanOLE2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4072"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4071"/>
         <source>BOOL&lt;br /&gt;
 This option enables scanning within PDF files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
@@ -1487,12 +1485,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4078"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4077"/>
         <source>ScanPDF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4125"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4124"/>
         <source>BOOL&lt;br /&gt;
 This option enables scanning within SWF files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without decoding and additional processing.&lt;br /&gt;
@@ -1503,12 +1501,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4131"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4130"/>
         <source>ScanSWF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4178"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4177"/>
         <source>BOOL&lt;br /&gt;
 This option enables scanning xml-based document files supported by libclamav.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
@@ -1519,12 +1517,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4184"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4183"/>
         <source>ScanXMLDOCS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4231"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4230"/>
         <source>BOOL&lt;br /&gt;
 This option enables scanning HWP3 files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
@@ -1535,12 +1533,12 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4237"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4236"/>
         <source>ScanHWP3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4284"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4283"/>
         <source>BOOL&lt;br /&gt;
 Scan within archives and compressed files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without unpacking and additional processing.&lt;br /&gt;
@@ -1551,17 +1549,17 @@ Si desactiva esta opción, los archivos originales se seguirán escaneando, pero
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4290"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4289"/>
         <source>ScanArchive</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4343"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4342"/>
         <source>Alerts</source>
         <translation>Alertas</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4376"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4375"/>
         <source>BOOL&lt;br /&gt;
 Alert on broken executable files (PE &amp; ELF).&lt;br /&gt;
 Default: no</source>
@@ -1570,12 +1568,12 @@ Alerta sobre archivos ejecutables rotos (PE y ELF). &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4381"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4380"/>
         <source>AlertBrokenExecutables</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4428"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4427"/>
         <source>BOOL&lt;br /&gt;
 Alert on encrypted archives and documents (encrypted .zip, .7zip, .rar, .pdf).&lt;br /&gt;
 Default: no</source>
@@ -1584,12 +1582,12 @@ Alerta sobre archivos y documentos cifrados (cifrado .zip, .7zip, .rar, .pdf). &
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4433"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4432"/>
         <source>AlertEncrypted</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4477"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4476"/>
         <source>BOOL&lt;br /&gt;
 Alert on encrypted archives (encrypted .zip, .7zip, .rar).&lt;br /&gt;
 Default: no</source>
@@ -1598,12 +1596,12 @@ Alerta sobre archivos cifrados (cifrado .zip, .7zip, .rar). &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4482"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4481"/>
         <source>AlertEncryptedArchive</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4526"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4525"/>
         <source>BOOL&lt;br /&gt;
 Alert on encrypted documents (encrypted .pdf).&lt;br /&gt;
 Default: no</source>
@@ -1612,12 +1610,12 @@ Alerta sobre documentos cifrados (cifrado .pdf). &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4531"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4530"/>
         <source>AlertEncryptedDoc</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4575"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4574"/>
         <source>BOOL&lt;br /&gt;
 Alert on OLE2 files containing VBA macros (Heuristics.OLE2.ContainsMacros).&lt;br /&gt;
 Default: no</source>
@@ -1626,12 +1624,12 @@ Alerta sobre archivos OLE2 que contienen macros VBA (Heuristics.OLE2.ContainsMac
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4580"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4579"/>
         <source>AlertOLE2Macros</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4624"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4623"/>
         <source>BOOL&lt;br /&gt;
 Alert on files that exceed max file size, max scan size, or max recursion limit (Heuristics.Limits.Exceeded).&lt;br /&gt;
 Default: no</source>
@@ -1640,12 +1638,12 @@ Alerta sobre archivos que superan el tamaño máximo de archivo, el tamaño máx
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4629"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4628"/>
         <source>AlertExceedsMax</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4673"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4672"/>
         <source>BOOL&lt;br /&gt;
 Alert on emails containing SSL mismatches in URLs (might lead to false positives!).&lt;br /&gt;
 Default: no</source>
@@ -1654,12 +1652,12 @@ Alerta sobre correos electrónicos que contienen discrepancias de SSL en las URL
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4678"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4677"/>
         <source>AlertPhishingSSLMismatch</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4722"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4721"/>
         <source>BOOL&lt;br /&gt;
 Alert on emails containing cloaked URLs (might lead to some false positives).&lt;br /&gt;
 Default: no</source>
@@ -1668,12 +1666,12 @@ Alerta sobre correos electrónicos que contienen URL encubiertas (puede dar luga
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4727"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4726"/>
         <source>AlertPhishingCloak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4771"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4770"/>
         <source>BOOL&lt;br /&gt;
 Alert on raw DMG image files containing partition intersections.&lt;br /&gt;
 Default: no</source>
@@ -1682,12 +1680,12 @@ Alerta sobre archivos de imagen DMG sin procesar que contienen intersecciones de
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4776"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4775"/>
         <source>AlertPartitionIntersection</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4823"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4822"/>
         <source>BOOL&lt;br /&gt;
 This option causes memory or nested map scans to dump the content to disk.&lt;br /&gt;
 If you turn on this option, more data is written to disk and is available when the leave-temps option is enabled at the cost of more disk writes.&lt;br /&gt;
@@ -1698,12 +1696,12 @@ Si activa esta opción, se escriben más datos en el disco y están disponibles 
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4829"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4828"/>
         <source>ForceToDisk</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4876"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4875"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum amount of time a scan may take to complete.&lt;br /&gt;
 In this version, this field only affects the scan time of ZIP archives.&lt;br /&gt;
@@ -1722,12 +1720,12 @@ Predeterminado: 0
 </translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4886"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4885"/>
         <source>MaxScanTime</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4933"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4932"/>
         <source>SIZE&lt;br /&gt;
 Sets the maximum amount of data to be scanned for each input file. Archives and other containers are recursively extracted and scanned up to this value. The size of an archive plus the sum of the sizes of all files within archive count toward the scan size. For example, a 1M uncompressed archive containing a single 1M inner file counts as 2M toward the max scan size. Warning: disabling this limit or setting it too high may result in severe damage to the system.&lt;br /&gt;
 Default: 100M</source>
@@ -1736,12 +1734,12 @@ Establece la cantidad máxima de datos que se escanearán para cada archivo de e
 Por defecto: 100 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4938"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4937"/>
         <source>MaxScanSize</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4985"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4984"/>
         <source>SIZE&lt;br /&gt;
 Files larger than this limit won&apos;t be scanned. Affects the input file itself as well as files contained inside it (when the input file is an archive, a document or some other kind of container). Warning: disabling this limit or setting it too high may result in severe damage to the system.&lt;br /&gt;
 Default: 25M</source>
@@ -1750,12 +1748,12 @@ Los archivos que superen este límite no se analizarán. Afecta al archivo de en
 Por defecto: 25 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="4990"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="4989"/>
         <source>MaxFileSize</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5037"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5036"/>
         <source>NUMBER&lt;br /&gt;
 Nested archives are scanned recursively, e.g. if a Zip archive contains a RAR file, all files within it will also be scanned. This options specifies how deeply the process should be continued. Warning: setting this limit too high may result in severe damage to the system.&lt;br /&gt;
 Default: 16</source>
@@ -1764,12 +1762,12 @@ Los archivos anidados se analizan de forma recursiva, p. Ej. si un archivo Zip c
 Predeterminado: 16</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5042"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5041"/>
         <source>MaxRecursion</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5089"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5088"/>
         <source>NUMBER&lt;br /&gt;
 Number of files to be scanned within an archive, a document, or any other kind of container. Warning: disabling this limit or setting it too high may result in severe damage to the system.&lt;br /&gt;
 Default: 10000</source>
@@ -1778,12 +1776,12 @@ Número de archivos que se escanearán dentro de un archivo, un documento o cual
 Predeterminado: 10000</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5094"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5093"/>
         <source>MaxFiles</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5141"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5140"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum size of a file to check for embedded PE.&lt;br /&gt;
 Files larger than this value will skip the additional analysis step.&lt;br /&gt;
@@ -1796,12 +1794,12 @@ No se permiten valores negativos. &lt;br /&gt;
 Por defecto: 10 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5148"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5147"/>
         <source>MaxEmbeddedPE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5195"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5194"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum size of a HTML file to normalize.&lt;br /&gt;
 HTML files larger than this value will not be normalized or scanned.&lt;br /&gt;
@@ -1814,12 +1812,12 @@ No se permiten valores negativos. &lt;br /&gt;
 Por defecto: 10 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5202"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5201"/>
         <source>MaxHTMLNormalize</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5249"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5248"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum size of a normalized HTML file to scan.&lt;br /&gt;
 HTML files larger than this value after normalization will not be scanned.&lt;br /&gt;
@@ -1837,12 +1835,12 @@ Negative values are not allowed.&lt;br /&gt;
 Default: 2M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5256"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5255"/>
         <source>MaxHTMLNoTags</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5303"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5302"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum size of a script file to normalize.&lt;br /&gt;
 Script content larger than this value will not be normalized or scanned.&lt;br /&gt;
@@ -1855,12 +1853,12 @@ No se permiten valores negativos. &lt;br /&gt;
 Por defecto: 5 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5310"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5309"/>
         <source>MaxScriptNormalize</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5357"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5356"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum size of a ZIP file to reanalyze type recognition.&lt;br /&gt;
 ZIP files larger than this value will skip the step to potentially reanalyze as PE.&lt;br /&gt;
@@ -1875,12 +1873,12 @@ ADVERTENCIA: establecer este límite demasiado alto puede provocar daños graves
 Predeterminado: 1 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5365"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5364"/>
         <source>MaxZipTypeRcg</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5412"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5411"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum number of partitions of a raw disk image to be scanned.&lt;br /&gt;
 Raw disk images with more partitions than this value will have up to the value partitions scanned.&lt;br /&gt;
@@ -1895,12 +1893,12 @@ ADVERTENCIA: establecer este límite demasiado alto puede provocar daños graves
 Predeterminado: 50</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5420"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5419"/>
         <source>MaxPartitions</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5467"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5466"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum number of icons within a PE to be scanned.&lt;br /&gt;
 PE files with more icons than this value will have up to the value number icons scanned.&lt;br /&gt;
@@ -1915,12 +1913,12 @@ ADVERTENCIA: establecer este límite demasiado alto puede provocar daños graves
 Predeterminado: 100</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5475"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5474"/>
         <source>MaxIconsPE</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5522"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5521"/>
         <source>NUMBER&lt;br /&gt;
 This option sets the maximum recursive calls to HWP3 parsing function.&lt;br /&gt;
 HWP3 files using more than this limit will be terminated and alert the user.&lt;br /&gt;
@@ -1937,12 +1935,12 @@ ADVERTENCIA: establecer este límite demasiado alto puede provocar daños graves
 Predeterminado: 16</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5531"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5530"/>
         <source>MaxRecHWP3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5578"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5577"/>
         <source>NUMBER&lt;br /&gt;
 This option sets the maximum calls to the PCRE match function during an instance of regex matching.&lt;br /&gt;
 Instances using more than this limit will be terminated and alert the user but the scan will continue.&lt;br /&gt;
@@ -1959,12 +1957,12 @@ ADVERTENCIA: establecer este límite demasiado alto puede afectar gravemente al 
 Predeterminado: 10000</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5587"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5586"/>
         <source>PCREMatchLimit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5634"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5633"/>
         <source>NUMBER&lt;br /&gt;
 This option sets the maximum recursive calls to the PCRE match function during an instance of regex matching.&lt;br /&gt;
 Instances using more than this limit will be terminated and alert the user but the scan will continue.&lt;br /&gt;
@@ -1981,12 +1979,12 @@ ADVERTENCIA: establecer este límite demasiado alto puede afectar gravemente al 
 Predeterminado: 2000</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5643"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5642"/>
         <source>PCRERecMatchLimit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5690"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5689"/>
         <source>SIZE&lt;br /&gt;
 This option sets the maximum filesize for which PCRE subsigs will be executed.&lt;br /&gt;
 Files exceeding this limit will not have PCRE subsigs executed unless a subsig is encompassed to a smaller buffer.&lt;br /&gt;
@@ -2003,17 +2001,17 @@ ADVERTENCIA: establecer este límite demasiado alto o deshabilitarlo puede afect
 Por defecto: 25 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5699"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5698"/>
         <source>PCREMaxFileSize</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5752"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5751"/>
         <source>OnAccess</source>
         <translation>OnAccess</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5785"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5784"/>
         <source>BOOL&lt;br /&gt;
 This option enables on-access scanning (Linux only)&lt;br /&gt;
 Default: disabled
@@ -2024,12 +2022,12 @@ Predeterminado: deshabilitado
 </translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5791"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5790"/>
         <source>ScanOnAccess</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5835"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5834"/>
         <source>STRING&lt;br /&gt;
 Specifies a mount point (including all files and directories under it), which should be scanned on access. This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
@@ -2038,12 +2036,12 @@ Especifica un punto de montaje (incluidos todos los archivos y directorios que s
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5840"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5839"/>
         <source>OnAccessMountPath</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5887"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5886"/>
         <source>STRING&lt;br /&gt;
 This option specifies a directory (including all files and directories inside it), which should be scanned on access. This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
@@ -2052,12 +2050,12 @@ Esta opción especifica un directorio (incluidos todos los archivos y directorio
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5892"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5891"/>
         <source>OnAccessIncludePath</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5939"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5938"/>
         <source>STRING&lt;br /&gt;
 This option allows excluding directories from on-access scanning. It can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
@@ -2066,12 +2064,12 @@ Esta opción permite excluir directorios del análisis en tiempo real. Se puede 
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5944"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5943"/>
         <source>OnAccessExcludePath</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5991"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5990"/>
         <source>BOOL&lt;br /&gt;
 With this option you can whitelist the root UID (0). Processes run under root will be able to access all files without triggering scans or permission denied events.&lt;br /&gt;
 Note that if clamd cannot check the uid of the process that generated an on-access scan event (e.g., because OnAccessPrevention was not enabled, and the process already exited), clamd will perform a scan. Thus, setting OnAccessExcludeRootUID is not guaranteed to prevent every access by the root user from triggering a scan (unless OnAccessPrevention is enabled).&lt;br /&gt;
@@ -2082,12 +2080,12 @@ Tenga en cuenta que si clamd no puede verificar el uid del proceso que generó u
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="5997"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="5996"/>
         <source>OnAccessExcludeRootUID</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6041"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6040"/>
         <source>NUMBER&lt;br /&gt;
 With this option you can whitelist specific UIDs. Processes with these UIDs will be able to access all files without triggering scans or permission denied events.&lt;br /&gt;
 This option can be used multiple times (one per line).&lt;br /&gt;
@@ -2102,12 +2100,12 @@ También tenga en cuenta que si clamd no puede verificar el uid del proceso que 
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6049"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6048"/>
         <source>OnAccessExcludeUID</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6096"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6095"/>
         <source>STRING&lt;br /&gt;
 This option allows exclusions via user names when using the on-access scanning client. It can be used multiple times, and has the same potential race condition limitations of the OnAccessExcludeUID option.&lt;br /&gt;
 Default: disabled</source>
@@ -2116,12 +2114,12 @@ Esta opción permite exclusiones a través de nombres de usuario cuando se utili
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6101"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6100"/>
         <source>OnAccessExcludeUname</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6148"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6147"/>
         <source>SIZE&lt;br /&gt;
 Files larger than this value will not be scanned in on access.&lt;br /&gt;
 Default: 5M</source>
@@ -2130,12 +2128,12 @@ Los archivos que superen este valor no se analizarán al acceder. &lt;br /&gt;
 Por defecto: 5 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6153"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6152"/>
         <source>OnAccessMaxFileSize</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6200"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6199"/>
         <source>BOOL&lt;br /&gt;
 Disables the dynamic directory determination system which allows for recursively watching include paths.&lt;br /&gt;
 Default: no</source>
@@ -2144,12 +2142,12 @@ Desactiva el sistema de determinación de directorio dinámico que permite ver d
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6205"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6204"/>
         <source>OnAccessDisableDDD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6249"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6248"/>
         <source>BOOL&lt;br /&gt;
 Enables fanotify blocking when malicious files are found.&lt;br /&gt;
 Default: disabled</source>
@@ -2158,12 +2156,12 @@ Habilita el bloqueo de fanotify cuando se encuentran archivos maliciosos. &lt;br
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6254"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6253"/>
         <source>OnAccessPrevention</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6301"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6300"/>
         <source>BOOL&lt;br /&gt;
 Toggles extra scanning and notifications when a file or directory is created or moved.&lt;br /&gt;
 Requires the DDD system to kick-off extra scans.&lt;br /&gt;
@@ -2174,12 +2172,12 @@ Requiere el sistema DDD para iniciar exploraciones adicionales. &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6307"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6306"/>
         <source>OnAccessExtraScanning</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6354"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6353"/>
         <source>NUMBER&lt;br /&gt;
 Max amount of time (in milliseconds) that the OnAccess client should spend for every connect, send, and recieve attempt when communicating with clamd via curl.&lt;br /&gt;
 Default: 5000 (5 seconds)</source>
@@ -2188,12 +2186,12 @@ Cantidad máxima de tiempo (en milisegundos) que el cliente de OnAccess debe ded
 Predeterminado: 5000 (5 segundos)</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6359"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6358"/>
         <source>OnAccessCurlTimeout</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6406"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6405"/>
         <source>NUMBER&lt;br /&gt;
 Max number of scanning threads to allocate to the OnAccess thread pool at startup. These threads are the ones responsible for creating a connection with the daemon and kicking off scanning after an event has been processed. To prevent clamonacc from consuming all clamd&apos;s resources keep this lower than clamd&apos;s max threads.&lt;br /&gt;
 Default: 5</source>
@@ -2202,12 +2200,12 @@ Número máximo de subprocesos de exploración para asignar al grupo de subproce
 Por defecto: 5</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6411"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6410"/>
         <source>OnAccessMaxThreads</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6458"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6457"/>
         <source>NUMBER&lt;br /&gt;
 Number of times the OnAccess client will retry a failed scan due to connection problems (or other issues).&lt;br /&gt;
 Default: 0</source>
@@ -2216,12 +2214,12 @@ Número de veces que el cliente de OnAccess volverá a intentar un escaneo falli
 Predeterminado: 0</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6463"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6462"/>
         <source>OnAccessRetryAttempts</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6510"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6509"/>
         <source>BOOL&lt;br /&gt;
 When using prevention, if this option is turned on, any errors that occur during scanning will result in the event attempt being denied. This could potentially lead to unwanted system behaviour with certain configurations, so the client defaults this to off and prefers allowing access events in case of scan or connection error.&lt;br /&gt;
 Default: no</source>
@@ -2230,12 +2228,12 @@ Cuando se usa la prevención, si esta opción está activada, cualquier error qu
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6515"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6514"/>
         <source>OnAccessDenyOnError</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6562"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6561"/>
         <source>BOOL&lt;br /&gt;
 Disable authenticode certificate chain verification in PE files.&lt;br /&gt;
 Default: no</source>
@@ -2244,17 +2242,17 @@ Deshabilite la verificación de la cadena de certificados autenticados en archiv
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6567"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6566"/>
         <source>DisableCertCheck</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6617"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6616"/>
         <source>Prelude</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6647"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6646"/>
         <source>https://www.prelude-siem.org/projects/prelude/wiki&lt;br /&gt;
 &lt;br /&gt;
 Prelude is a Universal &quot;Security Information &amp; Event Management&quot; (SIEM) system. Prelude collects, normalizes, sorts, aggregates, correlates and reports all security-related events independently of the product brand or license giving rise to such events; Prelude is &quot;agentless&quot;.&lt;br /&gt;
@@ -2271,17 +2269,17 @@ Además de ser capaz de recuperar cualquier tipo de registro (registros del sist
 </translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6681"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6680"/>
         <source>PreludeEnable</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6718"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6717"/>
         <source>PreludeAnalyzerName</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6809"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6808"/>
         <source>SIZE&lt;br /&gt;
 Limit the size of the log file. The logger will be automatically disabled if the file is greater than SIZE. Value of 0 disables the limit.&lt;br /&gt;
 Default: 1M</source>
@@ -2290,7 +2288,7 @@ Limite el tamaño del archivo de registro. El registrador se desactivará autom�
 Predeterminado: 1 M</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6858"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6857"/>
         <source>BOOL&lt;br /&gt;
 Log time with each message.&lt;br /&gt;
 Default: no</source>
@@ -2299,7 +2297,7 @@ Registre el tiempo con cada mensaje. &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6907"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6906"/>
         <source>BOOL&lt;br /&gt;
 Enable logging to Syslog. May be used in combination with UpdateLogFile.&lt;br /&gt;
 Default: disabled.</source>
@@ -2308,7 +2306,7 @@ Habilite el registro en Syslog. Puede usarse en combinación con UpdateLogFile. 
 Predeterminado: desactivado.</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="6956"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="6955"/>
         <source>STRING&lt;br /&gt;
 Specify the type of syslog messages - please refer to &apos;man syslog&apos; for facility names.&lt;br /&gt;
 Default: LOG_LOCAL6</source>
@@ -2317,7 +2315,7 @@ Especifique el tipo de mensajes de syslog; consulte &apos;man syslog&apos; para 
 Por defecto: LOG_LOCAL6</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7002"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7001"/>
         <source>BOOL&lt;br /&gt;
 Enable verbose logging.&lt;br /&gt;
 Default: disabled</source>
@@ -2326,12 +2324,12 @@ Habilite el registro detallado. &lt;br /&gt;
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7106"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7105"/>
         <source>Connect</source>
         <translation>Conectar</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7139"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7138"/>
         <source>STRING&lt;br /&gt;
 This option allows you to save the process identifier of the daemon to a file specified in the argument.&lt;br /&gt;
 Default: disabled</source>
@@ -2340,7 +2338,7 @@ Esta opción le permite guardar el identificador de proceso del demonio en un ar
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7185"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7184"/>
         <source>STRING&lt;br /&gt;
 Path to a directory containing database files.&lt;br /&gt;
 Default: /var/lib/clamav</source>
@@ -2349,7 +2347,7 @@ Ruta a un directorio que contiene archivos de base de datos. &lt;br /&gt;
 Por defecto: /var/lib/clamav</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7280"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7279"/>
         <source>BOOL&lt;br /&gt;
 Enable debug messages in libclamav.&lt;br /&gt;
 Default: no</source>
@@ -2358,7 +2356,7 @@ Habilite los mensajes de depuración en libclamav. &lt;br /&gt;
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7329"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7328"/>
         <source>STRING&lt;br /&gt;
 Enable logging to a specified file. Highly recommended.&lt;br /&gt;
 Default: disabled.</source>
@@ -2367,13 +2365,13 @@ Habilite el registro en un archivo específico. Muy recomendable. &lt;br /&gt;
 Predeterminado: desactivado.</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7334"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7333"/>
         <source>UpdateLogFile</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7375"/>
-        <location filename="../ConfigureDialogCurrent.ui" line="7421"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7374"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7420"/>
         <source>STRING&lt;br /&gt;
 When started by root, drop privileges to a specified user.&lt;br /&gt;
 Default:</source>
@@ -2382,17 +2380,17 @@ Cuando lo inicie root, elimine los privilegios a un usuario específico. &lt;br 
 Defecto:</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7380"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7379"/>
         <source>DatabaseOwner</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7426"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7425"/>
         <source>Checks</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7470"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7469"/>
         <source>STRING&lt;br /&gt;
 Use DNS to verify the virus database version. Freshclam uses DNS TXT records to verify the versions of the database and software itself. With this directive you can change the database verification domain.&lt;br /&gt;
 WARNING: Please don&apos;t change it unless you&apos;re configuring freshclam to use your own database verification domain.&lt;br /&gt;
@@ -2403,12 +2401,12 @@ ADVERTENCIA: No lo cambie a menos que esté configurando freshclam para usar su 
 Predeterminado: habilitado, apuntando a current.cvd.clamav.net</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7476"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7475"/>
         <source>DNSDatabaseInfo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7517"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7516"/>
         <source>STRING&lt;br /&gt;
 DatabaseMirror specifies to which mirror(s) freshclam should connect. You should have at least one entries: database.clamav.net. Now that CloudFlare is being used as our Content Delivery Network (CDN), this one domain name works world-wide to direct freshclam to the closest geographic endpoint.&lt;br /&gt;
 Default: database.clamav.net</source>
@@ -2417,12 +2415,12 @@ DatabaseMirror especifica a qué espejo (s) debe conectarse freshclam. Debe tene
 Predeterminado: database.clamav.net</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7522"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7521"/>
         <source>DatabaseMirror</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7566"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7565"/>
         <source>STRING&lt;br /&gt;
 This option allows you to easily point freshclam to private mirrors. If PrivateMirror is set, freshclam does not attempt to use DNS to determine whether its databases are out-of-date, instead it will use the If-Modified-Since request or directly check the headers of the remote database files. For each database, freshclam first attempts to download the CLD file. If that fails, it tries to download the CVD file. This option overrides DatabaseMirror, DNSDatabaseInfo and ScriptedUpdates. It can be used multiple times to provide fall-back mirrors.&lt;br /&gt;
 Default: disabled</source>
@@ -2431,12 +2429,12 @@ Esta opción le permite apuntar fácilmente freshclam a espejos privados. Si se 
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7571"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7570"/>
         <source>PrivateMirror</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7618"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7617"/>
         <source>NUMBER&lt;br /&gt;
 How many attempts (per mirror) to make before giving up.&lt;br /&gt;
 Default: 3 (per mirror)</source>
@@ -2445,12 +2443,12 @@ Cuántos intentos (por espejo) hacer antes de rendirse. &lt;br /&gt;
 Por defecto: 3 (por espejo)</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7623"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7622"/>
         <source>MaxAttempts</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7667"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7666"/>
         <source>BOOL&lt;br /&gt;
 With this option you can control scripted updates. It&apos;s highly recommended to keep it enabled.&lt;br /&gt;
 Default: yes</source>
@@ -2459,17 +2457,17 @@ Con esta opción, puede controlar las actualizaciones programadas. Es muy recome
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7672"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7671"/>
         <source>ScriptedUpdates</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7722"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7721"/>
         <source>Databases</source>
         <translation>Bases de datos</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7755"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7754"/>
         <source>BOOL&lt;br /&gt;
 With this option enabled, freshclam will attempt to load new databases into memory to make sure they are properly handled by libclamav before replacing the old ones.&lt;br /&gt;
 Default: enabled</source>
@@ -2478,12 +2476,12 @@ Con esta opción habilitada, freshclam intentará cargar nuevas bases de datos e
 Predeterminado: habilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7760"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7759"/>
         <source>TestDatabases</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7804"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7803"/>
         <source>BOOL&lt;br /&gt;
 By default freshclam will keep the local databases (.cld) uncompressed to make their handling faster. With this option you can enable the compression; the change will take effect with the next database update.&lt;br /&gt;
 Default: no</source>
@@ -2492,12 +2490,12 @@ Por defecto, freshclam mantendrá las bases de datos locales (.cld) sin comprimi
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7809"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7808"/>
         <source>CompressLocalDatabase</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7853"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7852"/>
         <source>STRING&lt;br /&gt;
 Download an additional 3rd party signature database distributed through the ClamAV mirrors. This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
@@ -2506,12 +2504,12 @@ Descargue una base de datos de firmas de terceros adicional distribuida a travé
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7858"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7857"/>
         <source>ExtraDatabase</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7905"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7904"/>
         <source>STRING&lt;br /&gt;
 Exclude a standard signature database (opt-out). This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
@@ -2520,12 +2518,12 @@ Excluir una base de datos de firmas estándar (exclusión voluntaria). Esta opci
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7910"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7909"/>
         <source>ExcludeDatabase</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7957"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7956"/>
         <source>STRING&lt;br /&gt;
 With this option you can provide custom sources for database files. This option can be used multiple times. Support for: http(s)://, ftp(s)://, or file:// Example usage: DatabaseCustomURL https://myserver.com:4567/whitelist.wdb&lt;br /&gt;
 Default: disabled</source>
@@ -2534,17 +2532,17 @@ Con esta opción, puede proporcionar fuentes personalizadas para archivos de bas
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="7962"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="7961"/>
         <source>DatabaseCustomURL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8015"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8014"/>
         <source>HTTP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8048"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8047"/>
         <source>STRING&lt;br /&gt;
 Use given proxy server for database downloads. May be prefixed with [scheme]:// to specify which kind of proxy is used. http:// HTTP Proxy. Default when no scheme or proxy type is specified. https:// HTTPS Proxy. (Added in 7.52.0 for OpenSSL, GnuTLS and NSS) socks4:// SOCKS4 Proxy. socks4a:// SOCKS4a Proxy. Proxy resolves URL hostname. socks5:// SOCKS5 Proxy. socks5h:// SOCKS5 Proxy. Proxy resolves URL hostname.&lt;br /&gt;
 Default: disabled</source>
@@ -2553,12 +2551,12 @@ Utilice el servidor proxy proporcionado para las descargas de la base de datos. 
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8053"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8052"/>
         <source>HTTPProxyServer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8094"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8093"/>
         <source>NUMBER&lt;br /&gt;
 Use given TCP port for database downloads.&lt;br /&gt;
 Default: disabled</source>
@@ -2567,12 +2565,12 @@ Utilice el puerto TCP proporcionado para las descargas de la base de datos. &lt;
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8099"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8098"/>
         <source>HTTPProxyPort</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8143"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8142"/>
         <source>STRING&lt;br /&gt;
 Proxy usage is authenticated through given username.&lt;br /&gt;
 Default: disabled</source>
@@ -2581,12 +2579,12 @@ El uso de proxy se autentica a través del nombre de usuario dado. &lt;br /&gt;
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8148"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8147"/>
         <source>HTTPProxyUsername</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8189"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8188"/>
         <source>STRING&lt;br /&gt;
 Proxy usage is authenticated through given password.&lt;br /&gt;
 Default: disabled</source>
@@ -2595,12 +2593,12 @@ El uso de proxy se autentica mediante una contraseña dada. &lt;br /&gt;
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8194"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8193"/>
         <source>HTTPProxyPassword</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8238"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8237"/>
         <source>STRING&lt;br /&gt;
 If your servers are behind a firewall/proxy which applies User-Agent filtering, you can use this option to force the use of a different User-Agent header.&lt;br /&gt;
 Default: clamav/version_number</source>
@@ -2609,17 +2607,17 @@ Si sus servidores están detrás de un firewall/proxy que aplica filtrado de Use
 Por defecto: clamav/version_number</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8243"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8242"/>
         <source>HTTPUserAgent</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8290"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8289"/>
         <source>Misc</source>
         <translation>Diverso</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8323"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8322"/>
         <source>STRING&lt;br /&gt;
 Notify a running clamd(8) to reload its database after a download has occurred. The path for clamd.conf file must be provided.&lt;br /&gt;
 Default: The default is to not notify clamd. See clamd.conf(5)&apos;s option SelfCheck for how clamd(8) handles database updates in this case.</source>
@@ -2628,12 +2626,12 @@ Notifique a un clamd (8) en ejecución que recargue su base de datos después de
 Predeterminado: el valor predeterminado es no notificar a clamd. Consulte la opción SelfCheck de clamd.conf (5) para ver cómo clamd (8) maneja las actualizaciones de la base de datos en este caso.</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8328"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8327"/>
         <source>NotifyClamd</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8369"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8368"/>
         <source>STRING&lt;br /&gt;
 Execute this command after the database has been successfully updated.&lt;br /&gt;
 Default: disabled</source>
@@ -2642,12 +2640,12 @@ Ejecute este comando después de que la base de datos se haya actualizado correc
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8374"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8373"/>
         <source>OnUpdateExecute</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8415"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8414"/>
         <source>STRING&lt;br /&gt;
 Execute this command after a database update has failed.&lt;br /&gt;
 Default: disabled</source>
@@ -2656,12 +2654,12 @@ Ejecute este comando después de que haya fallado una actualización de la base 
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8420"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8419"/>
         <source>OnErrorExecute</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8461"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8460"/>
         <source>STRING&lt;br /&gt;
 Execute this command when freshclam reports outdated version. In the command string %v will be replaced by the new version number.&lt;br /&gt;
 Default: disabled</source>
@@ -2670,12 +2668,12 @@ Ejecute este comando cuando freshclam informe de una versión desactualizada. En
 Predeterminado: deshabilitado</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8466"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8465"/>
         <source>OnOutdatedExecute</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8507"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8506"/>
         <source>STRING&lt;br /&gt;
 Use IP as client address for downloading databases. Useful for multi homed systems.&lt;br /&gt;
 Default: Use OS&apos;es default outgoing IP address.</source>
@@ -2684,12 +2682,12 @@ Utilice IP como dirección de cliente para descargar bases de datos. Útil para 
 Predeterminado: Utilice la dirección IP saliente predeterminada del SO.</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8512"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8511"/>
         <source>LocalIPAddress</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8553"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8552"/>
         <source>NUMBER&lt;br /&gt;
 Timeout in seconds when connecting to database server.&lt;br /&gt;
 Default: 10</source>
@@ -2698,12 +2696,12 @@ Tiempo de espera en segundos al conectarse al servidor de la base de datos. &lt;
 Predeterminado: 10</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8558"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8557"/>
         <source>ConnectTimeout</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8602"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8601"/>
         <source>NUMBER&lt;br /&gt;
 Timeout in seconds when reading from database server. 0 means no timeout.&lt;br /&gt;
 Default: 0</source>
@@ -2712,12 +2710,12 @@ Tiempo de espera en segundos al leer del servidor de la base de datos. 0 signifi
 Predeterminado: 0</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8607"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8606"/>
         <source>ReceiveTimeout</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8651"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8650"/>
         <source>BOOL&lt;br /&gt;
 This option enables support for Google Safe Browsing. When activated for the first time, freshclam will download a new database file (safebrowsing.cvd) which will be automatically loaded by clamd and clamscan during the next reload, provided that the heuristic phishing detection is turned on. This database includes information about websites that may be phishing sites or possible sources of malware. When using this option, it&apos;s mandatory to run freshclam at least every 30 minutes. Freshclam uses the ClamAV&apos;s mirror infrastructure to distribute the database and its updates but all the contents are provided under Google&apos;s terms of use. See https://support.google.com/code/answer/70015 and https://www.clamav.net/documents/safebrowsing for more information.&lt;br /&gt;
 Default: no</source>
@@ -2726,12 +2724,12 @@ Esta opción habilita la compatibilidad con la navegación segura de Google. Cua
 Por defecto: no</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8656"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8655"/>
         <source>SafeBrowsing</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8700"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8699"/>
         <source>BOOL&lt;br /&gt;
 This option enables downloading of bytecode.cvd, which includes additional detection mechanisms and improvements to the ClamAV engine.&lt;br /&gt;
 Default: yes</source>
@@ -2740,44 +2738,44 @@ Esta opción permite descargar bytecode.cvd, que incluye mecanismos de detecció
 Por defecto: si</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8779"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8778"/>
         <source>Reload ClamAV</source>
         <translation>Recargar ClamAV</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8786"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8785"/>
         <source>Apply</source>
         <translation>Aplicar</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8793"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8792"/>
         <source>Ok</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.ui" line="8800"/>
+        <location filename="../ConfigureDialogCurrent.ui" line="8799"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2537"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2551"/>
         <source>M</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2540"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2554"/>
         <source>K</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2665"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2674"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2679"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2688"/>
         <source>Open Configuration File</source>
         <translation>Abrir Archivo de Configuración</translation>
     </message>
     <message>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2666"/>
-        <location filename="../ConfigureDialogCurrent.cpp" line="2675"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2680"/>
+        <location filename="../ConfigureDialogCurrent.cpp" line="2689"/>
         <source>Conf Files (*.conf);;All Files (*)</source>
         <translation>Archivos de Conf (*.conf);;Todos los Archivos (*)</translation>
     </message>
@@ -2797,12 +2795,22 @@ Do you want to quarantine?&lt;br /&gt;</source>
 ¿Quieres poner en cuarentena? &lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="../ListerQuarantine.ui" line="46"/>
+        <location filename="../ListerQuarantine.ui" line="65"/>
+        <source>Yes All</source>
+        <translation>Si Todo</translation>
+    </message>
+    <message>
+        <location filename="../ListerQuarantine.ui" line="72"/>
+        <source>No All</source>
+        <translation>No Todo</translation>
+    </message>
+    <message>
+        <location filename="../ListerQuarantine.ui" line="79"/>
         <source>Yes</source>
         <translation>Sí</translation>
     </message>
     <message>
-        <location filename="../ListerQuarantine.ui" line="53"/>
+        <location filename="../ListerQuarantine.ui" line="86"/>
         <source>No</source>
         <translation>No</translation>
     </message>
@@ -2843,7 +2851,7 @@ Do you want to quarantine?&lt;br /&gt;</source>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="163"/>
-        <location filename="../MainWindow.cpp" line="1243"/>
+        <location filename="../MainWindow.cpp" line="1267"/>
         <source>Quarantine</source>
         <translation>Cuarentena</translation>
     </message>
@@ -2964,14 +2972,14 @@ Do you want to quarantine?&lt;br /&gt;</source>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="573"/>
-        <location filename="../MainWindow.cpp" line="2703"/>
-        <location filename="../MainWindow.cpp" line="2711"/>
+        <location filename="../MainWindow.cpp" line="2740"/>
+        <location filename="../MainWindow.cpp" line="2748"/>
         <source>OnAccess</source>
         <translation>OnAccess</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="604"/>
-        <location filename="../MainWindow.cpp" line="2778"/>
+        <location filename="../MainWindow.cpp" line="2815"/>
         <source>Definitions Up To Date</source>
         <translation>Definiciones Actualizadas</translation>
     </message>
@@ -2982,7 +2990,7 @@ Do you want to quarantine?&lt;br /&gt;</source>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="657"/>
-        <location filename="../MainWindow.cpp" line="1098"/>
+        <location filename="../MainWindow.cpp" line="1122"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -3024,8 +3032,18 @@ Do you want to quarantine?&lt;br /&gt;</source>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="792"/>
-        <source>Permently Delete File</source>
-        <translation>Borrar Permanentemente Archivo</translation>
+        <source>Permanently Delete File</source>
+        <translation>Eliminar Archivo de Forma Permanente</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.ui" line="1836"/>
+        <source>Scanned Files Interval</source>
+        <translation>Intervalo de Archivos Escaneados</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.ui" line="2456"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;This program is desktop frontend application for the popular clamav antivirus engine. The design features of this application allow you to quickly navagative the complex configuration’s of clamav’s design and customize them to your desire, monitor ther status of the detection engine, perform custom virus scans, maintains an individual log of detection and prevention events, quarintines and locks potential threats, and personally alerts you when it detects a problem. &lt;/p&gt;&lt;p&gt;Source code can be located at &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; and inquiries sent to &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Documentation is currently lacking, but will be added to the source code webpage in due time.&lt;/p&gt;&lt;p&gt;If you care to donate to this project:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;Este programa es una aplicación de interfaz de escritorio para el popular motor antivirus clamav. Las características de diseño de esta aplicación le permiten navegar rápidamente por las configuraciones complejas del diseño de clamav y personalizarlas a su gusto, monitorear el estado del motor de detección, realizar escaneos de virus personalizados, mantiene un registro individual de eventos de detección y prevención, quarintinas y bloqueos amenazas potenciales y le avisa personalmente cuando detecta un problema.&lt;/p&gt;&lt;p&gt;El código fuente se puede encontrar en&lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; y consultas enviadas a &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Actualmente falta documentación, pero se agregará a la página web del código fuente a su debido tiempo.&lt;/p&gt;&lt;p&gt;Si desea donar a este proyecto:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="840"/>
@@ -3120,11 +3138,6 @@ Do you want to quarantine?&lt;br /&gt;</source>
         <translation>Tipo de Parcela</translation>
     </message>
     <message>
-        <location filename="../MainWindow.ui" line="1836"/>
-        <source>Scaned Files Interval</source>
-        <translation>Intervalo de Archivos Escaneados</translation>
-    </message>
-    <message>
         <location filename="../MainWindow.ui" line="1841"/>
         <source>Threats Found Interval</source>
         <translation>Intervalo de Amenazas Encontradas</translation>
@@ -3143,11 +3156,6 @@ Do you want to quarantine?&lt;br /&gt;</source>
         <location filename="../MainWindow.ui" line="2446"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clam One - &lt;/span&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;&lt;a href=&quot;clicked_about&quot;&gt;About&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; &lt;span style = &quot;font-weight: 600;&quot;&gt; Clam One - &lt;/span&gt; &lt;span style = &quot;font-weight: 600; text-decoration: underline; &quot;&gt; &lt;a href=&quot;clicked_about&quot;&gt; Acerca de &lt;/a&gt; &lt;/span&gt;&lt;/p&gt;&lt;/body&gt; &lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.ui" line="2456"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;This program is desktop frontend application for the popular clamav antivirus engine. The design features of this application allow you to quickly navagative the complex configuration’s of clamav’s design and customize them to your desire, monitor ther status of the detection engine, perform custom virus scans, maintains an individual log of detection and prevention events, quarintines and locks potential threats, and personally alerts you when it detects a problem. &lt;/p&gt;&lt;p&gt;Source code can be located at &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; and inquiries sent to &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Documenation is currently lacking, but will be added to the source code webpage in due time.&lt;/p&gt;&lt;p&gt;If you care to donate to this project:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; &lt;br/&gt; Este programa es una aplicación de interfaz de escritorio para el popular motor antivirus clamav. Las características de diseño de esta aplicación le permiten navegar rápidamente por las configuraciones complejas del diseño de clamav y personalizarlas a su gusto, monitorear el estado del motor de detección, realizar escaneos de virus personalizados, mantiene un registro individual de eventos de detección y prevención, quarintinas y bloqueos amenazas potenciales y le avisa personalmente cuando detecta un problema. &lt;/p&gt; &lt;p&gt; El código fuente se puede encontrar en &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt; &lt;span style = &quot;text-decoration: underline; color: # 0000ff;&quot;&gt; https : //github.com/ClamOne/ClamOne &lt;/span&gt; &lt;/a&gt; y consultas enviadas a &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt; &lt;span style = &quot;text-decoration: underline; color: # 0000ff; &quot;&gt; clamavone@protonmail.com &lt;/span&gt; &lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Actualmente falta documentación, pero se agregará a la página web del código fuente a su debido tiempo. &lt;/p&gt; &lt;p&gt; Si desea donar a este proyecto: &lt;/p&gt; &lt;p&gt; BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt; &lt;span style = &quot;text-decoration: underline; color: # 0000ff ; &quot;&gt; https://clamone.github.io/ &lt;/span&gt; &lt;/a&gt; &lt;br/&gt; &lt;/p&gt;&lt;/body&gt; &lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="2515"/>
@@ -3205,479 +3213,474 @@ Do you want to quarantine?&lt;br /&gt;</source>
         <translation>Sa&amp;lida</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="474"/>
+        <location filename="../MainWindow.cpp" line="496"/>
         <source>Permanently Deleted Quarantined File: </source>
         <translation>Archivo en Cuarentena Eliminado Permanentemente: </translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2702"/>
-        <location filename="../MainWindow.cpp" line="2710"/>
+        <location filename="../MainWindow.cpp" line="2739"/>
+        <location filename="../MainWindow.cpp" line="2747"/>
         <source>yes</source>
         <translation>sí</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="413"/>
+        <location filename="../MainWindow.cpp" line="435"/>
         <source>quarantine</source>
         <translation>cuarentena</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="466"/>
+        <location filename="../MainWindow.cpp" line="488"/>
         <source>Quarantined File: </source>
         <translation>Archivo en Cuarentena: </translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="482"/>
+        <location filename="../MainWindow.cpp" line="504"/>
         <source>Restored Quarantined File: </source>
         <translation>Archivo en Cuarentena Restaurado: </translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="503"/>
-        <location filename="../MainWindow.cpp" line="504"/>
-        <location filename="../MainWindow.cpp" line="518"/>
-        <location filename="../MainWindow.cpp" line="519"/>
-        <location filename="../MainWindow.cpp" line="1572"/>
-        <location filename="../MainWindow.cpp" line="1573"/>
+        <location filename="../MainWindow.cpp" line="525"/>
+        <location filename="../MainWindow.cpp" line="526"/>
+        <location filename="../MainWindow.cpp" line="540"/>
+        <location filename="../MainWindow.cpp" line="541"/>
+        <location filename="../MainWindow.cpp" line="1609"/>
         <location filename="../MainWindow.cpp" line="1610"/>
-        <location filename="../MainWindow.cpp" line="1612"/>
-        <location filename="../MainWindow.cpp" line="1620"/>
+        <location filename="../MainWindow.cpp" line="1647"/>
+        <location filename="../MainWindow.cpp" line="1649"/>
+        <location filename="../MainWindow.cpp" line="1657"/>
         <source>/</source>
         <translation>/</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="754"/>
-        <location filename="../MainWindow.cpp" line="768"/>
+        <location filename="../MainWindow.cpp" line="778"/>
+        <location filename="../MainWindow.cpp" line="792"/>
         <source>
 </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="791"/>
-        <location filename="../MainWindow.cpp" line="793"/>
-        <location filename="../MainWindow.cpp" line="838"/>
-        <location filename="../MainWindow.cpp" line="840"/>
-        <location filename="../MainWindow.cpp" line="1193"/>
-        <location filename="../MainWindow.cpp" line="1195"/>
-        <location filename="../MainWindow.cpp" line="1303"/>
-        <location filename="../MainWindow.cpp" line="1305"/>
+        <location filename="../MainWindow.cpp" line="815"/>
+        <location filename="../MainWindow.cpp" line="817"/>
+        <location filename="../MainWindow.cpp" line="862"/>
+        <location filename="../MainWindow.cpp" line="864"/>
+        <location filename="../MainWindow.cpp" line="1217"/>
+        <location filename="../MainWindow.cpp" line="1219"/>
+        <location filename="../MainWindow.cpp" line="1336"/>
+        <location filename="../MainWindow.cpp" line="1338"/>
         <source> - </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="791"/>
-        <location filename="../MainWindow.cpp" line="793"/>
-        <location filename="../MainWindow.cpp" line="838"/>
-        <location filename="../MainWindow.cpp" line="840"/>
-        <location filename="../MainWindow.cpp" line="1193"/>
-        <location filename="../MainWindow.cpp" line="1195"/>
-        <location filename="../MainWindow.cpp" line="1303"/>
-        <location filename="../MainWindow.cpp" line="1305"/>
+        <location filename="../MainWindow.cpp" line="815"/>
+        <location filename="../MainWindow.cpp" line="817"/>
+        <location filename="../MainWindow.cpp" line="862"/>
+        <location filename="../MainWindow.cpp" line="864"/>
+        <location filename="../MainWindow.cpp" line="1217"/>
+        <location filename="../MainWindow.cpp" line="1219"/>
+        <location filename="../MainWindow.cpp" line="1336"/>
+        <location filename="../MainWindow.cpp" line="1338"/>
         <source> (</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="791"/>
-        <location filename="../MainWindow.cpp" line="793"/>
-        <location filename="../MainWindow.cpp" line="838"/>
-        <location filename="../MainWindow.cpp" line="840"/>
-        <location filename="../MainWindow.cpp" line="1193"/>
-        <location filename="../MainWindow.cpp" line="1195"/>
-        <location filename="../MainWindow.cpp" line="1303"/>
-        <location filename="../MainWindow.cpp" line="1305"/>
+        <location filename="../MainWindow.cpp" line="815"/>
+        <location filename="../MainWindow.cpp" line="817"/>
+        <location filename="../MainWindow.cpp" line="862"/>
+        <location filename="../MainWindow.cpp" line="864"/>
+        <location filename="../MainWindow.cpp" line="1217"/>
+        <location filename="../MainWindow.cpp" line="1219"/>
+        <location filename="../MainWindow.cpp" line="1336"/>
+        <location filename="../MainWindow.cpp" line="1338"/>
         <source> entries total)</source>
         <translation> total de entradas)</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="795"/>
-        <location filename="../MainWindow.cpp" line="842"/>
-        <location filename="../MainWindow.cpp" line="1197"/>
-        <location filename="../MainWindow.cpp" line="1307"/>
+        <location filename="../MainWindow.cpp" line="819"/>
+        <location filename="../MainWindow.cpp" line="866"/>
+        <location filename="../MainWindow.cpp" line="1221"/>
+        <location filename="../MainWindow.cpp" line="1340"/>
         <source>0 - 0 (0 entries total)</source>
         <translation>0 - 0 (0 total de entradas)</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1046"/>
+        <location filename="../MainWindow.cpp" line="1070"/>
         <source>GB</source>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1048"/>
+        <location filename="../MainWindow.cpp" line="1072"/>
         <source>MB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1050"/>
+        <location filename="../MainWindow.cpp" line="1074"/>
         <source>KB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1096"/>
+        <location filename="../MainWindow.cpp" line="1120"/>
         <source>&lt;a href=&quot;newevents&quot;&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1096"/>
+        <location filename="../MainWindow.cpp" line="1120"/>
         <source>&lt;/a&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1163"/>
+        <location filename="../MainWindow.cpp" line="1187"/>
         <source>An error has occurred: </source>
         <translation>Se ha producido un error: </translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1250"/>
+        <location filename="../MainWindow.cpp" line="1274"/>
         <source>Exception</source>
         <translation>Excepción</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1256"/>
+        <location filename="../MainWindow.cpp" line="1289"/>
         <source>Ignore</source>
         <translation>Ignorar</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1339"/>
+        <location filename="../MainWindow.cpp" line="1372"/>
         <source>Clam One - THREAT DETECTED</source>
         <translation>Clam One - AMENAZA DETECTADA</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1447"/>
-        <source>pkexec kill -USR1 </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="1648"/>
+        <location filename="../MainWindow.cpp" line="1685"/>
         <source>Click to delete this schedule entry</source>
         <translation>Haga clic para eliminar esta entrada de programación</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1652"/>
-        <location filename="../MainWindow.cpp" line="1657"/>
+        <location filename="../MainWindow.cpp" line="1689"/>
+        <location filename="../MainWindow.cpp" line="1694"/>
         <source>enabled</source>
         <translation>habilitado</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1652"/>
-        <location filename="../MainWindow.cpp" line="1657"/>
+        <location filename="../MainWindow.cpp" line="1689"/>
+        <location filename="../MainWindow.cpp" line="1694"/>
         <source>disabled</source>
         <translation>deshabilitado</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1654"/>
+        <location filename="../MainWindow.cpp" line="1691"/>
         <source>Should this schedule entry be enabled</source>
         <translation>Debería habilitarse esta entrada de horario</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1667"/>
+        <location filename="../MainWindow.cpp" line="1704"/>
         <source>Name of this schedule entry</source>
         <translation>Nombre de esta entrada de horario</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1685"/>
+        <location filename="../MainWindow.cpp" line="1722"/>
         <source>Crontab style minute field</source>
         <translation>Campo de minutos estilo Crontab</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1700"/>
+        <location filename="../MainWindow.cpp" line="1737"/>
         <source>Crontab style hour field</source>
         <translation>Campo de hora estilo Crontab</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1715"/>
+        <location filename="../MainWindow.cpp" line="1752"/>
         <source>Crontab style day of month field</source>
         <translation>Campo de día del mes estilo Crontab</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1730"/>
+        <location filename="../MainWindow.cpp" line="1767"/>
         <source>Crontab style month field</source>
         <translation>Campo de mes de estilo Crontab</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1745"/>
+        <location filename="../MainWindow.cpp" line="1782"/>
         <source>Crontab style day of week field</source>
         <translation>Campo de día de la semana estilo Crontab</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1758"/>
+        <location filename="../MainWindow.cpp" line="1795"/>
         <source>List of Files/Directories to scan</source>
         <translation>Lista de Archivos/Directorios para escanear</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1767"/>
-        <location filename="../MainWindow.cpp" line="1774"/>
+        <location filename="../MainWindow.cpp" line="1804"/>
+        <location filename="../MainWindow.cpp" line="1811"/>
         <source>Add File</source>
         <translation>Agregar Archivo</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1771"/>
+        <location filename="../MainWindow.cpp" line="1808"/>
         <source>Add Files to the list</source>
         <translation>Agregar Archivos a la lista</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1785"/>
-        <location filename="../MainWindow.cpp" line="1792"/>
+        <location filename="../MainWindow.cpp" line="1822"/>
+        <location filename="../MainWindow.cpp" line="1829"/>
         <source>Add Dir</source>
         <translation>Agregar Dir</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="1789"/>
+        <location filename="../MainWindow.cpp" line="1826"/>
         <source>Add Directories to the list</source>
         <translation>Agregar Directorios a la lista</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2531"/>
+        <location filename="../MainWindow.cpp" line="2568"/>
         <source>/daily.{cld|cvd} doesnt exist</source>
         <translation>/daily.{cld|cvd} no existe</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2537"/>
+        <location filename="../MainWindow.cpp" line="2574"/>
         <source>/daily.{cld|cvd} file not open read-only</source>
         <translation>/daily.{cld|cvd} archivo no abierto de solo lectura</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2544"/>
+        <location filename="../MainWindow.cpp" line="2581"/>
         <source>/daily.{cld|cvd} smaller than 0x200 bytes</source>
         <translation>/daily.{cld|cvd} más pequeño que 0x200 bytes</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2549"/>
+        <location filename="../MainWindow.cpp" line="2586"/>
         <source>/daily.{cld|cvd} header not parsed correctly</source>
         <translation>/daily.{cld|cvd} encabezado no analizado correctamente</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2576"/>
+        <location filename="../MainWindow.cpp" line="2613"/>
         <source>/main.{cld|cvd} doesnt exist</source>
         <translation>/main.{cld|cvd} no existe</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2581"/>
+        <location filename="../MainWindow.cpp" line="2618"/>
         <source>/main.{cld|cvd} file not open read-only</source>
         <translation>/main.{cld|cvd} archivo no abierto de solo lectura</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2587"/>
+        <location filename="../MainWindow.cpp" line="2624"/>
         <source>/main.{cld|cvd} smaller than 0x200 bytes</source>
         <translation>/main.{cld|cvd} más pequeño que 0x200 bytes</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2592"/>
+        <location filename="../MainWindow.cpp" line="2629"/>
         <source>/main.{cld|cvd} header not parsed correctly</source>
         <translation>/main.{cld|cvd} encabezado no analizado correctamente</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2619"/>
+        <location filename="../MainWindow.cpp" line="2656"/>
         <source>/bytecode.{cld|cvd} doesnt exist</source>
         <translation>/bytecode.{cld|cvd} no existe</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2624"/>
+        <location filename="../MainWindow.cpp" line="2661"/>
         <source>/bytecode.{cld|cvd} file not open read-only</source>
         <translation>/bytecode.{cld|cvd} archivo no abierto de solo lectura</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2630"/>
+        <location filename="../MainWindow.cpp" line="2667"/>
         <source>/bytecode.{cld|cvd} smaller than 0x200 bytes</source>
         <translation>/bytecode.{cld|cvd} más pequeño que 0x200 bytes</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2635"/>
+        <location filename="../MainWindow.cpp" line="2672"/>
         <source>/bytecode.{cld|cvd} header not parsed correctly</source>
         <translation>/bytecode.{cld|cvd} encabezado no analizado correctamente</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2656"/>
+        <location filename="../MainWindow.cpp" line="2693"/>
         <source>clamd is currently not running.</source>
         <translation>clamd no se está ejecutando actualmente.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2666"/>
+        <location filename="../MainWindow.cpp" line="2703"/>
         <source>clamd must be configured to run locally on a &quot;local socket&quot;, which is currently not enabled.</source>
         <translation>clamd debe configurarse para ejecutarse localmente en un &quot;socket local&quot;, que actualmente no está habilitado.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2680"/>
+        <location filename="../MainWindow.cpp" line="2717"/>
         <source>clamd failed to ping back.</source>
         <translation>clamd no pudo devolver el ping.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2695"/>
+        <location filename="../MainWindow.cpp" line="2732"/>
         <source>freshclam is currently not running.</source>
         <translation>freshclam no se está ejecutando actualmente.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2708"/>
+        <location filename="../MainWindow.cpp" line="2745"/>
         <source>OnAccess is configured, but currently not running.</source>
         <translation>OnAccess está configurado, pero actualmente no se está ejecutando.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2714"/>
+        <location filename="../MainWindow.cpp" line="2751"/>
         <source>OnAccess - Disabled in Configure</source>
         <translation>OnAccess - Deshabilitado en Configurar</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2720"/>
-        <location filename="../MainWindow.cpp" line="2731"/>
-        <location filename="../MainWindow.cpp" line="2742"/>
+        <location filename="../MainWindow.cpp" line="2757"/>
         <location filename="../MainWindow.cpp" line="2768"/>
+        <location filename="../MainWindow.cpp" line="2779"/>
+        <location filename="../MainWindow.cpp" line="2805"/>
         <source>Definitions Not Up To Date</source>
         <translation>Definiciones No Actualizadas</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2722"/>
-        <location filename="../MainWindow.cpp" line="2733"/>
-        <location filename="../MainWindow.cpp" line="2744"/>
-        <location filename="../MainWindow.cpp" line="2754"/>
+        <location filename="../MainWindow.cpp" line="2759"/>
+        <location filename="../MainWindow.cpp" line="2770"/>
+        <location filename="../MainWindow.cpp" line="2781"/>
+        <location filename="../MainWindow.cpp" line="2791"/>
         <source>Virus Definitions Check Failed.</source>
         <translation>Falló la comprobación de definiciones de virus.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2723"/>
-        <source>There was a problem attempting to check the daily.cld virus defnition database. The file&apos;s header looks malformed.</source>
+        <location filename="../MainWindow.cpp" line="2760"/>
+        <source>There was a problem attempting to check the daily.cld virus definition database. The file&apos;s header looks malformed.</source>
         <translation>Hubo un problema al intentar verificar la base de datos de definiciones de virus daily.cld. El encabezado del archivo parece mal formado.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2727"/>
+        <location filename="../MainWindow.cpp" line="2771"/>
+        <source>There was a problem attempting to check the main.cld virus definition database. The file&apos;s header looks malformed.</source>
+        <translation>Hubo un problema al intentar verificar la base de datos de definiciones de virus main.cld. El encabezado del archivo parece mal formado.</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="2782"/>
+        <source>There was a problem attempting to check the bytecode.cld virus definition database. The file&apos;s header looks malformed.</source>
+        <translation>Hubo un problema al intentar verificar la base de datos de definiciones de virus bytecode.cld. El encabezado del archivo parece mal formado.</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="2792"/>
+        <source>There was a problem attempting to lookup the DNS TXT current virus definition info. Check your internet connectivity.</source>
+        <translation>Hubo un problema al intentar buscar la información de definición de virus actual de DNS TXT. Verifique su conectividad a Internet.</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="3178"/>
+        <source>System Unknown</source>
+        <translation>Sistema Desconocido</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="2764"/>
         <source>Unable To Check daily.cld</source>
         <translation>No se puede comprobar daily.cld</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2734"/>
-        <source>There was a problem attempting to check the main.cld virus defnition database. The file&apos;s header looks malformed.</source>
-        <translation>Hubo un problema al intentar verificar la base de datos de definiciones de virus main.cld. El encabezado del archivo parece mal formado.</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="2738"/>
+        <location filename="../MainWindow.cpp" line="2775"/>
         <source>Unable To Check main.cld</source>
         <translation>No se puede comprobar main.cld</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2745"/>
-        <source>There was a problem attempting to check the bytecode.cld virus defnition database. The file&apos;s header looks malformed.</source>
-        <translation>Hubo un problema al intentar verificar la base de datos de definiciones de virus bytecode.cld. El encabezado del archivo parece mal formado.</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="2749"/>
+        <location filename="../MainWindow.cpp" line="2786"/>
         <source>Unable To Check bytecode.cld</source>
         <translation>No se puede comprobar bytecode.cld</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2755"/>
-        <source>There was a problem attempting to lookup the DNS TXT current virus defnition info. Check your internet connectivity.</source>
-        <translation>Hubo un problema al intentar buscar la información de definición de virus actual de DNS TXT. Verifique su conectividad a Internet.</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="2759"/>
+        <location filename="../MainWindow.cpp" line="2796"/>
         <source>Unable To Establish Internet Connection</source>
         <translation>No se puede establecer una conexión a Internet</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2770"/>
+        <location filename="../MainWindow.cpp" line="2807"/>
         <source>Virus Definitions Update Failed.</source>
         <translation>Falló la actualización de las definiciones de virus.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2771"/>
+        <location filename="../MainWindow.cpp" line="2808"/>
         <source>There was a problem attempting to update the virus definition database to the most current form. The virus definition database is out-of-date</source>
         <translation>Hubo un problema al intentar actualizar la base de datos de definiciones de virus a la forma más actual. La base de datos de definiciones de virus no está actualizada</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2775"/>
+        <location filename="../MainWindow.cpp" line="2812"/>
         <source>Virus Definitions Are Out Of Date</source>
         <translation>Las definiciones de virus están desactualizadas</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2780"/>
+        <location filename="../MainWindow.cpp" line="2817"/>
         <source>Virus Definitions Updated.</source>
         <translation>Definiciones de virus actualizadas.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2781"/>
+        <location filename="../MainWindow.cpp" line="2818"/>
         <source>The virus definition database is up-to-date&lt;br /&gt;&lt;br /&gt;</source>
         <translation>La base de datos de definiciones de virus está actualizada &lt;br /&gt; &lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2785"/>
+        <location filename="../MainWindow.cpp" line="2822"/>
         <source> d-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2787"/>
+        <location filename="../MainWindow.cpp" line="2824"/>
         <source> m-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2789"/>
+        <location filename="../MainWindow.cpp" line="2826"/>
         <source> b-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2792"/>
+        <location filename="../MainWindow.cpp" line="2829"/>
         <source>d-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2793"/>
+        <location filename="../MainWindow.cpp" line="2830"/>
         <source>, m-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2794"/>
+        <location filename="../MainWindow.cpp" line="2831"/>
         <source>, b-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2805"/>
+        <location filename="../MainWindow.cpp" line="2842"/>
         <source>Active threat detected on filesystem.</source>
         <translation>Amenaza activa detectada en el sistema de archivos.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3019"/>
-        <location filename="../MainWindow.cpp" line="3027"/>
+        <location filename="../MainWindow.cpp" line="3052"/>
+        <location filename="../MainWindow.cpp" line="3060"/>
         <source>.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3019"/>
-        <location filename="../MainWindow.cpp" line="3027"/>
+        <location filename="../MainWindow.cpp" line="3052"/>
+        <location filename="../MainWindow.cpp" line="3060"/>
         <source>..</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3091"/>
+        <location filename="../MainWindow.cpp" line="3124"/>
         <source>Error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3109"/>
+        <location filename="../MainWindow.cpp" line="3142"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3127"/>
+        <location filename="../MainWindow.cpp" line="3160"/>
         <source>All Systems Nominal</source>
         <translation>Todos Los Sistemas Nominales</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3145"/>
-        <source>System Unkonwn</source>
-        <translation>Sistema Desconocido</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="3168"/>
+        <location filename="../MainWindow.cpp" line="3201"/>
         <source>&lt;h1&gt;&lt;b&gt;Exiting...&lt;/b&gt;&lt;/h1&gt;</source>
         <translation>&lt;h1&gt;&lt;b&gt;Saliendo...&lt;/b&gt;&lt;/h1&gt;</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3169"/>
+        <location filename="../MainWindow.cpp" line="3202"/>
         <source>Do you want to shutdown ClamOne?</source>
         <translation>¿Quiere cerrar ClamOne?</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3170"/>
+        <location filename="../MainWindow.cpp" line="3203"/>
         <source>Yes</source>
         <translation>Sí</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="3172"/>
+        <location filename="../MainWindow.cpp" line="3205"/>
         <source>No</source>
         <translation>No</translation>
     </message>

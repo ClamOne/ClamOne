@@ -60,6 +60,20 @@ Do you want to quarantine?&lt;br /&gt;</string>
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="pushButtonYesAll">
+       <property name="text">
+        <string>Yes All</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonNoAll">
+       <property name="text">
+        <string>No All</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButtonYes">
        <property name="text">
         <string>Yes</string>

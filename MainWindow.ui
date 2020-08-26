@@ -789,7 +789,7 @@
                <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
-               <string>Permently Delete File</string>
+               <string>Permanently Delete File</string>
               </property>
              </widget>
             </item>
@@ -1833,7 +1833,7 @@
               </property>
               <item>
                <property name="text">
-                <string>Scaned Files Interval</string>
+                <string>Scanned Files Interval</string>
                </property>
               </item>
               <item>
@@ -2418,8 +2418,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>195</width>
-               <height>621</height>
+               <width>435</width>
+               <height>366</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -2453,7 +2453,7 @@
                  <string notr="true">color: #4A4A4A;</string>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;This program is desktop frontend application for the popular clamav antivirus engine. The design features of this application allow you to quickly navagative the complex configuration’s of clamav’s design and customize them to your desire, monitor ther status of the detection engine, perform custom virus scans, maintains an individual log of detection and prevention events, quarintines and locks potential threats, and personally alerts you when it detects a problem. &lt;/p&gt;&lt;p&gt;Source code can be located at &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; and inquiries sent to &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Documenation is currently lacking, but will be added to the source code webpage in due time.&lt;/p&gt;&lt;p&gt;If you care to donate to this project:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;This program is desktop frontend application for the popular clamav antivirus engine. The design features of this application allow you to quickly navagative the complex configuration’s of clamav’s design and customize them to your desire, monitor ther status of the detection engine, perform custom virus scans, maintains an individual log of detection and prevention events, quarintines and locks potential threats, and personally alerts you when it detects a problem. &lt;/p&gt;&lt;p&gt;Source code can be located at &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; and inquiries sent to &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Documentation is currently lacking, but will be added to the source code webpage in due time.&lt;/p&gt;&lt;p&gt;If you care to donate to this project:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>

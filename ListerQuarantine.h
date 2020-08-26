@@ -17,6 +17,8 @@ class ListerQuarantine : public QDialog
 private slots:
     void on_pushButtonYes_clicked();
     void on_pushButtonNo_clicked();
+    void on_pushButtonYesAll_clicked();
+    void on_pushButtonNoAll_clicked();
 
 public slots:
     void add_file(QByteArray crypt_filename, QByteArray plain_filename);

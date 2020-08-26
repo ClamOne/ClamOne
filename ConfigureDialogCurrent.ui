@@ -75,7 +75,7 @@
                    <item>
                     <widget class="QLabel" name="labelLocationOfClamonedb">
                      <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Location on the filesystem where the sqlite database is located containing all Clam One's configureations and entries&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Location on the filesystem where the sqlite database is located containing all Clam One's configurations and entries&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                      <property name="text">
                       <string>Location Of clamone.db</string>
@@ -426,7 +426,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>416</width>
+                  <width>484</width>
                   <height>620</height>
                  </rect>
                 </property>
@@ -1350,8 +1350,8 @@ Default: disabled</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>233</width>
-                  <height>289</height>
+                  <width>497</width>
+                  <height>356</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1842,8 +1842,8 @@ Default: no</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>239</width>
-                  <height>179</height>
+                  <width>497</width>
+                  <height>356</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -2126,7 +2126,7 @@ Default: no</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>249</width>
+                  <width>484</width>
                   <height>371</height>
                  </rect>
                 </property>
@@ -2397,10 +2397,9 @@ Default: 600</string>
                       <bool>false</bool>
                      </property>
                      <property name="toolTip">
-                      <string>NUMBER&lt;br /&gt;
+                      <string>BOOL&lt;br /&gt;
 This option allows you to disable clamd's caching feature.&lt;br /&gt;
-Default: no
-</string>
+Default: no</string>
                      </property>
                      <property name="text">
                       <string>DisableCache</string>
@@ -2767,7 +2766,7 @@ Default: no</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>414</width>
+                  <width>484</width>
                   <height>908</height>
                  </rect>
                 </property>
@@ -4353,7 +4352,7 @@ Default: yes</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>286</width>
+                  <width>484</width>
                   <height>826</height>
                  </rect>
                 </property>
@@ -5762,7 +5761,7 @@ Default: 25M</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>416</width>
+                  <width>484</width>
                   <height>610</height>
                  </rect>
                 </property>
@@ -6630,8 +6629,8 @@ Default: no</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>199</width>
-                  <height>532</height>
+                  <width>497</width>
+                  <height>356</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_4">

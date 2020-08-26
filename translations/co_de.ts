@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.1" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
         <location filename="../AboutDialog.ui" line="14"/>
         <source>Clam One - About</source>
-        <translation>Clam One - À Propos</translation>
+        <translation>Clam One - Über</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="27"/>
@@ -16,12 +16,12 @@
     <message>
         <location filename="../AboutDialog.ui" line="43"/>
         <source>The frontend desktop application to the Clam Anti-Virus Engine&lt;br /&gt;&lt;br /&gt;For Unix and Linux Operation Systems</source>
-        <translation>L&apos;application de bureau frontend au moteur anti-virus Clam &lt;br /&gt; &lt;br /&gt; Pour les systèmes d&apos;exploitation Unix et Linux</translation>
+        <translation>Die Frontend-Desktop-Anwendung für die Clam Anti-Virus Engine &lt;br /&gt; &lt;br /&gt; Für Unix- und Linux-Betriebssysteme</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="55"/>
         <source>Clam One Version: </source>
-        <translation>Clam One Version: </translation>
+        <translation>Clam One Ausführung: </translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="71"/>
@@ -49,12 +49,12 @@
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="14"/>
         <source>Clam One - Configure</source>
-        <translation>Clam One - Configurer</translation>
+        <translation>Clam One - Konfigurieren</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="29"/>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="34"/>
@@ -69,57 +69,57 @@
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="55"/>
         <source>Basics</source>
-        <translation>Basiques</translation>
+        <translation>Grundlagen</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="78"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Location on the filesystem where the sqlite database is located containing all Clam One&apos;s configurations and entries&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Emplacement sur le système de fichiers où se trouve la base de données sqlite contenant toutes les configurations et entrées de Clam One&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Speicherort im Dateisystem, in dem sich die SQLite-Datenbank befindet, der alle Konfigurationen und Einträge von Clam One enthält&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="81"/>
         <source>Location Of clamone.db</source>
-        <translation>Emplacement de clamone.db</translation>
+        <translation>Position Von clamone.db</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="99"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Used solely by Clam One, its the location of clamav&apos;s clamd.conf file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Utilisé uniquement par Clam One, c&apos;est l&apos;emplacement du fichier clamd.conf de clamav. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wird ausschließlich von Clam One verwendet und ist der Speicherort der clamd.conf-Datei von clamav.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="102"/>
         <source>Location Of clamd.conf</source>
-        <translation>Emplacement de clamd.conf</translation>
+        <translation>Position Von clamd.conf</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="147"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Used solely by Clam One, its the location of clamav&apos;s freshclam.conf file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Utilisé uniquement par Clam One, c&apos;est l&apos;emplacement du fichier freshclam.conf de clamav.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wird ausschließlich von Clam One verwendet und ist der Speicherort der Datei freshclam.conf von clamav.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="150"/>
         <source>Location Of freshclam.conf</source>
-        <translation>Emplacement de freshclam.conf</translation>
+        <translation>Position Von freshclam.conf</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="191"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Used by Clam One&apos;s display, it lists the number of items to display on a single page at one time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Utilisé par l&apos;affichage de Clam One, il répertorie le nombre d&apos;éléments à afficher sur une seule page à la fois.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wird von der Anzeige von Clam One verwendet und listet die Anzahl der Elemente auf, die gleichzeitig auf einer einzelnen Seite angezeigt werden sollen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="194"/>
         <source>Entries Per Page</source>
-        <translation>Entrées par page</translation>
+        <translation>Einträge pro Seite</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="234"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Used solely by Clam One, it determines if Clam One is monitoring the state of clamav&apos;s OnAccess program.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Utilisé uniquement par Clam One, il détermine si Clam One surveille l&apos;état du programme OnAccess de clamav.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Es wird ausschließlich von Clam One verwendet und bestimmt, ob Clam One den Status des OnAccess-Programms von clamav überwacht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="237"/>
         <source>Enable ClamOne to monitor OnAccess</source>
-        <translation>Activer ClamOne pour surveiller OnAccess</translation>
+        <translation>Aktivieren Sie ClamOne, um OnAccess zu überwachen</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="257"/>
@@ -234,42 +234,42 @@
         <location filename="../ConfigureDialogCurrent.cpp" line="3322"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3329"/>
         <source>no</source>
-        <translation>non</translation>
+        <translation>nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="268"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enables Clam One to automatically process detected alerts.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permet à Clam One de traiter automatiquement les alertes détectées.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ermöglicht Clam One, erkannte Warnungen automatisch zu verarbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="271"/>
         <source>Enable Clam One to quarantine files</source>
-        <translation>Activer Clam One pour mettre les fichiers en quarantaine</translation>
+        <translation>Aktivieren Sie Clam One, um Dateien unter Quarantäne zu stellen</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="305"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sets the maximum size of a file to try and quarantine.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Définit la taille maximale d&apos;un fichier à essayer de mettre en quarantaine.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Legt die maximale Größe einer Datei fest, die unter Quarantäne gestellt werden soll.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="308"/>
         <source>Maximum filesize to quarantine</source>
-        <translation>Taille maximale des fichiers à mettre en quarantaine</translation>
+        <translation>Maximale Dateigröße zur Quarantäne</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="342"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Chooses the location for where quarantined files are to reside.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Choisit l&apos;emplacement où les fichiers mis en quarantaine doivent résider.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wählt den Speicherort für Dateien in Quarantäne aus.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="345"/>
         <source>Location of quarantine files directory</source>
-        <translation>Emplacement du répertoire des fichiers de quarantaine</translation>
+        <translation>Speicherort des Quarantänedateiverzeichnisses</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="416"/>
         <source>NetSock</source>
-        <translation></translation>
+        <translation>NetzBuch</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="449"/>
@@ -277,8 +277,8 @@
 Path to a local (Unix) socket the daemon will listen on.&lt;br /&gt;
 Default: disabled</source>
         <translation>STRING&lt;br /&gt;
-Chemin vers une socket locale (Unix) sur laquelle le démon écoutera. &lt;br /&gt;
-Par défaut: désactivé</translation>
+Pfad zu einem lokalen (Unix) Socket, den der Dämon abhört. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="454"/>
@@ -296,8 +296,8 @@ Par défaut: désactivé</translation>
 Sets the group ownership on the unix socket.&lt;br /&gt;
 Default: the primary group of the user running clamd</source>
         <translation>STRING&lt;br /&gt;
-Définit la propriété du groupe sur le socket unix. &lt;br /&gt;
-Par défaut: le groupe principal de l&apos;utilisateur exécutant clamd</translation>
+Legt den Gruppenbesitz für den Unix-Socket fest. &lt;br /&gt;
+Standard: Die primäre Gruppe des Benutzers, der clamd ausführt</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="503"/>
@@ -315,8 +315,8 @@ Par défaut: le groupe principal de l&apos;utilisateur exécutant clamd</transla
 Sets the permissions on the unix socket to the specified mode.&lt;br /&gt;
 Default: socket is world readable and writable</source>
         <translation>STRING&lt;br /&gt;
-Définit les autorisations sur le socket unix sur le mode spécifié. &lt;br /&gt;
-Par défaut: le socket est lisible et inscriptible dans le monde entier</translation>
+Setzt die Berechtigungen für den Unix-Socket auf den angegebenen Modus. &lt;br /&gt;
+Standard: Socket ist weltweit lesbar und beschreibbar</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="552"/>
@@ -334,8 +334,8 @@ Par défaut: le socket est lisible et inscriptible dans le monde entier</transla
 Remove stale socket after unclean shutdown.&lt;br /&gt;
 Default: yes</source>
         <translation>BOOL&lt;br /&gt;
-Supprimez le socket obsolète après un arrêt malpropre. &lt;br /&gt;
-Par défaut: oui</translation>
+Entfernen Sie den veralteten Sockel nach dem unsauberen Herunterfahren. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="604"/>
@@ -437,16 +437,16 @@ Par défaut: oui</translation>
         <location filename="../ConfigureDialogCurrent.cpp" line="3320"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="3327"/>
         <source>yes</source>
-        <translation>oui</translation>
+        <translation>ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="651"/>
         <source>NUMBER&lt;br /&gt;
 TCP port number the daemon will listen on.&lt;br /&gt;
 Default: disabled</source>
-        <translation>NUMBER&lt;br /&gt;
-Numéro de port TCP sur lequel le démon écoutera. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>NUMMER &lt;br /&gt;
+TCP-Portnummer, die der Dämon abhört. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="656"/>
@@ -459,10 +459,10 @@ Par défaut: désactivé</translation>
 By default clamd binds to INADDR_ANY.&lt;br /&gt;
 This option allows you to restrict the TCP address and provide some degree of protection from the outside world. This option can be specified multiple times in order to listen on multiple IPs. IPv6 is now supported.&lt;br /&gt;
 Default: disable</source>
-        <translation>STRING&lt;br /&gt;
-Par défaut, clamd se lie à INADDR_ANY. &lt;br /&gt;
-Cette option vous permet de restreindre l&apos;adresse TCP et de fournir un certain degré de protection contre le monde extérieur. Cette option peut être spécifiée plusieurs fois pour écouter sur plusieurs IP. IPv6 est désormais pris en charge. &lt;br /&gt;
-Par défaut: désactiver</translation>
+        <translation>STRING &lt;br /&gt;
+Standardmäßig bindet clamd an INADDR_ANY. &lt;br /&gt;
+Mit dieser Option können Sie die TCP-Adresse einschränken und einen gewissen Schutz vor der Außenwelt bieten. Diese Option kann mehrmals angegeben werden, um mehrere IPs abzuhören. IPv6 wird jetzt unterstützt. &lt;br /&gt;
+Standard: deaktivieren</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="712"/>
@@ -474,9 +474,9 @@ Par défaut: désactiver</translation>
         <source>NUMBER&lt;br /&gt;
 Maximum length the queue of pending connections may grow to.&lt;br /&gt;
 Default: 200</source>
-        <translation>NUMBER&lt;br /&gt;
-Longueur maximale de la file d&apos;attente des connexions en attente. &lt;br /&gt;
-Par défaut: 200</translation>
+        <translation>NUMMER &lt;br /&gt;
+Die maximale Länge der Warteschlange ausstehender Verbindungen kann ansteigen. &lt;br /&gt;
+Standard: 200</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="764"/>
@@ -489,10 +489,10 @@ Par défaut: 200</translation>
 Close the STREAM session when the data size limit is exceeded.&lt;br /&gt;
 The value should match your MTA&apos;s limit for the maximum attachment size.&lt;br /&gt;
 Default: 25M</source>
-        <translation>SIZE&lt;br /&gt;
-Fermez la session STREAM lorsque la limite de taille des données est dépassée. &lt;br /&gt;
-La valeur doit correspondre à la limite de votre MTA pour la taille maximale des pièces jointes. &lt;br /&gt;
-Par défaut: 25M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Schließen Sie die STREAM-Sitzung, wenn die Datengrößenbeschränkung überschritten wird. &lt;br /&gt;
+Der Wert sollte mit dem Grenzwert Ihres MTA für die maximale Anhangsgröße übereinstimmen. &lt;br /&gt;
+Standard: 25M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="817"/>
@@ -505,10 +505,10 @@ Par défaut: 25M</translation>
 The STREAM command uses an FTP-like protocol.&lt;br /&gt;
 This option sets the lower boundary for the port range.&lt;br /&gt;
 Default: 1024</source>
-        <translation>NUMBER&lt;br /&gt;
-La commande STREAM utilise un protocole de type FTP. &lt;br /&gt;
-Cette option définit la limite inférieure de la plage de ports. &lt;br /&gt;
-Par défaut: 1024</translation>
+        <translation>NUMMER &lt;br /&gt;
+Der Befehl STREAM verwendet ein FTP-ähnliches Protokoll. &lt;br /&gt;
+Diese Option legt die untere Grenze für den Portbereich fest. &lt;br /&gt;
+Standard: 1024</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="870"/>
@@ -520,9 +520,9 @@ Par défaut: 1024</translation>
         <source>NUMBER&lt;br /&gt;
 This option sets the upper boundary for the port range.&lt;br /&gt;
 Default: 2048</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option définit la limite supérieure de la plage de ports. &lt;br /&gt;
-Par défaut: 2048</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option legt die obere Grenze für den Portbereich fest. &lt;br /&gt;
+Standard: 2048</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="922"/>
@@ -534,9 +534,9 @@ Par défaut: 2048</translation>
         <source>NUMBER&lt;br /&gt;
 Maximum number of threads running at the same time.&lt;br /&gt;
 Default: 10</source>
-        <translation>NUMBER&lt;br /&gt;
-Nombre maximum de threads exécutés simultanément. &lt;br /&gt;
-Par défaut: 10</translation>
+        <translation>NUMMER &lt;br /&gt;
+Maximale Anzahl von Threads, die gleichzeitig ausgeführt werden. &lt;br /&gt;
+Standard: 10</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="974"/>
@@ -548,9 +548,7 @@ Par défaut: 10</translation>
         <source>NUMBER&lt;br /&gt;
 This option specifies the time (in seconds) after which clamd should timeout if a client doesn&apos;t provide any data.&lt;br /&gt;
 Default: 120</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option spécifie le temps (en secondes) après lequel clamd doit expirer si un client ne fournit aucune donnée. &lt;br /&gt;
-Par défaut: 120</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1026"/>
@@ -562,9 +560,9 @@ Par défaut: 120</translation>
         <source>NUMBER&lt;br /&gt;
 This option specifies the time (in seconds) after which clamd should timeout if a client doesn&apos;t provide any initial command after connecting. The default is set to 30 to avoid timeouts with TCP sockets when processing large messages. If using a Unix socket, the value can be changed to 5. Note: the timeout for subsequents commands, and/or data chunks is specified by ReadTimeout.&lt;br /&gt;
 Default: 30</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option spécifie le temps (en secondes) après lequel clamd doit expirer si un client ne fournit aucune commande initiale après la connexion. La valeur par défaut est définie sur 30 pour éviter les délais d&apos;expiration avec les sockets TCP lors du traitement de messages volumineux. Si vous utilisez un socket Unix, la valeur peut être modifiée à 5. Remarque: le délai d&apos;expiration des commandes et / ou des blocs de données suivants est spécifié par ReadTimeout. &lt;br /&gt;
-Par défaut: 30</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option gibt die Zeit (in Sekunden) an, nach der clamd eine Zeitüberschreitung aufweisen soll, wenn ein Client nach dem Herstellen der Verbindung keinen ersten Befehl bereitstellt. Der Standardwert ist 30, um Zeitüberschreitungen mit TCP-Sockets bei der Verarbeitung großer Nachrichten zu vermeiden. Bei Verwendung eines Unix-Sockets kann der Wert in 5 geändert werden. Hinweis: Das Zeitlimit für nachfolgende Befehle und / oder Datenblöcke wird von ReadTimeout angegeben. &lt;br /&gt;
+Standard: 30</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1078"/>
@@ -576,9 +574,9 @@ Par défaut: 30</translation>
         <source>NUMBER&lt;br /&gt;
 This option specifies how long to wait (in milliseconds) if the send buffer is full. Keep this value low to prevent clamd hanging.&lt;br /&gt;
 Default: 500</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option spécifie la durée d&apos;attente (en millisecondes) si le tampon d&apos;envoi est plein. Gardez cette valeur basse pour éviter que les palourdes ne pendent. &lt;br /&gt;
-Par défaut: 500</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option gibt an, wie lange (in Millisekunden) gewartet werden soll, wenn der Sendepuffer voll ist. Halten Sie diesen Wert niedrig, um zu verhindern, dass Muscheln hängen. &lt;br /&gt;
+Standard: 500</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1130"/>
@@ -591,10 +589,10 @@ Par défaut: 500</translation>
 Maximum number of queued items (including those being processed by MaxThreads threads). It is recommended to have this value at least twice MaxThreads if possible.&lt;br /&gt;
 WARNING: you shouldn&apos;t increase this too much to avoid running out of file descriptors, the following condition should hold: MaxThreads*MaxRecursion + MaxQueue - MaxThreads + 6 &amp;lt; RLIMIT_NOFILE. RLIMIT_NOFILE is the maximum number of open file descriptors (usually 1024), set by ulimit -n.&lt;br /&gt;
 Default: 100</source>
-        <translation>NUMBER&lt;br /&gt;
-Nombre maximum d&apos;éléments en file d&apos;attente (y compris ceux en cours de traitement par les threads MaxThreads). Il est recommandé d&apos;avoir cette valeur au moins deux fois MaxThreads si possible. &lt;br /&gt;
-AVERTISSEMENT: vous ne devez pas trop augmenter pour éviter de manquer de descripteurs de fichiers, la condition suivante doit être remplie: MaxThreads * MaxRecursion + MaxQueue - MaxThreads + 6 &amp;lt; RLIMIT_NOFILE. RLIMIT_NOFILE est le nombre maximum de descripteurs de fichiers ouverts (généralement 1024), défini par ulimit -n. &lt;br /&gt;
-Valeur par défaut: 100</translation>
+        <translation>NUMMER &lt;br /&gt;
+Maximale Anzahl von Elementen in der Warteschlange (einschließlich der Elemente, die von MaxThreads-Threads verarbeitet werden). Es wird empfohlen, diesen Wert nach Möglichkeit mindestens zweimal auf MaxThreads zu setzen. &lt;br /&gt;
+WARNUNG: Sie sollten dies nicht zu stark erhöhen, um zu vermeiden, dass Ihnen die Dateideskriptoren ausgehen. Die folgende Bedingung sollte gelten: MaxThreads*MaxRecursion + MaxQueue - MaxThreads + 6 &amp;lt; RLIMIT_NOFILE. RLIMIT_NOFILE ist die maximale Anzahl offener Dateideskriptoren (normalerweise 1024), die von ulimit -n festgelegt werden. &lt;br /&gt;
+Standard: 100</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1183"/>
@@ -606,9 +604,9 @@ Valeur par défaut: 100</translation>
         <source>NUMBER&lt;br /&gt;
 This option specifies how long (in seconds) the process should wait for a new job.&lt;br /&gt;
 Default: 30</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option spécifie combien de temps (en secondes) le processus doit attendre un nouveau travail. &lt;br /&gt;
-Par défaut: 30</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option gibt an, wie lange (in Sekunden) der Prozess auf einen neuen Job warten soll. &lt;br /&gt;
+Standard: 30</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1235"/>
@@ -620,9 +618,9 @@ Par défaut: 30</translation>
         <source>REGEX&lt;br /&gt;
 Don&apos;t scan files and directories matching REGEX. This directive can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
-        <translation>REGEX&lt;br /&gt;
-N&apos;analyse pas les fichiers et répertoires correspondant à REGEX. Cette directive peut être utilisée plusieurs fois. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>REGEX &lt;br /&gt;
+Scannen Sie keine Dateien und Verzeichnisse, die mit REGEX übereinstimmen. Diese Anweisung kann mehrfach verwendet werden. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1287"/>
@@ -633,16 +631,16 @@ Par défaut: désactivé</translation>
         <location filename="../ConfigureDialogCurrent.ui" line="1340"/>
         <location filename="../ConfigureDialogCurrent.ui" line="6775"/>
         <source>Logs</source>
-        <translation>Journaux</translation>
+        <translation>Protokolle</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1373"/>
         <source>STRING&lt;br /&gt;
 Save all reports to a log file.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Enregistrez tous les rapports dans un fichier journal. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Speichern Sie alle Berichte in einer Protokolldatei. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1378"/>
@@ -659,9 +657,9 @@ Par défaut: désactivé</translation>
         <source>BOOL&lt;br /&gt;
 By default the log file is locked for writing and only a single daemon process can write to it. This option disables the lock.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Par défaut, le fichier journal est verrouillé pour l&apos;écriture et un seul processus démon peut y écrire. Cette option désactive le verrouillage. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Standardmäßig ist die Protokolldatei zum Schreiben gesperrt und nur ein einziger Dämonprozess kann darauf schreiben. Diese Option deaktiviert die Sperre. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1427"/>
@@ -674,10 +672,10 @@ Par défaut: non</translation>
 Maximum size of the log file.&lt;br /&gt;
 Value of 0 disables the limit.&lt;br /&gt;
 Default: 1048576</source>
-        <translation>SIZE&lt;br /&gt;
-Taille maximale du fichier journal. &lt;br /&gt;
-La valeur 0 désactive la limite. &lt;br /&gt;
-Par défaut: 1048576</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Maximale Größe der Protokolldatei. &lt;br /&gt;
+Der Wert 0 deaktiviert das Limit. &lt;br /&gt;
+Standard: 1048576</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1477"/>
@@ -695,9 +693,9 @@ Par défaut: 1048576</translation>
         <source>BOOL&lt;br /&gt;
 Log time for each message.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Heure de connexion pour chaque message. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Protokollieren Sie die Zeit für jede Nachricht. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1535"/>
@@ -711,10 +709,10 @@ Par défaut: non</translation>
 Log all clean files.&lt;br /&gt;
 Useful in debugging but drastically increases the log size.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Consignez tous les fichiers nettoyés. &lt;br /&gt;
-Utile pour le débogage mais augmente considérablement la taille du journal. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Protokollieren Sie alle sauberen Dateien. &lt;br /&gt;
+Nützlich beim Debuggen, erhöht jedoch die Protokollgröße drastisch. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1585"/>
@@ -726,9 +724,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Use the system logger (can work together with LogFile).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Utilisez l&apos;enregistreur système (peut fonctionner avec LogFile). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Verwenden Sie den Systemlogger (kann mit LogFile zusammenarbeiten). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1634"/>
@@ -742,10 +740,10 @@ Par défaut: non</translation>
 Type of syslog messages&lt;br /&gt;
 Please refer to &apos;man syslog&apos; for facility names.&lt;br /&gt;
 Default: LOG_LOCAL6</source>
-        <translation>STRING&lt;br /&gt;
-Type de messages syslog &lt;br /&gt;
-Veuillez vous référer à &apos;man syslog&apos; pour les noms des installations. &lt;br /&gt;
-Par défaut: LOG_LOCAL6</translation>
+        <translation>STRING &lt;br /&gt;
+Art der Syslog-Nachrichten &lt;br /&gt;
+Die Namen der Einrichtungen finden Sie unter &quot;man syslog&quot;. &lt;br /&gt;
+Standard: LOG_LOCAL6</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1684"/>
@@ -763,9 +761,9 @@ Par défaut: LOG_LOCAL6</translation>
         <source>BOOL&lt;br /&gt;
 Enable verbose logging.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Activer la journalisation détaillée. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie die ausführliche Protokollierung. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1733"/>
@@ -779,9 +777,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Rotate log file. Requires LogFileMaxSize option set prior to this option.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Faites pivoter le fichier journal. Nécessite le jeu d&apos;options LogFileMaxSize avant cette option. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Protokolldatei drehen. Erfordert die vor dieser Option festgelegte Option LogFileMaxSize. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1782"/>
@@ -792,30 +790,30 @@ Par défaut: non</translation>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1832"/>
         <source>Parameters</source>
-        <translation>Paramètres</translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1865"/>
         <source>BOOL&lt;br /&gt;
 Log additional information about the infected file, such as its size and hash, together with the virus name.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Consignez des informations supplémentaires sur le fichier infecté, telles que sa taille et son hachage, ainsi que le nom du virus. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Protokollieren Sie zusätzliche Informationen über die infizierte Datei, wie z. B. Größe und Hash, zusammen mit dem Virennamen. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1870"/>
         <source>ExtendedDetectionInfo</source>
-        <translation>ExtendedDetectionInfo</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1914"/>
         <source>STRING&lt;br /&gt;
 Save the process identifier of a listening daemon (main thread) to a specified file.&lt;br /&gt;
 Default: disabled&lt;br /&gt;</source>
-        <translation>STRING&lt;br /&gt;
-Enregistrez l&apos;identifiant de processus d&apos;un démon d&apos;écoute (thread principal) dans un fichier spécifié. &lt;br /&gt;
-Par défaut: désactivé &lt;br /&gt;</translation>
+        <translation>STRING &lt;br /&gt;
+Speichern Sie die Prozesskennung eines Überwachungsdämons (Hauptthread) in einer angegebenen Datei. &lt;br /&gt;
+Standard: deaktiviert&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1919"/>
@@ -833,9 +831,9 @@ Par défaut: désactivé &lt;br /&gt;</translation>
         <source>STRING&lt;br /&gt;
 This option allows you to change the default temporary directory.&lt;br /&gt;
 Default: system specific (usually /tmp or /var/tmp).</source>
-        <translation>STRING&lt;br /&gt;
-Cette option vous permet de changer le répertoire temporaire par défaut. &lt;br /&gt;
-Par défaut: spécifique au système (généralement /tmp ou /var/tmp).</translation>
+        <translation>STRING &lt;br /&gt;
+Mit dieser Option können Sie das temporäre Standardverzeichnis ändern.&lt;br /&gt;
+Standard: systemspezifisch (normalerweise /tmp oder /var/tmp).</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="1968"/>
@@ -852,9 +850,9 @@ Par défaut: spécifique au système (généralement /tmp ou /var/tmp).</transla
         <source>STRING&lt;br /&gt;
 This option allows you to change the default database directory. If you enable it, please make sure it points to the same directory in both clamd and freshclam.&lt;br /&gt;
 Default: defined at configuration (/usr/local/share/clamav)</source>
-        <translation>STRING&lt;br /&gt;
-Cette option vous permet de modifier le répertoire de base de données par défaut. Si vous l&apos;activez, assurez-vous qu&apos;il pointe vers le même répertoire dans clamd et freshclam. &lt;br /&gt;
-Par défaut: défini lors de la configuration (/usr/local/share/clamav)</translation>
+        <translation>STRING &lt;br /&gt;
+Mit dieser Option können Sie das Standarddatenbankverzeichnis ändern. Wenn Sie es aktivieren, stellen Sie bitte sicher, dass es sowohl in clamd als auch in freshclam auf dasselbe Verzeichnis verweist. &lt;br /&gt;
+Standard: bei der Konfiguration definiert (/usr/local/share/clamav)</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2017"/>
@@ -872,9 +870,9 @@ Par défaut: défini lors de la configuration (/usr/local/share/clamav)</transla
         <source>BOOL&lt;br /&gt;
 Only load the official signatures published by the ClamAV project.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Ne chargez que les signatures officielles publiées par le projet ClamAV. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Laden Sie nur die offiziellen Signaturen, die vom ClamAV-Projekt veröffentlicht wurden. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2066"/>
@@ -884,16 +882,16 @@ Par défaut: non</translation>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2116"/>
         <source>FileSys</source>
-        <translation>SysFichier</translation>
+        <translation>DateiSys</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2149"/>
         <source>NUMBER&lt;br /&gt;
 Maximum depth directories are scanned at.&lt;br /&gt;
 Default: 15</source>
-        <translation>NUMBER&lt;br /&gt;
-Les répertoires de profondeur maximale sont analysés à. &lt;br /&gt;
-Par défaut: 15</translation>
+        <translation>NUMMER &lt;br /&gt;
+Verzeichnisse mit maximaler Tiefe werden gescannt. &lt;br /&gt;
+Standard: 15</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2154"/>
@@ -905,9 +903,9 @@ Par défaut: 15</translation>
         <source>BOOL&lt;br /&gt;
 Follow directory symlinks.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Suivez les liens symboliques du répertoire. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Folgen Sie den Verzeichnissymlinks. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2203"/>
@@ -919,9 +917,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Follow regular file symlinks.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Suivez les liens symboliques de fichiers réguliers. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Folgen Sie den regulären Dateisymlinks. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2252"/>
@@ -933,9 +931,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Scan files and directories on other filesystems.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Analyser les fichiers et répertoires sur d’autres systèmes de fichiers. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Scannen Sie Dateien und Verzeichnisse auf anderen Dateisystemen. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2301"/>
@@ -947,9 +945,9 @@ Par défaut: oui</translation>
         <source>NUMBER&lt;br /&gt;
 This option specifies the time intervals (in seconds) in which clamd should perform a database check.&lt;br /&gt;
 Default: 600</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option spécifie les intervalles de temps (en secondes) pendant lesquels clamd doit effectuer une vérification de la base de données. &lt;br /&gt;
-Par défaut: 600</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option gibt die Zeitintervalle (in Sekunden) an, in denen clamd eine Datenbankprüfung durchführen soll. &lt;br /&gt;
+Standard: 600</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2353"/>
@@ -962,8 +960,8 @@ Par défaut: 600</translation>
 This option allows you to disable clamd&apos;s caching feature.&lt;br /&gt;
 Default: no</source>
         <translation>BOOL &lt;br /&gt;
-Cette option vous permet de désactiver la fonction de mise en cache de clamd. &lt;br /&gt;
-Par défaut: non</translation>
+Mit dieser Option können Sie die Caching-Funktion von clamd deaktivieren. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2405"/>
@@ -976,9 +974,9 @@ Par défaut: non</translation>
 Execute a command when a virus is found. In the command string %v will be replaced with the virus name. Additionally, two environment variables will be defined: $CLAM_VIRUSEVENT_FILENAME and $CLAM_VIRUSEVENT_VIRUSNAME.&lt;br /&gt;
 Default: disabled
 </source>
-        <translation>COMMAND&lt;br /&gt;
-Exécutez une commande lorsqu&apos;un virus est détecté. Dans la chaîne de commande,% v sera remplacé par le nom du virus. De plus, deux variables d&apos;environnement seront définies: $ CLAM_VIRUSEVENT_FILENAME et $ CLAM_VIRUSEVENT_VIRUSNAME. &lt;br /&gt;
-Par défaut: désactivé
+        <translation>BEFEHL &lt;br /&gt;
+Führen Sie einen Befehl aus, wenn ein Virus gefunden wird. In der Befehlszeichenfolge wird% v durch den Virennamen ersetzt. Zusätzlich werden zwei Umgebungsvariablen definiert: $ CLAM_VIRUSEVENT_FILENAME und $ CLAM_VIRUSEVENT_VIRUSNAME. &lt;br /&gt;
+Standard: deaktiviert
 </translation>
     </message>
     <message>
@@ -996,9 +994,9 @@ Par défaut: désactivé
         <source>BOOL&lt;br /&gt;
 Stop daemon when libclamav reports out of memory condition.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Arrête le démon lorsque libclamav signale une condition de mémoire insuffisante. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Stoppen Sie den Daemon, wenn libclamav einen Speichermangel meldet. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2504"/>
@@ -1010,9 +1008,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Permit use of the ALLMATCHSCAN command.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Autoriser l&apos;utilisation de la commande ALLMATCHSCAN. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Erlauben Sie die Verwendung des ALLMATCHSCAN-Befehls. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2556"/>
@@ -1025,9 +1023,9 @@ Par défaut: oui</translation>
         <source>BOOL&lt;br /&gt;
 Don&apos;t fork into background.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Ne passez pas en arrière-plan. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Nicht in den Hintergrund treten. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2608"/>
@@ -1040,9 +1038,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Enable debug messages from libclamav.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Activez les messages de débogage de libclamav. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie Debug-Meldungen von libclamav. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2657"/>
@@ -1055,9 +1053,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Do not remove temporary files (for debugging purpose).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Ne supprimez pas les fichiers temporaires (à des fins de débogage). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Entfernen Sie keine temporären Dateien (zum Debuggen). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2706"/>
@@ -1067,16 +1065,16 @@ Par défaut: non</translation>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2756"/>
         <source>Scanning</source>
-        <translation>Balayage</translation>
+        <translation>Scannen</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2789"/>
         <source>STRING&lt;br /&gt;
 Run the daemon as a specified user (the process must be started by root).&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Exécutez le démon en tant qu&apos;utilisateur spécifié (le processus doit être démarré par root). &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Führen Sie den Daemon als angegebenen Benutzer aus (der Prozess muss von root gestartet werden). &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2794"/>
@@ -1093,9 +1091,9 @@ Par défaut: désactivé</translation>
         <source>BOOL&lt;br /&gt;
 With this option enabled ClamAV will load bytecode from the database. It is highly recommended you keep this option turned on, otherwise you may miss detections for many new viruses.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Avec cette option activée, ClamAV chargera le bytecode à partir de la base de données. Il est fortement recommandé de laisser cette option activée, sinon vous risquez de manquer les détections de nombreux nouveaux virus. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Wenn diese Option aktiviert ist, lädt ClamAV Bytecode aus der Datenbank. Es wird dringend empfohlen, diese Option aktiviert zu lassen, da Sie sonst möglicherweise die Erkennung vieler neuer Viren verpassen. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2843"/>
@@ -1113,14 +1111,14 @@ TrustSigned - trust bytecode loaded from signed .c[lv]d files and insert runtime
 Paranoid - don&apos;t trust any bytecode, insert runtime checks for all.&lt;br /&gt;
 Recommended: TrustSigned, because bytecode in .cvd files already has these checks.&lt;br /&gt;
 Default: TrustSigned</source>
-        <translation>STRING&lt;br /&gt;
-Définir le niveau de sécurité du bytecode. &lt;br /&gt;
+        <translation>STRING &lt;br /&gt;
+Legen Sie die Bytecode-Sicherheitsstufe fest. &lt;br /&gt;
 &lt;br /&gt;
-Valeurs possibles: &lt;br /&gt;
-TrustSigned - fait confiance au bytecode chargé à partir de fichiers signés .c [lv] d et insère des contrôles de sécurité à l&apos;exécution pour le bytecode chargé à partir d&apos;autres sources, &lt;br /&gt;
-Paranoïaque - ne faites confiance à aucun bytecode, insérez des vérifications d&apos;exécution pour tous. &lt;br /&gt;
-Recommandé: TrustSigned, car le bytecode dans les fichiers .cvd a déjà ces vérifications. &lt;br /&gt;
-Défaut: TrustSigned</translation>
+Mögliche Werte: &lt;br /&gt;
+TrustSigned - Vertrauen Sie dem aus signierten .c [lv] d-Dateien geladenen Bytecode und fügen Sie Laufzeitsicherheitsprüfungen für aus anderen Quellen geladenen Bytecode ein. &lt;br /&gt;
+Paranoid - vertraue keinem Bytecode, füge Laufzeitprüfungen für alle ein. &lt;br /&gt;
+Empfohlen: TrustSigned, da der Bytecode in .vvd-Dateien diese Überprüfungen bereits enthält. &lt;br /&gt;
+Standard: TrustSigned</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2900"/>
@@ -1142,9 +1140,9 @@ Défaut: TrustSigned</translation>
         <source>NUMBER&lt;br /&gt;
 Set bytecode timeout in milliseconds.&lt;br /&gt;
 Default: 5000</source>
-        <translation>NUMBER&lt;br /&gt;
-Définit le délai d&apos;expiration du bytecode en millisecondes. &lt;br /&gt;
-Par défaut: 5000</translation>
+        <translation>NUMMER &lt;br /&gt;
+Legen Sie das Bytecode-Zeitlimit in Millisekunden fest. &lt;br /&gt;
+Standard: 5000</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="2956"/>
@@ -1156,9 +1154,9 @@ Par défaut: 5000</translation>
         <source>BOOL&lt;br /&gt;
 Allow loading bytecode from outside digitally signed .c[lv]d files.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Autoriser le chargement de bytecode à partir de fichiers .c [lv] d signés numériquement à l&apos;extérieur. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Erlaube das Laden von Bytecode von außerhalb digital signierter .c[lv]d-Dateien. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3008"/>
@@ -1176,15 +1174,15 @@ ForceJIT - always choose JIT, fail if not possible&lt;br /&gt;
 ForceInterpreter - always choose interpreter&lt;br /&gt;
 Test - run with both JIT and interpreter and compare results. Make all failures fatal.&lt;br /&gt;
 Default: Auto</source>
-        <translation>STRING&lt;br /&gt;
-Définit le mode d&apos;exécution du bytecode. &lt;br /&gt;
+        <translation>STRING &lt;br /&gt;
+Legen Sie den Bytecode-Ausführungsmodus fest. &lt;br /&gt;
 &lt;br /&gt;
-Valeurs possibles: &lt;br /&gt;
-Auto - choisissez automatiquement JIT si possible, retour à l&apos;interpréteur &lt;br /&gt;
-ForceJIT - choisissez toujours JIT, échouez si ce n&apos;est pas possible &lt;br /&gt;
-ForceInterpreter - choisissez toujours l&apos;interpréteur &lt;br /&gt;
-Test - exécutez avec le JIT et l&apos;interpréteur et comparez les résultats. Rendre tous les échecs fatals. &lt;br /&gt;
-Défaut: Auto</translation>
+Mögliche Werte: &lt;br /&gt;
+Auto - Wählen Sie nach Möglichkeit automatisch JIT und greifen Sie auf den Interpreter &lt;br /&gt; zurück
+ForceJIT - immer JIT wählen, fehlschlagen, wenn nicht möglich &lt;br /&gt;
+ForceInterpreter - wählen Sie immer den Interpreter &lt;br /&gt;
+Testlauf mit JIT und Interpreter und Vergleich der Ergebnisse. Machen Sie alle Fehler tödlich. &lt;br /&gt;
+Standard: Auto</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3063"/>
@@ -1216,9 +1214,9 @@ Défaut: Auto</translation>
         <source>BOOL&lt;br /&gt;
 Detect Possibly Unwanted Applications.&lt;br /&gt;
 Default: No</source>
-        <translation>BOOL&lt;br /&gt;
-Détectez les applications potentiellement indésirables. &lt;br /&gt;
-Par défaut: Non</translation>
+        <translation>BOOL &lt;br /&gt;
+Erkennen Sie möglicherweise unerwünschte Anwendungen. &lt;br /&gt;
+Standard: Nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3129"/>
@@ -1230,9 +1228,9 @@ Par défaut: Non</translation>
         <source>CATEGORY&lt;br /&gt;
 Exclude a specific PUA category. This directive can be used multiple times. See https://www.clamav.net/documents/potentially-unwanted-applications-pua for the complete list of PUA categories.&lt;br /&gt;
 Default: disabled</source>
-        <translation>CATEGORY&lt;br /&gt;
-Excluez une catégorie PUA spécifique. Cette directive peut être utilisée plusieurs fois. Voir https://www.clamav.net/documents/potentially-unwanted-applications-pua pour la liste complète des catégories PUA. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>KATEGORIE &lt;br /&gt;
+Schließen Sie eine bestimmte PUA-Kategorie aus. Diese Anweisung kann mehrfach verwendet werden. Die vollständige Liste der PUA-Kategorien finden Sie unter https://www.clamav.net/documents/potential-unwanted-applications-pua. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3181"/>
@@ -1244,9 +1242,9 @@ Par défaut: désactivé</translation>
         <source>CATEGORY&lt;br /&gt;
 Only include a specific PUA category. This directive can be used multiple times. See https://www.clamav.net/documents/potentially-unwanted-applications-pua for the complete list of PUA categories.&lt;br /&gt;
 Default: disabled</source>
-        <translation>CATEGORY&lt;br /&gt;
-N&apos;incluez qu&apos;une catégorie PUA spécifique. Cette directive peut être utilisée plusieurs fois. Voir https://www.clamav.net/documents/potentially-unwanted-applications-pua pour la liste complète des catégories PUA. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>KATEGORIE &lt;br /&gt;
+Geben Sie nur eine bestimmte PUA-Kategorie an. Diese Anweisung kann mehrfach verwendet werden. Die vollständige Liste der PUA-Kategorien finden Sie unter https://www.clamav.net/documents/potential-unwanted-applications-pua. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3242"/>
@@ -1259,10 +1257,10 @@ Par défaut: désactivé</translation>
 PE stands for Portable Executable - it&apos;s an executable file format used in all 32 and 64-bit versions of Windows operating systems. This option allows ClamAV to perform a deeper analysis of executable files and it&apos;s also required for decompression of popular executable packers such as UPX.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-PE signifie Portable Executable - c&apos;est un format de fichier exécutable utilisé dans toutes les versions 32 et 64 bits des systèmes d&apos;exploitation Windows. Cette option permet à ClamAV d&apos;effectuer une analyse plus approfondie des fichiers exécutables et elle est également requise pour la décompression des packers exécutables populaires tels que UPX. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+PE steht für Portable Executable - ein ausführbares Dateiformat, das in allen 32- und 64-Bit-Versionen von Windows-Betriebssystemen verwendet wird. Diese Option ermöglicht es ClamAV, eine eingehendere Analyse ausführbarer Dateien durchzuführen, und ist auch für die Dekomprimierung gängiger ausführbarer Packer wie UPX erforderlich. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3301"/>
@@ -1275,10 +1273,10 @@ Par défaut: oui</translation>
 Executable and Linking Format is a standard format for UN*X executables. This option allows you to control the scanning of ELF files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Le format des exécutables et des liens est un format standard pour les exécutables UN * X. Cette option vous permet de contrôler l&apos;analyse des fichiers ELF. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Das ausführbare Format und das Verknüpfungsformat ist ein Standardformat für ausführbare UN*X-Dateien. Mit dieser Option können Sie das Scannen von ELF-Dateien steuern. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3354"/>
@@ -1291,10 +1289,10 @@ Par défaut: oui</translation>
 Enable scanning of mail files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without parsing individual messages/attachments.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Activer l&apos;analyse des fichiers de messagerie. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans analyser les messages / pièces jointes individuels. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie das Scannen von Mail-Dateien. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, ohne jedoch einzelne Nachrichten / Anhänge zu analysieren. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3407"/>
@@ -1306,9 +1304,9 @@ Par défaut: oui</translation>
         <source>BOOL&lt;br /&gt;
 Scan RFC1341 messages split over many emails. You will need to periodically clean up $TemporaryDirectory/clamav-partial directory. WARNING: This option may open your system to a DoS attack. Never use it on loaded servers.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Analyser les messages RFC1341 répartis sur de nombreux e-mails. Vous devrez nettoyer périodiquement le répertoire $ TemporaryDirectory / clamav-partial. AVERTISSEMENT: cette option peut ouvrir votre système à une attaque DoS. Ne l&apos;utilisez jamais sur des serveurs chargés. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Scannen Sie RFC1341-Nachrichten, die auf viele E-Mails verteilt sind. Sie müssen das Verzeichnis $ TemporaryDirectory / clamav-teilweise regelmäßig bereinigen. WARNUNG: Diese Option kann Ihr System für einen DoS-Angriff öffnen. Verwenden Sie es niemals auf geladenen Servern. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3459"/>
@@ -1320,9 +1318,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Enable email signature-based phishing detection.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Activez la détection de hameçonnage basée sur la signature électronique. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie die auf E-Mail-Signaturen basierende Phishing-Erkennung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3508"/>
@@ -1334,9 +1332,9 @@ Par défaut: oui</translation>
         <source>BOOL&lt;br /&gt;
 Enable URL signature-based phishing detection (Phishing.Heuristics.Email.*)&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Activer la détection de hameçonnage basée sur la signature d&apos;URL (Phishing.Heuristics.Email. *) &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie die auf URL-Signaturen basierende Phishing-Erkennung (Phishing.Heuristics.Email. *) &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3560"/>
@@ -1348,9 +1346,9 @@ Par défaut: oui</translation>
         <source>BOOL&lt;br /&gt;
 In some cases (eg. complex malware, exploits in graphic files, and others), ClamAV uses special algorithms to provide accurate detection. This option controls the algorithmic detection.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Dans certains cas (par exemple, logiciels malveillants complexes, exploits dans des fichiers graphiques, etc.), ClamAV utilise des algorithmes spéciaux pour fournir une détection précise. Cette option contrôle la détection algorithmique. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+In einigen Fällen (z. B. komplexe Malware, Exploits in Grafikdateien usw.) verwendet ClamAV spezielle Algorithmen, um eine genaue Erkennung zu ermöglichen. Diese Option steuert die algorithmische Erkennung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3612"/>
@@ -1362,9 +1360,9 @@ Par défaut: oui</translation>
         <source>BOOL&lt;br /&gt;
 Allow heuristic match to take precedence. When enabled, if a heuristic scan (such as phishingScan) detects a possible virus/phishing it will stop scanning immediately. Recommended, saves CPU scan-time. When disabled, virus/phishing detected by heuristic scans will be reported only at the end of a scan. If an archive contains both a heuristically detected virus/phishing, and a real malware, the real malware will be reported. Keep this disabled if you intend to handle &quot;*.Heuristics.*&quot; viruses differently from &quot;real&quot; malware. If a non-heuristically-detected virus (signature-based) is found first, the scan is interrupted immediately, regardless of this config option.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Autoriser la correspondance heuristique à avoir la priorité. Lorsqu&apos;elle est activée, si une analyse heuristique (telle que PhishingScan) détecte un éventuel virus / hameçonnage, elle arrêtera immédiatement l&apos;analyse. Recommandé, économise le temps de cycle du processeur. Lorsqu&apos;il est désactivé, les virus / hameçonnage détectés par des analyses heuristiques ne seront signalés qu&apos;à la fin d&apos;une analyse. Si une archive contient à la fois un virus / phishing détecté de manière heuristique et un véritable malware, le véritable malware sera signalé. Gardez cette option désactivée si vous avez l&apos;intention de gérer les virus &quot;* .Heuristics. *&quot; Différemment des &quot;vrais&quot; logiciels malveillants. Si un virus non détecté de manière heuristique (basé sur une signature) est détecté en premier, l&apos;analyse est immédiatement interrompue, quelle que soit cette option de configuration. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Lassen Sie heuristische Übereinstimmungen Vorrang haben. Wenn diese Option aktiviert ist und ein heuristischer Scan (z. B. phishingScan) einen möglichen Virus / Phishing erkennt, wird der Scan sofort abgebrochen. Empfohlen, spart CPU-Scan-Zeit. Wenn diese Option deaktiviert ist, werden durch heuristische Scans erkannte Viren / Phishing erst am Ende eines Scans gemeldet. Wenn ein Archiv sowohl einen heuristisch erkannten Virus / Phishing als auch eine echte Malware enthält, wird die echte Malware gemeldet. Lassen Sie diese Option deaktiviert, wenn Sie beabsichtigen, &quot;* .Heuristics. *&quot; - Viren anders als &quot;echte&quot; Malware zu behandeln. Wenn zuerst ein nicht heuristisch erkannter Virus (signaturbasiert) gefunden wird, wird der Scan unabhängig von dieser Konfigurationsoption sofort unterbrochen. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3664"/>
@@ -1376,9 +1374,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Enable the DLP module.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Activez le module DLP. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie das DLP-Modul. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3716"/>
@@ -1390,9 +1388,9 @@ Par défaut: non</translation>
         <source>NUMBER&lt;br /&gt;
 This option sets the lowest number of Credit Card numbers found in a file to generate a detect.&lt;br /&gt;
 Default: 3</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option définit le plus petit nombre de numéros de carte de crédit trouvés dans un fichier pour générer une détection. &lt;br /&gt;
-Par défaut: 3</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option legt die niedrigste Anzahl von Kreditkartennummern fest, die in einer Datei gefunden werden, um eine Erkennung zu generieren. &lt;br /&gt;
+Standard: 3</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3765"/>
@@ -1404,9 +1402,9 @@ Par défaut: 3</translation>
         <source>NUMBER&lt;br /&gt;
 This option sets the lowest number of Social Security Numbers found in a file to generate a detect.&lt;br /&gt;
 Default: 3</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option définit le plus petit nombre de numéros de sécurité sociale trouvés dans un fichier pour générer une détection. &lt;br /&gt;
-Par défaut: 3</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option legt die niedrigste Anzahl von Sozialversicherungsnummern fest, die in einer Datei gefunden werden, um eine Erkennung zu generieren. &lt;br /&gt;
+Standard: 3</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3817"/>
@@ -1418,9 +1416,9 @@ Par défaut: 3</translation>
         <source>BOOL&lt;br /&gt;
 With this option enabled the DLP module will search for valid SSNs formatted as xxx-yy-zzzz.&lt;br /&gt;
 Default: Yes</source>
-        <translation>BOOL&lt;br /&gt;
-Lorsque cette option est activée, le module DLP recherchera les SSN valides au format xxx-yy-zzzz. &lt;br /&gt;
-Par défaut: Oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Wenn diese Option aktiviert ist, sucht das DLP-Modul nach gültigen SSNs, die als xxx-yy-zzzz formatiert sind. &lt;br /&gt;
+Standard: Ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3869"/>
@@ -1432,9 +1430,9 @@ Par défaut: Oui</translation>
         <source>BOOL&lt;br /&gt;
 With this option enabled the DLP module will search for valid SSNs formatted as xxxyyzzzz.&lt;br /&gt;
 Default: No</source>
-        <translation>BOOL&lt;br /&gt;
-Lorsque cette option est activée, le module DLP recherchera les SSN valides au format xxxyyzzzz. &lt;br /&gt;
-Par défaut: Non</translation>
+        <translation>BOOL &lt;br /&gt;
+Wenn diese Option aktiviert ist, sucht das DLP-Modul nach gültigen SSNs, die als xxxyyzzzz formatiert sind. &lt;br /&gt;
+Standard: Nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3921"/>
@@ -1447,10 +1445,10 @@ Par défaut: Non</translation>
 Perform HTML/JavaScript/ScriptEncoder normalisation and decryption.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Effectuer la normalisation et le décryptage HTML / JavaScript / ScriptEncoder. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Führen Sie eine Normalisierung und Entschlüsselung von HTML / JavaScript / ScriptEncoder durch. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="3971"/>
@@ -1463,10 +1461,10 @@ Par défaut: oui</translation>
 This option enables scanning of OLE2 files, such as Microsoft Office documents and .msi files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option permet d&apos;analyser les fichiers OLE2, tels que les documents Microsoft Office et les fichiers .msi. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option ermöglicht das Scannen von OLE2-Dateien, z. B. Microsoft Office-Dokumenten und MSI-Dateien. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4024"/>
@@ -1479,10 +1477,10 @@ Par défaut: oui</translation>
 This option enables scanning within PDF files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option permet la numérisation dans les fichiers PDF. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option ermöglicht das Scannen in PDF-Dateien. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4077"/>
@@ -1495,10 +1493,10 @@ Par défaut: oui</translation>
 This option enables scanning within SWF files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without decoding and additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option permet d&apos;analyser les fichiers SWF. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers originaux seront toujours analysés, mais sans décodage ni traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option ermöglicht das Scannen in SWF-Dateien. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne Dekodierung und zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4130"/>
@@ -1511,10 +1509,10 @@ Par défaut: oui</translation>
 This option enables scanning xml-based document files supported by libclamav.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option permet d&apos;analyser les fichiers de document XML pris en charge par libclamav. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option ermöglicht das Scannen von XML-basierten Dokumentdateien, die von libclamav unterstützt werden. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4183"/>
@@ -1527,10 +1525,10 @@ Par défaut: oui</translation>
 This option enables scanning HWP3 files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option permet d’analyser les fichiers HWP3. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers d&apos;origine seront toujours analysés, mais sans traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option ermöglicht das Scannen von HWP3-Dateien. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4236"/>
@@ -1543,10 +1541,10 @@ Par défaut: oui</translation>
 Scan within archives and compressed files.&lt;br /&gt;
 If you turn off this option, the original files will still be scanned, but without unpacking and additional processing.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Analyser les archives et les fichiers compressés. &lt;br /&gt;
-Si vous désactivez cette option, les fichiers originaux seront toujours analysés, mais sans décompression ni traitement supplémentaire. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Scannen Sie in Archiven und komprimierten Dateien. &lt;br /&gt;
+Wenn Sie diese Option deaktivieren, werden die Originaldateien weiterhin gescannt, jedoch ohne Entpacken und zusätzliche Verarbeitung. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4289"/>
@@ -1556,16 +1554,16 @@ Par défaut: oui</translation>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4342"/>
         <source>Alerts</source>
-        <translation>Alertes</translation>
+        <translation>Warnungen</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4375"/>
         <source>BOOL&lt;br /&gt;
 Alert on broken executable files (PE &amp; ELF).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les fichiers exécutables cassés (PE &amp; ELF). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Warnung bei fehlerhaften ausführbaren Dateien (PE &amp; ELF). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4380"/>
@@ -1577,9 +1575,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on encrypted archives and documents (encrypted .zip, .7zip, .rar, .pdf).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les archives et documents cryptés (crypté .zip, .7zip, .rar, .pdf). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Warnung zu verschlüsselten Archiven und Dokumenten (verschlüsseltes .zip, .7zip, .rar, .pdf). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4432"/>
@@ -1591,9 +1589,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on encrypted archives (encrypted .zip, .7zip, .rar).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les archives cryptées (crypté .zip, .7zip, .rar). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Warnung bei verschlüsselten Archiven (verschlüsselte .zip-, .7zip-, .rar-Dateien). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4481"/>
@@ -1605,9 +1603,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on encrypted documents (encrypted .pdf).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les documents cryptés (crypté .pdf). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Benachrichtigung über verschlüsselte Dokumente (verschlüsseltes PDF). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4530"/>
@@ -1619,9 +1617,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on OLE2 files containing VBA macros (Heuristics.OLE2.ContainsMacros).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les fichiers OLE2 contenant des macros VBA (Heuristics.OLE2.ContainsMacros). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Warnung bei OLE2-Dateien mit VBA-Makros (Heuristics.OLE2.ContainsMacros). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4579"/>
@@ -1633,9 +1631,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on files that exceed max file size, max scan size, or max recursion limit (Heuristics.Limits.Exceeded).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les fichiers qui dépassent la taille de fichier maximale, la taille d&apos;analyse maximale ou la limite de récursivité maximale (Heuristics.Limits.Exceeded). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Warnung bei Dateien, die die maximale Dateigröße, die maximale Scangröße oder das maximale Rekursionslimit überschreiten (Heuristics.Limits.Exceeded). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4628"/>
@@ -1647,9 +1645,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on emails containing SSL mismatches in URLs (might lead to false positives!).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les e-mails contenant des incohérences SSL dans les URL (peut conduire à de faux positifs!). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Benachrichtigung über E-Mails mit SSL-Nichtübereinstimmungen in URLs (kann zu Fehlalarmen führen!). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4677"/>
@@ -1661,9 +1659,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on emails containing cloaked URLs (might lead to some false positives).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les e-mails contenant des URL masquées (peut conduire à des faux positifs). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Benachrichtigung über E-Mails mit getarnten URLs (kann zu Fehlalarmen führen). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4726"/>
@@ -1675,9 +1673,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Alert on raw DMG image files containing partition intersections.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Alerte sur les fichiers d&apos;image DMG bruts contenant des intersections de partition. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Warnung bei unformatierten DMG-Bilddateien, die Partitionsschnittpunkte enthalten. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4775"/>
@@ -1690,10 +1688,10 @@ Par défaut: non</translation>
 This option causes memory or nested map scans to dump the content to disk.&lt;br /&gt;
 If you turn on this option, more data is written to disk and is available when the leave-temps option is enabled at the cost of more disk writes.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option fait que la mémoire ou les analyses de carte imbriquées vident le contenu sur le disque. &lt;br /&gt;
-Si vous activez cette option, davantage de données sont écrites sur le disque et sont disponibles lorsque l&apos;option Leave-temps est activée au prix d&apos;écritures supplémentaires sur le disque. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option bewirkt, dass Speicher- oder verschachtelte Kartenscans den Inhalt auf die Festplatte kopieren. &lt;br /&gt;
+Wenn Sie diese Option aktivieren, werden mehr Daten auf die Festplatte geschrieben und sind verfügbar, wenn die Option &quot;Temps verlassen&quot; auf Kosten weiterer Schreibvorgänge auf der Festplatte aktiviert ist. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4828"/>
@@ -1710,13 +1708,13 @@ WARNING: disabling this limit or setting it too high may result allow scanning o
 The value is in milliseconds.&lt;br /&gt;
 Default: 0
 </source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit la durée maximale qu&apos;une analyse peut prendre pour se terminer. &lt;br /&gt;
-Dans cette version, ce champ affecte uniquement la durée d&apos;analyse des archives ZIP. &lt;br /&gt;
-La valeur 0 désactive la limite. &lt;br /&gt;
-AVERTISSEMENT: la désactivation de cette limite ou sa définition trop élevée peut permettre à l&apos;analyse de certains fichiers de bloquer le processus d&apos;analyse / les threads entraînant un déni de service. &lt;br /&gt;
-La valeur est en millisecondes. &lt;br /&gt;
-Par défaut: 0
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Zeit fest, die ein Scan dauern kann. &lt;br /&gt;
+In dieser Version wirkt sich dieses Feld nur auf die Scanzeit von ZIP-Archiven aus. &lt;br /&gt;
+Der Wert 0 deaktiviert das Limit. &lt;br /&gt;
+WARNUNG: Wenn Sie dieses Limit deaktivieren oder zu hoch einstellen, kann das Scannen bestimmter Dateien dazu führen, dass der Scanvorgang / die Scan-Threads blockiert werden, was zu einem Denial of Service führt. &lt;br /&gt;
+Der Wert wird in Millisekunden angegeben. &lt;br /&gt;
+Standard: 0
 </translation>
     </message>
     <message>
@@ -1729,9 +1727,9 @@ Par défaut: 0
         <source>SIZE&lt;br /&gt;
 Sets the maximum amount of data to be scanned for each input file. Archives and other containers are recursively extracted and scanned up to this value. The size of an archive plus the sum of the sizes of all files within archive count toward the scan size. For example, a 1M uncompressed archive containing a single 1M inner file counts as 2M toward the max scan size. Warning: disabling this limit or setting it too high may result in severe damage to the system.&lt;br /&gt;
 Default: 100M</source>
-        <translation>SIZE&lt;br /&gt;
-Définit la quantité maximale de données à analyser pour chaque fichier d&apos;entrée. Les archives et autres conteneurs sont extraits et analysés de manière récursive jusqu&apos;à cette valeur. La taille d&apos;une archive plus la somme des tailles de tous les fichiers dans l&apos;archive compte dans la taille de l&apos;analyse. Par exemple, une archive non compressée de 1 Mo contenant un seul fichier interne de 1 Mo compte pour 2 Mo vers la taille d&apos;analyse maximale. Attention: la désactivation de cette limite ou sa définition trop élevée peut endommager gravement le système. &lt;br /&gt;
-Par défaut: 100M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Legt die maximale Datenmenge fest, die für jede Eingabedatei gescannt werden soll. Archive und andere Container werden rekursiv extrahiert und bis zu diesem Wert gescannt. Die Größe eines Archivs plus die Summe der Größen aller Dateien im Archiv zählen zur Scangröße. Beispielsweise zählt ein unkomprimiertes 1M-Archiv, das eine einzelne innere 1M-Datei enthält, als 2M für die maximale Scangröße. Warnung: Wenn Sie diesen Grenzwert deaktivieren oder zu hoch einstellen, kann das System schwer beschädigt werden. &lt;br /&gt;
+Standard: 100M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4937"/>
@@ -1743,9 +1741,9 @@ Par défaut: 100M</translation>
         <source>SIZE&lt;br /&gt;
 Files larger than this limit won&apos;t be scanned. Affects the input file itself as well as files contained inside it (when the input file is an archive, a document or some other kind of container). Warning: disabling this limit or setting it too high may result in severe damage to the system.&lt;br /&gt;
 Default: 25M</source>
-        <translation>SIZE&lt;br /&gt;
-Les fichiers dont la taille dépasse cette limite ne seront pas analysés. Affecte le fichier d&apos;entrée lui-même ainsi que les fichiers qu&apos;il contient (lorsque le fichier d&apos;entrée est une archive, un document ou un autre type de conteneur). Attention: la désactivation de cette limite ou sa définition trop élevée peut endommager gravement le système. &lt;br /&gt;
-Par défaut: 25M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Dateien, die diesen Grenzwert überschreiten, werden nicht gescannt. Betrifft die Eingabedatei selbst sowie die darin enthaltenen Dateien (wenn die Eingabedatei ein Archiv, ein Dokument oder eine andere Art von Container ist). Warnung: Wenn Sie diesen Grenzwert deaktivieren oder zu hoch einstellen, kann das System schwer beschädigt werden. &lt;br /&gt;
+Standard: 25M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="4989"/>
@@ -1757,9 +1755,9 @@ Par défaut: 25M</translation>
         <source>NUMBER&lt;br /&gt;
 Nested archives are scanned recursively, e.g. if a Zip archive contains a RAR file, all files within it will also be scanned. This options specifies how deeply the process should be continued. Warning: setting this limit too high may result in severe damage to the system.&lt;br /&gt;
 Default: 16</source>
-        <translation>NUMBER&lt;br /&gt;
-Les archives imbriquées sont analysées de manière récursive, par ex. si une archive Zip contient un fichier RAR, tous les fichiers qu&apos;elle contient seront également analysés. Cette option spécifie à quel point le processus doit être poursuivi. Attention: définir cette limite trop élevée peut entraîner de graves dommages au système. &lt;br /&gt;
-Par défaut: 16</translation>
+        <translation>NUMMER &lt;br /&gt;
+Verschachtelte Archive werden rekursiv gescannt, z. Wenn ein Zip-Archiv eine RAR-Datei enthält, werden auch alle darin enthaltenen Dateien gescannt. Diese Option gibt an, wie tief der Prozess fortgesetzt werden soll. Warnung: Wenn Sie diesen Grenzwert zu hoch einstellen, kann das System schwer beschädigt werden. &lt;br /&gt;
+Standard: 16</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5041"/>
@@ -1771,9 +1769,9 @@ Par défaut: 16</translation>
         <source>NUMBER&lt;br /&gt;
 Number of files to be scanned within an archive, a document, or any other kind of container. Warning: disabling this limit or setting it too high may result in severe damage to the system.&lt;br /&gt;
 Default: 10000</source>
-        <translation>NUMBER&lt;br /&gt;
-Nombre de fichiers à analyser dans une archive, un document ou tout autre type de conteneur. Attention: la désactivation de cette limite ou sa définition trop élevée peut endommager gravement le système. &lt;br /&gt;
-Par défaut: 10000</translation>
+        <translation>NUMMER &lt;br /&gt;
+Anzahl der Dateien, die in einem Archiv, einem Dokument oder einem anderen Container gescannt werden sollen. Warnung: Wenn Sie diesen Grenzwert deaktivieren oder zu hoch einstellen, kann das System schwer beschädigt werden. &lt;br /&gt;
+Standard: 10000</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5093"/>
@@ -1787,11 +1785,11 @@ This option sets the maximum size of a file to check for embedded PE.&lt;br /&gt
 Files larger than this value will skip the additional analysis step.&lt;br /&gt;
 Negative values are not allowed.&lt;br /&gt;
 Default: 10M</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit la taille maximale d&apos;un fichier pour vérifier le PE intégré. &lt;br /&gt;
-Les fichiers plus volumineux que cette valeur ignoreront l&apos;étape d&apos;analyse supplémentaire. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-Par défaut: 10M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Größe einer Datei fest, die auf eingebettetes PE überprüft werden soll. &lt;br /&gt;
+Dateien, die größer als dieser Wert sind, überspringen den zusätzlichen Analyseschritt. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+Standard: 10M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5147"/>
@@ -1805,11 +1803,11 @@ This option sets the maximum size of a HTML file to normalize.&lt;br /&gt;
 HTML files larger than this value will not be normalized or scanned.&lt;br /&gt;
 Negative values are not allowed.&lt;br /&gt;
 Default: 10M</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit la taille maximale d&apos;un fichier HTML à normaliser. &lt;br /&gt;
-Les fichiers HTML plus volumineux que cette valeur ne seront ni normalisés ni analysés. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-Par défaut: 10M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Größe einer zu normalisierenden HTML-Datei fest. &lt;br /&gt;
+HTML-Dateien, die größer als dieser Wert sind, werden nicht normalisiert oder gescannt. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+Standard: 10M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5201"/>
@@ -1823,11 +1821,11 @@ This option sets the maximum size of a normalized HTML file to scan.&lt;br /&gt;
 HTML files larger than this value after normalization will not be scanned.&lt;br /&gt;
 Negative values are not allowed.&lt;br /&gt;
 Default: 2M</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit la taille maximale d&apos;un fichier HTML normalisé à analyser. &lt;br /&gt;
-Les fichiers HTML plus volumineux que cette valeur après la normalisation ne seront pas analysés. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-Par défaut: 2M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Größe einer zu scannenden normalisierten HTML-Datei fest. &lt;br /&gt;
+HTML-Dateien, die nach der Normalisierung größer als dieser Wert sind, werden nicht gescannt. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+Standard: 2M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5255"/>
@@ -1841,11 +1839,11 @@ This option sets the maximum size of a script file to normalize.&lt;br /&gt;
 Script content larger than this value will not be normalized or scanned.&lt;br /&gt;
 Negative values are not allowed.&lt;br /&gt;
 Default: 5M</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit la taille maximale d&apos;un fichier de script à normaliser. &lt;br /&gt;
-Le contenu du script supérieur à cette valeur ne sera ni normalisé ni analysé. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-Par défaut: 5M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Größe einer zu normalisierenden Skriptdatei fest. &lt;br /&gt;
+Skriptinhalte, die größer als dieser Wert sind, werden nicht normalisiert oder gescannt. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+Standard: 5M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5309"/>
@@ -1860,12 +1858,12 @@ ZIP files larger than this value will skip the step to potentially reanalyze as 
 Negative values are not allowed.&lt;br /&gt;
 WARNING: setting this limit too high may result in severe damage or impact performance.&lt;br /&gt;
 Default: 1M</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit la taille maximale d&apos;un fichier ZIP pour réanalyser la reconnaissance de type. &lt;br /&gt;
-Les fichiers ZIP plus volumineux que cette valeur ignorent l&apos;étape de réanalyse potentielle en tant que PE. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-AVERTISSEMENT: régler cette limite trop haut peut entraîner de graves dommages ou un impact sur les performances. &lt;br /&gt;
-Par défaut: 1M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Größe einer ZIP-Datei fest, um die Typerkennung erneut zu analysieren. &lt;br /&gt;
+ZIP-Dateien, die größer als dieser Wert sind, überspringen den Schritt zur erneuten Analyse als PE. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+WARNUNG: Wenn Sie diesen Grenzwert zu hoch einstellen, kann dies zu schweren Schäden oder Aufprallleistungen führen. &lt;br /&gt;
+Standard: 1M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5364"/>
@@ -1880,12 +1878,12 @@ Raw disk images with more partitions than this value will have up to the value p
 Negative values are not allowed.&lt;br /&gt;
 WARNING: setting this limit too high may result in severe damage or impact performance.&lt;br /&gt;
 Default: 50</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit le nombre maximum de partitions d&apos;une image disque brute à analyser. &lt;br /&gt;
-Les images de disque brutes avec plus de partitions que cette valeur auront jusqu&apos;à la valeur partitions analysées. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-AVERTISSEMENT: régler cette limite trop haut peut entraîner de graves dommages ou un impact sur les performances. &lt;br /&gt;
-Par défaut: 50</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Anzahl von Partitionen eines zu scannenden Raw-Disk-Images fest. &lt;br /&gt;
+Bei Raw-Disk-Images mit mehr Partitionen als diesem Wert werden bis zu den Wertpartitionen gescannt. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+WARNUNG: Wenn Sie diesen Grenzwert zu hoch einstellen, kann dies zu schweren Schäden oder Aufprallleistungen führen. &lt;br /&gt;
+Standard: 50</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5419"/>
@@ -1900,12 +1898,12 @@ PE files with more icons than this value will have up to the value number icons 
 Negative values are not allowed.&lt;br /&gt;
 WARNING: setting this limit too high may result in severe damage or impact performance.&lt;br /&gt;
 Default: 100</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit le nombre maximum d&apos;icônes dans un PE à analyser. &lt;br /&gt;
-Les fichiers PE avec plus d&apos;icônes que cette valeur auront jusqu&apos;au nombre d&apos;icônes de valeur analysé. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-AVERTISSEMENT: régler cette limite trop haut peut entraîner de graves dommages ou un impact sur les performances. &lt;br /&gt;
-Valeur par défaut: 100</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Anzahl von Symbolen in einem PE fest, die gescannt werden sollen. &lt;br /&gt;
+Bei PE-Dateien mit mehr Symbolen als diesem Wert werden bis zu der Wertanzahl Symbole gescannt. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+WARNUNG: Wenn Sie diesen Grenzwert zu hoch einstellen, kann dies zu schweren Schäden oder Aufprallleistungen führen. &lt;br /&gt;
+Standard: 100</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5474"/>
@@ -1921,13 +1919,13 @@ Scans will be unable to scan any HWP3 attachments if the recursive limit is reac
 Negative values are not allowed.&lt;br /&gt;
 WARNING: setting this limit too high may result in severe damage or impact performance.&lt;br /&gt;
 Default: 16</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option définit le nombre maximum d&apos;appels récursifs à la fonction d&apos;analyse HWP3. &lt;br /&gt;
-Les fichiers HWP3 utilisant plus que cette limite seront supprimés et alerteront l&apos;utilisateur. &lt;br /&gt;
-Les analyses ne pourront pas analyser les pièces jointes HWP3 si la limite récursive est atteinte. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-AVERTISSEMENT: régler cette limite trop haut peut entraîner de graves dommages ou un impact sur les performances. &lt;br /&gt;
-Par défaut: 16</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option legt die maximalen rekursiven Aufrufe der HWP3-Analysefunktion fest. &lt;br /&gt;
+HWP3-Dateien, die mehr als dieses Limit verwenden, werden beendet und benachrichtigen den Benutzer. &lt;br /&gt;
+Scans können keine HWP3-Anhänge scannen, wenn das rekursive Limit erreicht ist. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+WARNUNG: Wenn Sie diesen Grenzwert zu hoch einstellen, kann dies zu schweren Schäden oder Aufprallleistungen führen. &lt;br /&gt;
+Standard: 16</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5530"/>
@@ -1943,13 +1941,13 @@ For more information on match_limit, see the PCRE documentation.&lt;br /&gt;
 Negative values are not allowed.&lt;br /&gt;
 WARNING: setting this limit too high may severely impact performance.&lt;br /&gt;
 Default: 10000</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option définit le nombre maximum d&apos;appels à la fonction de correspondance PCRE pendant une instance de correspondance regex. &lt;br /&gt;
-Les instances utilisant plus que cette limite seront arrêtées et alerteront l&apos;utilisateur, mais l&apos;analyse se poursuivra. &lt;br /&gt;
-Pour plus d&apos;informations sur match_limit, consultez la documentation PCRE. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-AVERTISSEMENT: définir cette limite trop élevée peut gravement affecter les performances. &lt;br /&gt;
-Par défaut: 10000</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option legt die maximalen Aufrufe der PCRE-Übereinstimmungsfunktion während einer Instanz des regulären Ausdrucks fest. &lt;br /&gt;
+Instanzen, die mehr als dieses Limit verwenden, werden beendet und der Benutzer benachrichtigt, der Scan wird jedoch fortgesetzt. &lt;br /&gt;
+Weitere Informationen zu match_limit finden Sie in der PCRE-Dokumentation. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+WARNUNG: Wenn Sie diesen Grenzwert zu hoch einstellen, kann dies die Leistung erheblich beeinträchtigen. &lt;br /&gt;
+Standard: 10000</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5586"/>
@@ -1965,13 +1963,13 @@ For more information on match_limit_recursion, see the PCRE documentation.&lt;br
 Negative values are not allowed and values &gt; PCREMatchLimit are superfluous.&lt;br /&gt;
 WARNING: setting this limit too high may severely impact performance.
 Default: 2000</source>
-        <translation>NUMBER&lt;br /&gt;
-Cette option définit les appels récursifs maximum à la fonction de correspondance PCRE pendant une instance de correspondance regex. &lt;br /&gt;
-Les instances utilisant plus que cette limite seront arrêtées et alerteront l&apos;utilisateur, mais l&apos;analyse se poursuivra. &lt;br /&gt;
-Pour plus d&apos;informations sur match_limit_recursion, consultez la documentation PCRE. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées et les valeurs&gt; PCREMatchLimit sont superflues. &lt;br /&gt;
-AVERTISSEMENT: définir cette limite trop élevée peut avoir un impact important sur les performances.
-Par défaut: 2000</translation>
+        <translation>NUMMER &lt;br /&gt;
+Diese Option legt die maximalen rekursiven Aufrufe der PCRE-Übereinstimmungsfunktion während einer Instanz der Regex-Übereinstimmung fest. &lt;br /&gt;
+Instanzen, die mehr als dieses Limit verwenden, werden beendet und der Benutzer benachrichtigt, der Scan wird jedoch fortgesetzt. &lt;br /&gt;
+Weitere Informationen zu match_limit_recursion finden Sie in der PCRE-Dokumentation. &lt;br /&gt;
+Negative Werte sind nicht zulässig und Werte&gt; PCREMatchLimit sind überflüssig. &lt;br /&gt;
+WARNUNG: Wenn Sie diesen Grenzwert zu hoch einstellen, kann dies die Leistung erheblich beeinträchtigen.
+Standard: 2000</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5642"/>
@@ -1987,13 +1985,13 @@ Negative values are not allowed.&lt;br /&gt;
 Setting this value to zero disables the limit.&lt;br /&gt;
 WARNING: setting this limit too high or disabling it may severely impact performance.&lt;br /&gt;
 Default: 25M</source>
-        <translation>SIZE&lt;br /&gt;
-Cette option définit la taille de fichier maximale pour laquelle les sous-ensembles PCRE seront exécutés. &lt;br /&gt;
-Les fichiers dépassant cette limite n&apos;auront pas de sous-ensembles PCRE exécutés à moins qu&apos;un sous-schéma ne soit englobé dans un tampon plus petit. &lt;br /&gt;
-Les valeurs négatives ne sont pas autorisées. &lt;br /&gt;
-La définition de cette valeur sur zéro désactive la limite. &lt;br /&gt;
-AVERTISSEMENT: définir cette limite trop élevée ou la désactiver peut gravement affecter les performances. &lt;br /&gt;
-Par défaut: 25M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Diese Option legt die maximale Dateigröße fest, für die PCRE-Subsigs ausgeführt werden. &lt;br /&gt;
+Bei Dateien, die dieses Limit überschreiten, werden keine PCRE-Subsigs ausgeführt, es sei denn, ein Subsig ist in einem kleineren Puffer enthalten. &lt;br /&gt;
+Negative Werte sind nicht zulässig. &lt;br /&gt;
+Wenn Sie diesen Wert auf Null setzen, wird das Limit deaktiviert. &lt;br /&gt;
+WARNUNG: Wenn Sie diesen Grenzwert zu hoch einstellen oder deaktivieren, kann dies die Leistung erheblich beeinträchtigen. &lt;br /&gt;
+Standard: 25M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5698"/>
@@ -2011,9 +2009,9 @@ Par défaut: 25M</translation>
 This option enables on-access scanning (Linux only)&lt;br /&gt;
 Default: disabled
 </source>
-        <translation>BOOL&lt;br /&gt;
-Cette option active l&apos;analyse à l&apos;accès (Linux uniquement) &lt;br /&gt;
-Par défaut: désactivé
+        <translation>BOOL &lt;br /&gt;
+Diese Option aktiviert das Scannen beim Zugriff (nur Linux) &lt;br /&gt;
+Standard: deaktiviert
 </translation>
     </message>
     <message>
@@ -2026,9 +2024,9 @@ Par défaut: désactivé
         <source>STRING&lt;br /&gt;
 Specifies a mount point (including all files and directories under it), which should be scanned on access. This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Spécifie un point de montage (y compris tous les fichiers et répertoires sous celui-ci), qui doit être analysé lors de l&apos;accès. Cette option peut être utilisée plusieurs fois. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Gibt einen Einhängepunkt an (einschließlich aller Dateien und Verzeichnisse darunter), der beim Zugriff gescannt werden soll. Diese Option kann mehrfach verwendet werden. &lt;br /&gt;
+Standard: deaktivier</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5839"/>
@@ -2040,9 +2038,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 This option specifies a directory (including all files and directories inside it), which should be scanned on access. This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Cette option spécifie un répertoire (y compris tous les fichiers et répertoires qu&apos;il contient), qui doit être analysé lors de l&apos;accès. Cette option peut être utilisée plusieurs fois. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Diese Option gibt ein Verzeichnis an (einschließlich aller darin enthaltenen Dateien und Verzeichnisse), das beim Zugriff gescannt werden soll. Diese Option kann mehrfach verwendet werden. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5891"/>
@@ -2054,9 +2052,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 This option allows excluding directories from on-access scanning. It can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Cette option permet d&apos;exclure les répertoires de l&apos;analyse à l&apos;accès. Il peut être utilisé plusieurs fois. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Mit dieser Option können Verzeichnisse vom On-Access-Scan ausgeschlossen werden. Es kann mehrfach verwendet werden. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5943"/>
@@ -2069,10 +2067,10 @@ Par défaut: désactivé</translation>
 With this option you can whitelist the root UID (0). Processes run under root will be able to access all files without triggering scans or permission denied events.&lt;br /&gt;
 Note that if clamd cannot check the uid of the process that generated an on-access scan event (e.g., because OnAccessPrevention was not enabled, and the process already exited), clamd will perform a scan. Thus, setting OnAccessExcludeRootUID is not guaranteed to prevent every access by the root user from triggering a scan (unless OnAccessPrevention is enabled).&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Avec cette option, vous pouvez ajouter l&apos;UID racine (0) à la liste blanche. Les processus exécutés sous root pourront accéder à tous les fichiers sans déclencher des analyses ou des événements de refus d&apos;autorisation. &lt;br /&gt;
-Notez que si clamd ne peut pas vérifier l&apos;uid du processus qui a généré un événement d&apos;analyse à l&apos;accès (par exemple, parce qu&apos;OnAccessPrevention n&apos;a pas été activé et que le processus est déjà terminé), clamd effectuera une analyse. Ainsi, la définition de OnAccessExcludeRootUID n&apos;est pas garantie pour empêcher chaque accès par l&apos;utilisateur root de déclencher une analyse (sauf si OnAccessPrevention est activé). &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Mit dieser Option können Sie die Root-UID (0) auf die Whitelist setzen. Prozesse, die unter root ausgeführt werden, können auf alle Dateien zugreifen, ohne Scans auszulösen oder Ereignisse mit verweigerter Berechtigung auszulösen. &lt;br /&gt;
+Beachten Sie, dass clamd einen Scan durchführt, wenn clamd die UID des Prozesses nicht überprüfen kann, der ein On-Access-Scan-Ereignis generiert hat (z. B. weil OnAccessPrevention nicht aktiviert war und der Prozess bereits beendet wurde). Daher kann durch das Festlegen von OnAccessExcludeRootUID nicht garantiert werden, dass jeder Zugriff des Root-Benutzers einen Scan auslöst (es sei denn, OnAccessPrevention ist aktiviert). &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="5996"/>
@@ -2087,12 +2085,12 @@ This option can be used multiple times (one per line).&lt;br /&gt;
 Note: using a value of 0 on any line will disable this option entirely. To whitelist the root UID (0) please enable the OnAccessExcludeRootUID option.&lt;br /&gt;
 Also note that if clamd cannot check the uid of the process that generated an on-access scan event (e.g., because OnAccessPrevention was not enabled, and the process already exited), clamd will perform a scan. Thus, setting OnAccessExcludeUID is not guaranteed to prevent every access by the specified uid from triggering a scan (unless OnAccessPrevention is enabled).&lt;br /&gt;
 Default: disabled</source>
-        <translation>NUMBER&lt;br /&gt;
-Avec cette option, vous pouvez ajouter des UID spécifiques à la liste blanche. Les processus avec ces UID pourront accéder à tous les fichiers sans déclencher des analyses ou des événements de refus d&apos;autorisation. &lt;br /&gt;
-Cette option peut être utilisée plusieurs fois (une par ligne). &lt;br /&gt;
-Remarque: l&apos;utilisation d&apos;une valeur de 0 sur n&apos;importe quelle ligne désactivera complètement cette option. Pour ajouter l&apos;UID racine (0) à la liste blanche, veuillez activer l&apos;option OnAccessExcludeRootUID. &lt;br /&gt;
-Notez également que si clamd ne peut pas vérifier l&apos;uid du processus qui a généré un événement d&apos;analyse à l&apos;accès (par exemple, parce que OnAccessPrevention n&apos;a pas été activé et que le processus est déjà terminé), clamd effectuera une analyse. Ainsi, la définition de OnAccessExcludeUID n&apos;est pas garantie pour empêcher chaque accès par l&apos;uid spécifié de déclencher une analyse (sauf si OnAccessPrevention est activé). &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>NUMMER &lt;br /&gt;
+Mit dieser Option können Sie bestimmte UIDs auf die Whitelist setzen. Prozesse mit diesen UIDs können auf alle Dateien zugreifen, ohne Scans auszulösen oder Ereignisse mit verweigerter Berechtigung auszulösen. &lt;br /&gt;
+Diese Option kann mehrfach verwendet werden (eine pro Zeile). &lt;br /&gt;
+Hinweis: Wenn Sie in einer Zeile den Wert 0 verwenden, wird diese Option vollständig deaktiviert. Um die Root-UID (0) auf die Whitelist zu setzen, aktivieren Sie bitte die Option OnAccessExcludeRootUID. &lt;br /&gt;
+Beachten Sie außerdem, dass clamd einen Scan durchführt, wenn clamd die UID des Prozesses nicht überprüfen kann, der ein On-Access-Scan-Ereignis generiert hat (z. B. weil OnAccessPrevention nicht aktiviert war und der Prozess bereits beendet wurde). Daher kann durch das Festlegen von OnAccessExcludeUID nicht garantiert werden, dass jeder Zugriff durch die angegebene UID einen Scan auslöst (es sei denn, OnAccessPrevention ist aktiviert). &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6048"/>
@@ -2104,9 +2102,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 This option allows exclusions via user names when using the on-access scanning client. It can be used multiple times, and has the same potential race condition limitations of the OnAccessExcludeUID option.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Cette option autorise les exclusions via les noms d&apos;utilisateur lors de l&apos;utilisation du client d&apos;analyse à l&apos;accès. Il peut être utilisé plusieurs fois et présente les mêmes limitations de condition de concurrence potentielles que l&apos;option OnAccessExcludeUID. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Diese Option ermöglicht Ausschlüsse über Benutzernamen, wenn der On-Access-Scan-Client verwendet wird. Es kann mehrfach verwendet werden und hat dieselben potenziellen Einschränkungen für die Rennbedingungen wie die Option OnAccessExcludeUID. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6100"/>
@@ -2118,9 +2116,9 @@ Par défaut: désactivé</translation>
         <source>SIZE&lt;br /&gt;
 Files larger than this value will not be scanned in on access.&lt;br /&gt;
 Default: 5M</source>
-        <translation>SIZE&lt;br /&gt;
-Les fichiers d&apos;une taille supérieure à cette valeur ne seront pas analysés lors de l&apos;accès. &lt;br /&gt;
-Par défaut: 5M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Dateien, die größer als dieser Wert sind, werden beim Zugriff nicht eingescannt. &lt;br /&gt;
+Standard: 5M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6152"/>
@@ -2132,9 +2130,9 @@ Par défaut: 5M</translation>
         <source>BOOL&lt;br /&gt;
 Disables the dynamic directory determination system which allows for recursively watching include paths.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Désactive le système de détermination dynamique des répertoires qui permet de surveiller de manière récursive les chemins d’inclusion. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Deaktiviert das dynamische Verzeichnisbestimmungssystem, mit dem Include-Pfade rekursiv überwacht werden können. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6204"/>
@@ -2146,9 +2144,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Enables fanotify blocking when malicious files are found.&lt;br /&gt;
 Default: disabled</source>
-        <translation>BOOL&lt;br /&gt;
-Active le blocage de fanotify lorsque des fichiers malveillants sont détectés. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktiviert die Fanotifizierungsblockierung, wenn schädliche Dateien gefunden werden. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6253"/>
@@ -2161,10 +2159,10 @@ Par défaut: désactivé</translation>
 Toggles extra scanning and notifications when a file or directory is created or moved.&lt;br /&gt;
 Requires the DDD system to kick-off extra scans.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Active/désactive l&apos;analyse et les notifications supplémentaires lorsqu&apos;un fichier ou un répertoire est créé ou déplacé. &lt;br /&gt;
-Nécessite le système DDD pour lancer des analyses supplémentaires. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Schaltet zusätzliche Scans und Benachrichtigungen um, wenn eine Datei oder ein Verzeichnis erstellt oder verschoben wird. &lt;br /&gt;
+Erfordert, dass das DDD-System zusätzliche Scans startet. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6306"/>
@@ -2176,9 +2174,9 @@ Par défaut: non</translation>
         <source>NUMBER&lt;br /&gt;
 Max amount of time (in milliseconds) that the OnAccess client should spend for every connect, send, and recieve attempt when communicating with clamd via curl.&lt;br /&gt;
 Default: 5000 (5 seconds)</source>
-        <translation>NUMBER&lt;br /&gt;
-Durée maximale (en millisecondes) que le client OnAccess doit consacrer à chaque tentative de connexion, d&apos;envoi et de réception lors de la communication avec clamd via curl. &lt;br /&gt;
-Par défaut: 5000 (5 secondes)</translation>
+        <translation>NUMMER &lt;br /&gt;
+Maximale Zeit (in Millisekunden), die der OnAccess-Client für jeden Verbindungs-, Sende- und Empfangsversuch bei der Kommunikation mit clamd über Curl aufwenden sollte. &lt;br /&gt;
+Standard: 5000 (5 sekunden)</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6358"/>
@@ -2190,9 +2188,9 @@ Par défaut: 5000 (5 secondes)</translation>
         <source>NUMBER&lt;br /&gt;
 Max number of scanning threads to allocate to the OnAccess thread pool at startup. These threads are the ones responsible for creating a connection with the daemon and kicking off scanning after an event has been processed. To prevent clamonacc from consuming all clamd&apos;s resources keep this lower than clamd&apos;s max threads.&lt;br /&gt;
 Default: 5</source>
-        <translation>NUMBER&lt;br /&gt;
-Nombre maximal de threads d&apos;analyse à allouer au pool de threads OnAccess au démarrage. Ces threads sont responsables de la création d&apos;une connexion avec le démon et du lancement de l&apos;analyse après le traitement d&apos;un événement. Pour empêcher clamonacc de consommer toutes les ressources de clamd, maintenez ce nombre inférieur au nombre maximum de threads de clamd. &lt;br /&gt;
-Valeur par défaut: 5</translation>
+        <translation>NUMMER &lt;br /&gt;
+Maximale Anzahl von Scan-Threads, die beim Start dem OnAccess-Thread-Pool zugewiesen werden sollen. Diese Threads sind dafür verantwortlich, eine Verbindung mit dem Dämon herzustellen und den Scanvorgang zu starten, nachdem ein Ereignis verarbeitet wurde. Um zu verhindern, dass clamonacc alle Ressourcen von clamd verbraucht, halten Sie diesen Wert niedriger als die maximalen Threads von clamd. &lt;br /&gt;
+Standard: 5</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6410"/>
@@ -2204,9 +2202,9 @@ Valeur par défaut: 5</translation>
         <source>NUMBER&lt;br /&gt;
 Number of times the OnAccess client will retry a failed scan due to connection problems (or other issues).&lt;br /&gt;
 Default: 0</source>
-        <translation>NUMBER&lt;br /&gt;
-Nombre de fois où le client OnAccess réessaiera une analyse échouée en raison de problèmes de connexion (ou d&apos;autres problèmes). &lt;br /&gt;
-Par défaut: 0</translation>
+        <translation>NUMMER &lt;br /&gt;
+Häufigkeit, mit der der OnAccess-Client einen fehlgeschlagenen Scan aufgrund von Verbindungsproblemen (oder anderen Problemen) wiederholt. &lt;br /&gt;
+Standard: 0</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6462"/>
@@ -2218,9 +2216,9 @@ Par défaut: 0</translation>
         <source>BOOL&lt;br /&gt;
 When using prevention, if this option is turned on, any errors that occur during scanning will result in the event attempt being denied. This could potentially lead to unwanted system behaviour with certain configurations, so the client defaults this to off and prefers allowing access events in case of scan or connection error.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Lors de l&apos;utilisation de la prévention, si cette option est activée, toute erreur survenant pendant l&apos;analyse entraînera le refus de la tentative d&apos;événement. Cela pourrait potentiellement entraîner un comportement indésirable du système avec certaines configurations, de sorte que le client le désactive par défaut et préfère autoriser les événements d&apos;accès en cas d&apos;erreur d&apos;analyse ou de connexion. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Wenn bei Verwendung der Prävention diese Option aktiviert ist, führen Fehler, die beim Scannen auftreten, dazu, dass der Ereignisversuch abgelehnt wird. Dies kann bei bestimmten Konfigurationen möglicherweise zu unerwünschtem Systemverhalten führen. Der Client ist daher standardmäßig deaktiviert und lässt Zugriffsereignisse im Falle eines Scan- oder Verbindungsfehlers lieber zu. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6514"/>
@@ -2232,9 +2230,9 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 Disable authenticode certificate chain verification in PE files.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Désactivez la vérification de la chaîne de certificats d&apos;authenticité dans les fichiers PE. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Deaktivieren Sie die Überprüfung der Authentifizierungscode-Zertifikatkette in PE-Dateien. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6566"/>
@@ -2257,9 +2255,9 @@ As well as being capable of recovering any type of log (system logs, syslog, fla
 </source>
         <translation>https://www.prelude-siem.org/projects/prelude/wiki&lt;br /&gt;
 &lt;br /&gt;
-Prelude est un système universel de &quot;Security Information &amp; Event Management&quot; (SIEM). Prelude collecte, normalise, trie, agrège, corrèle et rapporte tous les événements liés à la sécurité indépendamment de la marque du produit ou de la licence donnant lieu à de tels événements; Prelude est &quot;sans agent&quot;.&lt;br /&gt;
+Prelude ist ein universelles &quot;Sicherheitsinformations- und Ereignismanagement&quot; (SIEM) system. Prelude sammelt, normalisiert, sortiert, aggregiert, korreliert und meldet alle sicherheitsrelevanten Ereignisse unabhängig von der Produktmarke oder Lizenz, die zu solchen Ereignissen führt. Vorspiel ist &quot;agentenlos&quot;.&lt;br /&gt;
 &lt;br /&gt;
-En plus d&apos;être capable de récupérer tout type de log (logs système, syslog, fichiers plats, etc.), Prelude bénéficie d&apos;un support natif avec un certain nombre de systèmes dédiés à l&apos;enrichissement encore plus avancé des informations (snort, samhain, ossec, auditd, etc.).&lt;br /&gt;
+Prelude ist nicht nur in der Lage, alle Arten von Protokollen (Systemprotokolle, Syslogs, Flatfiles usw.) wiederherzustellen, sondern profitiert auch von einer nativen Unterstützung mit einer Reihe von Systemen, mit denen Informationen noch weiter angereichert werden können (Snort, Samhain, Ossec, Auditd, etc.).&lt;br /&gt;
 &lt;br /&gt;
 </translation>
     </message>
@@ -2278,86 +2276,86 @@ En plus d&apos;être capable de récupérer tout type de log (logs système, sys
         <source>SIZE&lt;br /&gt;
 Limit the size of the log file. The logger will be automatically disabled if the file is greater than SIZE. Value of 0 disables the limit.&lt;br /&gt;
 Default: 1M</source>
-        <translation>SIZE&lt;br /&gt;
-Limitez la taille du fichier journal. L&apos;enregistreur sera automatiquement désactivé si le fichier est supérieur à SIZE. La valeur 0 désactive la limite. &lt;br /&gt;
-Par défaut: 1M</translation>
+        <translation>GRÖSSE &lt;br /&gt;
+Begrenzen Sie die Größe der Protokolldatei. Der Logger wird automatisch deaktiviert, wenn die Datei größer als SIZE ist. Der Wert 0 deaktiviert das Limit. &lt;br /&gt;
+Standard: 1M</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6857"/>
         <source>BOOL&lt;br /&gt;
 Log time with each message.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Heure de connexion avec chaque message. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Protokollieren Sie die Zeit mit jeder Nachricht. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6906"/>
         <source>BOOL&lt;br /&gt;
 Enable logging to Syslog. May be used in combination with UpdateLogFile.&lt;br /&gt;
 Default: disabled.</source>
-        <translation>BOOL&lt;br /&gt;
-Activez la journalisation dans Syslog. Peut être utilisé en combinaison avec UpdateLogFile. &lt;br /&gt;
-Par défaut: désactivé.</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie die Protokollierung in Syslog. Kann in Kombination mit UpdateLogFile verwendet werden. &lt;br /&gt;
+Standard: deaktiviert.</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="6955"/>
         <source>STRING&lt;br /&gt;
 Specify the type of syslog messages - please refer to &apos;man syslog&apos; for facility names.&lt;br /&gt;
 Default: LOG_LOCAL6</source>
-        <translation>STRING&lt;br /&gt;
-Spécifiez le type de messages syslog - veuillez vous référer à &apos;man syslog&apos; pour les noms des installations. &lt;br /&gt;
-Par défaut: LOG_LOCAL6</translation>
+        <translation>STRING &lt;br /&gt;
+Geben Sie den Typ der Syslog-Nachrichten an. Die Namen der Einrichtungen finden Sie unter &apos;man syslog&apos;. &lt;br /&gt;
+Standard: LOG_LOCAL6</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7001"/>
         <source>BOOL&lt;br /&gt;
 Enable verbose logging.&lt;br /&gt;
 Default: disabled</source>
-        <translation>BOOL&lt;br /&gt;
-Activez la journalisation détaillée. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie die ausführliche Protokollierung. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7105"/>
         <source>Connect</source>
-        <translation>Relier</translation>
+        <translation>Verbinden</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7138"/>
         <source>STRING&lt;br /&gt;
 This option allows you to save the process identifier of the daemon to a file specified in the argument.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Cette option vous permet d&apos;enregistrer l&apos;identifiant de processus du démon dans un fichier spécifié dans l&apos;argument. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Mit dieser Option können Sie die Prozesskennung des Dämons in einer im Argument angegebenen Datei speichern. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7184"/>
         <source>STRING&lt;br /&gt;
 Path to a directory containing database files.&lt;br /&gt;
 Default: /var/lib/clamav</source>
-        <translation>STRING&lt;br /&gt;
-Chemin vers un répertoire contenant des fichiers de base de données. &lt;br /&gt;
-Défaut: /var/lib/clamav</translation>
+        <translation>STRING &lt;br /&gt;
+Pfad zu einem Verzeichnis mit Datenbankdateien.&lt;br /&gt;
+Standard: /var/lib/clamav</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7279"/>
         <source>BOOL&lt;br /&gt;
 Enable debug messages in libclamav.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Activez les messages de débogage dans libclamav. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Aktivieren Sie Debug-Meldungen in libclamav. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7328"/>
         <source>STRING&lt;br /&gt;
 Enable logging to a specified file. Highly recommended.&lt;br /&gt;
 Default: disabled.</source>
-        <translation>STRING&lt;br /&gt;
-Activez la journalisation dans un fichier spécifié. Fortement recommandé. &lt;br /&gt;
-Par défaut: désactivé.</translation>
+        <translation>STRING &lt;br /&gt;
+Aktivieren Sie die Protokollierung in einer angegebenen Datei. Sehr zu empfehlen. &lt;br /&gt;
+Standard: deaktiviert.</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7333"/>
@@ -2370,9 +2368,9 @@ Par défaut: désactivé.</translation>
         <source>STRING&lt;br /&gt;
 When started by root, drop privileges to a specified user.&lt;br /&gt;
 Default:</source>
-        <translation>STRING&lt;br /&gt;
-Une fois démarré par root, supprimez les privilèges à un utilisateur spécifié. &lt;br /&gt;
-Défaut:</translation>
+        <translation>STRING &lt;br /&gt;
+Löschen Sie beim Starten mit root die Berechtigungen für einen bestimmten Benutzer. &lt;br /&gt;
+Standard:</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7379"/>
@@ -2390,10 +2388,10 @@ Défaut:</translation>
 Use DNS to verify the virus database version. Freshclam uses DNS TXT records to verify the versions of the database and software itself. With this directive you can change the database verification domain.&lt;br /&gt;
 WARNING: Please don&apos;t change it unless you&apos;re configuring freshclam to use your own database verification domain.&lt;br /&gt;
 Default: enabled, pointing to current.cvd.clamav.net</source>
-        <translation>STRING&lt;br /&gt;
-Utilisez DNS pour vérifier la version de la base de données virale. Freshclam utilise des enregistrements DNS TXT pour vérifier les versions de la base de données et du logiciel lui-même. Avec cette directive, vous pouvez modifier le domaine de vérification de la base de données. &lt;br /&gt;
-AVERTISSEMENT: veuillez ne le modifier que si vous configurez Freshclam pour utiliser votre propre domaine de vérification de base de données. &lt;br /&gt;
-Par défaut: activé, pointant vers current.cvd.clamav.net</translation>
+        <translation>STRING &lt;br /&gt;
+Verwenden Sie DNS, um die Version der Virendatenbank zu überprüfen. Freshclam verwendet DNS-TXT-Einträge, um die Versionen der Datenbank und der Software selbst zu überprüfen. Mit dieser Anweisung können Sie die Datenbanküberprüfungsdomäne ändern. &lt;br /&gt;
+WARNUNG: Bitte ändern Sie es nur, wenn Sie freshclam für die Verwendung Ihrer eigenen Datenbanküberprüfungsdomäne konfigurieren. &lt;br /&gt;
+Standard: aktiviert und zeigt auf current.cvd.clamav.net</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7475"/>
@@ -2405,9 +2403,9 @@ Par défaut: activé, pointant vers current.cvd.clamav.net</translation>
         <source>STRING&lt;br /&gt;
 DatabaseMirror specifies to which mirror(s) freshclam should connect. You should have at least one entries: database.clamav.net. Now that CloudFlare is being used as our Content Delivery Network (CDN), this one domain name works world-wide to direct freshclam to the closest geographic endpoint.&lt;br /&gt;
 Default: database.clamav.net</source>
-        <translation>STRING&lt;br /&gt;
-DatabaseMirror spécifie à quel (s) miroir (s) freshclam doit se connecter. Vous devez avoir au moins une entrée: database.clamav.net. Maintenant que CloudFlare est utilisé comme notre réseau de diffusion de contenu (CDN), ce nom de domaine fonctionne dans le monde entier pour diriger Freshclam vers le point de terminaison géographique le plus proche. &lt;br /&gt;
-Défaut: database.clamav.net</translation>
+        <translation>STRING &lt;br /&gt;
+DatabaseMirror gibt an, mit welchem Spiegel Freshclam eine Verbindung herstellen soll. Sie sollten mindestens einen Eintrag haben: database.clamav.net. Jetzt, da CloudFlare als unser Content Delivery Network (CDN) verwendet wird, funktioniert dieser eine Domainname weltweit, um Freshclam zum nächstgelegenen geografischen Endpunkt zu leiten. &lt;br /&gt;
+Standard: database.clamav.net</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7521"/>
@@ -2419,9 +2417,9 @@ Défaut: database.clamav.net</translation>
         <source>STRING&lt;br /&gt;
 This option allows you to easily point freshclam to private mirrors. If PrivateMirror is set, freshclam does not attempt to use DNS to determine whether its databases are out-of-date, instead it will use the If-Modified-Since request or directly check the headers of the remote database files. For each database, freshclam first attempts to download the CLD file. If that fails, it tries to download the CVD file. This option overrides DatabaseMirror, DNSDatabaseInfo and ScriptedUpdates. It can be used multiple times to provide fall-back mirrors.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Cette option vous permet de pointer facilement freshclam vers des miroirs privés. Si PrivateMirror est défini, freshclam ne tente pas d&apos;utiliser DNS pour déterminer si ses bases de données sont obsolètes, à la place, il utilisera la requête If-Modified-Since ou vérifiera directement les en-têtes des fichiers de base de données distants. Pour chaque base de données, freshclam tente d&apos;abord de télécharger le fichier CLD. Si cela échoue, il essaie de télécharger le fichier CVD. Cette option remplace DatabaseMirror, DNSDatabaseInfo et ScriptedUpdates. Il peut être utilisé plusieurs fois pour fournir des miroirs de repli. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Mit dieser Option können Sie Freshclam einfach auf private Spiegel richten. Wenn PrivateMirror festgelegt ist, versucht freshclam nicht, mithilfe von DNS festzustellen, ob die Datenbanken veraltet sind, sondern verwendet die Anforderung If-Modified-Since oder überprüft direkt die Header der entfernten Datenbankdateien. Freshclam versucht zunächst, für jede Datenbank die CLD-Datei herunterzuladen. Wenn dies fehlschlägt, wird versucht, die CVD-Datei herunterzuladen. Diese Option überschreibt DatabaseMirror, DNSDatabaseInfo und ScriptedUpdates. Es kann mehrfach verwendet werden, um Fallback-Spiegel bereitzustellen. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7570"/>
@@ -2433,9 +2431,9 @@ Par défaut: désactivé</translation>
         <source>NUMBER&lt;br /&gt;
 How many attempts (per mirror) to make before giving up.&lt;br /&gt;
 Default: 3 (per mirror)</source>
-        <translation>NUMBER&lt;br /&gt;
-Combien de tentatives (par miroir) faire avant d&apos;abandonner. &lt;br /&gt;
-Par défaut: 3 (par miroir)</translation>
+        <translation>NUMMER &lt;br /&gt;
+Wie viele Versuche (pro Spiegel) machen, bevor man aufgibt. &lt;br /&gt;
+Standard: 3 (pro Spiegel)</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7622"/>
@@ -2447,9 +2445,9 @@ Par défaut: 3 (par miroir)</translation>
         <source>BOOL&lt;br /&gt;
 With this option you can control scripted updates. It&apos;s highly recommended to keep it enabled.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Avec cette option, vous pouvez contrôler les mises à jour scriptées. Il est fortement recommandé de le garder activé. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Mit dieser Option können Sie Skript-Updates steuern. Es wird dringend empfohlen, es aktiviert zu lassen. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7671"/>
@@ -2459,16 +2457,16 @@ Par défaut: oui</translation>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7721"/>
         <source>Databases</source>
-        <translation>Bases de Données</translation>
+        <translation>Datenbanken</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7754"/>
         <source>BOOL&lt;br /&gt;
 With this option enabled, freshclam will attempt to load new databases into memory to make sure they are properly handled by libclamav before replacing the old ones.&lt;br /&gt;
 Default: enabled</source>
-        <translation>BOOL&lt;br /&gt;
-Avec cette option activée, freshclam tentera de charger de nouvelles bases de données en mémoire pour s&apos;assurer qu&apos;elles sont correctement gérées par libclamav avant de remplacer les anciennes. &lt;br /&gt;
-Par défaut: activé</translation>
+        <translation>BOOL &lt;br /&gt;
+Wenn diese Option aktiviert ist, versucht freshclam, neue Datenbanken in den Speicher zu laden, um sicherzustellen, dass sie von libclamav ordnungsgemäß verarbeitet werden, bevor die alten ersetzt werden. &lt;br /&gt;
+Standard: aktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7759"/>
@@ -2480,9 +2478,9 @@ Par défaut: activé</translation>
         <source>BOOL&lt;br /&gt;
 By default freshclam will keep the local databases (.cld) uncompressed to make their handling faster. With this option you can enable the compression; the change will take effect with the next database update.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Par défaut, Freshclam gardera les bases de données locales (.cld) non compressées pour accélérer leur traitement. Avec cette option, vous pouvez activer la compression; le changement prendra effet lors de la prochaine mise à jour de la base de données. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Standardmäßig hält freshclam die lokalen Datenbanken (.cld) unkomprimiert, um ihre Verarbeitung zu beschleunigen. Mit dieser Option können Sie die Komprimierung aktivieren. Die Änderung wird mit dem nächsten Datenbankupdate wirksam. &lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7808"/>
@@ -2494,9 +2492,9 @@ Par défaut: non</translation>
         <source>STRING&lt;br /&gt;
 Download an additional 3rd party signature database distributed through the ClamAV mirrors. This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Téléchargez une base de données de signatures tierce supplémentaire distribuée via les miroirs ClamAV. Cette option peut être utilisée plusieurs fois. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Laden Sie eine zusätzliche Signaturdatenbank eines Drittanbieters herunter, die über die ClamAV-Spiegel verteilt wird. Diese Option kann mehrfach verwendet werden. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7857"/>
@@ -2508,9 +2506,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 Exclude a standard signature database (opt-out). This option can be used multiple times.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Exclure une base de données de signatures standard (opt-out). Cette option peut être utilisée plusieurs fois. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Schließen Sie eine Standard-Signaturdatenbank aus (Opt-out). Diese Option kann mehrfach verwendet werden. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7909"/>
@@ -2523,8 +2521,8 @@ Par défaut: désactivé</translation>
 With this option you can provide custom sources for database files. This option can be used multiple times. Support for: http(s)://, ftp(s)://, or file:// Example usage: DatabaseCustomURL https://myserver.com:4567/whitelist.wdb&lt;br /&gt;
 Default: disabled</source>
         <translation>STRING&lt;br /&gt;
-Avec cette option, vous pouvez fournir des sources personnalisées pour les fichiers de base de données. Cette option peut être utilisée plusieurs fois. Prise en charge de: http(s)://, ftp(s):// ou file:// Exemple d&apos;utilisation: DatabaseCustomURL https://myserver.com:4567/whitelist.wdb &lt;br /&gt;
-Par défaut: désactivé</translation>
+Mit dieser Option können Sie benutzerdefinierte Quellen für Datenbankdateien bereitstellen. Diese Option kann mehrfach verwendet werden. Unterstützung für: http(s)://, ftp(s)://, oder file:// Anwendungsbeispiel: DatabaseCustomURL https://myserver.com:4567/whitelist.wdb&lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="7961"/>
@@ -2542,8 +2540,8 @@ Par défaut: désactivé</translation>
 Use given proxy server for database downloads. May be prefixed with [scheme]:// to specify which kind of proxy is used. http:// HTTP Proxy. Default when no scheme or proxy type is specified. https:// HTTPS Proxy. (Added in 7.52.0 for OpenSSL, GnuTLS and NSS) socks4:// SOCKS4 Proxy. socks4a:// SOCKS4a Proxy. Proxy resolves URL hostname. socks5:// SOCKS5 Proxy. socks5h:// SOCKS5 Proxy. Proxy resolves URL hostname.&lt;br /&gt;
 Default: disabled</source>
         <translation>STRING&lt;br /&gt;
-Utilisez un serveur proxy donné pour les téléchargements de bases de données. Peut être précédé de [schéma]:// pour spécifier le type de proxy utilisé. http:// Proxy HTTP. Valeur par défaut lorsqu&apos;aucun schéma ou type de proxy n&apos;est spécifié. https:// Proxy HTTPS. (Ajouté dans 7.52.0 pour OpenSSL, GnuTLS et NSS) socks4:// SOCKS4 Proxy. socks4a:// Proxy SOCKS4a. Le proxy résout le nom d&apos;hôte de l&apos;URL. socks5:// Proxy SOCKS5. socks5h:// Proxy SOCKS5. Le proxy résout le nom d&apos;hôte de l&apos;URL. &lt;br /&gt;
-Par défaut: désactivé</translation>
+Verwenden Sie den angegebenen Proxyserver für Datenbankdownloads. Kann mit vorangestellt werden [scheme]:// um anzugeben, welche Art von Proxy verwendet wird. http:// HTTP Proxy. Standard, wenn kein Schema oder Proxy-Typ angegeben ist. https:// HTTPS Proxy. (Hinzugefügt in 7.52.0 für OpenSSL, GnuTLS und NSS) socks4:// SOCKS4 Proxy. socks4a:// SOCKS4a Proxy. Proxy löst den URL-hostnamen auf. socks5:// SOCKS5 Proxy. socks5h:// SOCKS5 Proxy. Proxy löst den URL-hostnamen auf.&lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8052"/>
@@ -2555,9 +2553,9 @@ Par défaut: désactivé</translation>
         <source>NUMBER&lt;br /&gt;
 Use given TCP port for database downloads.&lt;br /&gt;
 Default: disabled</source>
-        <translation>NUMBER&lt;br /&gt;
-Utilisez le port TCP donné pour les téléchargements de bases de données. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>NUMMER &lt;br /&gt;
+Verwenden Sie den angegebenen TCP-Port für Datenbank-Downloads. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8098"/>
@@ -2569,9 +2567,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 Proxy usage is authenticated through given username.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-L&apos;utilisation du proxy est authentifiée via un nom d&apos;utilisateur donné. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Die Verwendung des Proxys wird durch den angegebenen Benutzernamen authentifiziert. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8147"/>
@@ -2583,9 +2581,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 Proxy usage is authenticated through given password.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-L&apos;utilisation du proxy est authentifiée par un mot de passe donné. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Die Verwendung des Proxys wird durch das angegebene Kennwort authentifiziert. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8193"/>
@@ -2597,9 +2595,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 If your servers are behind a firewall/proxy which applies User-Agent filtering, you can use this option to force the use of a different User-Agent header.&lt;br /&gt;
 Default: clamav/version_number</source>
-        <translation>STRING&lt;br /&gt;
-Si vos serveurs sont derrière un pare-feu / proxy qui applique le filtrage User-Agent, vous pouvez utiliser cette option pour forcer l&apos;utilisation d&apos;un autre en-tête User-Agent. &lt;br /&gt;
-Défaut: clamav/version_number</translation>
+        <translation>STRING &lt;br /&gt;
+Wenn sich Ihre Server hinter einer Firewall/einem Proxy befinden, die bzw. der die User-Agent-Filterung anwendet, können Sie mit dieser Option die Verwendung eines anderen User-Agent-Headers erzwingen.&lt;br /&gt;
+Standard: clamav/versionsnummer</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8242"/>
@@ -2609,16 +2607,16 @@ Défaut: clamav/version_number</translation>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8289"/>
         <source>Misc</source>
-        <translation>Divers</translation>
+        <translation>Versch</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8322"/>
         <source>STRING&lt;br /&gt;
 Notify a running clamd(8) to reload its database after a download has occurred. The path for clamd.conf file must be provided.&lt;br /&gt;
 Default: The default is to not notify clamd. See clamd.conf(5)&apos;s option SelfCheck for how clamd(8) handles database updates in this case.</source>
-        <translation>STRING&lt;br /&gt;
-Avertissez un clamd (8) en cours d&apos;exécution de recharger sa base de données après un téléchargement. Le chemin du fichier clamd.conf doit être fourni. &lt;br /&gt;
-Par défaut: la valeur par défaut est de ne pas notifier clamd. Voir l&apos;option SelfCheck de clamd.conf (5) pour savoir comment clamd (8) gère les mises à jour de la base de données dans ce cas.</translation>
+        <translation>STRING &lt;br /&gt;
+Benachrichtigen Sie eine laufende Clamd (8), um ihre Datenbank nach einem Download neu zu laden. Der Pfad für die Datei clamd.conf muss angegeben werden. &lt;br /&gt;
+Standard: Standardmäßig wird clamd nicht benachrichtigt. In der Option SelfCheck von clamd.conf (5) erfahren Sie, wie clamd (8) in diesem Fall mit Datenbankaktualisierungen umgeht.</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8327"/>
@@ -2630,9 +2628,9 @@ Par défaut: la valeur par défaut est de ne pas notifier clamd. Voir l&apos;opt
         <source>STRING&lt;br /&gt;
 Execute this command after the database has been successfully updated.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Exécutez cette commande une fois que la base de données a été mise à jour avec succès. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Führen Sie diesen Befehl aus, nachdem die Datenbank erfolgreich aktualisiert wurde. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8373"/>
@@ -2644,9 +2642,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 Execute this command after a database update has failed.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Exécutez cette commande après l&apos;échec d&apos;une mise à jour de la base de données. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Führen Sie diesen Befehl aus, nachdem eine Datenbankaktualisierung fehlgeschlagen ist. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8419"/>
@@ -2658,9 +2656,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 Execute this command when freshclam reports outdated version. In the command string %v will be replaced by the new version number.&lt;br /&gt;
 Default: disabled</source>
-        <translation>STRING&lt;br /&gt;
-Exécutez cette commande lorsque freshclam signale une version obsolète. Dans la chaîne de commande% v sera remplacé par le nouveau numéro de version. &lt;br /&gt;
-Par défaut: désactivé</translation>
+        <translation>STRING &lt;br /&gt;
+Führen Sie diesen Befehl aus, wenn freshclam eine veraltete Version meldet. In der Befehlszeichenfolge wird% v durch die neue Versionsnummer ersetzt. &lt;br /&gt;
+Standard: deaktiviert</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8465"/>
@@ -2672,9 +2670,9 @@ Par défaut: désactivé</translation>
         <source>STRING&lt;br /&gt;
 Use IP as client address for downloading databases. Useful for multi homed systems.&lt;br /&gt;
 Default: Use OS&apos;es default outgoing IP address.</source>
-        <translation>STRING&lt;br /&gt;
-Utilisez IP comme adresse client pour télécharger des bases de données. Utile pour les systèmes multi-hébergés. &lt;br /&gt;
-Par défaut: utilisez l&apos;adresse IP sortante par défaut du système d&apos;exploitation.</translation>
+        <translation>STRING &lt;br /&gt;
+Verwenden Sie IP als Client-Adresse zum Herunterladen von Datenbanken. Nützlich für Multi-Homed-Systeme. &lt;br /&gt;
+Standard: Verwenden Sie die ausgehende Standard-IP-Adresse des Betriebssystems.</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8511"/>
@@ -2686,9 +2684,9 @@ Par défaut: utilisez l&apos;adresse IP sortante par défaut du système d&apos;
         <source>NUMBER&lt;br /&gt;
 Timeout in seconds when connecting to database server.&lt;br /&gt;
 Default: 10</source>
-        <translation>NUMBER&lt;br /&gt;
-Délai d&apos;expiration en secondes lors de la connexion au serveur de base de données. &lt;br /&gt;
-Par défaut: 10</translation>
+        <translation>NUMMER &lt;br /&gt;
+Zeitüberschreitung in Sekunden beim Herstellen einer Verbindung zum Datenbankserver. &lt;br /&gt;
+Standard: 10</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8557"/>
@@ -2700,9 +2698,9 @@ Par défaut: 10</translation>
         <source>NUMBER&lt;br /&gt;
 Timeout in seconds when reading from database server. 0 means no timeout.&lt;br /&gt;
 Default: 0</source>
-        <translation>NUMBER&lt;br /&gt;
-Délai en secondes lors de la lecture à partir du serveur de base de données. 0 signifie pas de délai d&apos;expiration. &lt;br /&gt;
-Par défaut: 0</translation>
+        <translation>NUMMER &lt;br /&gt;
+Zeitüberschreitung in Sekunden beim Lesen vom Datenbankserver. 0 bedeutet keine Zeitüberschreitung. &lt;br /&gt;
+Standard: 0</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8606"/>
@@ -2714,9 +2712,9 @@ Par défaut: 0</translation>
         <source>BOOL&lt;br /&gt;
 This option enables support for Google Safe Browsing. When activated for the first time, freshclam will download a new database file (safebrowsing.cvd) which will be automatically loaded by clamd and clamscan during the next reload, provided that the heuristic phishing detection is turned on. This database includes information about websites that may be phishing sites or possible sources of malware. When using this option, it&apos;s mandatory to run freshclam at least every 30 minutes. Freshclam uses the ClamAV&apos;s mirror infrastructure to distribute the database and its updates but all the contents are provided under Google&apos;s terms of use. See https://support.google.com/code/answer/70015 and https://www.clamav.net/documents/safebrowsing for more information.&lt;br /&gt;
 Default: no</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option active la prise en charge de la navigation sécurisée Google. Lorsqu&apos;il est activé pour la première fois, freshclam téléchargera un nouveau fichier de base de données (safebrowsing.cvd) qui sera automatiquement chargé par clamd et clamscan lors du prochain rechargement, à condition que la détection heuristique de phishing soit activée. Cette base de données comprend des informations sur les sites Web qui peuvent être des sites de phishing ou des sources possibles de logiciels malveillants. Lorsque vous utilisez cette option, il est obligatoire d&apos;exécuter freshclam au moins toutes les 30 minutes. Freshclam utilise l&apos;infrastructure miroir de ClamAV pour distribuer la base de données et ses mises à jour, mais tout le contenu est fourni selon les conditions d&apos;utilisation de Google. Voir https://support.google.com/code/answer/70015 et https://www.clamav.net/documents/safebrowsing pour plus d&apos;informations. &lt;br /&gt;
-Par défaut: non</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option aktiviert die Unterstützung für Google Safe Browsing. Bei der ersten Aktivierung lädt freshclam eine neue Datenbankdatei (safebrowsing.cvd) herunter, die beim nächsten Neuladen automatisch von clamd und clamscan geladen wird, sofern die heuristische Phishing-Erkennung aktiviert ist. Diese Datenbank enthält Informationen zu Websites, bei denen es sich möglicherweise um Phishing-Websites oder mögliche Quellen für Malware handelt. Wenn Sie diese Option verwenden, muss die Freshclam mindestens alle 30 Minuten ausgeführt werden. Freshclam verwendet die Spiegelinfrastruktur von ClamAV, um die Datenbank und ihre Aktualisierungen zu verteilen. Der gesamte Inhalt wird jedoch gemäß den Nutzungsbedingungen von Google bereitgestellt. Sehen https://support.google.com/code/answer/70015 and https://www.clamav.net/documents/safebrowsing Weitere Informationen.&lt;br /&gt;
+Voreinstellung: nein</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8655"/>
@@ -2728,29 +2726,29 @@ Par défaut: non</translation>
         <source>BOOL&lt;br /&gt;
 This option enables downloading of bytecode.cvd, which includes additional detection mechanisms and improvements to the ClamAV engine.&lt;br /&gt;
 Default: yes</source>
-        <translation>BOOL&lt;br /&gt;
-Cette option permet le téléchargement de bytecode.cvd, qui comprend des mécanismes de détection supplémentaires et des améliorations du moteur ClamAV. &lt;br /&gt;
-Par défaut: oui</translation>
+        <translation>BOOL &lt;br /&gt;
+Diese Option ermöglicht das Herunterladen von bytecode.cvd, das zusätzliche Erkennungsmechanismen und Verbesserungen an der ClamAV-Engine enthält. &lt;br /&gt;
+Standard: ja</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8778"/>
         <source>Reload ClamAV</source>
-        <translation>Recharger ClamAV</translation>
+        <translation>Neu laden ClamAV</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8785"/>
         <source>Apply</source>
-        <translation>Appliquer</translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8792"/>
         <source>Ok</source>
-        <translation>D&apos;accord</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.ui" line="8799"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation>Stornieren</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.cpp" line="2551"/>
@@ -2766,13 +2764,13 @@ Par défaut: oui</translation>
         <location filename="../ConfigureDialogCurrent.cpp" line="2679"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2688"/>
         <source>Open Configuration File</source>
-        <translation>Ouvrir le Ffichier de Configuration</translation>
+        <translation>Konfigurationsdatei öffnen</translation>
     </message>
     <message>
         <location filename="../ConfigureDialogCurrent.cpp" line="2680"/>
         <location filename="../ConfigureDialogCurrent.cpp" line="2689"/>
         <source>Conf Files (*.conf);;All Files (*)</source>
-        <translation>Fichier Conf (*.conf);;Tous Fichiers (*)</translation>
+        <translation>Konf-Dateien (*.conf);;Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
@@ -2780,34 +2778,34 @@ Par défaut: oui</translation>
     <message>
         <location filename="../ListerQuarantine.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Dialogue</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ListerQuarantine.ui" line="20"/>
         <source>&lt;h1&gt;&lt;b&gt;Quarantine&lt;/b&gt;&lt;/h1&gt;
 Do you want to quarantine?&lt;br /&gt;</source>
-        <translation>&lt;h1&gt;&lt;b&gt;Quarantaine&lt;/b&gt;&lt;/h1&gt;
-Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
+        <translation>&lt;h1&gt;&lt;b&gt;Quarantäne&lt;/b&gt;&lt;/h1&gt;
+Möchten Sie unter Quarantäne stellen?&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="../ListerQuarantine.ui" line="65"/>
         <source>Yes All</source>
-        <translation>Oui Tout</translation>
+        <translation>Ja Alle</translation>
     </message>
     <message>
         <location filename="../ListerQuarantine.ui" line="72"/>
         <source>No All</source>
-        <translation>Non Tout</translation>
+        <translation>Nicht Alle</translation>
     </message>
     <message>
         <location filename="../ListerQuarantine.ui" line="79"/>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../ListerQuarantine.ui" line="86"/>
         <source>No</source>
-        <translation>Non</translation>
+        <translation>Nein</translation>
     </message>
 </context>
 <context>
@@ -2821,149 +2819,149 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../MainWindow.ui" line="129"/>
         <source>Scanning</source>
-        <translation>Balayage</translation>
+        <translation>Scannen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="132"/>
         <source>Scan The Computer</source>
-        <translation>Analyser L&apos;ordinateur</translation>
+        <translation>Scannen Sie den Computer</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="142"/>
         <location filename="../MainWindow.ui" line="375"/>
         <source>Schedule</source>
-        <translation>Programme</translation>
+        <translation>Zeitplan</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="151"/>
         <source>Status</source>
-        <translation>Statut</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="154"/>
         <source>Status about your computer</source>
-        <translation>État de votre ordinateur</translation>
+        <translation>Status über Ihren Computer</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="163"/>
         <location filename="../MainWindow.cpp" line="1267"/>
         <source>Quarantine</source>
-        <translation>Quarantaine</translation>
+        <translation>Quarantäne</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="166"/>
         <source>Delete quarantined files</source>
-        <translation>Supprimer les fichiers en quarantaine</translation>
+        <translation>Dateien in Quarantäne löschen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="175"/>
         <location filename="../MainWindow.ui" line="815"/>
         <source>Event Logs</source>
-        <translation>Journaux D&apos;événements</translation>
+        <translation>Ereignisprotokolle</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="178"/>
         <source>Show event logs</source>
-        <translation>Afficher les Journaux D&apos;événements</translation>
+        <translation>Ereignisprotokolle anzeigen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="187"/>
         <location filename="../MainWindow.ui" line="1429"/>
         <source>Messages</source>
-        <translation>Messages</translation>
+        <translation>Mitteilungen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="190"/>
         <source>General messages related to Clam One</source>
-        <translation>Messages généraux liés à Clam One</translation>
+        <translation>Allgemeine Meldungen zu Clam One</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="199"/>
         <source>Update</source>
-        <translation>Mettre à Jour</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="202"/>
         <source>Update Virus Definitions</source>
-        <translation>Mettre à Jour les Définitions de Virus</translation>
+        <translation>Aktualisieren Sie die Virendefinitionen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="212"/>
         <location filename="../MainWindow.ui" line="1807"/>
         <source>Graphs</source>
-        <translation>Graphiques</translation>
+        <translation>Grafiken</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="215"/>
         <source>Visualizations, information, and data</source>
-        <translation>Visualisations, informations et données</translation>
+        <translation>Visualisierungen, Informationen und Daten</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="224"/>
         <location filename="../MainWindow.ui" line="2356"/>
         <source>Configure</source>
-        <translation>Configurer</translation>
+        <translation>Konfigurieren</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="227"/>
         <source>Configure Clam One, clamd, and freshclam configuration files</source>
-        <translation>Configurer les fichiers de configuration de Clam One, clamd et freshclam</translation>
+        <translation>Konfigurieren Sie die Konfigurationsdateien für Clam One, Clamd und Freshclam</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="236"/>
         <location filename="../MainWindow.ui" line="2439"/>
         <source>Help</source>
-        <translation>Aidez-moi</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="239"/>
         <source>Help and general information</source>
-        <translation>Aide et informations générales</translation>
+        <translation>Hilfe und allgemeine Informationen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="268"/>
         <source>Scan Local Hard Drives</source>
-        <translation>Analyser les Disques Durs Locaux</translation>
+        <translation>Lokale Festplatten scannen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="331"/>
         <source>&lt;a href=&quot;DeepScan&quot;&gt;Deep scan&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;DeepScan&quot;&gt;Analyse Approfondie&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;DeepScan&quot;&gt;Tiefen-Scan&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="338"/>
         <source>&lt;a href=&quot;QuickScan&quot;&gt;Quick Scan&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;QuickScan&quot;&gt;Scan Rapide&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;QuickScan&quot;&gt;Schneller Scan&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="403"/>
         <source>Add New</source>
-        <translation>Ajouter Nouveau</translation>
+        <translation>Neue hinzufügen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="432"/>
         <source>ClamAV Status</source>
-        <translation>ClamAV Statut</translation>
+        <translation>ClamAV Status</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="469"/>
         <source>Protection State</source>
-        <translation>État de Protection</translation>
+        <translation>Schutzstaat</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="479"/>
         <source>Protection State Details</source>
-        <translation>Détails de L&apos;état de Protection</translation>
+        <translation>Angaben zum Schutzstaat</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="505"/>
         <source>Antivirus Engine</source>
-        <translation>Moteur Antivirus</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="539"/>
         <source>Antivirus Updater</source>
-        <translation>Programme de Mise à Jour Antivirus</translation>
+        <translation>Antivirus Updater</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="573"/>
@@ -2976,12 +2974,12 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../MainWindow.ui" line="604"/>
         <location filename="../MainWindow.cpp" line="2815"/>
         <source>Definitions Up To Date</source>
-        <translation>Définitions à Jour</translation>
+        <translation>Definitionen Aktuell</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="644"/>
         <source>New Events Detected:</source>
-        <translation>Nouveaux Événements Détectés:</translation>
+        <translation>Neue Ereignisse Erkannt:</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="657"/>
@@ -2993,67 +2991,57 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../MainWindow.ui" line="699"/>
         <location filename="../MainWindow.ui" line="864"/>
         <source>Quarantined Files</source>
-        <translation>Fichiers en Quarantaine</translation>
+        <translation>Dateien in Quarantäne</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="706"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the area that contains files that are quarantined, it can be potential malware detected by ClamAV but rendered &amp;quot;non-active&amp;quot;. If you are sure you want to delete any quarantined file, you can permently delete it from here.&lt;/p&gt;&lt;p&gt;Large files may take a long time to quarantine, unquarantine, and may cause long load times of Clam One.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;C&apos;est la zone qui contient les fichiers mis en quarantaine, il peut s&apos;agir d&apos;un malware potentiel détecté par ClamAV mais rendu &amp;quot;inactif&amp;quot;. Si vous êtes sûr de vouloir supprimer un fichier mis en quarantaine, vous pouvez le supprimer définitivement à partir d&apos;ici. &lt;/p&gt; &lt;p&gt; Les fichiers volumineux peuvent prendre un certain temps à mettre en quarantaine, se déséquilibrer et peuvent entraîner de longs temps de chargement de Clam One.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dies ist der Bereich, der Dateien enthält, die unter Quarantäne gestellt werden. Dies kann potenzielle Malware sein, die von ClamAV erkannt, aber &amp;quot;nicht aktiv&amp;quot; gemacht wurde. Wenn Sie sicher sind, dass Sie eine unter Quarantäne gestellte Datei löschen möchten, können Sie sie permental von hier aus löschen.&lt;/p&gt;&lt;p&gt;Es kann lange dauern, bis große Dateien unter Quarantäne gestellt und nicht unter Quarantäne gestellt werden, und es kann zu langen Ladezeiten von Clam One kommen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="741"/>
         <source>Quarantine Name</source>
-        <translation>Nom de la Quarantaine</translation>
+        <translation>Name der Quarantäne</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="746"/>
         <source>Date/Time</source>
-        <translation>Date/Heure</translation>
+        <translation>Datum/Zeit</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="751"/>
         <source>File Size</source>
-        <translation>Taille du Fichier</translation>
+        <translation>Dateigröße</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="756"/>
         <source>File Name</source>
-        <translation>Nom de Fichier</translation>
+        <translation>Dateiname</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="782"/>
         <source>UnQuarantine File</source>
-        <translation>Fichier de Quarantaine Inversée</translation>
+        <translation>Datei Unter Quarantäne Stellen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="792"/>
         <source>Permanently Delete File</source>
-        <translation>Supprimer Définitivement le Fichier</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.ui" line="1836"/>
-        <source>Scanned Files Interval</source>
-        <translation>Intervalle des Fichiers Numérisés</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.ui" line="2456"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;This program is desktop frontend application for the popular clamav antivirus engine. The design features of this application allow you to quickly navagative the complex configuration’s of clamav’s design and customize them to your desire, monitor ther status of the detection engine, perform custom virus scans, maintains an individual log of detection and prevention events, quarintines and locks potential threats, and personally alerts you when it detects a problem. &lt;/p&gt;&lt;p&gt;Source code can be located at &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; and inquiries sent to &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Documentation is currently lacking, but will be added to the source code webpage in due time.&lt;/p&gt;&lt;p&gt;If you care to donate to this project:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;Ce programme est une application frontale de bureau pour le moteur antivirus clamav populaire. Les caractéristiques de conception de cette application vous permettent de naviguer rapidement dans les configurations complexes de la conception de clamav et de les personnaliser à votre guise, de surveiller l&apos;état du moteur de détection, d&apos;effectuer des analyses de virus personnalisées, de maintenir un journal individuel des événements de détection et de prévention, des quarintines et des verrous menaces potentielles, et vous alerte personnellement lorsqu&apos;il détecte un problème.&lt;/p&gt;&lt;p&gt;Le code source peut être localisé sur &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; et demandes envoyées à &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;La documentation fait actuellement défaut, mais sera ajoutée à la page Web du code source en temps voulu.&lt;/p&gt;&lt;p&gt;Si vous souhaitez faire un don à ce projet:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>Datei Dauerhaft Löschen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="840"/>
         <source>Type:</source>
-        <translation>Type:</translation>
+        <translation>Art:</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="854"/>
         <source>General</source>
-        <translation>Général</translation>
+        <translation>Allgemeines</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="859"/>
         <source>Detected Threats</source>
-        <translation>Menaces Détectées</translation>
+        <translation>Erkannte Gefahren</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="913"/>
@@ -3061,14 +3049,14 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../MainWindow.ui" line="1265"/>
         <location filename="../MainWindow.ui" line="1458"/>
         <source>Time</source>
-        <translation>Temps</translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="918"/>
         <location filename="../MainWindow.ui" line="1090"/>
         <location filename="../MainWindow.ui" line="1270"/>
         <source>Message</source>
-        <translation>Message</translation>
+        <translation>Botschaft</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="941"/>
@@ -3085,37 +3073,37 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../MainWindow.ui" line="1463"/>
         <source>Console Messages</source>
-        <translation>Messages de la Console</translation>
+        <translation>Konsolennachrichten</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1615"/>
         <source>Virus update status</source>
-        <translation>État de la mise à jour du virus</translation>
+        <translation>Status der virenaktualisierung</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1637"/>
         <source>Default</source>
-        <translation>Défaut</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1656"/>
         <source>Local daily.cld:</source>
-        <translation></translation>
+        <translation>Lokal daily.cld:</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1680"/>
         <source>Local main.cld:</source>
-        <translation></translation>
+        <translation>Lokal main.cld:</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1704"/>
         <source>Local bytecode.cld:</source>
-        <translation></translation>
+        <translation>Lokal bytecode.cld:</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1728"/>
         <source>Remote definition version:</source>
-        <translation>Version de définition à distance:</translation>
+        <translation>Remote-Definitionsversion:</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1757"/>
@@ -3125,113 +3113,117 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../MainWindow.ui" line="1767"/>
         <source>Using the &amp;quot;kill&amp;quot; command, send a signal to the freshclam daemon to&lt;br /&gt;&lt;a href=&quot;UpdateVirusDefinitions&quot;&gt;Update virus definitions&lt;/a&gt;</source>
-        <translation>À l&apos;aide de la commande &amp;quot;kill&amp;quot;, envoyez un signal au démon freshclam pour&lt;br /&gt;&lt;a href=&quot;UpdateVirusDefinitions&quot;&gt;Mettre à jour les définitions de virus&lt;/a&gt;</translation>
+        <translation>Senden Sie mit dem Befehl &amp;quot;kill&amp;quot; ein Signal an den freshclam-Daemon an&lt;br /&gt;&lt;a href=&quot;UpdateVirusDefinitions&quot;&gt;Aktualisieren Sie die Virendefinitionen&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1816"/>
         <source>Plot Type</source>
-        <translation>Type de Tracé</translation>
+        <translation>Diagrammtyp</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.ui" line="1836"/>
+        <source>Scanned Files Interval</source>
+        <translation>Intervall für Gescannte Dateien</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1841"/>
         <source>Threats Found Interval</source>
-        <translation>Intervalle de Détection des Menaces</translation>
+        <translation>Intervall für Gefundene Bedrohungen</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="1846"/>
         <source>Quarantined Files Interval</source>
-        <translation>Intervalle des Fichiers en Quarantaine</translation>
+        <translation>Intervall für Unter Quarantäne Gestellte Dateien</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="2381"/>
         <source>&lt;p&gt;Configuration settings for various ClamAV related products&lt;/p&gt;&lt;a href=&quot;AccessPreferences&quot;&gt;Access preferences...&lt;/a&gt;</source>
-        <translation>&lt;p&gt; Paramètres de configuration pour divers produits associés à ClamAV &lt;/p&gt; &lt;a href=&quot;AccessPreferences&quot;&gt; Préférences d&apos;accès ... &lt;/a&gt;</translation>
+        <translation>&lt;p&gt;Konfigurationseinstellungen für verschiedene ClamAV-bezogene Produkte&lt;/p&gt;&lt;a href=&quot;AccessPreferences&quot;&gt;Zugriffseinstellungen...&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="2446"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clam One - &lt;/span&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;&lt;a href=&quot;clicked_about&quot;&gt;About&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; &lt;span style = &quot;font-weight: 600;&quot;&gt; Clam One - &lt;/span&gt; &lt;span style = &quot;font-weight: 600; text-decoration: underline; &quot;&gt; &lt;a href=&quot;clicked_about&quot;&gt; À propos de &lt;/a&gt; &lt;/span&gt;&lt;/p&gt;&lt;/body&gt; &lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clam One - &lt;/span&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;&lt;a href=&quot;clicked_about&quot;&gt;Über&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.ui" line="2456"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;This program is desktop frontend application for the popular clamav antivirus engine. The design features of this application allow you to quickly navagative the complex configuration’s of clamav’s design and customize them to your desire, monitor ther status of the detection engine, perform custom virus scans, maintains an individual log of detection and prevention events, quarintines and locks potential threats, and personally alerts you when it detects a problem. &lt;/p&gt;&lt;p&gt;Source code can be located at &lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; and inquiries sent to &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Documentation is currently lacking, but will be added to the source code webpage in due time.&lt;/p&gt;&lt;p&gt;If you care to donate to this project:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;Dieses Programm ist eine Desktop-Frontend-Anwendung für die beliebte Clamav-Antiviren-Engine. Mit den Konstruktionsmerkmalen dieser Anwendung können Sie die komplexen Konfigurationen des Clamav-Designs schnell navigieren und an Ihre Wünsche anpassen, den Status der Erkennungs-Engine überwachen, benutzerdefinierte Virenscans durchführen und ein individuelles Protokoll mit Erkennungs- und Präventionsereignissen, Quarintinen und Sperren führen potenzielle Bedrohungen und benachrichtigt Sie persönlich, wenn ein Problem erkannt wird.&lt;/p&gt;&lt;p&gt;Der Quellcode befindet sich unter&lt;a href=&quot;https://github.com/ClamOne/ClamOne&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ClamOne/ClamOne&lt;/span&gt;&lt;/a&gt; und Anfragen an &lt;a href=&quot;mailto:clamavone@protonmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;clamavone@protonmail.com&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Die Dokumentation fehlt derzeit, wird jedoch zu gegebener Zeit zur Quellcode-Webseite hinzugefügt.&lt;/p&gt;&lt;p&gt;Wenn Sie für dieses Projekt spenden möchten:&lt;/p&gt;&lt;p&gt;BTC: &lt;a href=&quot;https://clamone.github.io/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://clamone.github.io/&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.ui" line="2515"/>
         <source>Complete&lt;br /&gt;Antivirus Solution</source>
-        <translation>Solution&lt;br /&gt;Antivirus Complète</translation>
+        <translation>Komplette&lt;br /&gt;Antivirus-Lösung</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="19"/>
         <source>Either ClamAV is not installed or </source>
-        <translation>Soit ClamAV n&apos;est pas installé, soit </translation>
+        <translation>Entweder ist ClamAV nicht installiert oder </translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="20"/>
         <source>the installed version of ClamAV(</source>
-        <translation>la version installée de ClamAV(</translation>
+        <translation>die installierte Version von ClamAV (</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="21"/>
         <source>) does not match the version of ClamOne(</source>
-        <translation>) ne correspond pas à la version de ClamOne(</translation>
+        <translation>) stimmt nicht mit der Version von ClamOne überein (</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="22"/>
         <source>). Please update both for proper operation</source>
-        <translation>). Veuillez mettre à jour les deux pour un fonctionnement correct</translation>
+        <translation>). Bitte aktualisieren Sie beide für den ordnungsgemäßen Betrieb</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="26"/>
         <source>&amp;Scan...</source>
-        <translation>&amp;Analyse...</translation>
+        <translation>&amp;Scan...</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="28"/>
         <source>&amp;Status...</source>
-        <translation>&amp;Statut...</translation>
+        <translation>&amp;Status...</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="30"/>
         <source>&amp;Update...</source>
-        <translation>&amp;Mettre à Jour...</translation>
+        <translation>&amp;Aktualisieren...</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="32"/>
         <source>E&amp;vent Logs...</source>
-        <translation>&amp;Journaux D&apos;événements...</translation>
+        <translation>&amp;Ereignisprotokolle...</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="34"/>
         <source>&amp;About...</source>
-        <translation>À &amp;Propos...</translation>
+        <translation>&amp;Über...</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="36"/>
         <source>&amp;Exit</source>
-        <translation>&amp;Sortie</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="496"/>
-        <source>Permanently Deleted Quarantined File: </source>
-        <translation>Fichier Mis en Quarantaine Définitivement Supprimé: </translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="2739"/>
-        <location filename="../MainWindow.cpp" line="2747"/>
-        <source>yes</source>
-        <translation>oui</translation>
+        <translation>&amp;Ausgang</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="435"/>
         <source>quarantine</source>
-        <translation>quarantaine</translation>
+        <translation>quarantäne</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="488"/>
         <source>Quarantined File: </source>
-        <translation>Fichier en Quarantaine: </translation>
+        <translation>Quarantänedatei: </translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="496"/>
+        <source>Permanently Deleted Quarantined File: </source>
+        <translation>Permanent Gelöschte Quarantänedatei: </translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="504"/>
         <source>Restored Quarantined File: </source>
-        <translation>Fichier en Quarantaine Restauré: </translation>
+        <translation>Wiederhergestellte Unter Quarantäne Gestellte Datei: </translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="525"/>
@@ -3287,7 +3279,7 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../MainWindow.cpp" line="1336"/>
         <location filename="../MainWindow.cpp" line="1338"/>
         <source> entries total)</source>
-        <translation> total des entrées)</translation>
+        <translation> einträge insgesamt)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="819"/>
@@ -3295,7 +3287,7 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../MainWindow.cpp" line="1221"/>
         <location filename="../MainWindow.cpp" line="1340"/>
         <source>0 - 0 (0 entries total)</source>
-        <translation>0 - 0 (0 total des entrées)</translation>
+        <translation>0 - 0 (0 einträge insgesamt)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1070"/>
@@ -3325,191 +3317,197 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../MainWindow.cpp" line="1187"/>
         <source>An error has occurred: </source>
-        <translation>Une erreur est survenue: </translation>
+        <translation>Ein Fehler ist aufgetreten: </translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1274"/>
         <source>Exception</source>
-        <translation>Exception</translation>
+        <translation>Ausnahme</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1289"/>
         <source>Ignore</source>
-        <translation>Ignorer</translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1372"/>
         <source>Clam One - THREAT DETECTED</source>
-        <translation>Clam One - MENACE DÉTECTÉE</translation>
+        <translation>Clam One - BEDROHUNG ERKANNT</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1685"/>
         <source>Click to delete this schedule entry</source>
-        <translation>Cliquez pour supprimer cette entrée de planification</translation>
+        <translation>Klicken Sie hier, um diesen Zeitplaneintrag zu löschen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1689"/>
         <location filename="../MainWindow.cpp" line="1694"/>
         <source>enabled</source>
-        <translation>activé</translation>
+        <translation>aktiviert</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1689"/>
         <location filename="../MainWindow.cpp" line="1694"/>
         <source>disabled</source>
-        <translation>désactivé</translation>
+        <translation>behindert</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1691"/>
         <source>Should this schedule entry be enabled</source>
-        <translation>Cette entrée de planification devrait-elle être activée</translation>
+        <translation>Sollte dieser Zeitplaneintrag aktiviert sein</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1704"/>
         <source>Name of this schedule entry</source>
-        <translation>Nom de cette entrée de planification</translation>
+        <translation>Name dieses zeitplaneintrags</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1722"/>
         <source>Crontab style minute field</source>
-        <translation>Champ des minutes de style Crontab</translation>
+        <translation>Minutenfeld im Crontab-Stil</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1737"/>
         <source>Crontab style hour field</source>
-        <translation>Champ des heures de style Crontab</translation>
+        <translation>Crontab-Stil Stundenfeld</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1752"/>
         <source>Crontab style day of month field</source>
-        <translation>Champ du jour du mois de style Crontab</translation>
+        <translation>Crontab-Stil Tag des Monats Feld</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1767"/>
         <source>Crontab style month field</source>
-        <translation>Champ du mois de style Crontab</translation>
+        <translation>Monatsfeld im Crontab-Stil</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1782"/>
         <source>Crontab style day of week field</source>
-        <translation>Champ Jour de la semaine de style Crontab</translation>
+        <translation>Crontab-Stil Wochentag Feld</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1795"/>
         <source>List of Files/Directories to scan</source>
-        <translation>Liste des Fichiers/Répertoires à analyser</translation>
+        <translation>Liste der zu scannenden Dateien/Verzeichnisse</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1804"/>
         <location filename="../MainWindow.cpp" line="1811"/>
         <source>Add File</source>
-        <translation>Ajouter le Fichier</translation>
+        <translation>Datei hinzufügen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1808"/>
         <source>Add Files to the list</source>
-        <translation>Ajouter des Fichiers à la liste</translation>
+        <translation>Fügen Sie der Liste Dateien hinzu</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1822"/>
         <location filename="../MainWindow.cpp" line="1829"/>
         <source>Add Dir</source>
-        <translation>Ajouter Annuaire</translation>
+        <translation>Verzeichnis Hinzufügen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1826"/>
         <source>Add Directories to the list</source>
-        <translation>Ajouter des Répertoires à la liste</translation>
+        <translation>Verzeichnisse zur Liste Hinzufügen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2568"/>
         <source>/daily.{cld|cvd} doesnt exist</source>
-        <translation>/daily.{cld|cvd} n&apos;existe pas</translation>
+        <translation>/daily.{cld|cvd} ist nicht vorhanden</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2574"/>
         <source>/daily.{cld|cvd} file not open read-only</source>
-        <translation>/daily.{cld|cvd} fichier non ouvert en lecture seule</translation>
+        <translation>/daily.{cld|cvd} datei nicht schreibgeschützt geöffnet</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2581"/>
         <source>/daily.{cld|cvd} smaller than 0x200 bytes</source>
-        <translation>/daily.{cld|cvd} plus petit que 0x200 octets</translation>
+        <translation>/daily.{cld|cvd} kleiner als 0x200 bytes</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2586"/>
         <source>/daily.{cld|cvd} header not parsed correctly</source>
-        <translation>/daily.{cld|cvd} en-tête mal analysé</translation>
+        <translation>/daily.{cld|cvd} header nicht korrekt analysiert</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2613"/>
         <source>/main.{cld|cvd} doesnt exist</source>
-        <translation>/main.{cld|cvd} n&apos;existe pas</translation>
+        <translation>/main.{cld|cvd} ist nicht vorhanden</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2618"/>
         <source>/main.{cld|cvd} file not open read-only</source>
-        <translation>/main.{cld|cvd} fichier non ouvert en lecture seule</translation>
+        <translation>/main.{cld|cvd} datei nicht schreibgeschützt geöffnet</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2624"/>
         <source>/main.{cld|cvd} smaller than 0x200 bytes</source>
-        <translation>/main.{cld|cvd} plus petit que 0x200 octets</translation>
+        <translation>/main.{cld|cvd} kleiner als 0x200 bytes</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2629"/>
         <source>/main.{cld|cvd} header not parsed correctly</source>
-        <translation>/main.{cld|cvd} en-tête mal analysé</translation>
+        <translation>/main.{cld|cvd} header nicht korrekt analysiert</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2656"/>
         <source>/bytecode.{cld|cvd} doesnt exist</source>
-        <translation>/bytecode.{cld|cvd} n&apos;existe pas</translation>
+        <translation>/bytecode.{cld|cvd} ist nicht vorhanden</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2661"/>
         <source>/bytecode.{cld|cvd} file not open read-only</source>
-        <translation>/bytecode.{cld|cvd} fichier non ouvert en lecture seule</translation>
+        <translation>/bytecode.{cld|cvd} datei nicht schreibgeschützt geöffnet</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2667"/>
         <source>/bytecode.{cld|cvd} smaller than 0x200 bytes</source>
-        <translation>/bytecode.{cld|cvd} plus petit que 0x200 octets</translation>
+        <translation>/bytecode.{cld|cvd} kleiner als 0x200 bytes</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2672"/>
         <source>/bytecode.{cld|cvd} header not parsed correctly</source>
-        <translation>/bytecode.{cld|cvd} en-tête mal analysé</translation>
+        <translation>/bytecode.{cld|cvd} header nicht korrekt analysiert</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2693"/>
         <source>clamd is currently not running.</source>
-        <translation>clamd n&apos;est pas en cours d&apos;exécution.</translation>
+        <translation>clamd läuft derzeit nicht.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2703"/>
         <source>clamd must be configured to run locally on a &quot;local socket&quot;, which is currently not enabled.</source>
-        <translation>clamd doit être configuré pour s&apos;exécuter localement sur un &quot;socket local&quot;, qui n&apos;est actuellement pas activé.</translation>
+        <translation>clamd muss so konfiguriert sein, dass es lokal auf einem &quot;lokalen socket&quot; ausgeführt wird, der derzeit nicht aktiviert ist.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2717"/>
         <source>clamd failed to ping back.</source>
-        <translation>clamd n&apos;a pas réussi à répondre.</translation>
+        <translation>clamd konnte nicht zurückpingen.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2732"/>
         <source>freshclam is currently not running.</source>
-        <translation>freshclam n&apos;est pas en cours d&apos;exécution actuellement.</translation>
+        <translation>freshclam läuft derzeit nicht.</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="2739"/>
+        <location filename="../MainWindow.cpp" line="2747"/>
+        <source>yes</source>
+        <translation>ja</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2745"/>
         <source>OnAccess is configured, but currently not running.</source>
-        <translation>OnAccess est configuré, mais n&apos;est actuellement pas en cours d&apos;exécution.</translation>
+        <translation>OnAccess ist konfiguriert, wird aber derzeit nicht ausgeführt.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2751"/>
         <source>OnAccess - Disabled in Configure</source>
-        <translation>OnAccess - Désactivé dans Configure</translation>
+        <translation>OnAccess - In Konfigurieren Deaktiviert</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2757"/>
@@ -3517,7 +3515,7 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../MainWindow.cpp" line="2779"/>
         <location filename="../MainWindow.cpp" line="2805"/>
         <source>Definitions Not Up To Date</source>
-        <translation>Définitions Non À Jour</translation>
+        <translation>Definitionen Nicht Aktuell</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2759"/>
@@ -3525,77 +3523,77 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../MainWindow.cpp" line="2781"/>
         <location filename="../MainWindow.cpp" line="2791"/>
         <source>Virus Definitions Check Failed.</source>
-        <translation>La Vérification des Définitions de Virus a Échoué.</translation>
+        <translation>Überprüfung der Virendefinitionen Fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2760"/>
         <source>There was a problem attempting to check the daily.cld virus definition database. The file&apos;s header looks malformed.</source>
-        <translation>Un problème est survenu lors de la tentative de vérification de la base de données de définitions de virus daily.cld. L&apos;en-tête du fichier semble mal formé.</translation>
+        <translation>Beim Versuch, die Virusdefinitionsdatenbank daily.cld zu überprüfen, ist ein Problem aufgetreten. Der Header der Datei sieht fehlerhaft aus.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2771"/>
         <source>There was a problem attempting to check the main.cld virus definition database. The file&apos;s header looks malformed.</source>
-        <translation>Un problème est survenu lors de la vérification de la base de données de définitions de virus main.cld. L&apos;en-tête du fichier semble mal formé.</translation>
+        <translation>Beim Versuch, die Virusdefinitionsdatenbank main.cld zu überprüfen, ist ein Problem aufgetreten. Der Header der Datei sieht fehlerhaft aus.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2782"/>
         <source>There was a problem attempting to check the bytecode.cld virus definition database. The file&apos;s header looks malformed.</source>
-        <translation>Un problème est survenu lors de la vérification de la base de données de définitions de virus bytecode.cld. L&apos;en-tête du fichier semble mal formé.</translation>
+        <translation>Beim Versuch, die Virendefinitionsdatenbank bytecode.cld zu überprüfen, ist ein Problem aufgetreten. Der Header der Datei sieht fehlerhaft aus.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2792"/>
         <source>There was a problem attempting to lookup the DNS TXT current virus definition info. Check your internet connectivity.</source>
-        <translation>Un problème est survenu lors de la recherche des informations sur la définition de virus actuelle du DNS TXT. Vérifiez votre connectivité Internet.</translation>
+        <translation>Beim Versuch, die aktuellen Informationen zur DNS-TXT-Virendefinition nachzuschlagen, ist ein Problem aufgetreten. Überprüfen Sie Ihre Internetverbindung.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3178"/>
         <source>System Unknown</source>
-        <translation>Système inconnu</translation>
+        <translation>System Unbekannt</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2764"/>
         <source>Unable To Check daily.cld</source>
-        <translation>Impossible de vérifier daily.cld</translation>
+        <translation>Kann nicht überprüfen daily.cld</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2775"/>
         <source>Unable To Check main.cld</source>
-        <translation>Impossible de vérifier main.cld</translation>
+        <translation>Kann nicht überprüfen main.cld</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2786"/>
         <source>Unable To Check bytecode.cld</source>
-        <translation>Impossible de vérifier bytecode.cld</translation>
+        <translation>Kann nicht überprüfen bytecode.cld</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2796"/>
         <source>Unable To Establish Internet Connection</source>
-        <translation>Impossible d&apos;établir une connexion Internet</translation>
+        <translation>Internetverbindung kann nicht hergestellt werden</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2807"/>
         <source>Virus Definitions Update Failed.</source>
-        <translation>Échec de la mise à jour des définitions de virus.</translation>
+        <translation>Aktualisierung der Virendefinitionen fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2808"/>
         <source>There was a problem attempting to update the virus definition database to the most current form. The virus definition database is out-of-date</source>
-        <translation>Un problème est survenu lors de la tentative de mise à jour de la base de données de définitions de virus vers la forme la plus récente. La base de données de définitions de virus est obsolète</translation>
+        <translation>Beim Versuch, die Virendefinitionsdatenbank auf das aktuellste Formular zu aktualisieren, ist ein Problem aufgetreten. Die Virendefinitionsdatenbank ist veraltet</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2812"/>
         <source>Virus Definitions Are Out Of Date</source>
-        <translation>Les définitions de virus sont obsolètes</translation>
+        <translation>Virusdefinitionen sind veraltet</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2817"/>
         <source>Virus Definitions Updated.</source>
-        <translation>Définitions de Virus Mises à Jour.</translation>
+        <translation>Virusdefinitionen aktualisiert.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2818"/>
         <source>The virus definition database is up-to-date&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>La base de données de définitions de virus est à jour&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Die Virendefinitionsdatenbank ist aktuell&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2822"/>
@@ -3630,7 +3628,7 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../MainWindow.cpp" line="2842"/>
         <source>Active threat detected on filesystem.</source>
-        <translation>Menace active détectée sur le système de fichiers.</translation>
+        <translation>Aktive Bedrohung im Dateisystem erkannt.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3052"/>
@@ -3647,37 +3645,37 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../MainWindow.cpp" line="3124"/>
         <source>Error</source>
-        <translation>Erreur</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3142"/>
         <source>Warning</source>
-        <translation>Avertissement</translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3160"/>
         <source>All Systems Nominal</source>
-        <translation>Tous Les Systèmes Nominaux</translation>
+        <translation>Alle Systeme nominal</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3201"/>
         <source>&lt;h1&gt;&lt;b&gt;Exiting...&lt;/b&gt;&lt;/h1&gt;</source>
-        <translation>&lt;h1&gt;&lt;b&gt;Sortie...&lt;/b&gt;&lt;/h1&gt;</translation>
+        <translation>&lt;h1&gt;&lt;b&gt;Verlassen...&lt;/b&gt;&lt;/h1&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3202"/>
         <source>Do you want to shutdown ClamOne?</source>
-        <translation>Voulez-vous arrêter ClamOne?</translation>
+        <translation>Möchten Sie ClamOne herunterfahren?</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3203"/>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="3205"/>
         <source>No</source>
-        <translation>Non</translation>
+        <translation>Nein</translation>
     </message>
 </context>
 <context>
@@ -3729,7 +3727,7 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../ScanDialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Dialogue</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="51"/>
@@ -3739,7 +3737,7 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../ScanDialog.ui" line="135"/>
         <source>This requires &quot;clamdscan&quot; in order to function and the executable cannot be found. Please make sure that it is installed and placed in Clam One&apos;s PATH directory.</source>
-        <translation>Cela nécessite &quot;clamdscan&quot; pour fonctionner et l&apos;exécutable est introuvable. Veuillez vous assurer qu&apos;il est installé et placé dans le répertoire PATH de Clam One.</translation>
+        <translation>Dies erfordert &quot;clamdscan&quot;, um zu funktionieren, und die ausführbare Datei kann nicht gefunden werden. Bitte stellen Sie sicher, dass es installiert und im PATH-Verzeichnis von Clam One abgelegt ist.</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="173"/>
@@ -3747,48 +3745,48 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../ScanDialog.ui" line="371"/>
         <location filename="../ScanDialog.ui" line="433"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="200"/>
         <source>Scan a single file or a whole directory</source>
-        <translation>Analyser un seul fichier ou un répertoire entier</translation>
+        <translation>Scannen Sie eine einzelne Datei oder ein ganzes Verzeichnis</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="259"/>
         <source>Add File(s)..</source>
-        <translation>Ajouter le fichier(s)..</translation>
+        <translation>Datei(en) hinzufügen..</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="266"/>
         <source>Add Directory...</source>
-        <translation>Ajouter un répertoire ...</translation>
+        <translation>Verzeichnis hinzufügen ...</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="273"/>
         <location filename="../ScanDialog.ui" line="364"/>
         <source>Scan</source>
-        <translation>Analyse</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="307"/>
         <source>Scan the whole system</source>
-        <translation>Scannez tout le système</translation>
+        <translation>Scannen Sie das gesamte System</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="384"/>
         <source>Scan Output:</source>
-        <translation>Sortie de numérisation:</translation>
+        <translation>Scan-Ausgabe:</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="426"/>
         <source>Abort</source>
-        <translation>Avorter</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../ScanDialog.ui" line="475"/>
         <source>Scan the&lt;br /&gt;Local Hard Drives</source>
-        <translation>Analyser les &lt;br /&gt; disques durs locaux</translation>
+        <translation>Scannen Sie die &lt;br /&gt; lokalen Festplatten</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="24"/>
@@ -3800,12 +3798,12 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../ScanDialog.cpp" line="25"/>
         <location filename="../ScanDialog.cpp" line="46"/>
         <source>Scan&lt;br /&gt;Error</source>
-        <translation>Analyse&lt;br /&gt;Erreur</translation>
+        <translation>Scan &lt;br /&gt; Fehler</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="28"/>
         <source>Clam One - Quick Scan</source>
-        <translation>Clam One - Scan Rapide</translation>
+        <translation>Clam One - Schneller Scan</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="30"/>
@@ -3816,12 +3814,12 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../ScanDialog.cpp" line="31"/>
         <source>Quick&lt;br /&gt;Scan</source>
-        <translation>Analyse&lt;br /&gt;Rapide</translation>
+        <translation>Schneller&lt;br /&gt;Scan</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="49"/>
         <source>Clam One - Deep Scan</source>
-        <translation>Clam One - Analyse Approfondie</translation>
+        <translation>Clam One - Tiefen-Scan</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="51"/>
@@ -3831,7 +3829,7 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
     <message>
         <location filename="../ScanDialog.cpp" line="52"/>
         <source>Deep&lt;br /&gt;Scan</source>
-        <translation>Analyse&lt;br /&gt;Approfondie</translation>
+        <translation>Tiefen&lt;br /&gt;Scan</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="56"/>
@@ -3947,27 +3945,27 @@ Voulez-vous mettre en quarantaine?&lt;br /&gt;</translation>
         <location filename="../ScanDialog.cpp" line="300"/>
         <location filename="../ScanDialog.cpp" line="322"/>
         <source>No Items to Scan.</source>
-        <translation>Aucun élément à analyser.</translation>
+        <translation>Keine zu scannenden Elemente.</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="287"/>
         <source>Clam One - Scheduled Scan</source>
-        <translation>Clam One - Analyse Planifiée</translation>
+        <translation>Clam One - Geplanten Scan</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="290"/>
         <source>Free&lt;br /&gt;Scan</source>
-        <translation>Analyse&lt;br /&gt;Gratuit</translation>
+        <translation>Kostenloser&lt;br /&gt;Scan</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="328"/>
         <source>Open File(s) to Scan</source>
-        <translation>Ouvrir le Fichier(s) à Analyser</translation>
+        <translation>Öffnen Sie die zu scannenden Datei(en)</translation>
     </message>
     <message>
         <location filename="../ScanDialog.cpp" line="335"/>
         <source>Open Directory to Scan</source>
-        <translation>Répertoire Ouvert à Analyser</translation>
+        <translation>Öffnen Sie das zu scannende Verzeichnis</translation>
     </message>
 </context>
 </TS>

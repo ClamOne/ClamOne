@@ -81,6 +81,7 @@ RESOURCES += \
     qlistspinboxwidget.qrc
 
 TRANSLATIONS += \
+    translations/co_de.ts \
     translations/co_fr.ts \
     translations/co_es.ts
 

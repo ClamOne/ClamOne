@@ -263,14 +263,35 @@ void MainWindow::configLaunch(){
     }
 }
 
-quint32 MainWindow::checkCurrentClamavVersionInstalled(){
+bool MainWindow::find_file(QByteArray *filepath, QString name){
     QProcess whichClamdProc;
-    whichClamdProc.start("which", QStringList({"clamd"}));
+    whichClamdProc.start("which", QStringList({name}));
     whichClamdProc.waitForFinished();
-    QByteArray whichClamdRet = whichClamdProc.readAllStandardOutput();
-    whichClamdRet = ((whichClamdRet.mid(whichClamdRet.length()-1, 1) == QByteArray("\n",1))?whichClamdRet.mid(0, whichClamdRet.length()-1):whichClamdRet);
+    (*filepath) = whichClamdProc.readAllStandardOutput();
+    (*filepath) = (((*filepath).mid((*filepath).length()-1, 1) == QByteArray("\n",1))?(*filepath).mid(0, (*filepath).length()-1):(*filepath));
     whichClamdProc.close();
-    if(whichClamdRet.isEmpty())
+    if((*filepath).isEmpty()){
+        if((*filepath).isEmpty() && QFileInfo("/bin/"+name).exists()){
+            (*filepath) = QByteArray("/bin/"+name.toLocal8Bit());
+        }
+        if((*filepath).isEmpty() && QFileInfo("/sbin/"+name).exists()){
+            (*filepath) = QByteArray("/sbin/"+name.toLocal8Bit());
+        }
+        if((*filepath).isEmpty() && QFileInfo("/usr/bin/"+name).exists()){
+            (*filepath) = QByteArray("/usr/bin/"+name.toLocal8Bit());
+        }
+        if((*filepath).isEmpty() && QFileInfo("/usr/sbin/"+name).exists()){
+            (*filepath) = QByteArray("/usr/sbin/"+name.toLocal8Bit());
+        }
+        if((*filepath).isEmpty())
+            return false;
+    }
+    return true;
+}
+
+quint32 MainWindow::checkCurrentClamavVersionInstalled(){
+    QByteArray whichClamdRet;
+    if(!find_file(&whichClamdRet, "clamd"))
         return 0xFFFFFFFF;
 
     QProcess clamdVersionProc;
@@ -1454,9 +1475,12 @@ void MainWindow::on_labelScanDeepScan_linkActivated(const QString &link){
 void MainWindow::on_labelUpdateClickUpdateDefs_linkActivated(const QString &link){
     Q_UNUSED(link)
     int rClamd = -1, rFresh = -1, rClamonacc = -1;
+    QByteArray whichPkexec, whichKill;
+    if(!find_file(&whichPkexec, "pkexec") || !find_file(&whichKill, "kill"))
+        return;
     ckProc(&rClamd, &rFresh, &rClamonacc);
     if(rFresh > 0){
-        QProcess::execute(tr("pkexec kill -USR1 ")+QString::number(rFresh));
+        QProcess::execute(QString(whichPkexec)+" "+QString(whichKill)+" -USR1 "+QString::number(rFresh));
         allHide();
     }
 }
@@ -2733,7 +2757,7 @@ void MainWindow::timerSlot(){
         ui->labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
         ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the daily.cld virus defnition database. The file's header looks malformed."));
+        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the daily.cld virus definition database. The file's header looks malformed."));
         isUpdateError = true;
         if(!isClamdError && !isFreshclamError && !isClamonaccError){
              statusSetWarn();
@@ -2744,7 +2768,7 @@ void MainWindow::timerSlot(){
         ui->labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
         ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the main.cld virus defnition database. The file's header looks malformed."));
+        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the main.cld virus definition database. The file's header looks malformed."));
         isUpdateError = true;
         if(!isClamdError && !isFreshclamError && !isClamonaccError){
              statusSetWarn();
@@ -2755,7 +2779,7 @@ void MainWindow::timerSlot(){
         ui->labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
         ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the bytecode.cld virus defnition database. The file's header looks malformed."));
+        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the bytecode.cld virus definition database. The file's header looks malformed."));
         isUpdateError = true;
         if(!isClamdError && !isFreshclamError && !isClamonaccError){
              statusSetWarn();
@@ -2765,7 +2789,7 @@ void MainWindow::timerSlot(){
     if(!isUpdateError && !requestUpdatedcDns()){
         ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/ques_16.png"));
         ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to lookup the DNS TXT current virus defnition info. Check your internet connectivity."));
+        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to lookup the DNS TXT current virus definition info. Check your internet connectivity."));
         isUpdateError = true;
         if(!isClamdError && !isFreshclamError && !isClamonaccError){
              statusSetWarn();
@@ -2986,16 +3010,12 @@ void MainWindow::ckProc(int *pidClamd, int *pidFreshclam, int *pidClamonacc){
 }
 
 quint32 MainWindow::clamdscanVersion(QByteArray *clamdscan_ver){
-    QProcess whichClamdscanProc;
-    whichClamdscanProc.start("which", QStringList({"clamdscan"}));
-    whichClamdscanProc.waitForFinished();
-    QByteArray whichClamdscanRet = whichClamdscanProc.readAllStandardOutput();
-    whichClamdscanRet = ((whichClamdscanRet.mid(whichClamdscanRet.length()-1, 1) == QByteArray("\n",1))?whichClamdscanRet.mid(0, whichClamdscanRet.length()-1):whichClamdscanRet);
-    whichClamdscanProc.close();
-    if(whichClamdscanRet.isEmpty())
+    QByteArray whichClamdscanRet;
+    if(!find_file(&whichClamdscanRet, "clamdscan"))
         return 0xFFFFFFFF;
+
     QProcess clamdscanProc;
-    clamdscanProc.start("clamdscan", QStringList({"--version"}));
+    clamdscanProc.start(whichClamdscanRet, QStringList({"--version"}));
     clamdscanProc.waitForFinished();
     QByteArray clamdscanRet = clamdscanProc.readAllStandardOutput();
     clamdscanRet = clamdscanRet.mid(7, clamdscanRet.indexOf('/')-7);
@@ -3155,7 +3175,7 @@ void MainWindow::statusSetGrey(){
     ui->labelTM->setStyleSheet("background-color: #999999;");
     ui->labelTR->setStyleSheet("background-color: #999999;");
 
-    ui->labelStatusProtectionState->setText(tr("System Unkonwn"));
+    ui->labelStatusProtectionState->setText(tr("System Unknown"));
     ui->labelStatusProtectionStateDetails->setText(tr(""));
 }
 

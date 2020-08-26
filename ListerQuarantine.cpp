@@ -69,6 +69,14 @@ void ListerQuarantine::on_pushButtonNo_clicked(){
     }
 }
 
+void ListerQuarantine::on_pushButtonYesAll_clicked(){
+
+}
+
+void ListerQuarantine::on_pushButtonNoAll_clicked(){
+
+}
+
 void ListerQuarantine::add_file(QByteArray crypt_filename, QByteArray plain_filename){
     show();
     bool doesListAlreadyContain = false;

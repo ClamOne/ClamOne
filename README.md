@@ -15,10 +15,16 @@ In order to run ClamOne, you will need several required packages installed. On a
 ```
 $ sudo add-apt-repository universe
 $ sudo apt-get update
-$ sudo apt-get -y install clamav clamav-daemon clamdscan libqt5sql5-sqlite libqt5widgets5
+$ sudo apt-get -y install clamav clamav-daemon clamdscan libqt5sql5-sqlite libqt5widgets5 libqt5charts5
 ```
 
-If you decide to compile the source code,
+If you decide to compile the source code, first install these additional packages (might need others too):
+```
+$ sudo apt-get update
+$ apt-get -y install g++ libprocps-dev qt5-default libqt5charts5-dev qttools5-dev libzip-dev
+```
+
+then you can compile with this command:
 
 ```
 $ lupdate ClamOne.pro
@@ -32,9 +38,10 @@ $ ./ClamOne
 
 If a package is available for download grab a copy of the latest and run:
 
+[Clam One Releases](https://github.com/ClamOne/ClamOne/releases)
 
 ```
-$ sudo dpkg -i clamone.deb
+$ sudo dpkg -i clamone_X.XXX.X-X_amd64.deb
 ```
 
 You can then run it with:
