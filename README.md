@@ -1,4 +1,4 @@
-# ClamOne
+# Clam One
 
 An Open Source Linux Frontend to the ClamAV Antivirus Engine. A basic graphical user interface, designed for a Desktop environment, to provide instant feedback when threats are detected on the local system. Features include configuring the clamd daemon directly from the GUI, indication of threats via visual cues as well as notifications, monitoring and updating the virus definitions, monitoring various clam-related event logs and messages, quarantining of detected threats, and visual graphing of antivirus activity.
 
@@ -21,7 +21,7 @@ $ sudo apt-get -y install clamav clamav-daemon clamdscan libqt5sql5-sqlite libqt
 If you decide to compile the source code, first install these additional packages (might need others too):
 ```
 $ sudo apt-get update
-$ apt-get -y install g++ libprocps-dev qt5-default libqt5charts5-dev qttools5-dev libzip-dev
+$ sudo apt-get -y install g++ libprocps-dev qt5-default libqt5charts5-dev qttools5-dev libzip-dev
 ```
 
 then you can compile with this command:

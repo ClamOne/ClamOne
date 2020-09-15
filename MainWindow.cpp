@@ -1028,9 +1028,6 @@ void MainWindow::updateQuarantineDirectoryUi(const QString path){
     qint64 width = 100;
     QDir dir = QFileInfo(qpath).dir();
     dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    ui->tableWidgetQuarantine->setColumnWidth(0, 270);
-    ui->tableWidgetQuarantine->setColumnWidth(1, 160);
-    ui->tableWidgetQuarantine->setColumnWidth(2, 60);
     ui->tableWidgetQuarantine->horizontalHeaderItem(3)->setTextAlignment(Qt::AlignLeft);
     ui->tableWidgetQuarantine->setSortingEnabled(false);
     foreach(QFileInfo qfi, dir.entryInfoList()){
@@ -1064,7 +1061,7 @@ void MainWindow::updateQuarantineDirectoryUi(const QString path){
 
         ui->tableWidgetQuarantine->insertRow(ui->tableWidgetQuarantine->rowCount());
 
-        QTableWidgetItem *item0 = new QTableWidgetItem(qfi.fileName());
+        QTableWidgetItem *item0 = new QTableWidgetItem(QString(filename));
         QTableWidgetItem *item1 = new TimestampTableWidgetItem(timestamp);
         QTableWidgetItem *item2 = new QTableWidgetItem((file_size>(1<<30))?
             QString::number(file_size/(1<<30))+tr("GB"):
@@ -1073,12 +1070,11 @@ void MainWindow::updateQuarantineDirectoryUi(const QString path){
                     (file_size>(1<<10))?
                     QString::number(file_size/(1<<10))+tr("KB"):
                         QString::number(file_size));
-        QTableWidgetItem *item3 = new QTableWidgetItem(QString(filename));
+        QTableWidgetItem *item3 = new QTableWidgetItem(qfi.fileName());
         item0->setFlags(item0->flags() ^ Qt::ItemIsEditable);
         item1->setFlags(item1->flags() ^ Qt::ItemIsEditable);
         item2->setFlags(item2->flags() ^ Qt::ItemIsEditable);
         item3->setFlags(item3->flags() ^ Qt::ItemIsEditable);
-        ui->tableWidgetQuarantine->setColumnWidth(3, width*8);
         ui->tableWidgetQuarantine->setItem(ui->tableWidgetQuarantine->rowCount()-1,0, item0);
         ui->tableWidgetQuarantine->setItem(ui->tableWidgetQuarantine->rowCount()-1,1, item1);
         ui->tableWidgetQuarantine->setItem(ui->tableWidgetQuarantine->rowCount()-1,2, item2);
@@ -1087,6 +1083,10 @@ void MainWindow::updateQuarantineDirectoryUi(const QString path){
     ui->tableWidgetQuarantine->setSortingEnabled(true);
     ui->tableWidgetQuarantine->sortByColumn(1, Qt::DescendingOrder);
     ui->tableWidgetQuarantine->setSortingEnabled(false);
+    ui->tableWidgetQuarantine->resizeColumnToContents(0);
+    ui->tableWidgetQuarantine->resizeColumnToContents(1);
+    ui->tableWidgetQuarantine->resizeColumnToContents(2);
+    ui->tableWidgetQuarantine->resizeColumnToContents(3);
 }
 
 void MainWindow::updateDbQuarantine(QByteArray quarantine_name, quint32 timestamp, quint64 file_size, QByteArray file_name, quint8 verified){
@@ -1598,8 +1598,9 @@ void MainWindow::on_pushButtonMessagesPageEnd_clicked(){
 void MainWindow::on_pushButtonQuarantineDelete_clicked(){
     if(ui->tableWidgetQuarantine->selectedItems().isEmpty())
         return;
-    QString quarantineNameToDelete = ui->tableWidgetQuarantine->selectedItems().at(0)->text();
-    QString fileNameToUnQuarantine = ui->tableWidgetQuarantine->selectedItems().at(3)->text();
+    qint64 current_row = ui->tableWidgetQuarantine->currentRow();
+    QString fileNameToUnQuarantine = ui->tableWidgetQuarantine->selectedItems().at(0)->text();
+    QString quarantineNameToDelete = ui->tableWidgetQuarantine->selectedItems().at(3)->text();
     quint32 timestamp = 0;
     QSqlQuery query;
     query.prepare("DELETE FROM quarantine WHERE quarantine_name = :quarantine_name1 ;");
@@ -1619,14 +1620,25 @@ void MainWindow::on_pushButtonQuarantineDelete_clicked(){
     query.prepare("UPDATE counts_table SET num = num + 1 WHERE timestamp = :timestamp1 AND state = 4 ;");
     query.bindValue(":timestamp1", timestamp);
     query.exec();
+    if(!ui->tableWidgetQuarantine->rowCount())
+        return;
+    if(current_row >= ui->tableWidgetQuarantine->rowCount())
+        QTimer::singleShot(250, [=]() {
+            ui->tableWidgetQuarantine->selectRow(ui->tableWidgetQuarantine->rowCount()-1);
+        });
+    else
+        QTimer::singleShot(250, [=]() {
+            ui->tableWidgetQuarantine->selectRow(current_row);
+        });
 }
 
 void MainWindow::on_pushButtonQuarantineUnQuarantine_clicked(){
     if(ui->tableWidgetQuarantine->selectedItems().isEmpty())
         return;
     QString path = getValDB("quarantinefilesdirectory");
-    QString quarantineNameToDelete = ui->tableWidgetQuarantine->selectedItems().at(0)->text();
-    QString fileNameToUnQuarantine = ui->tableWidgetQuarantine->selectedItems().at(3)->text();
+    qint64 current_row = ui->tableWidgetQuarantine->currentRow();
+    QString fileNameToUnQuarantine = ui->tableWidgetQuarantine->selectedItems().at(0)->text();
+    QString quarantineNameToDelete = ui->tableWidgetQuarantine->selectedItems().at(3)->text();
     QFileInfo qfi(fileNameToUnQuarantine);
     if(qfi.exists()){
         if(qfi.isFile()){
@@ -1662,6 +1674,16 @@ void MainWindow::on_pushButtonQuarantineUnQuarantine_clicked(){
     qf.close();
     on_pushButtonQuarantineDelete_clicked();
     markQuarantineUnQ(fileNameToUnQuarantine.toLocal8Bit());
+    if(!ui->tableWidgetQuarantine->rowCount())
+        return;
+    if(current_row >= ui->tableWidgetQuarantine->rowCount())
+        QTimer::singleShot(250, [=]() {
+            ui->tableWidgetQuarantine->selectRow(ui->tableWidgetQuarantine->rowCount()-1);
+        });
+    else
+        QTimer::singleShot(250, [=]() {
+            ui->tableWidgetQuarantine->selectRow(current_row);
+        });
 }
 
 void MainWindow::on_pushButtonSchedule_clicked(){

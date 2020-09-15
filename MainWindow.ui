@@ -738,7 +738,7 @@
             </attribute>
             <column>
              <property name="text">
-              <string>Quarantine Name</string>
+              <string>File Name</string>
              </property>
             </column>
             <column>
@@ -753,7 +753,7 @@
             </column>
             <column>
              <property name="text">
-              <string>File Name</string>
+              <string>Quarantine Name</string>
              </property>
             </column>
            </widget>
@@ -1437,6 +1437,9 @@
             </property>
             <property name="alternatingRowColors">
              <bool>true</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
             </property>
             <property name="textElideMode">
              <enum>Qt::ElideNone</enum>
@@ -2418,8 +2421,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>435</width>
-               <height>366</height>
+               <width>195</width>
+               <height>621</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_18">

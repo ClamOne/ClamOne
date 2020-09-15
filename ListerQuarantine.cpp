@@ -70,11 +70,17 @@ void ListerQuarantine::on_pushButtonNo_clicked(){
 }
 
 void ListerQuarantine::on_pushButtonYesAll_clicked(){
-
+    while(ui->listWidget->count()){
+        ui->listWidget->setCurrentRow(0);
+        on_pushButtonYes_clicked();
+    }
 }
 
 void ListerQuarantine::on_pushButtonNoAll_clicked(){
-
+    while(ui->listWidget->count()){
+        ui->listWidget->setCurrentRow(0);
+        on_pushButtonNo_clicked();
+    }
 }
 
 void ListerQuarantine::add_file(QByteArray crypt_filename, QByteArray plain_filename){
