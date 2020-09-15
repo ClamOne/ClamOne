@@ -8,9 +8,16 @@
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QCryptographicHash>
-#include <QtUiPlugin/QDesignerExportWidget>
 
-class QDESIGNER_WIDGET_EXPORT QStringListWidget : public QWidget
+#ifdef QDESIGNER_MODE_COMPILE
+#include <QtUiPlugin/QDesignerExportWidget>
+#endif
+
+class 
+#ifdef QDESIGNER_MODE_COMPILE
+QDESIGNER_WIDGET_EXPORT 
+#endif
+QStringListWidget : public QWidget
 {
     Q_OBJECT
 private slots:
