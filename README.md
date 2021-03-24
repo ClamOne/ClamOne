@@ -21,7 +21,7 @@ $ sudo apt-get -y install clamav clamav-daemon clamdscan libqt5sql5-sqlite libqt
 If you decide to compile the source code, first install these additional packages (might need others too):
 ```
 $ sudo apt-get update
-$ sudo apt-get -y install g++ libprocps-dev qt5-default libqt5charts5-dev qttools5-dev libzip-dev
+$ sudo apt-get -y install g++ qt5-default libqt5charts5-dev qttools5-dev libzip-dev
 ```
 
 then you can compile with this command:
@@ -58,7 +58,6 @@ This software must be run along with the clamav engine, it requires the engine i
 
 * [Qt](https://doc.qt.io/qt-5.9/) - The C++ framework used
 * [ClamAV](https://www.clamav.net/) - An open source antivirus engine for detecting trojans, viruses, malware & other malicious threats.
-* [libprocps-dev](https://salsa.debian.org/debian/procps/) - A simple interface library to the /proc filesystem
 * [zlib](https://zlib.net/) - A massively spiffy yet delicately unobtrusive compression library
 
 ## Versioning

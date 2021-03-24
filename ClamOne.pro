@@ -41,10 +41,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     AboutDialog.cpp \
+    CheckBoxPlug.cpp \
+    ComboBoxPlug.cpp \
+    ConfigureDialog.cpp \
+    LineEditPlug.cpp \
+    ListSpinBoxWidgetPlug.cpp \
     MainWindow.cpp \
     Main.cpp \
+    SpinBoxPlug.cpp \
+    StringListWidgetPlug.cpp \
     qstringlistwidget.cpp \
-    ConfigureDialogCurrent.cpp \
     gUncompress.cpp \
     ScanDialog.cpp \
     QAES.cpp \
@@ -55,9 +61,15 @@ SOURCES += \
 
 HEADERS += \
     AboutDialog.h \
+    CheckBoxPlug.h \
+    ComboBoxPlug.h \
+    ConfigureDialog.h \
+    LineEditPlug.h \
+    ListSpinBoxWidgetPlug.h \
     MainWindow.h \
+    SpinBoxPlug.h \
+    StringListWidgetPlug.h \
     qstringlistwidget.h \
-    ConfigureDialogCurrent.h \
     confs.h \
     gUncompress.h \
     ScanDialog.h \
@@ -70,7 +82,6 @@ HEADERS += \
 FORMS += \
     AboutDialog.ui \
     MainWindow.ui \
-    ConfigureDialogCurrent.ui \
     ScanDialog.ui \
     ListerQuarantine.ui
 
@@ -83,10 +94,11 @@ RESOURCES += \
 TRANSLATIONS += \
     translations/co_de.ts \
     translations/co_fr.ts \
+    translations/co_ko.ts \
     translations/co_es.ts
 
 unix:contains(QMAKE_HOST.arch, x86_64):{
-    LIBS += -ldl -lstdc++fs -lz
+    LIBS += -lstdc++fs -lz
 }
 
 DISTFILES += \

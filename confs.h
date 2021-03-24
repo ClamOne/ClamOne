@@ -1,6 +1,9 @@
 #ifndef CONFS_H
 #define CONFS_H
 
+#include <dirent.h>
+#include <sys/types.h>
+
 #define CLAMONE_MAJOR 0
 #define CLAMONE_MINOR 102
 #define CLAMONE_BUILD 4

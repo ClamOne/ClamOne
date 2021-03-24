@@ -33,13 +33,14 @@
 
 #include <QDnsLookup>
 
+//for std::experimental::filesystem::is_socket
 #include <experimental/filesystem>
 
 //loading dynamically
 #include <dlfcn.h>
 
 //from libprocps4-dev
-#include <proc/readproc.h>
+//#include <proc/readproc.h>
 
 //#include <unistd.h>
 //#include <sys/types.h>
@@ -55,7 +56,7 @@
 #include <QDebug>
 
 #include "AboutDialog.h"
-#include "ConfigureDialogCurrent.h"
+#include "ConfigureDialog.h"
 #include "ScanDialog.h"
 #include "ListerQuarantine.h"
 #include "Quarantiner.h"
@@ -66,6 +67,7 @@
 
 #include "confs.h"
 #include "gUncompress.h"
+#include "CkProc.h"
 
 namespace Ui {
 class MainWindow;
@@ -253,7 +255,7 @@ private:
     QList<ScheduleItem *> schedule;
 
     AboutDialog *about = Q_NULLPTR;
-    ConfigureDialogCurrent *config = Q_NULLPTR;
+    ConfigureDialog *config = Q_NULLPTR;
     ScanDialog *scanDialog = Q_NULLPTR;
     ListerQuarantine *listerQuarantine = Q_NULLPTR;
 
@@ -308,10 +310,10 @@ private:
     void errorMsg(QString msg = "", bool enable_exit = true);
     void exitProgram(int ret = 0);
 
-    void *handle;
-    PROCTAB* (*openproc_p)(int, ...);
-    proc_t* (*readproc_p)(PROCTAB *, proc_t *);
-    void (*closeproc_p)(PROCTAB*);
+    //void *handle;
+    //PROCTAB* (*openproc_p)(int, ...);
+    //proc_t* (*readproc_p)(PROCTAB *, proc_t *);
+    //void (*closeproc_p)(PROCTAB*);
 
 protected:
     void closeEvent(QCloseEvent *event) override;

@@ -13,15 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     qsrand(time(NULL));
 #endif
     QByteArray clamdscan_ver;
-    quint32 clamdscan_v = clamdscanVersion(&clamdscan_ver);
-    if(CLAMONE_VERSION_L != clamdscan_v){
-        QMessageBox::critical(this, windowTitle(),
-                              tr("Either ClamAV is not installed or ")+
-                              tr("the installed version of ClamAV(")+QString(clamdscan_ver)+
-                              tr(") does not match the version of ClamOne(")+QString(CLAMONE_VERSION)+
-                              tr("). Please update both for proper operation"), QMessageBox::Ok);
-        exitProgram();
-    }
 
     scanAction = new QAction(tr("&Scan..."), this);
     connect(scanAction, &QAction::triggered, this, &MainWindow::scanShow);
@@ -72,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
         return;
     }
     about = new AboutDialog(this);
-    config = new ConfigureDialogCurrent(dbFileLocation, this);
+    config = new ConfigureDialog(dbFileLocation, this);
     scanDialog = new ScanDialog();
     listerQuarantine = new ListerQuarantine();
     setEnabledQuarantine(getValDB("enablequarantine")=="yes");
@@ -94,14 +85,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, &MainWindow::stackedWidgetChanged);
     connect(ui->comboBoxGraphsSubTitleSelector, QOverload<int>::of(&QComboBox::activated), ui->stackedWidgetGraphs, &QStackedWidget::setCurrentIndex);
     connect(ui->comboBoxLog, QOverload<int>::of(&QComboBox::activated), ui->stackedWidgetEvents, &QStackedWidget::setCurrentIndex);
-    connect(config, &ConfigureDialogCurrent::setValDB, this, &MainWindow::setValDB);
-    connect(config, &ConfigureDialogCurrent::refreshEventGeneral, this, &MainWindow::initializeEventsGeneralTableWidget);
-    connect(config, &ConfigureDialogCurrent::refreshEventFound, this, &MainWindow::initializeEventsFoundTableWidget);
-    connect(config, &ConfigureDialogCurrent::refreshEventQuarantined, this, &MainWindow::initializeEventsQuarantinedTableWidget);
-    connect(config, &ConfigureDialogCurrent::refreshMessages, this, &MainWindow::initializeMessagesTableWidget);
-    connect(config, &ConfigureDialogCurrent::refreshQuarantineDirectory, this, &MainWindow::refreshQuarantineDirectory);
-    connect(config, &ConfigureDialogCurrent::setEnabledQuarantine, this, &MainWindow::setEnabledQuarantine);
-    connect(this, &MainWindow::addExclusionClamdconf, config, &ConfigureDialogCurrent::addExclusionClamdconf);
+    connect(config, &ConfigureDialog::setValDB, this, &MainWindow::setValDB);
+    connect(config, &ConfigureDialog::refreshEventGeneral, this, &MainWindow::initializeEventsGeneralTableWidget);
+    connect(config, &ConfigureDialog::refreshEventFound, this, &MainWindow::initializeEventsFoundTableWidget);
+    connect(config, &ConfigureDialog::refreshEventQuarantined, this, &MainWindow::initializeEventsQuarantinedTableWidget);
+    connect(config, &ConfigureDialog::refreshMessages, this, &MainWindow::initializeMessagesTableWidget);
+    connect(config, &ConfigureDialog::refreshQuarantineDirectory, this, &MainWindow::refreshQuarantineDirectory);
+    connect(config, &ConfigureDialog::setEnabledQuarantine, this, &MainWindow::setEnabledQuarantine);
+    connect(this, &MainWindow::addExclusionClamdconf, config, &ConfigureDialog::addExclusionClamdconf);
     connect(scanDialog, &ScanDialog::parseClamdscanLine, this, &MainWindow::parseClamdscanLine);
     connect(scanDialog, &ScanDialog::initScanProcess, this, &MainWindow::initScanProcess);
     connect(scanDialog, &ScanDialog::setScanActive, this, &MainWindow::setScanActive);
@@ -127,42 +118,6 @@ MainWindow::MainWindow(QWidget *parent) :
     isScanActive = false;
     refreshFoundTableOnUpdate = false;
 
-    //Why won't this work with standard dl loading the library, idk
-    //There are version problems making it less portable, but it works okay like this.
-    if(!(handle = dlopen("libprocps.so", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.6", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.7", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.8", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.9", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.10", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.11", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.12", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.13", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.14", RTLD_LAZY)) &&
-       !(handle = dlopen("libprocps.so.15", RTLD_LAZY)) ){
-        errorMsg("Error: dlopen failed", false);
-        exitProgram();
-        return;
-    }
-
-    openproc_p = (PROCTAB* (*)(int, ...))dlsym(handle, "openproc");
-    if(dlerror() != NULL){
-        exitProgram();
-        return;
-    }
-
-    readproc_p = (proc_t* (*)(PROCTAB *, proc_t *))dlsym(handle, "readproc");
-    if(dlerror() != NULL){
-        exitProgram();
-        return;
-    }
-
-    closeproc_p = (void (*)(PROCTAB*))dlsym(handle, "closeproc");
-    if(dlerror() != NULL){
-        exitProgram();
-        return;
-    }
-
     for(int i = 0; i < qMax(QThread::idealThreadCount(),1); i++)
         threads_list.append(new QThread(this));
 
@@ -185,7 +140,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow(){
     delete ui;
-    dlclose(handle);
+    //dlclose(handle);
 }
 
 void MainWindow::allHide(){
@@ -229,38 +184,15 @@ void MainWindow::configLaunch(){
         errorMsg("Bad: ClamAV Version Installed: " + QString::number(ret, 16));
         exitProgram();
     }
-    if(ret < QT_VERSION_CHECK(0, 101, 4)){
-        //hide MaxScanTime < 0.101.4
-        //hide OnAccessExcludeUname < 0.102.0
-        //hide OnAccessCurlTimeout < 0.102.0
-        //hide OnAccessMaxThreads < 0.102.0
-        //hide OnAccessRetryAttempts < 0.102.0
-        //hide OnAccessDenyOnError < 0.102.0
-    }else if(ret < QT_VERSION_CHECK(0, 102, 0)){
-        //show MaxScanTime >= 0.101.4
-        //show ScanOnAccess < 0.102.0
-        //hide OnAccessExcludeUname < 0.102.0
-        //hide OnAccessCurlTimeout < 0.102.0
-        //hide OnAccessMaxThreads < 0.102.0
-        //hide OnAccessRetryAttempts < 0.102.0
-        //hide OnAccessDenyOnError < 0.102.0
-    }else{
-        config->show();
-        config->updateClamdconfLoc(getValDB("clamdconf"));
-        config->updateFreshclamconfLoc(getValDB("freshclamconf"));
-        config->updateMonitorOnAccess(getValDB("monitoronaccess")=="yes");
-        config->updateEntriesPerPage(getValDB("entriesperpage"));
-        config->updateEnableQuarantine(getValDB("enablequarantine")=="yes");
-        config->updateMaximumQuarantineFileSize(getValDB("maxquarantinesize").toInt());
-        config->updateLocationQuarantineFileDirectory(getValDB("quarantinefilesdirectory"));
-        //show MaxScanTime >= 0.101.4
-        //hide ScanOnAccess >= 0.102.0
-        //show OnAccessExcludeUname >= 0.102.0
-        //show OnAccessCurlTimeout >= 0.102.0
-        //show OnAccessMaxThreads >= 0.102.0
-        //show OnAccessRetryAttempts >= 0.102.0
-        //show OnAccessDenyOnError >= 0.102.0
-    }
+    config->show();
+    config->setVersion(ret);
+    config->updateClamdconfLoc(getValDB("clamdconf"));
+    config->updateFreshclamconfLoc(getValDB("freshclamconf"));
+    config->updateMonitorOnAccess(getValDB("monitoronaccess")=="yes");
+    config->updateEntriesPerPage(getValDB("entriesperpage"));
+    config->updateEnableQuarantine(getValDB("enablequarantine")=="yes");
+    config->updateMaximumQuarantineFileSize(getValDB("maxquarantinesize").toInt());
+    config->updateLocationQuarantineFileDirectory(getValDB("quarantinefilesdirectory"));
 }
 
 bool MainWindow::find_file(QByteArray *filepath, QString name){
@@ -271,7 +203,7 @@ bool MainWindow::find_file(QByteArray *filepath, QString name){
     (*filepath) = (((*filepath).mid((*filepath).length()-1, 1) == QByteArray("\n",1))?(*filepath).mid(0, (*filepath).length()-1):(*filepath));
     whichClamdProc.close();
     if((*filepath).isEmpty()){
-        if((*filepath).isEmpty() && QFileInfo("/bin/"+name).exists()){
+        if(QFileInfo("/bin/"+name).exists()){
             (*filepath) = QByteArray("/bin/"+name.toLocal8Bit());
         }
         if((*filepath).isEmpty() && QFileInfo("/sbin/"+name).exists()){
@@ -283,13 +215,39 @@ bool MainWindow::find_file(QByteArray *filepath, QString name){
         if((*filepath).isEmpty() && QFileInfo("/usr/sbin/"+name).exists()){
             (*filepath) = QByteArray("/usr/sbin/"+name.toLocal8Bit());
         }
-        if((*filepath).isEmpty())
+        if((*filepath).isEmpty()){
+            qDebug() << "Error: find_file: can't find file \"" << name << "\"";
             return false;
+        }
     }
     return true;
 }
 
 quint32 MainWindow::checkCurrentClamavVersionInstalled(){
+    bool ok = true;
+    localSocket->abort();
+    localSocket->setServerName(localSocketFilename);
+    localSocket->connectToServer(QLocalSocket::ReadWrite);
+    if(localSocket->waitForConnected() &&
+        localSocket->write(QByteArray("VERSION", 7)) == (qint64)7 &&
+        localSocket->waitForReadyRead(250))
+    {
+        QByteArray versionCmdResult = localSocket->readAll();
+        if(!versionCmdResult.isEmpty()){
+            quint32 ret = 0;
+            QStringList tmp = QString(versionCmdResult).split("/").at(0).split(" ").at(1).split(".");
+            if(tmp.length() == 3){
+                for(int i = 0; i < 3; i++){
+                    ret += tmp.at(i).toInt(&ok,10) << ((2-i)*8);
+                    if(!ok)
+                        break;
+                }
+            }
+            if(ok)
+                return ret;
+        }
+    }
+
     QByteArray whichClamdRet;
     if(!find_file(&whichClamdRet, "clamd"))
         return 0xFFFFFFFF;
@@ -309,7 +267,7 @@ quint32 MainWindow::checkCurrentClamavVersionInstalled(){
     versionNums = versionNums[1].split(".");
     if(versionNums.length() != 3)
         return 0xFFFFFFFB;
-    bool ok = true;
+    ok = true;
     quint8 num1 = versionNums[0].toInt(&ok);
     if(!ok)
         return 0xFFFFFFFA;
@@ -2401,7 +2359,6 @@ QString MainWindow::getClamdDatabaseDirectoryName(){
     QRegularExpression re;
     QString ddVar = "";
     QFile file(getValDB("clamdconf"));
-
     if(!file.exists())
         return QString();
 
@@ -2443,12 +2400,12 @@ void MainWindow::setValDB(QString key, QString val){
 bool MainWindow::setUID(){
     if(!getuid()){ //only setuid/setgid if root
         struct passwd *user = NULL;
-        QRegularExpression userRegex("^User\\s+(.*)$");
         QFile clamdconf(getValDB("clamdconf"));
-        if (clamdconf.open(QIODevice::ReadOnly)){
+        if (clamdconf.exists() && clamdconf.open(QIODevice::ReadOnly)){
             QTextStream clamdconfStream(&clamdconf);
             while (!clamdconfStream.atEnd()){
                 QString line = clamdconfStream.readLine();
+                QRegularExpression userRegex("^User\\s+(.*)$");
                 if(userRegex.match(line).hasMatch()){
                     QString setuidUsername = "";
                     setuidUsername = line.replace(userRegex,"\\1");
@@ -3003,32 +2960,47 @@ QStringList MainWindow::ckExistsOnFs(){
 }
 
 void MainWindow::ckProc(int *pidClamd, int *pidFreshclam, int *pidClamonacc){
+    bool ok;
+    QDir procdir("/proc");
+
     (*pidClamd) = -1;
     (*pidFreshclam) = -1;
     (*pidClamonacc) = -1;
 
-    int count = 0;
-    static proc_t proc;
-    PROCTAB* pproctab;
-    pproctab = (*openproc_p)(PROC_FILLCOM, NULL);
-    while((*readproc_p)(pproctab, &proc) != NULL){
-        if(&(proc.cmdline[0]) != NULL && QFileInfo(QString(proc.cmdline[0])).baseName() == QString("clamd")){
+    procdir.entryList();
+    procdir.setFilter(QDir::Dirs | QDir::NoSymLinks);
+    procdir.setSorting(QDir::Name);
+
+    QFileInfoList list = procdir.entryInfoList();
+    for (int i = 0; i < list.size(); ++i) {
+        QString freadall = QString();
+        QFileInfo proccmdline, fileInfo = list.at(i);
+        int num = QString(fileInfo.fileName()).toInt(&ok, 10);
+        if(!ok)
+            continue;
+        proccmdline = QFileInfo(fileInfo.absoluteFilePath()+"/cmdline");
+        if(!proccmdline.exists())
+            continue;
+        QFile f(proccmdline.absoluteFilePath());
+        if(f.open(QFile::ReadOnly)){
+            freadall = QString(f.readAll());
+            f.close();
+        }else
+            continue;
+        if(freadall.isEmpty())
+            continue;
+        freadall = QFileInfo(freadall).baseName();
+        if(freadall == QString("clamd")){
             if(pidClamd != Q_NULLPTR)
-                (*pidClamd) = proc.tid;
-            count++;
-        }else if(&(proc.cmdline[0]) != NULL && QFileInfo(QString(proc.cmdline[0])).baseName() == QString("freshclam")){
+                (*pidClamd) = num;
+        }else if(freadall == QString("freshclam")){
             if(pidFreshclam != Q_NULLPTR)
-                (*pidFreshclam) = proc.tid;
-            count++;
-        }else if(&(proc.cmdline[0]) != NULL && QFileInfo(QString(proc.cmdline[0])).baseName() == QString("clamonacc")){
+                (*pidFreshclam) = num;
+        }else if(freadall == QString("clamonacc")){
             if(pidClamonacc != Q_NULLPTR)
-                (*pidClamonacc) = proc.tid;
-            count++;
+                (*pidClamonacc) = num;
         }
-        if(count >=3)
-            break;
     }
-    (*closeproc_p)(pproctab);
 }
 
 quint32 MainWindow::clamdscanVersion(QByteArray *clamdscan_ver){

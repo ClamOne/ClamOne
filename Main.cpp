@@ -5,6 +5,7 @@
 #include <QRegularExpression>
 
 #include "MainWindow.h"
+#include "ConfigureDialog.h"
 
 #ifndef CLAMONE_DEBUG
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg);
@@ -21,14 +22,14 @@ int main(int argc, char *argv[])
         qApp->installTranslator(&translator);
 
     MainWindow w;
+    QObject::connect(&a, &QApplication::aboutToQuit, &w, &MainWindow::aboutToQuit);
+    //ConfigureDialog w;
 #ifdef CLAMONE_DEBUG
     w.show();
 #else
     w.hide();
     qApp->setQuitOnLastWindowClosed(false);
 #endif
-
-    QObject::connect(&a, &QApplication::aboutToQuit, &w, &MainWindow::aboutToQuit);
 
     return a.exec();
 }
