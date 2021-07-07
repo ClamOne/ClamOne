@@ -14,19 +14,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ClamOne
 TEMPLATE = app
 
-unix:target.path = /usr/bin
-unix:target.files = ClamOne
-
-unix:conf.path = /usr/share/ClamOne
-unix:conf.files = ubuntu_setup.sh
-
-unix:manfile.path = /usr/share/man/man1/
-unix:manfile.files = man/clamone.1.gz
-
-INSTALLS += target conf
-INSTALLS += manfile
-
-
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -97,12 +84,37 @@ TRANSLATIONS += \
     translations/co_ko.ts \
     translations/co_es.ts
 
-unix:contains(QMAKE_HOST.arch, x86_64):{
+unix:{
     LIBS += -lstdc++fs -lz
+
+    isEmpty(PREFIX){
+        PREFIX = /usr
+    }
+    target.path = $$PREFIX/bin
+    target.files = ClamOne
+
+    shortcutfiles.files = clamone.desktop
+    shortcutfiles.path = $$PREFIX/share/applications/
+    data.files = images/main_icon_grey.png
+    data.path = $$PREFIX/share/pixmaps/
+
+    conf.files = ubuntu_setup.sh
+    conf.path = $$PREFIX/share/ClamOne/
+
+    manfile.files = man/clamone.1.gz
+    manfile.path = $$PREFIX/share/man/man1/
+
+    INSTALLS += shortcutfiles
+    INSTALLS += data
+    INSTALLS += conf
+    INSTALLS += manfile
 }
 
-DISTFILES += \
-    garbage2 \
-    accesnt_chars.txt
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /usr/bin
+!isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=
 
 

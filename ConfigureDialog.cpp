@@ -72,7 +72,7 @@ ConfigureDialog::ConfigureDialog(QString dbLoc, QWidget *parent)
 }
 
 void ConfigureDialog::setVersion(quint32 version){
-    //reset && clear && grep '"BlockMax"' source/clamav/clamav-0.*/shared/optparser.c | grep -v -e 'Deprecated' -e 'OPT_DEPRECATED'
+    //clamav-0.*/shared/optparser.c
     if(version >= QT_VERSION_CHECK(0, 97, 4) && version <= QT_VERSION_CHECK(0, 97, 8)){
         cntClamAuth->show();
         cntClamAuth->setVersion_parameter(true);
@@ -283,6 +283,13 @@ void ConfigureDialog::setVersion(quint32 version){
         cntConcurrentDatabaseReload->hide();
         cntStructuredCCOnly->setVersion_parameter(false);
         cntStructuredCCOnly->hide();
+    }
+    if(version >= QT_VERSION_CHECK(0, 103, 3)){
+        cntFreshSafeBrowsing->hide();
+        cntFreshSafeBrowsing->setVersion_parameter(false);
+    }else{
+        cntFreshSafeBrowsing->show();
+        cntFreshSafeBrowsing->setVersion_parameter(false);
     }
 }
 
@@ -1006,8 +1013,9 @@ void ConfigureDialog::clamd_netsock_tab_init(){
     cntTCPAddr = new StringListWidgetPlug("TCPAddr",
                         tr("STRING<br />"
                         "By default clamd binds to INADDR_ANY.<br />"
-                        "This option allows you to restrict the TCP address and provide some degree of protection from the outside world. This option can be specified multiple times in order to listen on multiple IPs. IPv6 is now supported.<br />"
-                        "Default: disable"));
+                        "This option allows you to restrict the TCP address and provide<br />"
+                        "some degree of protection from the outside world."
+                        "Default: localhost"));
     tabNetSockScrollAreaWidgetVBox->addWidget(cntTCPAddr);
 
     //MaxConnectionQueueLength
@@ -1484,8 +1492,8 @@ void ConfigureDialog::clamd_scanning_tab_init(){
     cntBytecodeTimeout = new SpinBoxPlug("BytecodeTimeout",
                         tr("NUMBER<br />"
                            "Set bytecode timeout in milliseconds.<br />"
-                           "Default: 5000"),
-                        0, 2147483647, 5000);
+                           "Default: 10000"),
+                        0, 2147483647, 10000);
     tabScanningScrollAreaWidgetVBox->addWidget(cntBytecodeTimeout);
 
     //BytecodeUnsigned
@@ -1720,7 +1728,8 @@ void ConfigureDialog::clamd_alerts_tab_init(){
     //AlertBrokenExecutables
     cntAlertBrokenExecutables = new CheckBoxPlug("AlertBrokenExecutables",
                         tr("BOOL<br />"
-                           "Alert on broken executable files (PE & ELF).<br />"
+                           "With this option enabled clamav will try to detect broken executables<br />"
+                           "(PE, ELF, & Mach-O) and alert on them with a Broken.Executable heuristic signature.<br />"
                            "Default: no"), false);
     tabAlertsScrollAreaWidgetVBox->addWidget(cntAlertBrokenExecutables);
 
@@ -2387,9 +2396,12 @@ void ConfigureDialog::freshclam_connect_tab_init(){
     //FreshDNSDatabaseInfo
     cntFreshDNSDatabaseInfo = new LineEditPlug("DNSDatabaseInfo",
                         tr("STRING<br />"
-                           "Use DNS to verify the virus database version. Freshclam uses DNS TXT records to verify the versions of the database and software itself. With this directive you can change the database verification domain.<br />"
-                           "WARNING: Please don't change it unless you're configuring freshclam to use your own database verification domain.<br />"
-                           "Default: enabled, pointing to current.cvd.clamav.net"), "");
+                           "Use DNS to verify the virus database version. FreshClam uses DNS TXT records<br />"
+                           "to verify the versions of the database and software itself. With this<br />"
+                           "directive you can change the database verification domain.<br />"
+                           "WARNING: Please don't change it unless you're configuring freshclam to use<br />"
+                           "your own database verification domain."
+                           "Default: enabled, pointing to current.cvd.clamav.net"), "current.cvd.clamav.net");
     tabFreshConnectScrollAreaWidgetVBox->addWidget(cntFreshDNSDatabaseInfo);
 
     //FreshDatabaseMirror
@@ -2443,8 +2455,10 @@ void ConfigureDialog::freshclam_databases_tab_init(){
     //FreshTestDatabases
     cntFreshTestDatabases = new CheckBoxPlug("TestDatabases",
                         tr("BOOL<br />"
-                           "With this option enabled, freshclam will attempt to load new databases into memory to make sure they are properly handled by libclamav before replacing the old ones.<br />"
-                           "Default: enabled"), false);
+                           "With this option enabled, freshclam will attempt to load new<br />"
+                           "databases into memory to make sure they are properly handled<br />"
+                           "by libclamav before replacing the old ones. Tip: This feature uses a lot of RAM. If your system has limited RAM and you are actively running ClamD or ClamScan during the update, then you may need to set `TestDatabases no`."
+                           "Default: enabled"), true);
     tabFreshDatabasesScrollAreaWidgetVBox->addWidget(cntFreshTestDatabases);
 
     //FreshCompressLocalDatabase
@@ -2560,7 +2574,7 @@ void ConfigureDialog::freshclam_misc_tab_init(){
     //FreshOnUpdateExecute
     cntFreshOnUpdateExecute = new LineEditPlug("OnUpdateExecute",
                         tr("STRING<br />"
-                           "Execute this command after the database has been successfully updated.<br />"
+                           "Run a command after a successful database update. Use EXIT_1 to return 1 after successful database update.<br />"
                            "Default: disabled"), "");
     tabFreshMiscScrollAreaWidgetVBox->addWidget(cntFreshOnUpdateExecute);
 
@@ -2602,7 +2616,7 @@ void ConfigureDialog::freshclam_misc_tab_init(){
     //FreshSafeBrowsing
     cntFreshSafeBrowsing = new CheckBoxPlug("SafeBrowsing",
                         tr("BOOL<br />"
-                           "This option enables support for Google Safe Browsing. When activated for the first time, freshclam will download a new database file (safebrowsing.cvd) which will be automatically loaded by clamd and clamscan during the next reload, provided that the heuristic phishing detection is turned on. This database includes information about websites that may be phishing sites or possible sources of malware. When using this option, it's mandatory to run freshclam at least every 30 minutes. Freshclam uses the ClamAV's mirror infrastructure to distribute the database and its updates but all the contents are provided under Google's terms of use. See https://support.google.com/code/answer/70015 and https://www.clamav.net/documents/safebrowsing for more information.<br />"
+                           "Deprecated option to download signatures derived from the Google Safe Browsing API. See https://blog.clamav.net/2020/06/the-future-of-clamav-safebrowsing.html for more details."
                            "Default: no"), false);
     tabFreshMiscScrollAreaWidgetVBox->addWidget(cntFreshSafeBrowsing);
 

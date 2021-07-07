@@ -140,7 +140,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow(){
     delete ui;
-    //dlclose(handle);
 }
 
 void MainWindow::allHide(){
@@ -1398,6 +1397,354 @@ void MainWindow::allShow(){
         scanDialog->setVisible(true);
 }
 
+void MainWindow::on_pushButtonTest_clicked(){
+    QMainWindow *qmw = new QMainWindow();
+    qmw->show();
+    qmw->setWindowIcon(QIcon("://images/main_icon_grey.png"));
+    qmw->setWindowTitle("Clam One");
+    qmw->setGeometry(0, 0, 640, 480);
+    qmw->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, qmw->size(), qApp->primaryScreen()->availableGeometry()));
+    qDebug() << qmw->geometry();
+    QWidget *centralWidget = new QWidget();
+    qmw->setCentralWidget(centralWidget);
+    QVBoxLayout *qvbl = new QVBoxLayout();
+    centralWidget->setLayout(qvbl);
+
+    QHBoxLayout *horizontalLayoutTop = new QHBoxLayout();
+    horizontalLayoutTop->setSpacing(0);
+    QHBoxLayout *horizontalLayoutMiddle = new QHBoxLayout();
+    horizontalLayoutMiddle->setSpacing(0);
+    QHBoxLayout *horizontalLayoutBottom = new QHBoxLayout();
+    horizontalLayoutBottom->setSpacing(0);
+
+    qvbl->addLayout(horizontalLayoutTop);
+    qvbl->addLayout(horizontalLayoutMiddle);
+    qvbl->addLayout(horizontalLayoutBottom);
+
+    QLabel *labelTL = new QLabel("Clam One");
+    labelTL->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    labelTL->setMinimumWidth(180);
+    labelTL->setMaximumHeight(45);
+    QFont fontLabel = labelTL->font();
+    fontLabel.setPointSize(20);
+    fontLabel.setBold(true);
+    fontLabel.setUnderline(true);
+    labelTL->setFont(fontLabel);
+    labelTL->setStyleSheet("background-color: #999999; color: #4A4A4A;");
+    labelTL->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    QLabel *labelTM = new QLabel();
+    labelTM->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    labelTM->setStyleSheet("background-color: #999999;");
+    labelTM->setScaledContents(true);
+
+    QLabel *labelTR = new QLabel();
+    labelTR->setMaximumHeight(45);
+    labelTR->setStyleSheet("background-color: #999999;");
+    labelTR->setPixmap(QPixmap("://images/banner_topr.png"));
+
+    horizontalLayoutTop->addWidget(labelTL);
+    horizontalLayoutTop->addWidget(labelTM);
+    horizontalLayoutTop->addWidget(labelTR);
+
+    QListWidget *listWidget = new QListWidget();
+    listWidget->setMinimumWidth(137);
+    listWidget->setMaximumWidth(137);
+    listWidget->setStyleSheet("background-color: #ffffff; color: #4A4A4A;");
+    QStackedWidget *stackedWidget = new QStackedWidget();
+    stackedWidget->setStyleSheet("background-color:#f0f0f0");
+
+    horizontalLayoutMiddle->addWidget(listWidget);
+    horizontalLayoutMiddle->addWidget(stackedWidget);
+
+    QLabel *labelBL = new QLabel("Complete<br />Antivirus Solution");
+    labelBL->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    labelBL->setMinimumWidth(180);
+    labelBL->setMaximumHeight(45);
+    fontLabel = labelBL->font();
+    fontLabel.setPointSize(12);
+    fontLabel.setBold(true);
+    labelBL->setFont(fontLabel);
+    labelBL->setStyleSheet("background-color: #ababab; color: #4A4A4A;");
+    labelBL->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    QLabel *labelBM = new QLabel();
+    labelBM->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    labelBM->setStyleSheet("background-color: #ababab;");
+    labelBM->setScaledContents(true);
+
+    QLabel *labelBR = new QLabel();
+    labelBR->setMaximumHeight(45);
+    labelBR->setStyleSheet("background-color: #ababab;");
+    labelBR->setPixmap(QPixmap("://images/banner_bottomr.png"));
+
+    horizontalLayoutBottom->addWidget(labelBL);
+    horizontalLayoutBottom->addWidget(labelBM);
+    horizontalLayoutBottom->addWidget(labelBR);
+
+    new QListWidgetItem(QIcon("://images/icon_scan.png"), "Scanning", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_time.png"), "Schedule", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_status_grey.png"), "Status", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_quarantine.png"), "Quarantine", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_log.png"), "Event Logs", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_console.png"), "Messages", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_update.png"), "Update", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_stats.png"), "Graphs", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_setup.png"), "Configure", listWidget);
+    new QListWidgetItem(QIcon("://images/icon_help.png"), "Help", listWidget);
+
+    QWidget *widgetStackedScan = new QWidget();
+    stackedWidget->addWidget(widgetStackedScan);
+    QWidget *widgetStackedSchedule = new QWidget();
+    stackedWidget->addWidget(widgetStackedSchedule);
+    QWidget *widgetStackedStatus = new QWidget();
+    stackedWidget->addWidget(widgetStackedStatus);
+    QWidget *widgetStackedQuarantine = new QWidget();
+    stackedWidget->addWidget(widgetStackedQuarantine);
+    QWidget *widgetStackedLogs = new QWidget();
+    stackedWidget->addWidget(widgetStackedLogs);
+    QWidget *widgetStackedMessages = new QWidget();
+    stackedWidget->addWidget(widgetStackedMessages);
+    QWidget *widgetStackedUpdate = new QWidget();
+    stackedWidget->addWidget(widgetStackedUpdate);
+    QWidget *widgetStackedGraphs = new QWidget();
+    stackedWidget->addWidget(widgetStackedGraphs);
+    QWidget *widgetStackedConfigure = new QWidget();
+    stackedWidget->addWidget(widgetStackedConfigure);
+    QWidget *widgetStackedHelp = new QWidget();
+    stackedWidget->addWidget(widgetStackedHelp);
+
+    QVBoxLayout *layoutStack01 = new QVBoxLayout();
+    widgetStackedScan->setLayout(layoutStack01);
+    {
+        QLabel *labelScanTitle = new QLabel("Scan Local Hard Drives");
+        layoutStack01->addWidget(labelScanTitle);
+        fontLabel = labelScanTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelScanTitle->setFont(fontLabel);
+        QFrame *frameScan = new QFrame();
+        layoutStack01->addWidget(frameScan);
+        frameScan->setStyleSheet("background-color: #b6b6b6;");
+        frameScan->setFrameShape(QFrame::WinPanel);
+        frameScan->setFrameShadow(QFrame::Plain);
+        frameScan->setLineWidth(3);
+        frameScan->setMidLineWidth(1);
+        QGridLayout *scanGridLayout = new QGridLayout();
+        frameScan->setLayout(scanGridLayout);
+        layoutStack01->addStretch();
+        QLabel *labelPointerQuickScan = new QLabel();
+        QLabel *labelScanQuickScan = new QLabel("<a href=\"QuickScan\">Quick Scan</a>");
+        QLabel *labelPointerDeepScan = new QLabel();
+        QLabel *labelScanDeepScan = new QLabel("<a href=\"DeepScan\">Deep Scan</a>");
+        labelPointerQuickScan->setPixmap(QPixmap("://images/icon_marker.png"));
+        labelPointerQuickScan->setMaximumSize(QSize(20, 20));
+        labelPointerQuickScan->setScaledContents(true);
+        labelPointerDeepScan->setPixmap(QPixmap("://images/icon_marker.png"));
+        labelPointerDeepScan->setMaximumSize(QSize(20, 20));
+        labelPointerDeepScan->setScaledContents(true);
+        scanGridLayout->addWidget(labelPointerQuickScan, 0, 0);
+        scanGridLayout->addWidget(labelScanQuickScan, 0, 1);
+        scanGridLayout->addWidget(labelPointerDeepScan, 1, 0);
+        scanGridLayout->addWidget(labelScanDeepScan, 1, 1);
+    }
+
+    QVBoxLayout *layoutStack02 = new QVBoxLayout();
+    widgetStackedSchedule->setLayout(layoutStack02);
+    {
+        QLabel *labelScheduleTitle = new QLabel("Schedule");
+        fontLabel = labelScheduleTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelScheduleTitle->setFont(fontLabel);
+        layoutStack02->addWidget(labelScheduleTitle);
+        QListWidget *listWidgetSchedule = new QListWidget();
+        layoutStack02->addWidget(listWidgetSchedule);
+        QHBoxLayout *scheduleHlayout = new QHBoxLayout();
+        layoutStack02->addLayout(scheduleHlayout);
+        scheduleHlayout->addStretch();
+        QPushButton *pushButtonSchedule = new QPushButton("Add New");
+        pushButtonSchedule->setFocusPolicy(Qt::NoFocus);
+        scheduleHlayout->addWidget(pushButtonSchedule);
+    }
+
+    QVBoxLayout *layoutStack03 = new QVBoxLayout();
+    widgetStackedStatus->setLayout(layoutStack03);
+    {
+        QLabel *labelStatusTitle = new QLabel("ClamAV Status");
+        fontLabel = labelStatusTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelStatusTitle->setFont(fontLabel);
+        layoutStack03->addWidget(labelStatusTitle);
+        QFrame *frameStatus = new QFrame();
+        frameStatus->setStyleSheet("background-color: #b6b6b6;");
+        frameStatus->setFrameShape(QFrame::WinPanel);
+        frameStatus->setFrameShadow(QFrame::Plain);
+        frameStatus->setLineWidth(3);
+        frameStatus->setMidLineWidth(1);
+        layoutStack03->addWidget(frameStatus);
+        QVBoxLayout *statusVBoxMain = new QVBoxLayout();
+        frameStatus->setLayout(statusVBoxMain);
+        QLabel *labelStatusProtectionState = new QLabel("Protection State");
+        statusVBoxMain->addWidget(labelStatusProtectionState);
+        QLabel *labelStatusProtectionStateDetails = new QLabel("Protection State Details");
+        statusVBoxMain->addWidget(labelStatusProtectionStateDetails);
+        QFrame *hline1 = new QFrame();
+        hline1->setFrameShape(QFrame::HLine);
+        statusVBoxMain->addWidget(hline1);
+
+        QHBoxLayout *statusHBox1 = new QHBoxLayout();
+        statusVBoxMain->addLayout(statusHBox1);
+        QLabel *labelStatusEnabledItem1Icon = new QLabel();
+        labelStatusEnabledItem1Icon->setPixmap(QPixmap("://images/ques_16.png"));
+        statusHBox1->addWidget(labelStatusEnabledItem1Icon);
+        QLabel *labelStatusEnabledItem1 = new QLabel("Antivirus Engine");
+        statusHBox1->addWidget(labelStatusEnabledItem1);
+        statusHBox1->addStretch();
+
+        QHBoxLayout *statusHBox2 = new QHBoxLayout();
+        statusVBoxMain->addLayout(statusHBox2);
+        QLabel *labelStatusEnabledItem2Icon = new QLabel();
+        labelStatusEnabledItem2Icon->setPixmap(QPixmap("://images/ques_16.png"));
+        statusHBox2->addWidget(labelStatusEnabledItem2Icon);
+        QLabel *labelStatusEnabledItem2 = new QLabel("Antivirus Updater");
+        statusHBox2->addWidget(labelStatusEnabledItem2);
+        statusHBox2->addStretch();
+
+        QHBoxLayout *statusHBox3 = new QHBoxLayout();
+        statusVBoxMain->addLayout(statusHBox3);
+        QLabel *labelStatusEnabledItem3Icon = new QLabel();
+        labelStatusEnabledItem3Icon->setPixmap(QPixmap("://images/ques_16.png"));
+        statusHBox3->addWidget(labelStatusEnabledItem3Icon);
+        QLabel *labelStatusEnabledItem3 = new QLabel("OnAccess");
+        statusHBox3->addWidget(labelStatusEnabledItem3);
+        statusHBox3->addStretch();
+
+        QHBoxLayout *statusHBox4 = new QHBoxLayout();
+        statusVBoxMain->addLayout(statusHBox4);
+        QLabel *labelStatusEnabledItem4Icon = new QLabel();
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap("://images/ques_16.png"));
+        statusHBox4->addWidget(labelStatusEnabledItem4Icon);
+        QLabel *labelStatusEnabledItem4 = new QLabel("Antivirus Updater");
+        statusHBox4->addWidget(labelStatusEnabledItem4);
+        statusHBox4->addStretch();
+
+        QFrame *hline2 = new QFrame();
+        hline2->setFrameShape(QFrame::HLine);
+        statusVBoxMain->addWidget(hline2);
+
+        QHBoxLayout *statusHBox5 = new QHBoxLayout();
+        statusVBoxMain->addLayout(statusHBox5);
+        QLabel *labelNumBlockedAttacksName = new QLabel("New Events Detected:");
+        statusHBox5->addWidget(labelNumBlockedAttacksName);
+        QLabel *labelNumBlockedAttacksVal = new QLabel("0");
+        labelNumBlockedAttacksVal->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+        statusHBox5->addWidget(labelNumBlockedAttacksVal);
+
+        layoutStack03->addStretch();
+    }
+
+    QVBoxLayout *layoutStack04 = new QVBoxLayout();
+    widgetStackedQuarantine->setLayout(layoutStack04);
+    {
+      QLabel *labelQuarantineTitle = new QLabel("Quarantined Files");
+      fontLabel = labelQuarantineTitle->font();
+      fontLabel.setPointSize(20);
+      fontLabel.setBold(true);
+      labelQuarantineTitle->setFont(fontLabel);
+      layoutStack04->addWidget(labelQuarantineTitle);
+      QLabel *labelQuarantineSubTitle = new QLabel();
+      labelQuarantineSubTitle->setText(
+            "<html><head/><body><p>This is the area that contains files that are quarantined, "
+            "it can be potential malware detected by ClamAV but rendered &quot;non-active&quot;. "
+            "If you are sure you want to delete any quarantined file, you can permently delete it "
+            "from here.</p><p>Large files may take a long time to quarantine, unquarantine, and may "
+            "cause long load times of Clam One.</p></body></html>");
+      labelQuarantineSubTitle->setWordWrap(true);
+      layoutStack04->addWidget(labelQuarantineSubTitle);
+      QTableWidget *tableQuarantine = new QTableWidget();
+      layoutStack04->addWidget(tableQuarantine);
+      tableQuarantine->setColumnCount(4);
+      tableQuarantine->setHorizontalHeaderLabels(QStringList() << "File Name" << "Date/Time" << "File Size" << "Quarantine Name");
+      tableQuarantine->setStyleSheet("background-color: #ffffff;");
+      tableQuarantine->setAlternatingRowColors(true);
+      tableQuarantine->setSelectionMode(QAbstractItemView::SingleSelection);
+      tableQuarantine->setSelectionBehavior(QAbstractItemView::SelectRows);
+      tableQuarantine->setTextElideMode(Qt::ElideNone);
+      tableQuarantine->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+      tableQuarantine->horizontalHeader()->setDefaultSectionSize(150);
+      tableQuarantine->horizontalHeader()->setStretchLastSection(true);
+      QHBoxLayout *quarantineHBox1 = new QHBoxLayout();
+      layoutStack04->addLayout(quarantineHBox1);
+      quarantineHBox1->addStretch();
+      QPushButton *pushButtonQuarantineUnQuarantine = new QPushButton("UnQuarantine File");
+      pushButtonQuarantineUnQuarantine->setFocusPolicy(Qt::NoFocus);
+      quarantineHBox1->addWidget(pushButtonQuarantineUnQuarantine);
+      QPushButton *pushButtonQuarantineDelete = new QPushButton("Permanently Delete File");
+      pushButtonQuarantineDelete->setFocusPolicy(Qt::NoFocus);
+      quarantineHBox1->addWidget(pushButtonQuarantineDelete);
+    }
+    QVBoxLayout *layoutStack05 = new QVBoxLayout();
+    widgetStackedLogs->setLayout(layoutStack05);
+    layoutStack05->addWidget(new QLabel("Five"));
+    QVBoxLayout *layoutStack06 = new QVBoxLayout();
+    widgetStackedMessages->setLayout(layoutStack06);
+    layoutStack06->addWidget(new QLabel("Six"));
+    QVBoxLayout *layoutStack07 = new QVBoxLayout();
+    widgetStackedUpdate->setLayout(layoutStack07);
+    layoutStack07->addWidget(new QLabel("Seven"));
+    QVBoxLayout *layoutStack08 = new QVBoxLayout();
+    widgetStackedGraphs->setLayout(layoutStack08);
+    layoutStack08->addWidget(new QLabel("Eight"));
+    QVBoxLayout *layoutStack09 = new QVBoxLayout();
+    widgetStackedConfigure->setLayout(layoutStack09);
+    layoutStack09->addWidget(new QLabel("Nine"));
+    QVBoxLayout *layoutStack10 = new QVBoxLayout();
+    widgetStackedHelp->setLayout(layoutStack10);
+    layoutStack10->addWidget(new QLabel("Ten"));
+
+    connect(listWidget, &QListWidget::currentRowChanged, stackedWidget, &QStackedWidget::setCurrentIndex);
+    listWidget->setCurrentRow(0);
+
+    /*QNetworkAccessManager *http = new QNetworkAccessManager();
+    QNetworkRequest req;
+    QTimer requestTimer;
+
+    requestTimer.setSingleShot(true);
+    req.setUrl(QUrl("https://www.snort.org/downloads"));
+    req.setRawHeader("User-Agent", "SnortVersion/0.1.0");
+
+    http->get(req);
+    requestTimer.start(1);
+
+    connect(&requestTimer, &QTimer::timeout, [=](){
+        http->disconnect();
+        http->deleteLater();
+    });
+    connect(http, &QNetworkAccessManager::finished, [=](QNetworkReply *reply) mutable{
+        QString str = reply->readAll();
+
+        QRegularExpression re("^.*(snort-[0-9.]+\\.tar\\.gz).*$");
+        re.setPatternOptions(QRegularExpression::MultilineOption);
+        QRegularExpressionMatch match = re.match(str);
+        if(match.hasMatch()){
+            QString matched = match.captured(1);
+            qDebug() << matched;
+            re.setPattern("^.*snort-([0-9.]+)\\.tar\\.gz.*$");
+            match = re.match(matched);
+            if(match.hasMatch()){
+                matched = match.captured(1);
+                qDebug() << matched;
+            }
+        }else{
+            qDebug() << re.pattern();
+            qDebug() << "Has No Match.";
+        }
+        http->deleteLater();
+    });//*/
+}
+
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason){
     switch (reason) {
     case QSystemTrayIcon::Trigger:
@@ -2358,12 +2705,16 @@ QString MainWindow::getClamdUpdateLogFileName(){
 QString MainWindow::getClamdDatabaseDirectoryName(){
     QRegularExpression re;
     QString ddVar = "";
-    QFile file(getValDB("clamdconf"));
-    if(!file.exists())
+    QString clamdconf_file_loc = getValDB("clamdconf");
+    QFile file(clamdconf_file_loc);
+    if(!file.exists()){
+        errorMsg(clamdconf_file_loc+tr(" clamd.conf doesnt exist"));
         return QString();
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    }
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        errorMsg(clamdconf_file_loc+tr(" clamd.conf is not readable"));
         return QString();
+    }
 
     while(!file.atEnd()){
         QByteArray line = file.readLine();
@@ -2539,7 +2890,6 @@ bool MainWindow::checkDefsHeaderDaily(){
     dailyDefHeader.user_name = "";
     dailyDefHeader.timestamp = 0;
     QString ddname = getClamdDatabaseDirectoryName();
-
     QFile file(ddname+"/daily.cld");
     if(!file.exists()){
         file.setFileName(ddname+"/daily.cvd");

@@ -18,6 +18,8 @@
 #include <QQueue>
 #include <QDateTime>
 #include <QBuffer>
+#include <QStyle>
+#include <QScreen>
 #include <QBarSeries>
 #include <QBarSet>
 #include <QBarCategoryAxis>
@@ -32,6 +34,8 @@
 #include <QSqlRecord>
 
 #include <QDnsLookup>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 //for std::experimental::filesystem::is_socket
 #include <experimental/filesystem>
@@ -102,6 +106,8 @@ class MainWindow : public QMainWindow
     };
 
 private slots:
+    void on_pushButtonTest_clicked();
+
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void allHide();
     void allShow();
