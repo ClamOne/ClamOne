@@ -11,7 +11,7 @@ QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = ClamOne
+TARGET = ClamOne.run
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -31,6 +31,7 @@ SOURCES += \
     CheckBoxPlug.cpp \
     ComboBoxPlug.cpp \
     ConfigureDialog.cpp \
+    FileDialogPlug.cpp \
     LineEditPlug.cpp \
     ListSpinBoxWidgetPlug.cpp \
     MainWindow.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     CheckBoxPlug.h \
     ComboBoxPlug.h \
     ConfigureDialog.h \
+    FileDialogPlug.h \
     LineEditPlug.h \
     ListSpinBoxWidgetPlug.h \
     MainWindow.h \
@@ -68,21 +70,17 @@ HEADERS += \
 
 FORMS += \
     AboutDialog.ui \
-    MainWindow.ui \
     ScanDialog.ui \
     ListerQuarantine.ui
+    #MainWindow.ui \
 
 RESOURCES += \
     mainwindow.qrc \
     qstringlistwidget.qrc \
-    translations.qrc \
+#    translations.qrc \
     qlistspinboxwidget.qrc
 
-TRANSLATIONS += \
-    translations/co_de.ts \
-    translations/co_fr.ts \
-    translations/co_ko.ts \
-    translations/co_es.ts
+#TRANSLATIONS += 
 
 unix:{
     LIBS += -lstdc++fs -lz

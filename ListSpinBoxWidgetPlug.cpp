@@ -28,7 +28,7 @@ QCheckBox *ListSpinBoxWidgetPlug::getEckbox() const{
     return eckbox;
 }
 
-QListSpinBoxWidget *ListSpinBoxWidgetPlug::getStringListWidget() const
+QListSpinBoxWidget *ListSpinBoxWidgetPlug::getListSpinBoxWidget() const
 {
     return listSpinBox;
 }

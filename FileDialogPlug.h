@@ -1,5 +1,5 @@
-#ifndef LineEditPlug_H
-#define LineEditPlug_H
+#ifndef FileDialogPlug_H
+#define FileDialogPlug_H
 
 #include <QObject>
 #include <QWidget>
@@ -8,17 +8,20 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
+#include <QFileDialog>
 #include <QRegularExpression>
 #include <QDebug>
 #include "confs.h"
 
-class LineEditPlug: public QWidget
+class FileDialogPlug: public QWidget
 {
 Q_OBJECT
 
 public:
-    LineEditPlug(QString name, QString tooltip, QString defaultText);
-    ~LineEditPlug();
+    FileDialogPlug(QString name, QString tooltip, QString defaultText, QString fileTypesFilter,
+                   QFileDialog::Options options = QFileDialog::ShowDirsOnly);
+    ~FileDialogPlug();
     QCheckBox *getEckbox() const;
     QLabel *getLabel() const;
     QLineEdit *getLineEdit() const;
@@ -32,7 +35,8 @@ private:
     QLabel *lab;
     QCheckBox *eckbox;
     QLineEdit *lineEdit;
+    QPushButton *pushButton;
     bool version_parameter = true;
 };
 
-#endif // LineEditPlug_H
+#endif // FileDialogPlug_H

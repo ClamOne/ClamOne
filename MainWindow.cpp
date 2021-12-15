@@ -1,19 +1,18 @@
 #include "MainWindow.h"
-#include "ui_MainWindow.h"
+//#include "ui_MainWindow.h"
 
 QT_CHARTS_USE_NAMESPACE
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    QMainWindow(parent)
 {
-    ui->setupUi(this);
+    InitializeMainWindow();
 
-#if QT_VERSION < 0x050a00
+    //snort --version 2>&1 | grep '~' | sed 's/^.*\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\).*$/\1/'
+
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
     qsrand(time(NULL));
 #endif
-    QByteArray clamdscan_ver;
-
     scanAction = new QAction(tr("&Scan..."), this);
     connect(scanAction, &QAction::triggered, this, &MainWindow::scanShow);
     statusAction = new QAction(tr("&Status..."), this);
@@ -40,13 +39,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     statusSetGrey();
     trayIcon->setToolTip(windowTitle());
-
     setupDb();
     addExistingEvents();
     markClamOneStarted();
     loadScheduleFromDb();
 
-    ui->tableWidgetEventGeneral->setColumnWidth(0, 160);
+    tableWidgetEventGeneral->setColumnWidth(0, 160);
 
     intEventGeneralPageNumber = 0;
     initializeEventsGeneralTableWidget(0);
@@ -67,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
     scanDialog = new ScanDialog();
     listerQuarantine = new ListerQuarantine();
     setEnabledQuarantine(getValDB("enablequarantine")=="yes");
+    setEnabledSnort(getValDB("enablesnort")=="yes");
+    setEnabledOnAccess(getValDB("monitoronaccess")=="yes");
 
     localSocket = new QLocalSocket(this);
     localSocketFilename = getClamdLocalSocketname();
@@ -77,14 +77,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timerSchedule, &QTimer::timeout, this, &MainWindow::ckScheduledScans);
     onNextCycle = false;
     quarantineDirectoryWatcher = new QFileSystemWatcher();
+    manager = new QNetworkAccessManager();
     refreshQuarantineDirectory();
     updateQuarantineDirectoryUi("");
 
     connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::iconActivated);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, ui->stackedWidget, &QStackedWidget::setCurrentIndex);
-    connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, &MainWindow::stackedWidgetChanged);
-    connect(ui->comboBoxGraphsSubTitleSelector, QOverload<int>::of(&QComboBox::activated), ui->stackedWidgetGraphs, &QStackedWidget::setCurrentIndex);
-    connect(ui->comboBoxLog, QOverload<int>::of(&QComboBox::activated), ui->stackedWidgetEvents, &QStackedWidget::setCurrentIndex);
+    connect(listWidget, &QListWidget::currentRowChanged, stackedWidget, &QStackedWidget::setCurrentIndex);
+    connect(stackedWidget, &QStackedWidget::currentChanged, this, &MainWindow::stackedWidgetChanged);
+    connect(comboBoxLog, QOverload<int>::of(&QComboBox::activated), stackedWidgetEvents, &QStackedWidget::setCurrentIndex);
     connect(config, &ConfigureDialog::setValDB, this, &MainWindow::setValDB);
     connect(config, &ConfigureDialog::refreshEventGeneral, this, &MainWindow::initializeEventsGeneralTableWidget);
     connect(config, &ConfigureDialog::refreshEventFound, this, &MainWindow::initializeEventsFoundTableWidget);
@@ -92,6 +92,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(config, &ConfigureDialog::refreshMessages, this, &MainWindow::initializeMessagesTableWidget);
     connect(config, &ConfigureDialog::refreshQuarantineDirectory, this, &MainWindow::refreshQuarantineDirectory);
     connect(config, &ConfigureDialog::setEnabledQuarantine, this, &MainWindow::setEnabledQuarantine);
+    connect(config, &ConfigureDialog::setEnabledSnort, this, &MainWindow::setEnabledSnort);
+    connect(config, &ConfigureDialog::setEnabledMonitorOnAccess, this, &MainWindow::setEnabledOnAccess);
     connect(this, &MainWindow::addExclusionClamdconf, config, &ConfigureDialog::addExclusionClamdconf);
     connect(scanDialog, &ScanDialog::parseClamdscanLine, this, &MainWindow::parseClamdscanLine);
     connect(scanDialog, &ScanDialog::initScanProcess, this, &MainWindow::initScanProcess);
@@ -101,8 +103,24 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(listerQuarantine, &ListerQuarantine::yesClicked, this, &MainWindow::ListerQuarantineYesClicked);
     connect(listerQuarantine, &ListerQuarantine::noClicked, this, &MainWindow::ListerQuarantineNoClicked);
     connect(this, &MainWindow::initializeFreelanceScan, scanDialog, &ScanDialog::initializeFreelanceScan);
+    connect(comboBoxGraphsSubTitleSelector, QOverload<int>::of(&QComboBox::activated), [=](int indexComboBox){
+        QList<quint8> mapper;
+        if(getValDB("enablequarantine") == "yes" && getValDB("enablesnort") == "yes"){
+            mapper = QList<quint8>({0,1,2,3});
+        }else if(getValDB("enablequarantine") == "yes" && getValDB("enablesnort") != "yes"){
+            mapper = QList<quint8>({0,1,2});
+        }else if(getValDB("enablequarantine") != "yes" && getValDB("enablesnort") == "yes"){
+            mapper = QList<quint8>({0,1,3});
+        }else{
+            mapper = QList<quint8>({0,1});
+        }
+        stackedWidgetGraphs->setCurrentIndex(mapper.at(indexComboBox));
+    });
 
+    dnsSuccess = false;
     cDns.last_lookup_timestamp = 0;
+    snort_local_version_last_lookup_timestamp = 0;
+    snort_local_rules_last_lookup_timestamp = 0;
 
     if(!getClamdLogFileName().isEmpty())
         lastTimestampClamdLogFile = (QFileInfo(getClamdLogFileName()).lastModified().toMSecsSinceEpoch()/1000);
@@ -121,25 +139,22 @@ MainWindow::MainWindow(QWidget *parent) :
     for(int i = 0; i < qMax(QThread::idealThreadCount(),1); i++)
         threads_list.append(new QThread(this));
 
-
     QTimer::singleShot(100, [=]() {
         initializeDateTimeLineGraphWidget(1);
         initializeDateTimeLineGraphWidget(2);
         initializeDateTimeLineGraphWidget(3);
+        initializeDateTimeLineGraphWidget(4);
     });
 
-    QLabel *imageLabel = new QLabel;
-    QImage image(":/images/expl_16.png");
-    imageLabel->setPixmap(QPixmap::fromImage(image));
-
-    QLabel *imageLabel2 = new QLabel;
-    QImage image2(":/images/expl_16.png");
-    imageLabel2->setPixmap(QPixmap::fromImage(image2));
+    snortGetLocalVersion();
+    snortGetLocalTimeModifiy();
+    snortGetRemoteVersions();
+    snortGetRemoteTimeModifiy();
 }
 
 
 MainWindow::~MainWindow(){
-    delete ui;
+
 }
 
 void MainWindow::allHide(){
@@ -151,26 +166,26 @@ void MainWindow::allHide(){
 
 void MainWindow::scanShow(){
     allShow();
-    ui->stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Scan);
-    ui->listWidget->setCurrentRow(ClamOneMainStackOrder::Scan);
+    stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Scan);
+    listWidget->setCurrentRow(ClamOneMainStackOrder::Scan);
 }
 
 void MainWindow::statusShow(){
     allShow();
-    ui->stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Status);
-    ui->listWidget->setCurrentRow(ClamOneMainStackOrder::Status);
+    stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Status);
+    listWidget->setCurrentRow(ClamOneMainStackOrder::Status);
 }
 
 void MainWindow::historyShow(){
     allShow();
-    ui->stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Log);
-    ui->listWidget->setCurrentRow(ClamOneMainStackOrder::Log);
+    stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Log);
+    listWidget->setCurrentRow(ClamOneMainStackOrder::Log);
 }
 
 void MainWindow::updateShow(){
     allShow();
-    ui->stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Update);
-    ui->listWidget->setCurrentRow(ClamOneMainStackOrder::Update);
+    stackedWidget->setCurrentIndex(ClamOneMainStackOrder::Update);
+    listWidget->setCurrentRow(ClamOneMainStackOrder::Update);
 }
 
 void MainWindow::aboutLaunch(){
@@ -190,11 +205,16 @@ void MainWindow::configLaunch(){
     config->updateMonitorOnAccess(getValDB("monitoronaccess")=="yes");
     config->updateEntriesPerPage(getValDB("entriesperpage"));
     config->updateEnableQuarantine(getValDB("enablequarantine")=="yes");
+    config->updateEnableSnort(getValDB("enablesnort")=="yes");
     config->updateMaximumQuarantineFileSize(getValDB("maxquarantinesize").toInt());
     config->updateLocationQuarantineFileDirectory(getValDB("quarantinefilesdirectory"));
+    config->updateLocationSnortRules(getValDB("snortconf"));
+    config->updateSnortOinkcode(getValDB("oinkcode"));
 }
 
 bool MainWindow::find_file(QByteArray *filepath, QString name){
+    if(!(*filepath).isEmpty() && QFileInfo(*filepath).exists() && QFileInfo(*filepath).baseName() == name)
+        return true;
     QProcess whichClamdProc;
     whichClamdProc.start("which", QStringList({name}));
     whichClamdProc.waitForFinished();
@@ -337,24 +357,12 @@ bool MainWindow::setupDb(){
 
     QString res = getValDB("clamdconf");
     if(res.isEmpty()){
-        setValDB("clamdconf",
-#ifndef _WIN32
-        "/etc/clamav/clamd.conf"
-#else
-        "C:\\ClamAV\\clamd.conf"
-#endif
-        );
+        setValDB("clamdconf", "/etc/clamav/clamd.conf");
     }
 
     res = getValDB("freshclamconf");
     if(res.isEmpty()){
-        setValDB("freshclamconf",
-#ifndef _WIN32
-        "/etc/clamav/freshclam.conf"
-#else
-        "C:\\ClamAV\\freshclam.conf"
-#endif
-        );
+        setValDB("freshclamconf", "/etc/clamav/freshclam.conf");
     }
 
     res = getValDB("monitoronaccess");
@@ -374,7 +382,12 @@ bool MainWindow::setupDb(){
 
     res = getValDB("enablequarantine");
     if(res.isEmpty()){
-        setValDB("enablequarantine", "yes");
+        setValDB("enablequarantine", "no");
+    }
+
+    res = getValDB("enablesnort");
+    if(res.isEmpty()){
+        setValDB("enablesnort", "no");
     }
 
     res = getValDB("maxquarantinesize");
@@ -394,6 +407,11 @@ bool MainWindow::setupDb(){
     QFileInfo qfd(getValDB("quarantinefilesdirectory"));
     if(!qfd.exists())
         QDir().mkpath(qfd.absoluteFilePath());
+
+    res = getValDB("snortconf");
+    if(res.isEmpty()){
+        setValDB("snortconf", "");
+    }
 
     return true;
 }
@@ -464,7 +482,7 @@ void MainWindow::markQuarantineUnQ(QByteArray filename){
 
 void MainWindow::stackedWidgetChanged(int index){
     Q_UNUSED(index)
-    ui->stackedWidget->currentWidget()->setFocus();
+    stackedWidget->currentWidget()->setFocus();
 }
 
 bool MainWindow::addExistingEvents(){
@@ -769,11 +787,11 @@ qint64 MainWindow::initializeEventsGeneralTableWidget(qint64 page){
         num = (qint64)query.value(0).toInt();
         if(num > 0){
             if(entriesperpage*(page+1) > num)
-                ui->labelEventGeneralPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(num)+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelEventGeneralPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(num)+tr(" (")+QString::number(num)+tr(" entries total)"));
             else
-                ui->labelEventGeneralPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(entriesperpage*(page+1))+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelEventGeneralPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(entriesperpage*(page+1))+tr(" (")+QString::number(num)+tr(" entries total)"));
         }else{
-            ui->labelEventGeneralPagePosition->setText(tr("0 - 0 (0 entries total)"));
+            labelEventGeneralPagePosition->setText(tr("0 - 0 (0 entries total)"));
             return 0;
         }
     }
@@ -782,25 +800,25 @@ qint64 MainWindow::initializeEventsGeneralTableWidget(qint64 page){
     query.bindValue(":lim", QString::number(entriesperpage, 10));
     query.bindValue(":of", (page)*entriesperpage);
     query.exec();
-    while(ui->tableWidgetEventGeneral->rowCount())
-        ui->tableWidgetEventGeneral->removeRow(0);
-    ui->tableWidgetEventGeneral->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
+    while(tableWidgetEventGeneral->rowCount())
+        tableWidgetEventGeneral->removeRow(0);
+    tableWidgetEventGeneral->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
 
     while(query.next()){
         QTableWidgetItem *item = new QTableWidgetItem(query.value(1).toString());
         if(query.value(1).toString().length() > width)
             width = query.value(1).toString().length();
 
-        ui->tableWidgetEventGeneral->insertRow(ui->tableWidgetEventGeneral->rowCount());
-        ui->tableWidgetEventGeneral->setItem(ui->tableWidgetEventGeneral->rowCount()-1,0,
+        tableWidgetEventGeneral->insertRow(tableWidgetEventGeneral->rowCount());
+        tableWidgetEventGeneral->setItem(tableWidgetEventGeneral->rowCount()-1,0,
              new QTableWidgetItem(
                  QDateTime::fromMSecsSinceEpoch(((quint64)query.value(0).toInt())*1000).toString("MM/dd/yyyy hh:mm:ss AP")
              ));
-        ui->tableWidgetEventGeneral->setItem(ui->tableWidgetEventGeneral->rowCount()-1,1, item);
+        tableWidgetEventGeneral->setItem(tableWidgetEventGeneral->rowCount()-1,1, item);
     }
-    ui->tableWidgetEventGeneral->resizeColumnToContents(1);
-    ui->tableWidgetEventGeneral->horizontalScrollBar()->setValue(0);
-    ui->tableWidgetEventGeneral->verticalScrollBar()->setValue(0);
+    tableWidgetEventGeneral->resizeColumnToContents(1);
+    tableWidgetEventGeneral->horizontalScrollBar()->setValue(0);
+    tableWidgetEventGeneral->verticalScrollBar()->setValue(0);
     return num;
 }
 
@@ -816,13 +834,13 @@ qint64 MainWindow::initializeMessagesTableWidget(qint64 page){
         num = (qint64)query.value(0).toInt();
         if(num > 0){
             if(entriesperpage*(page+1) > num)
-                ui->labelMessagesPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(num)+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelMessagesPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(num)+tr(" (")+QString::number(num)+tr(" entries total)"));
             else
-                ui->labelMessagesPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(entriesperpage*(page+1))+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelMessagesPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(entriesperpage*(page+1))+tr(" (")+QString::number(num)+tr(" entries total)"));
         }else{
-            ui->labelMessagesPagePosition->setText(tr("0 - 0 (0 entries total)"));
-            while(ui->tableWidgetMessages->rowCount())
-                ui->tableWidgetMessages->removeRow(0);
+            labelMessagesPagePosition->setText(tr("0 - 0 (0 entries total)"));
+            while(tableWidgetMessages->rowCount())
+                tableWidgetMessages->removeRow(0);
             return 0;
         }
     }
@@ -831,21 +849,21 @@ qint64 MainWindow::initializeMessagesTableWidget(qint64 page){
     query.bindValue(":lim", QString::number(entriesperpage, 10));
     query.bindValue(":of", (page)*entriesperpage);
     query.exec();
-    while(ui->tableWidgetMessages->rowCount())
-        ui->tableWidgetMessages->removeRow(0);
-    ui->tableWidgetMessages->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
+    while(tableWidgetMessages->rowCount())
+        tableWidgetMessages->removeRow(0);
+    tableWidgetMessages->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
     while(query.next()){
         QTableWidgetItem *item = new QTableWidgetItem(query.value(1).toString());
         if(query.value(1).toString().length() > width)
             width = query.value(1).toString().length();
-        ui->tableWidgetMessages->insertRow(ui->tableWidgetMessages->rowCount());
-        ui->tableWidgetMessages->setItem(ui->tableWidgetMessages->rowCount()-1,0,new QTableWidgetItem(
+        tableWidgetMessages->insertRow(tableWidgetMessages->rowCount());
+        tableWidgetMessages->setItem(tableWidgetMessages->rowCount()-1,0,new QTableWidgetItem(
             QDateTime::fromMSecsSinceEpoch(((quint64)query.value(0).toInt())*1000).toString("MM/dd/yyyy hh:mm:ss AP")
         ));
-        ui->tableWidgetMessages->setItem(ui->tableWidgetMessages->rowCount()-1,1, item);
+        tableWidgetMessages->setItem(tableWidgetMessages->rowCount()-1,1, item);
     }
-    ui->tableWidgetMessages->horizontalScrollBar()->setValue(0);
-    ui->tableWidgetMessages->verticalScrollBar()->setValue(0);
+    tableWidgetMessages->horizontalScrollBar()->setValue(0);
+    tableWidgetMessages->verticalScrollBar()->setValue(0);
     return num;
 }
 
@@ -861,31 +879,38 @@ void MainWindow::initializeDateTimeLineGraphWidget(int state){
     QChart *chart = new QChart();
     chart->setMinimumHeight(200);
     QColor color;
-
     if(state == 1){
         delta_ts = DELTA_BASE * pow(2., graphs_scaned_xscale);
         ts_range_2 = QDateTime::currentDateTime().toSecsSinceEpoch()-graphs_scaned_xshift;
         ts_range_1 =  ts_range_2 - delta_ts;
-        ui->labelGraphsScanedXYPosition1->setText(QDateTime::fromSecsSinceEpoch(ts_range_1).toString("MMM dd, yyyy h:MM ap"));
-        ui->labelGraphsScanedXYPosition2->setText(QDateTime::fromSecsSinceEpoch(ts_range_2).toString("MMM dd, yyyy h:MM ap"));
-        ui->chartviewScanned->setChart(chart);
+        labelGraphsScanedXYPosition1->setText(QDateTime::fromSecsSinceEpoch(ts_range_1).toString("MMM dd, yyyy h:MM ap"));
+        labelGraphsScanedXYPosition2->setText(QDateTime::fromSecsSinceEpoch(ts_range_2).toString("MMM dd, yyyy h:MM ap"));
+        chartviewScanedFiles->setChart(chart);
         color = QColor::fromRgb(0,0,255);
     }else if(state == 2){
         delta_ts = DELTA_BASE * pow(2., graphs_found_xscale);
         ts_range_2 = QDateTime::currentDateTime().toSecsSinceEpoch()-graphs_found_xshift;
         ts_range_1 =  ts_range_2 - delta_ts;
-        ui->labelGraphsFoundXYPosition1->setText(QDateTime::fromSecsSinceEpoch(ts_range_1).toString("MMM dd, yyyy h:MM ap"));
-        ui->labelGraphsFoundXYPosition2->setText(QDateTime::fromSecsSinceEpoch(ts_range_2).toString("MMM dd, yyyy h:MM ap"));
-        ui->chartviewFound->setChart(chart);
+        labelGraphsFoundXYPosition1->setText(QDateTime::fromSecsSinceEpoch(ts_range_1).toString("MMM dd, yyyy h:MM ap"));
+        labelGraphsFoundXYPosition2->setText(QDateTime::fromSecsSinceEpoch(ts_range_2).toString("MMM dd, yyyy h:MM ap"));
+        chartviewThreatsFound->setChart(chart);
         color = QColor::fromRgb(255,0,0);
     }else if(state == 3){
         delta_ts = DELTA_BASE * pow(2., graphs_quarantine_xscale);
         ts_range_2 = QDateTime::currentDateTime().toSecsSinceEpoch()-graphs_quarantine_xshift;
         ts_range_1 =  ts_range_2 - delta_ts;
-        ui->labelGraphsQuarantineXYPosition1->setText(QDateTime::fromSecsSinceEpoch(ts_range_1).toString("MMM dd, yyyy h:MM ap"));
-        ui->labelGraphsQuarantineXYPosition2->setText(QDateTime::fromSecsSinceEpoch(ts_range_2).toString("MMM dd, yyyy h:MM ap"));
-        ui->chartviewQuarantine->setChart(chart);
+        labelGraphsQuarantineXYPosition1->setText(QDateTime::fromSecsSinceEpoch(ts_range_1).toString("MMM dd, yyyy h:MM ap"));
+        labelGraphsQuarantineXYPosition2->setText(QDateTime::fromSecsSinceEpoch(ts_range_2).toString("MMM dd, yyyy h:MM ap"));
+        chartviewQuarantinedFiles->setChart(chart);
         color = QColor::fromRgb(0,255,0);
+    }else if(state == 4){
+        delta_ts = DELTA_BASE * pow(2., graphs_snortevents_xscale);
+        ts_range_2 = QDateTime::currentDateTime().toSecsSinceEpoch()-graphs_snortevents_xshift;
+        ts_range_1 =  ts_range_2 - delta_ts;
+        labelGraphsSnortEventsXYPosition1->setText(QDateTime::fromSecsSinceEpoch(ts_range_1).toString("MMM dd, yyyy h:MM ap"));
+        labelGraphsSnortEventsXYPosition2->setText(QDateTime::fromSecsSinceEpoch(ts_range_2).toString("MMM dd, yyyy h:MM ap"));
+        chartviewSnortEvents->setChart(chart);
+        color = QColor::fromRgb(128,255,0);
     }else{
         return;
     }
@@ -979,14 +1004,14 @@ void MainWindow::updateQuarantineDirectoryUi(const QString path){
     Q_UNUSED(path)
     QString qpath = getValDB("quarantinefilesdirectory");
 
-    while(ui->tableWidgetQuarantine->rowCount())
-        ui->tableWidgetQuarantine->removeRow(0);
+    while(tableWidgetQuarantine->rowCount())
+        tableWidgetQuarantine->removeRow(0);
 
     qint64 width = 100;
     QDir dir = QFileInfo(qpath).dir();
     dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    ui->tableWidgetQuarantine->horizontalHeaderItem(3)->setTextAlignment(Qt::AlignLeft);
-    ui->tableWidgetQuarantine->setSortingEnabled(false);
+    tableWidgetQuarantine->horizontalHeaderItem(3)->setTextAlignment(Qt::AlignLeft);
+    tableWidgetQuarantine->setSortingEnabled(false);
     foreach(QFileInfo qfi, dir.entryInfoList()){
         if(qfi.absolutePath().length() > width)
             width = qfi.fileName().length();
@@ -1016,7 +1041,7 @@ void MainWindow::updateQuarantineDirectoryUi(const QString path){
             getQuarantineInfo(qfi.fileName(), &timestamp, &file_size, &filename);
         }
 
-        ui->tableWidgetQuarantine->insertRow(ui->tableWidgetQuarantine->rowCount());
+        tableWidgetQuarantine->insertRow(tableWidgetQuarantine->rowCount());
 
         QTableWidgetItem *item0 = new QTableWidgetItem(QString(filename));
         QTableWidgetItem *item1 = new TimestampTableWidgetItem(timestamp);
@@ -1032,18 +1057,18 @@ void MainWindow::updateQuarantineDirectoryUi(const QString path){
         item1->setFlags(item1->flags() ^ Qt::ItemIsEditable);
         item2->setFlags(item2->flags() ^ Qt::ItemIsEditable);
         item3->setFlags(item3->flags() ^ Qt::ItemIsEditable);
-        ui->tableWidgetQuarantine->setItem(ui->tableWidgetQuarantine->rowCount()-1,0, item0);
-        ui->tableWidgetQuarantine->setItem(ui->tableWidgetQuarantine->rowCount()-1,1, item1);
-        ui->tableWidgetQuarantine->setItem(ui->tableWidgetQuarantine->rowCount()-1,2, item2);
-        ui->tableWidgetQuarantine->setItem(ui->tableWidgetQuarantine->rowCount()-1,3, item3);
+        tableWidgetQuarantine->setItem(tableWidgetQuarantine->rowCount()-1,0, item0);
+        tableWidgetQuarantine->setItem(tableWidgetQuarantine->rowCount()-1,1, item1);
+        tableWidgetQuarantine->setItem(tableWidgetQuarantine->rowCount()-1,2, item2);
+        tableWidgetQuarantine->setItem(tableWidgetQuarantine->rowCount()-1,3, item3);
     }
-    ui->tableWidgetQuarantine->setSortingEnabled(true);
-    ui->tableWidgetQuarantine->sortByColumn(1, Qt::DescendingOrder);
-    ui->tableWidgetQuarantine->setSortingEnabled(false);
-    ui->tableWidgetQuarantine->resizeColumnToContents(0);
-    ui->tableWidgetQuarantine->resizeColumnToContents(1);
-    ui->tableWidgetQuarantine->resizeColumnToContents(2);
-    ui->tableWidgetQuarantine->resizeColumnToContents(3);
+    tableWidgetQuarantine->setSortingEnabled(true);
+    tableWidgetQuarantine->sortByColumn(1, Qt::DescendingOrder);
+    tableWidgetQuarantine->setSortingEnabled(false);
+    tableWidgetQuarantine->resizeColumnToContents(0);
+    tableWidgetQuarantine->resizeColumnToContents(1);
+    tableWidgetQuarantine->resizeColumnToContents(2);
+    tableWidgetQuarantine->resizeColumnToContents(3);
 }
 
 void MainWindow::updateDbQuarantine(QByteArray quarantine_name, quint32 timestamp, quint64 file_size, QByteArray file_name, quint8 verified){
@@ -1074,9 +1099,9 @@ void MainWindow::updateNewEventsCount(){
     if(query.next()){
         qint64 num = (qint64)query.value(0).toInt();
         if(num)
-            ui->labelNumBlockedAttacksVal->setText(tr("<a href=\"newevents\">")+QString::number(num)+tr("</a>"));
+            labelNumBlockedAttacksVal->setText("<a href=\"newevents\">"+QString::number(num)+"</a>");
         else
-            ui->labelNumBlockedAttacksVal->setText(tr("0"));
+            labelNumBlockedAttacksVal->setText("0");
     }
 }
 
@@ -1152,15 +1177,15 @@ void MainWindow::errorMsg(QString msg, bool enable_exit){
 void MainWindow::exitProgram(int ret){
     procKill();
     QTimer::singleShot(5000, [=]() { exit(ret); });
-    QTimer::singleShot(250, [=]() { qApp->quit(); });
-    qApp->quit();
+    QTimer::singleShot(250, [=]() { qApp->exit(1); });
+    qApp->exit(1);
 }
 
 qint64 MainWindow::initializeEventsFoundTableWidget(qint64 page, bool reset_position){
     qint64 num = 0;
     qint64 entriesperpage = getEntriesPerPage();
-    int orig_vert = ui->tableWidgetEventFound->verticalScrollBar()->value();
-    int orig_hori = ui->tableWidgetEventFound->horizontalScrollBar()->value();
+    int orig_vert = tableWidgetEventFound->verticalScrollBar()->value();
+    int orig_hori = tableWidgetEventFound->horizontalScrollBar()->value();
 
     QSqlQuery query;
     updateNewEventsCount();
@@ -1171,11 +1196,11 @@ qint64 MainWindow::initializeEventsFoundTableWidget(qint64 page, bool reset_posi
         num = (qint64)query.value(0).toInt();
         if(num > 0){
             if(entriesperpage*(page+1) > num)
-                ui->labelEventFoundPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(num)+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelEventFoundPagePosition->setText(QString::number(entriesperpage*page+1)+" - "+QString::number(num)+" ("+QString::number(num)+tr(" entries total)"));
             else
-                ui->labelEventFoundPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(entriesperpage*(page+1))+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelEventFoundPagePosition->setText(QString::number(entriesperpage*page+1)+" - "+QString::number(entriesperpage*(page+1))+" ("+QString::number(num)+tr(" entries total)"));
         }else{
-            ui->labelEventFoundPagePosition->setText(tr("0 - 0 (0 entries total)"));
+            labelEventFoundPagePosition->setText(tr("0 - 0 (0 entries total)"));
             return 0;
         }
     }
@@ -1184,10 +1209,10 @@ qint64 MainWindow::initializeEventsFoundTableWidget(qint64 page, bool reset_posi
     query.bindValue(":lim", QString::number(entriesperpage, 10));
     query.bindValue(":of", (page)*entriesperpage);
     query.exec();
-    while(ui->tableWidgetEventFound->rowCount())
-        ui->tableWidgetEventFound->removeRow(0);
+    while(tableWidgetEventFound->rowCount())
+        tableWidgetEventFound->removeRow(0);
 
-    ui->tableWidgetEventFound->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
+    tableWidgetEventFound->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
     while(query.next()){
         qlonglong ts = query.value(0).toLongLong();
         QString message = query.value(1).toString();
@@ -1200,14 +1225,14 @@ qint64 MainWindow::initializeEventsFoundTableWidget(qint64 page, bool reset_posi
         QWidget *widgetButtons = new QWidget();
         QTableWidgetItem *itemButtons = new QTableWidgetItem();
 
-        int currentRowNum = ui->tableWidgetEventFound->rowCount();
-        ui->tableWidgetEventFound->insertRow(currentRowNum);
-        ui->tableWidgetEventFound->setItem(currentRowNum, 0, itemTimestamp);
-        ui->tableWidgetEventFound->setCellWidget(currentRowNum, 0, labelTimestamp);
-        ui->tableWidgetEventFound->setItem(currentRowNum, 1, itemMessage);
-        ui->tableWidgetEventFound->setCellWidget(currentRowNum, 1, labelMessage);
-        ui->tableWidgetEventFound->setItem(currentRowNum, 2, itemButtons);
-        ui->tableWidgetEventFound->setCellWidget(currentRowNum, 2, widgetButtons);
+        int currentRowNum = tableWidgetEventFound->rowCount();
+        tableWidgetEventFound->insertRow(currentRowNum);
+        tableWidgetEventFound->setItem(currentRowNum, 0, itemTimestamp);
+        tableWidgetEventFound->setCellWidget(currentRowNum, 0, labelTimestamp);
+        tableWidgetEventFound->setItem(currentRowNum, 1, itemMessage);
+        tableWidgetEventFound->setCellWidget(currentRowNum, 1, labelMessage);
+        tableWidgetEventFound->setItem(currentRowNum, 2, itemButtons);
+        tableWidgetEventFound->setCellWidget(currentRowNum, 2, widgetButtons);
 
         labelTimestamp->setText(QDateTime::fromMSecsSinceEpoch(((quint64)query.value(0).toInt())*1000).toString("MM/dd/yyyy hh:mm:ss AP"));
         labelMessage->setText(message);
@@ -1265,15 +1290,15 @@ qint64 MainWindow::initializeEventsFoundTableWidget(qint64 page, bool reset_posi
         }
         itemButtons->setSizeHint(widgetButtons->sizeHint());
     }
-    ui->tableWidgetEventFound->resizeColumnToContents(0);
-    ui->tableWidgetEventFound->resizeColumnToContents(1);
-    ui->tableWidgetEventFound->resizeColumnToContents(2);
+    tableWidgetEventFound->resizeColumnToContents(0);
+    tableWidgetEventFound->resizeColumnToContents(1);
+    tableWidgetEventFound->resizeColumnToContents(2);
     if(reset_position){
-        ui->tableWidgetEventFound->horizontalScrollBar()->setValue(0);
-        ui->tableWidgetEventFound->verticalScrollBar()->setValue(0);
+        tableWidgetEventFound->horizontalScrollBar()->setValue(0);
+        tableWidgetEventFound->verticalScrollBar()->setValue(0);
     }else{
-        ui->tableWidgetEventFound->horizontalScrollBar()->setValue(orig_hori);
-        ui->tableWidgetEventFound->verticalScrollBar()->setValue(orig_vert);
+        tableWidgetEventFound->horizontalScrollBar()->setValue(orig_hori);
+        tableWidgetEventFound->verticalScrollBar()->setValue(orig_vert);
     }
     return num;
 }
@@ -1290,11 +1315,11 @@ qint64 MainWindow::initializeEventsQuarantinedTableWidget(qint64 page){
         num = (qint64)query.value(0).toInt();
         if(num > 0){
             if(entriesperpage*(page+1) > num)
-                ui->labelEventQuarantinedPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(num)+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelEventQuarantinedPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(num)+tr(" (")+QString::number(num)+tr(" entries total)"));
             else
-                ui->labelEventQuarantinedPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(entriesperpage*(page+1))+tr(" (")+QString::number(num)+tr(" entries total)"));
+                labelEventQuarantinedPagePosition->setText(QString::number(entriesperpage*page+1)+tr(" - ")+QString::number(entriesperpage*(page+1))+tr(" (")+QString::number(num)+tr(" entries total)"));
         }else{
-            ui->labelEventQuarantinedPagePosition->setText(tr("0 - 0 (0 entries total)"));
+            labelEventQuarantinedPagePosition->setText(tr("0 - 0 (0 entries total)"));
             return 0;
         }
     }
@@ -1303,24 +1328,24 @@ qint64 MainWindow::initializeEventsQuarantinedTableWidget(qint64 page){
     query.bindValue(":lim", QString::number(entriesperpage, 10));
     query.bindValue(":of", (page)*entriesperpage);
     query.exec();
-    while(ui->tableWidgetEventQuarantined->rowCount())
-        ui->tableWidgetEventQuarantined->removeRow(0);
+    while(tableWidgetEventQuarantined->rowCount())
+        tableWidgetEventQuarantined->removeRow(0);
 
-    ui->tableWidgetEventQuarantined->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
+    tableWidgetEventQuarantined->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignLeft);
     while(query.next()){
         QTableWidgetItem *item = new QTableWidgetItem(query.value(1).toString());
         if(query.value(1).toString().length() > width)
             width = query.value(1).toString().length();
-        ui->tableWidgetEventQuarantined->setColumnWidth(1, width*8);
-        ui->tableWidgetEventQuarantined->insertRow(ui->tableWidgetEventQuarantined->rowCount());
-        ui->tableWidgetEventQuarantined->setItem(ui->tableWidgetEventQuarantined->rowCount()-1,0,new QTableWidgetItem(
+        tableWidgetEventQuarantined->setColumnWidth(1, width*8);
+        tableWidgetEventQuarantined->insertRow(tableWidgetEventQuarantined->rowCount());
+        tableWidgetEventQuarantined->setItem(tableWidgetEventQuarantined->rowCount()-1,0,new QTableWidgetItem(
             QDateTime::fromMSecsSinceEpoch(((quint64)query.value(0).toInt())*1000).toString("MM/dd/yyyy hh:mm:ss AP")
         ));
-        ui->tableWidgetEventQuarantined->setItem(ui->tableWidgetEventQuarantined->rowCount()-1,1, item);
+        tableWidgetEventQuarantined->setItem(tableWidgetEventQuarantined->rowCount()-1,1, item);
     }
-    ui->tableWidgetEventQuarantined->resizeColumnToContents(1);
-    ui->tableWidgetEventQuarantined->horizontalScrollBar()->setValue(0);
-    ui->tableWidgetEventQuarantined->verticalScrollBar()->setValue(0);
+    tableWidgetEventQuarantined->resizeColumnToContents(1);
+    tableWidgetEventQuarantined->horizontalScrollBar()->setValue(0);
+    tableWidgetEventQuarantined->verticalScrollBar()->setValue(0);
     return num;
 }
 
@@ -1333,16 +1358,64 @@ void MainWindow::detectedThreatListener(QString msg, QString filename){
 }
 
 void MainWindow::setEnabledQuarantine(bool state){
-    ui->tableWidgetQuarantine->setEnabled(state);
-    ui->pushButtonQuarantineDelete->setEnabled(state);
-    ui->pushButtonQuarantineUnQuarantine->setEnabled(state);
-    ui->tableWidgetEventQuarantined->setEnabled(state);
+    tableWidgetQuarantine->setEnabled(state);
+    pushButtonQuarantineDelete->setEnabled(state);
+    pushButtonQuarantineUnQuarantine->setEnabled(state);
+    tableWidgetEventQuarantined->setEnabled(state);
     if(state){
-        ui->tableWidgetQuarantine->setStyleSheet("background-color: #ffffff;");
-        ui->tableWidgetEventQuarantined->setStyleSheet("background-color: #ffffff;");
+        tableWidgetQuarantine->setStyleSheet("background-color: #ffffff;");
+        tableWidgetEventQuarantined->setStyleSheet("background-color: #ffffff;");
     }else{
-        ui->tableWidgetQuarantine->setStyleSheet("background-color: #eeeeee;");
-        ui->tableWidgetEventQuarantined->setStyleSheet("background-color: #eeeeee;");
+        tableWidgetQuarantine->setStyleSheet("background-color: #eeeeee;");
+        tableWidgetEventQuarantined->setStyleSheet("background-color: #eeeeee;");
+    }
+    quarantineListWidgetEntry->setHidden(!state);
+    comboBoxLog->clear();
+    if(state){
+        comboBoxLog->addItems(QStringList() << "General" << "Detected Threats" << "Quarantined Files");
+    }else{
+        comboBoxLog->addItems(QStringList() << "General" << "Detected Threats");
+    }
+    comboBoxLog->setCurrentIndex(0);
+    updateGraphsComboBox();
+}
+
+void MainWindow::setEnabledSnort(bool state){
+    snortListWidgetEntry->setHidden(!state);
+    if(state){
+        labelStatusEnabledItem5->show();
+        labelStatusEnabledItem5Icon->show();
+        snortGetLocalVersion();
+        snortGetRemoteVersions();
+    }else{
+        labelStatusEnabledItem5->hide();
+        labelStatusEnabledItem5Icon->hide();
+    }
+    updateGraphsComboBox();
+}
+
+void MainWindow::updateGraphsComboBox(){
+    comboBoxGraphsSubTitleSelector->clear();
+    if(getValDB("enablequarantine") == "yes" && getValDB("enablesnort") == "yes"){
+        comboBoxGraphsSubTitleSelector->addItems(QStringList() << "Scanned Files Interval" << "Threats Found Interval" << "Quarantined Files Interval" << "Snort Events Interval");
+    }else if(getValDB("enablequarantine") == "yes" && getValDB("enablesnort") != "yes"){
+        comboBoxGraphsSubTitleSelector->addItems(QStringList() << "Scanned Files Interval" << "Threats Found Interval" << "Quarantined Files Interval");
+    }else if(getValDB("enablequarantine") != "yes" && getValDB("enablesnort") == "yes"){
+        comboBoxGraphsSubTitleSelector->addItems(QStringList() << "Scanned Files Interval" << "Threats Found Interval" << "Snort Events Interval");
+    }else{
+        comboBoxGraphsSubTitleSelector->addItems(QStringList() << "Scanned Files Interval" << "Threats Found Interval");
+    }
+    comboBoxGraphsSubTitleSelector->setCurrentIndex(0);
+    stackedWidgetGraphs->setCurrentIndex(0);
+}
+
+void MainWindow::setEnabledOnAccess(bool state){
+    if(state){
+        labelStatusEnabledItem3->show();
+        labelStatusEnabledItem3Icon->show();
+    }else{
+        labelStatusEnabledItem3->hide();
+        labelStatusEnabledItem3Icon->hide();
     }
 }
 
@@ -1366,24 +1439,23 @@ void MainWindow::setScanActive(bool state){
 
 void MainWindow::initScanProcess(QStringList listWidgetToStringList){
     p->start("clamdscan", QStringList() << "-v" << "--stdout" << "--fdpass" << listWidgetToStringList);
-    emit sigProcessReadyRead("Scan started...\n");
-#ifdef CLAMONE_COUNT_ITEMS_SCANNED
-    QTimer::singleShot(250, [=]() {
-        QSqlQuery query;
-        quint32 ts;
-        quint64 count = 0;
-        countTotalScanItems(listWidgetToStringList, &count);
+    emit sigProcessReadyRead(tr("Scan started...\n").toLocal8Bit());
 
-        ts = (quint32)time(NULL);
-        query.prepare("INSERT OR IGNORE INTO counts_table(timestamp, state, num) VALUES (:timestamp1, 1, 0);");
-        query.bindValue(":timestamp1", ts);
-        query.exec();
-        query.prepare("UPDATE counts_table SET num = num + :num1 WHERE timestamp = :timestamp1 AND state = 1 ;");
-        query.bindValue(":timestamp1", ts);
-        query.bindValue(":num1", count);
-        query.exec();
-    });
-#endif //CLAMONE_COUNT_ITEMS_SCANNED
+    QSqlQuery query;
+    quint32 ts;
+    quint64 count = 0;
+    countTotalScanItems(listWidgetToStringList, &count);
+    emit sigProcessReadyRead((tr("Files to be scanned: ")+QString::number(count)+"\n").toLocal8Bit());
+
+    ts = (quint32)time(NULL);
+    query.prepare("INSERT OR IGNORE INTO counts_table(timestamp, state, num) VALUES (:timestamp1, 1, 0);");
+    query.bindValue(":timestamp1", ts);
+    query.exec();
+    query.prepare("UPDATE counts_table SET num = num + :num1 WHERE timestamp = :timestamp1 AND state = 1 ;");
+    query.bindValue(":timestamp1", ts);
+    query.bindValue(":num1", count);
+    query.exec();
+    on_pushButtonGraphsFileScansResetGraph_clicked();
 }
 
 void MainWindow::processReadyRead(){
@@ -1397,14 +1469,12 @@ void MainWindow::allShow(){
         scanDialog->setVisible(true);
 }
 
-void MainWindow::on_pushButtonTest_clicked(){
-    QMainWindow *qmw = new QMainWindow();
-    qmw->show();
+void MainWindow::InitializeMainWindow(){
+    QMainWindow *qmw = this;
     qmw->setWindowIcon(QIcon("://images/main_icon_grey.png"));
     qmw->setWindowTitle("Clam One");
     qmw->setGeometry(0, 0, 640, 480);
     qmw->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, qmw->size(), qApp->primaryScreen()->availableGeometry()));
-    qDebug() << qmw->geometry();
     QWidget *centralWidget = new QWidget();
     qmw->setCentralWidget(centralWidget);
     QVBoxLayout *qvbl = new QVBoxLayout();
@@ -1421,7 +1491,7 @@ void MainWindow::on_pushButtonTest_clicked(){
     qvbl->addLayout(horizontalLayoutMiddle);
     qvbl->addLayout(horizontalLayoutBottom);
 
-    QLabel *labelTL = new QLabel("Clam One");
+    labelTL = new QLabel("Clam One");
     labelTL->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
     labelTL->setMinimumWidth(180);
     labelTL->setMaximumHeight(45);
@@ -1433,12 +1503,12 @@ void MainWindow::on_pushButtonTest_clicked(){
     labelTL->setStyleSheet("background-color: #999999; color: #4A4A4A;");
     labelTL->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    QLabel *labelTM = new QLabel();
+    labelTM = new QLabel();
     labelTM->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     labelTM->setStyleSheet("background-color: #999999;");
     labelTM->setScaledContents(true);
 
-    QLabel *labelTR = new QLabel();
+    labelTR = new QLabel();
     labelTR->setMaximumHeight(45);
     labelTR->setStyleSheet("background-color: #999999;");
     labelTR->setPixmap(QPixmap("://images/banner_topr.png"));
@@ -1447,11 +1517,11 @@ void MainWindow::on_pushButtonTest_clicked(){
     horizontalLayoutTop->addWidget(labelTM);
     horizontalLayoutTop->addWidget(labelTR);
 
-    QListWidget *listWidget = new QListWidget();
+    listWidget = new QListWidget();
     listWidget->setMinimumWidth(137);
     listWidget->setMaximumWidth(137);
     listWidget->setStyleSheet("background-color: #ffffff; color: #4A4A4A;");
-    QStackedWidget *stackedWidget = new QStackedWidget();
+    stackedWidget = new QStackedWidget();
     stackedWidget->setStyleSheet("background-color:#f0f0f0");
 
     horizontalLayoutMiddle->addWidget(listWidget);
@@ -1485,12 +1555,13 @@ void MainWindow::on_pushButtonTest_clicked(){
     new QListWidgetItem(QIcon("://images/icon_scan.png"), "Scanning", listWidget);
     new QListWidgetItem(QIcon("://images/icon_time.png"), "Schedule", listWidget);
     new QListWidgetItem(QIcon("://images/icon_status_grey.png"), "Status", listWidget);
-    new QListWidgetItem(QIcon("://images/icon_quarantine.png"), "Quarantine", listWidget);
+    quarantineListWidgetEntry = new QListWidgetItem(QIcon("://images/icon_quarantine.png"), "Quarantine", listWidget);
     new QListWidgetItem(QIcon("://images/icon_log.png"), "Event Logs", listWidget);
     new QListWidgetItem(QIcon("://images/icon_console.png"), "Messages", listWidget);
     new QListWidgetItem(QIcon("://images/icon_update.png"), "Update", listWidget);
     new QListWidgetItem(QIcon("://images/icon_stats.png"), "Graphs", listWidget);
     new QListWidgetItem(QIcon("://images/icon_setup.png"), "Configure", listWidget);
+    snortListWidgetEntry = new QListWidgetItem(QIcon("://images/icon_snort.png"), "Snort", listWidget);
     new QListWidgetItem(QIcon("://images/icon_help.png"), "Help", listWidget);
 
     QWidget *widgetStackedScan = new QWidget();
@@ -1511,6 +1582,8 @@ void MainWindow::on_pushButtonTest_clicked(){
     stackedWidget->addWidget(widgetStackedGraphs);
     QWidget *widgetStackedConfigure = new QWidget();
     stackedWidget->addWidget(widgetStackedConfigure);
+    QWidget *widgetStackedSnort = new QWidget();
+    stackedWidget->addWidget(widgetStackedSnort);
     QWidget *widgetStackedHelp = new QWidget();
     stackedWidget->addWidget(widgetStackedHelp);
 
@@ -1518,6 +1591,7 @@ void MainWindow::on_pushButtonTest_clicked(){
     widgetStackedScan->setLayout(layoutStack01);
     {
         QLabel *labelScanTitle = new QLabel("Scan Local Hard Drives");
+        labelScanTitle->setStyleSheet("color: #4A4A4A;");
         layoutStack01->addWidget(labelScanTitle);
         fontLabel = labelScanTitle->font();
         fontLabel.setPointSize(20);
@@ -1534,9 +1608,11 @@ void MainWindow::on_pushButtonTest_clicked(){
         frameScan->setLayout(scanGridLayout);
         layoutStack01->addStretch();
         QLabel *labelPointerQuickScan = new QLabel();
-        QLabel *labelScanQuickScan = new QLabel("<a href=\"QuickScan\">Quick Scan</a>");
+        labelScanQuickScan = new QLabel("<a href=\"QuickScan\">Quick Scan</a>");
+        connect(labelScanQuickScan, &QLabel::linkActivated, this, &MainWindow::on_labelScanQuickScan_linkActivated);
         QLabel *labelPointerDeepScan = new QLabel();
-        QLabel *labelScanDeepScan = new QLabel("<a href=\"DeepScan\">Deep Scan</a>");
+        labelScanDeepScan = new QLabel("<a href=\"DeepScan\">Deep Scan</a>");
+        connect(labelScanDeepScan, &QLabel::linkActivated, this, &MainWindow::on_labelScanDeepScan_linkActivated);
         labelPointerQuickScan->setPixmap(QPixmap("://images/icon_marker.png"));
         labelPointerQuickScan->setMaximumSize(QSize(20, 20));
         labelPointerQuickScan->setScaledContents(true);
@@ -1553,31 +1629,34 @@ void MainWindow::on_pushButtonTest_clicked(){
     widgetStackedSchedule->setLayout(layoutStack02);
     {
         QLabel *labelScheduleTitle = new QLabel("Schedule");
+        labelScheduleTitle->setStyleSheet("color: #4A4A4A;");
         fontLabel = labelScheduleTitle->font();
         fontLabel.setPointSize(20);
         fontLabel.setBold(true);
         labelScheduleTitle->setFont(fontLabel);
         layoutStack02->addWidget(labelScheduleTitle);
-        QListWidget *listWidgetSchedule = new QListWidget();
+        listWidgetSchedule = new QListWidget();
         layoutStack02->addWidget(listWidgetSchedule);
         QHBoxLayout *scheduleHlayout = new QHBoxLayout();
         layoutStack02->addLayout(scheduleHlayout);
         scheduleHlayout->addStretch();
-        QPushButton *pushButtonSchedule = new QPushButton("Add New");
+        pushButtonSchedule = new QPushButton("Add New");
         pushButtonSchedule->setFocusPolicy(Qt::NoFocus);
         scheduleHlayout->addWidget(pushButtonSchedule);
+        connect(pushButtonSchedule, &QPushButton::clicked, this, &MainWindow::on_pushButtonSchedule_clicked);
     }
 
     QVBoxLayout *layoutStack03 = new QVBoxLayout();
     widgetStackedStatus->setLayout(layoutStack03);
     {
         QLabel *labelStatusTitle = new QLabel("ClamAV Status");
+        labelStatusTitle->setStyleSheet("color: #4A4A4A;");
         fontLabel = labelStatusTitle->font();
         fontLabel.setPointSize(20);
         fontLabel.setBold(true);
         labelStatusTitle->setFont(fontLabel);
         layoutStack03->addWidget(labelStatusTitle);
-        QFrame *frameStatus = new QFrame();
+        frameStatus = new QFrame();
         frameStatus->setStyleSheet("background-color: #b6b6b6;");
         frameStatus->setFrameShape(QFrame::WinPanel);
         frameStatus->setFrameShadow(QFrame::Plain);
@@ -1586,9 +1665,11 @@ void MainWindow::on_pushButtonTest_clicked(){
         layoutStack03->addWidget(frameStatus);
         QVBoxLayout *statusVBoxMain = new QVBoxLayout();
         frameStatus->setLayout(statusVBoxMain);
-        QLabel *labelStatusProtectionState = new QLabel("Protection State");
+        labelStatusProtectionState = new QLabel("Protection State");
+        labelStatusProtectionState->setWordWrap(true);
         statusVBoxMain->addWidget(labelStatusProtectionState);
-        QLabel *labelStatusProtectionStateDetails = new QLabel("Protection State Details");
+        labelStatusProtectionStateDetails = new QLabel("Protection State Details");
+        labelStatusProtectionStateDetails->setWordWrap(true);
         statusVBoxMain->addWidget(labelStatusProtectionStateDetails);
         QFrame *hline1 = new QFrame();
         hline1->setFrameShape(QFrame::HLine);
@@ -1596,16 +1677,16 @@ void MainWindow::on_pushButtonTest_clicked(){
 
         QHBoxLayout *statusHBox1 = new QHBoxLayout();
         statusVBoxMain->addLayout(statusHBox1);
-        QLabel *labelStatusEnabledItem1Icon = new QLabel();
+        labelStatusEnabledItem1Icon = new QLabel();
         labelStatusEnabledItem1Icon->setPixmap(QPixmap("://images/ques_16.png"));
         statusHBox1->addWidget(labelStatusEnabledItem1Icon);
-        QLabel *labelStatusEnabledItem1 = new QLabel("Antivirus Engine");
+        labelStatusEnabledItem1 = new QLabel("Antivirus Engine");
         statusHBox1->addWidget(labelStatusEnabledItem1);
         statusHBox1->addStretch();
 
         QHBoxLayout *statusHBox2 = new QHBoxLayout();
         statusVBoxMain->addLayout(statusHBox2);
-        QLabel *labelStatusEnabledItem2Icon = new QLabel();
+        labelStatusEnabledItem2Icon = new QLabel();
         labelStatusEnabledItem2Icon->setPixmap(QPixmap("://images/ques_16.png"));
         statusHBox2->addWidget(labelStatusEnabledItem2Icon);
         QLabel *labelStatusEnabledItem2 = new QLabel("Antivirus Updater");
@@ -1614,33 +1695,46 @@ void MainWindow::on_pushButtonTest_clicked(){
 
         QHBoxLayout *statusHBox3 = new QHBoxLayout();
         statusVBoxMain->addLayout(statusHBox3);
-        QLabel *labelStatusEnabledItem3Icon = new QLabel();
+        labelStatusEnabledItem3Icon = new QLabel();
         labelStatusEnabledItem3Icon->setPixmap(QPixmap("://images/ques_16.png"));
         statusHBox3->addWidget(labelStatusEnabledItem3Icon);
-        QLabel *labelStatusEnabledItem3 = new QLabel("OnAccess");
+        labelStatusEnabledItem3 = new QLabel("OnAccess");
         statusHBox3->addWidget(labelStatusEnabledItem3);
         statusHBox3->addStretch();
 
         QHBoxLayout *statusHBox4 = new QHBoxLayout();
         statusVBoxMain->addLayout(statusHBox4);
-        QLabel *labelStatusEnabledItem4Icon = new QLabel();
+        labelStatusEnabledItem4Icon = new QLabel();
         labelStatusEnabledItem4Icon->setPixmap(QPixmap("://images/ques_16.png"));
         statusHBox4->addWidget(labelStatusEnabledItem4Icon);
-        QLabel *labelStatusEnabledItem4 = new QLabel("Antivirus Updater");
+        labelStatusEnabledItem4 = new QLabel("Not Applicable");
         statusHBox4->addWidget(labelStatusEnabledItem4);
         statusHBox4->addStretch();
+
+        labelStatusEnabledItem4->hide();
+        labelStatusEnabledItem4Icon->hide();
+
+        QHBoxLayout *statusHBox5 = new QHBoxLayout();
+        statusVBoxMain->addLayout(statusHBox5);
+        labelStatusEnabledItem5Icon = new QLabel();
+        labelStatusEnabledItem5Icon->setPixmap(QPixmap("://images/ques_16.png"));
+        statusHBox5->addWidget(labelStatusEnabledItem5Icon);
+        labelStatusEnabledItem5 = new QLabel("Snort Network Intrusion Detection System");
+        statusHBox5->addWidget(labelStatusEnabledItem5);
+        statusHBox5->addStretch();
 
         QFrame *hline2 = new QFrame();
         hline2->setFrameShape(QFrame::HLine);
         statusVBoxMain->addWidget(hline2);
 
-        QHBoxLayout *statusHBox5 = new QHBoxLayout();
-        statusVBoxMain->addLayout(statusHBox5);
+        QHBoxLayout *statusHBox6 = new QHBoxLayout();
+        statusVBoxMain->addLayout(statusHBox6);
         QLabel *labelNumBlockedAttacksName = new QLabel("New Events Detected:");
-        statusHBox5->addWidget(labelNumBlockedAttacksName);
-        QLabel *labelNumBlockedAttacksVal = new QLabel("0");
+        statusHBox6->addWidget(labelNumBlockedAttacksName);
+        labelNumBlockedAttacksVal = new QLabel("0");
+        connect(labelNumBlockedAttacksVal, &QLabel::linkActivated, this, &MainWindow::on_labelNumBlockedAttacksVal_linkActivated);
         labelNumBlockedAttacksVal->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-        statusHBox5->addWidget(labelNumBlockedAttacksVal);
+        statusHBox6->addWidget(labelNumBlockedAttacksVal);
 
         layoutStack03->addStretch();
     }
@@ -1649,6 +1743,7 @@ void MainWindow::on_pushButtonTest_clicked(){
     widgetStackedQuarantine->setLayout(layoutStack04);
     {
       QLabel *labelQuarantineTitle = new QLabel("Quarantined Files");
+      labelQuarantineTitle->setStyleSheet("color: #4A4A4A;");
       fontLabel = labelQuarantineTitle->font();
       fontLabel.setPointSize(20);
       fontLabel.setBold(true);
@@ -1663,86 +1758,790 @@ void MainWindow::on_pushButtonTest_clicked(){
             "cause long load times of Clam One.</p></body></html>");
       labelQuarantineSubTitle->setWordWrap(true);
       layoutStack04->addWidget(labelQuarantineSubTitle);
-      QTableWidget *tableQuarantine = new QTableWidget();
-      layoutStack04->addWidget(tableQuarantine);
-      tableQuarantine->setColumnCount(4);
-      tableQuarantine->setHorizontalHeaderLabels(QStringList() << "File Name" << "Date/Time" << "File Size" << "Quarantine Name");
-      tableQuarantine->setStyleSheet("background-color: #ffffff;");
-      tableQuarantine->setAlternatingRowColors(true);
-      tableQuarantine->setSelectionMode(QAbstractItemView::SingleSelection);
-      tableQuarantine->setSelectionBehavior(QAbstractItemView::SelectRows);
-      tableQuarantine->setTextElideMode(Qt::ElideNone);
-      tableQuarantine->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
-      tableQuarantine->horizontalHeader()->setDefaultSectionSize(150);
-      tableQuarantine->horizontalHeader()->setStretchLastSection(true);
+      tableWidgetQuarantine = new QTableWidget();
+      layoutStack04->addWidget(tableWidgetQuarantine);
+      tableWidgetQuarantine->setColumnCount(4);
+      tableWidgetQuarantine->setHorizontalHeaderLabels(QStringList() << "File Name" << "Date/Time" << "File Size" << "Quarantine Name");
+      tableWidgetQuarantine->setStyleSheet("background-color: #ffffff;");
+      tableWidgetQuarantine->setAlternatingRowColors(true);
+      tableWidgetQuarantine->setSelectionMode(QAbstractItemView::SingleSelection);
+      tableWidgetQuarantine->setSelectionBehavior(QAbstractItemView::SelectRows);
+      tableWidgetQuarantine->setTextElideMode(Qt::ElideNone);
+      tableWidgetQuarantine->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+      tableWidgetQuarantine->horizontalHeader()->setDefaultSectionSize(150);
+      tableWidgetQuarantine->horizontalHeader()->setStretchLastSection(true);
       QHBoxLayout *quarantineHBox1 = new QHBoxLayout();
       layoutStack04->addLayout(quarantineHBox1);
       quarantineHBox1->addStretch();
-      QPushButton *pushButtonQuarantineUnQuarantine = new QPushButton("UnQuarantine File");
+      pushButtonQuarantineUnQuarantine = new QPushButton("UnQuarantine File");
       pushButtonQuarantineUnQuarantine->setFocusPolicy(Qt::NoFocus);
       quarantineHBox1->addWidget(pushButtonQuarantineUnQuarantine);
-      QPushButton *pushButtonQuarantineDelete = new QPushButton("Permanently Delete File");
+      pushButtonQuarantineDelete = new QPushButton("Permanently Delete File");
       pushButtonQuarantineDelete->setFocusPolicy(Qt::NoFocus);
       quarantineHBox1->addWidget(pushButtonQuarantineDelete);
     }
     QVBoxLayout *layoutStack05 = new QVBoxLayout();
     widgetStackedLogs->setLayout(layoutStack05);
-    layoutStack05->addWidget(new QLabel("Five"));
+    {
+      QLabel *labelLogTitle = new QLabel("Event Logs");
+      labelLogTitle->setStyleSheet("color: #4A4A4A;");
+      fontLabel = labelLogTitle->font();
+      fontLabel.setPointSize(20);
+      fontLabel.setBold(true);
+      labelLogTitle->setFont(fontLabel);
+      layoutStack05->addWidget(labelLogTitle);
+      layoutStack05->addStretch();
+      QHBoxLayout *eventGeneralHBox1 = new QHBoxLayout();
+      layoutStack05->addLayout(eventGeneralHBox1);
+      QLabel *labelLogTypeName = new QLabel("Type: ");
+      eventGeneralHBox1->addWidget(labelLogTypeName);
+      comboBoxLog = new QComboBox();
+      comboBoxLog->setMinimumWidth(200);
+      if(getValDB("enablequarantine")=="yes"){
+          comboBoxLog->addItems(QStringList() << "General" << "Detected Threats" << "Quarantined Files");
+      }else{
+          comboBoxLog->addItems(QStringList() << "General" << "Detected Threats");
+      }
+      eventGeneralHBox1->addWidget(comboBoxLog);
+      eventGeneralHBox1->addStretch();
+
+      stackedWidgetEvents = new QStackedWidget();
+      layoutStack05->addWidget(stackedWidgetEvents);
+      {
+          QWidget *stackedEventGeneral = new QWidget();
+          stackedWidgetEvents->addWidget(stackedEventGeneral);
+          {
+              QVBoxLayout *vboxEventGeneral = new QVBoxLayout();
+              stackedEventGeneral->setLayout(vboxEventGeneral);
+
+              tableWidgetEventGeneral = new QTableWidget();
+              tableWidgetEventGeneral->setColumnCount(2);
+              tableWidgetEventGeneral->setHorizontalHeaderItem(0, new QTableWidgetItem("Time"));
+              tableWidgetEventGeneral->setHorizontalHeaderItem(1, new QTableWidgetItem("Message"));
+              tableWidgetEventGeneral->setAlternatingRowColors(true);
+              tableWidgetEventGeneral->setSelectionMode(QAbstractItemView::NoSelection);
+              tableWidgetEventGeneral->setTextElideMode(Qt::ElideNone);
+              tableWidgetEventGeneral->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+              tableWidgetEventGeneral->horizontalHeader()->setMinimumSectionSize(160);
+              tableWidgetEventGeneral->horizontalHeader()->setStretchLastSection(true);
+              tableWidgetEventGeneral->verticalHeader()->setVisible(false);
+              tableWidgetEventGeneral->horizontalHeader()->setVisible(true);
+              tableWidgetEventGeneral->setStyleSheet("background-color: #ffffff;");
+              vboxEventGeneral->addWidget(tableWidgetEventGeneral);
+
+              QHBoxLayout *hboxEventGeneral = new QHBoxLayout();
+              vboxEventGeneral->addLayout(hboxEventGeneral);
+              hboxEventGeneral->addStretch();
+              labelEventGeneralPagePosition = new QLabel("0/0");
+              hboxEventGeneral->addWidget(labelEventGeneralPagePosition);
+              hboxEventGeneral->addStretch();
+              hboxEventGeneral->addStretch();
+              QPushButton *pushButtonEventGeneralPageBegining = new QPushButton();
+              connect(pushButtonEventGeneralPageBegining, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventGeneralPageBegining_clicked);
+              pushButtonEventGeneralPageBegining->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventGeneralPageBegining->setMaximumWidth(26);
+              pushButtonEventGeneralPageBegining->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+              hboxEventGeneral->addWidget(pushButtonEventGeneralPageBegining);
+              QPushButton *pushButtonEventGeneralPageBack = new QPushButton();
+              connect(pushButtonEventGeneralPageBack, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventGeneralPageBack_clicked);
+              pushButtonEventGeneralPageBack->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventGeneralPageBack->setMaximumWidth(13);
+              pushButtonEventGeneralPageBack->setIcon(QIcon(QPixmap(":/images/left.png")));
+              hboxEventGeneral->addWidget(pushButtonEventGeneralPageBack);
+              QPushButton *pushButtonEventGeneralPageForward = new QPushButton();
+              connect(pushButtonEventGeneralPageForward, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventGeneralPageForward_clicked);
+              pushButtonEventGeneralPageForward->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventGeneralPageForward->setMaximumWidth(13);
+              pushButtonEventGeneralPageForward->setIcon(QIcon(QPixmap(":/images/right.png")));
+              hboxEventGeneral->addWidget(pushButtonEventGeneralPageForward);
+              QPushButton *pushButtonEventGeneralPageEnd = new QPushButton();
+              connect(pushButtonEventGeneralPageEnd, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventGeneralPageEnd_clicked);
+              pushButtonEventGeneralPageEnd->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventGeneralPageEnd->setMaximumWidth(26);
+              pushButtonEventGeneralPageEnd->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+              hboxEventGeneral->addWidget(pushButtonEventGeneralPageEnd);
+          }
+
+          QWidget *stackedEventFound = new QWidget();
+          stackedWidgetEvents->addWidget(stackedEventFound);
+          {
+              QVBoxLayout *vboxEventFound = new QVBoxLayout();
+              stackedEventFound->setLayout(vboxEventFound);
+
+              tableWidgetEventFound = new QTableWidget();
+              tableWidgetEventFound->setColumnCount(2);
+              tableWidgetEventFound->setHorizontalHeaderItem(0, new QTableWidgetItem("Time"));
+              tableWidgetEventFound->setHorizontalHeaderItem(1, new QTableWidgetItem("Message"));
+              tableWidgetEventFound->setAlternatingRowColors(true);
+              tableWidgetEventFound->setSelectionMode(QAbstractItemView::NoSelection);
+              tableWidgetEventFound->setTextElideMode(Qt::ElideNone);
+              tableWidgetEventFound->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+              tableWidgetEventFound->horizontalHeader()->setMinimumSectionSize(160);
+              tableWidgetEventFound->horizontalHeader()->setStretchLastSection(true);
+              tableWidgetEventFound->verticalHeader()->setVisible(false);
+              tableWidgetEventFound->horizontalHeader()->setVisible(true);
+              tableWidgetEventFound->setStyleSheet("background-color: #ffffff;");
+              vboxEventFound->addWidget(tableWidgetEventFound);
+
+              QHBoxLayout *hboxEventFound = new QHBoxLayout();
+              vboxEventFound->addLayout(hboxEventFound);
+              hboxEventFound->addStretch();
+              labelEventFoundPagePosition = new QLabel("0/0");
+              hboxEventFound->addWidget(labelEventFoundPagePosition);
+              hboxEventFound->addStretch();
+              hboxEventFound->addStretch();
+              QPushButton *pushButtonEventFoundPageBegining = new QPushButton();
+              connect(pushButtonEventFoundPageBegining, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventFoundPageBegining_clicked);
+              pushButtonEventFoundPageBegining->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventFoundPageBegining->setMaximumWidth(26);
+              pushButtonEventFoundPageBegining->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+              hboxEventFound->addWidget(pushButtonEventFoundPageBegining);
+              QPushButton *pushButtonEventFoundPageBack = new QPushButton();
+              connect(pushButtonEventFoundPageBack, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventFoundPageBack_clicked);
+              pushButtonEventFoundPageBack->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventFoundPageBack->setMaximumWidth(13);
+              pushButtonEventFoundPageBack->setIcon(QIcon(QPixmap(":/images/left.png")));
+              hboxEventFound->addWidget(pushButtonEventFoundPageBack);
+              QPushButton *pushButtonEventFoundPageForward = new QPushButton();
+              connect(pushButtonEventFoundPageForward, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventFoundPageForward_clicked);
+              pushButtonEventFoundPageForward->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventFoundPageForward->setMaximumWidth(13);
+              pushButtonEventFoundPageForward->setIcon(QIcon(QPixmap(":/images/right.png")));
+              hboxEventFound->addWidget(pushButtonEventFoundPageForward);
+              QPushButton *pushButtonEventFoundPageEnd = new QPushButton();
+              connect(pushButtonEventFoundPageEnd, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventFoundPageEnd_clicked);
+              pushButtonEventFoundPageEnd->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventFoundPageEnd->setMaximumWidth(26);
+              pushButtonEventFoundPageEnd->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+              hboxEventFound->addWidget(pushButtonEventFoundPageEnd);
+          }
+
+          QWidget *stackedEventQuarantined = new QWidget();
+          stackedWidgetEvents->addWidget(stackedEventQuarantined);
+          {
+              QVBoxLayout *vboxEventQuarantined = new QVBoxLayout();
+              stackedEventQuarantined->setLayout(vboxEventQuarantined);
+
+              tableWidgetEventQuarantined = new QTableWidget();
+              tableWidgetEventQuarantined->setColumnCount(2);
+              tableWidgetEventQuarantined->setHorizontalHeaderItem(0, new QTableWidgetItem("Time"));
+              tableWidgetEventQuarantined->setHorizontalHeaderItem(1, new QTableWidgetItem("Message"));
+              tableWidgetEventQuarantined->setAlternatingRowColors(true);
+              tableWidgetEventQuarantined->setSelectionMode(QAbstractItemView::NoSelection);
+              tableWidgetEventQuarantined->setTextElideMode(Qt::ElideNone);
+              tableWidgetEventQuarantined->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+              tableWidgetEventQuarantined->horizontalHeader()->setMinimumSectionSize(160);
+              tableWidgetEventQuarantined->horizontalHeader()->setStretchLastSection(true);
+              tableWidgetEventQuarantined->verticalHeader()->setVisible(false);
+              tableWidgetEventQuarantined->horizontalHeader()->setVisible(true);
+              tableWidgetEventQuarantined->setStyleSheet("background-color: #ffffff;");
+              vboxEventQuarantined->addWidget(tableWidgetEventQuarantined);
+
+              QHBoxLayout *hboxEventQuarantined = new QHBoxLayout();
+              vboxEventQuarantined->addLayout(hboxEventQuarantined);
+              hboxEventQuarantined->addStretch();
+              labelEventQuarantinedPagePosition = new QLabel("0/0");
+              hboxEventQuarantined->addWidget(labelEventQuarantinedPagePosition);
+              hboxEventQuarantined->addStretch();
+              hboxEventQuarantined->addStretch();
+              QPushButton *pushButtonEventQuarantinedPageBegining = new QPushButton();
+              connect(pushButtonEventQuarantinedPageBegining, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventQuarantinedPageBegining_clicked);
+              pushButtonEventQuarantinedPageBegining->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventQuarantinedPageBegining->setMaximumWidth(26);
+              pushButtonEventQuarantinedPageBegining->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+              hboxEventQuarantined->addWidget(pushButtonEventQuarantinedPageBegining);
+              QPushButton *pushButtonEventQuarantinedPageBack = new QPushButton();
+              connect(pushButtonEventQuarantinedPageBack, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventQuarantinedPageBack_clicked);
+              pushButtonEventQuarantinedPageBack->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventQuarantinedPageBack->setMaximumWidth(13);
+              pushButtonEventQuarantinedPageBack->setIcon(QIcon(QPixmap(":/images/left.png")));
+              hboxEventQuarantined->addWidget(pushButtonEventQuarantinedPageBack);
+              QPushButton *pushButtonEventQuarantinedPageForward = new QPushButton();
+              connect(pushButtonEventQuarantinedPageForward, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventQuarantinedPageForward_clicked);
+              pushButtonEventQuarantinedPageForward->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventQuarantinedPageForward->setMaximumWidth(13);
+              pushButtonEventQuarantinedPageForward->setIcon(QIcon(QPixmap(":/images/right.png")));
+              hboxEventQuarantined->addWidget(pushButtonEventQuarantinedPageForward);
+              QPushButton *pushButtonEventQuarantinedPageEnd = new QPushButton();
+              connect(pushButtonEventQuarantinedPageEnd, &QPushButton::clicked, this, &MainWindow::on_pushButtonEventQuarantinedPageEnd_clicked);
+              pushButtonEventQuarantinedPageEnd->setFocusPolicy(Qt::NoFocus);
+              pushButtonEventQuarantinedPageEnd->setMaximumWidth(26);
+              pushButtonEventQuarantinedPageEnd->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+              hboxEventQuarantined->addWidget(pushButtonEventQuarantinedPageEnd);
+          }
+          stackedWidgetEvents->setCurrentIndex(0);
+          comboBoxLog->setCurrentIndex(0);
+          connect(comboBoxLog, QOverload<int>::of(&QComboBox::activated), stackedWidgetEvents, &QStackedWidget::setCurrentIndex);
+      }
+    }
+
     QVBoxLayout *layoutStack06 = new QVBoxLayout();
     widgetStackedMessages->setLayout(layoutStack06);
-    layoutStack06->addWidget(new QLabel("Six"));
+    {
+        QLabel *labelMessagesTitle = new QLabel("Messages");
+        labelMessagesTitle->setStyleSheet("color: #4A4A4A;");
+        fontLabel = labelMessagesTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelMessagesTitle->setFont(fontLabel);
+        layoutStack06->addWidget(labelMessagesTitle);
+        tableWidgetMessages = new QTableWidget();
+        tableWidgetMessages->setColumnCount(2);
+        tableWidgetMessages->setHorizontalHeaderItem(0, new QTableWidgetItem("Time"));
+        tableWidgetMessages->setHorizontalHeaderItem(1, new QTableWidgetItem("Console Messages"));
+        tableWidgetMessages->setAlternatingRowColors(true);
+        tableWidgetMessages->setSelectionMode(QAbstractItemView::NoSelection);
+        tableWidgetMessages->setTextElideMode(Qt::ElideNone);
+        tableWidgetMessages->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+        tableWidgetMessages->horizontalHeader()->setMinimumSectionSize(160);
+        tableWidgetMessages->horizontalHeader()->setStretchLastSection(true);
+        tableWidgetMessages->verticalHeader()->setVisible(false);
+        tableWidgetMessages->horizontalHeader()->setVisible(true);
+
+        tableWidgetMessages->setStyleSheet("background-color: #ffffff;");
+        layoutStack06->addWidget(tableWidgetMessages);
+
+        QHBoxLayout *hboxMessages = new QHBoxLayout();
+        layoutStack06->addLayout(hboxMessages);
+        hboxMessages->addStretch();
+        labelMessagesPagePosition = new QLabel("0/0");
+        hboxMessages->addWidget(labelMessagesPagePosition);
+        hboxMessages->addStretch();
+        hboxMessages->addStretch();
+        QPushButton *pushButtonMessagesPageBegining = new QPushButton();
+        connect(pushButtonMessagesPageBegining, &QPushButton::clicked, this, &MainWindow::on_pushButtonMessagesPageBegining_clicked);
+        pushButtonMessagesPageBegining->setFocusPolicy(Qt::NoFocus);
+        pushButtonMessagesPageBegining->setMaximumWidth(26);
+        pushButtonMessagesPageBegining->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+        hboxMessages->addWidget(pushButtonMessagesPageBegining);
+        QPushButton *pushButtonMessagesPageBack = new QPushButton();
+        connect(pushButtonMessagesPageBack, &QPushButton::clicked, this, &MainWindow::on_pushButtonMessagesPageBack_clicked);
+        pushButtonMessagesPageBack->setFocusPolicy(Qt::NoFocus);
+        pushButtonMessagesPageBack->setMaximumWidth(13);
+        pushButtonMessagesPageBack->setIcon(QIcon(QPixmap(":/images/left.png")));
+        hboxMessages->addWidget(pushButtonMessagesPageBack);
+        QPushButton *pushButtonMessagesPageForward = new QPushButton();
+        connect(pushButtonMessagesPageForward, &QPushButton::clicked, this, &MainWindow::on_pushButtonMessagesPageForward_clicked);
+        pushButtonMessagesPageForward->setFocusPolicy(Qt::NoFocus);
+        pushButtonMessagesPageForward->setMaximumWidth(13);
+        pushButtonMessagesPageForward->setIcon(QIcon(QPixmap(":/images/right.png")));
+        hboxMessages->addWidget(pushButtonMessagesPageForward);
+        QPushButton *pushButtonMessagesPageEnd = new QPushButton();
+        connect(pushButtonMessagesPageEnd, &QPushButton::clicked, this, &MainWindow::on_pushButtonMessagesPageEnd_clicked);
+        pushButtonMessagesPageEnd->setFocusPolicy(Qt::NoFocus);
+        pushButtonMessagesPageEnd->setMaximumWidth(26);
+        pushButtonMessagesPageEnd->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+        hboxMessages->addWidget(pushButtonMessagesPageEnd);
+
+    }
+
     QVBoxLayout *layoutStack07 = new QVBoxLayout();
     widgetStackedUpdate->setLayout(layoutStack07);
-    layoutStack07->addWidget(new QLabel("Seven"));
+    {
+        labelUpdateMessage = new QLabel("Virus update status");
+        labelUpdateMessage->setStyleSheet("color: #4A4A4A;");
+        fontLabel = labelUpdateMessage->font();
+        fontLabel.setPointSize(13);
+        fontLabel.setBold(true);
+        labelUpdateMessage->setFont(fontLabel);
+        layoutStack07->addWidget(labelUpdateMessage);
+        frameUpdate = new QFrame();
+        frameUpdate->setStyleSheet("background-color: #b6b6b6;");
+        frameUpdate->setFrameShadow(QFrame::Plain);
+        frameUpdate->setFrameShape(QFrame::WinPanel);
+        layoutStack07->addWidget(frameUpdate);
+        QVBoxLayout *vboxframeUpdate = new QVBoxLayout();
+        frameUpdate->setLayout(vboxframeUpdate);
+        labelUpdateMessageDetails = new QLabel("Default");
+        labelUpdateMessageDetails->setWordWrap(true);
+        vboxframeUpdate->addWidget(labelUpdateMessageDetails);
+
+        QFrame *hline1 = new QFrame();
+        hline1->setFrameShape(QFrame::HLine);
+        hline1->setFrameShadow(QFrame::Sunken);
+        vboxframeUpdate->addWidget(hline1);
+
+        QHBoxLayout *hboxFrameUpdate1 = new QHBoxLayout();
+        vboxframeUpdate->addLayout(hboxFrameUpdate1);
+        QLabel *labelUpdateLocalDailyName = new QLabel("Local daily.cld:");
+        hboxFrameUpdate1->addWidget(labelUpdateLocalDailyName);
+        labelUpdateLocalDailyVal = new QLabel("");
+        hboxFrameUpdate1->addWidget(labelUpdateLocalDailyVal);
+
+        QHBoxLayout *hboxFrameUpdate2 = new QHBoxLayout();
+        vboxframeUpdate->addLayout(hboxFrameUpdate2);
+        QLabel *labelUpdateLocalMainName = new QLabel("Local main.cld:");
+        hboxFrameUpdate2->addWidget(labelUpdateLocalMainName);
+        labelUpdateLocalMainVal = new QLabel("");
+        hboxFrameUpdate2->addWidget(labelUpdateLocalMainVal);
+
+        QHBoxLayout *hboxFrameUpdate3 = new QHBoxLayout();
+        vboxframeUpdate->addLayout(hboxFrameUpdate3);
+        QLabel *labelUpdateLocalByteName = new QLabel("Local bytecode.cld:");
+        hboxFrameUpdate3->addWidget(labelUpdateLocalByteName);
+        labelUpdateLocalByteVal = new QLabel("");
+        hboxFrameUpdate3->addWidget(labelUpdateLocalByteVal);
+
+        QHBoxLayout *hboxFrameUpdate4 = new QHBoxLayout();
+        vboxframeUpdate->addLayout(hboxFrameUpdate4);
+        QLabel *labelUpdateRemoteVersionName = new QLabel("Remote definition version:");
+        hboxFrameUpdate4->addWidget(labelUpdateRemoteVersionName);
+        labelUpdateRemoteVersionVal = new QLabel("");
+        hboxFrameUpdate4->addWidget(labelUpdateRemoteVersionVal);
+
+        QFrame *hline2 = new QFrame();
+        hline2->setFrameShape(QFrame::HLine);
+        hline2->setFrameShadow(QFrame::Sunken);
+        vboxframeUpdate->addWidget(hline2);
+
+        QHBoxLayout *hboxFrameUpdate5 = new QHBoxLayout();
+        vboxframeUpdate->addLayout(hboxFrameUpdate5);
+        QLabel *labelUpdateLocalEngineName = new QLabel("Local engine version:");
+        hboxFrameUpdate5->addWidget(labelUpdateLocalEngineName);
+        labelUpdateLocalEngineVal = new QLabel("");
+        hboxFrameUpdate5->addWidget(labelUpdateLocalEngineVal);
+
+        QHBoxLayout *hboxFrameUpdate6 = new QHBoxLayout();
+        vboxframeUpdate->addLayout(hboxFrameUpdate6);
+        QLabel *labelUpdateRemoteEngineName = new QLabel("Remote engine version:");
+        hboxFrameUpdate6->addWidget(labelUpdateRemoteEngineName);
+        labelUpdateRemoteEngineVal = new QLabel("");
+        hboxFrameUpdate6->addWidget(labelUpdateRemoteEngineVal);
+
+        QFrame *hline3 = new QFrame();
+        hline3->setFrameShape(QFrame::HLine);
+        hline3->setFrameShadow(QFrame::Sunken);
+        vboxframeUpdate->addWidget(hline3);
+
+        labelUpdateClickUpdateDefs = new QLabel("Using the &quot;kill&quot; command, send a signal to the "
+                                                "freshclam daemon to<br /><a href=\"UpdateVirusDefinitions\">"
+                                                "Update virus definitions</a>");
+        connect(labelUpdateClickUpdateDefs, &QLabel::linkActivated, this, &MainWindow::on_labelUpdateClickUpdateDefs_linkActivated);
+        vboxframeUpdate->addWidget(labelUpdateClickUpdateDefs);
+
+        layoutStack07->addStretch();
+    }
+
     QVBoxLayout *layoutStack08 = new QVBoxLayout();
     widgetStackedGraphs->setLayout(layoutStack08);
-    layoutStack08->addWidget(new QLabel("Eight"));
+    {
+        QLabel *labelGraphsTitle = new QLabel("Graphs");
+        labelGraphsTitle->setStyleSheet("color: #4A4A4A;");
+        fontLabel = labelGraphsTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelGraphsTitle->setFont(fontLabel);
+        layoutStack08->addWidget(labelGraphsTitle);
+
+        QHBoxLayout *hboxGraphs1 = new QHBoxLayout();
+        layoutStack08->addLayout(hboxGraphs1);
+        QLabel *labelGraphsSubTitleName = new QLabel("Plot Type");
+        hboxGraphs1->addWidget(labelGraphsSubTitleName);
+        comboBoxGraphsSubTitleSelector = new QComboBox();
+        comboBoxGraphsSubTitleSelector->addItems(QStringList() << "Scanned Files Interval" << "Threats Found Interval");
+
+        hboxGraphs1->addWidget(comboBoxGraphsSubTitleSelector);
+        hboxGraphs1->addStretch();
+
+        stackedWidgetGraphs = new QStackedWidget();
+        layoutStack08->addWidget(stackedWidgetGraphs);
+
+        {
+            QWidget *pageScanedFiles = new QWidget();
+            stackedWidgetGraphs->addWidget(pageScanedFiles);
+            QVBoxLayout *vboxPageScanedFiles = new QVBoxLayout();
+            pageScanedFiles->setLayout(vboxPageScanedFiles);
+
+            chartviewScanedFiles = new QChartView();
+            chartviewScanedFiles->setRenderHint(QPainter::Antialiasing);
+            chartviewScanedFiles->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            vboxPageScanedFiles->addWidget(chartviewScanedFiles);
+
+            QHBoxLayout *hboxPageScanedFiles = new QHBoxLayout();
+            vboxPageScanedFiles->addLayout(hboxPageScanedFiles);
+            hboxPageScanedFiles->addStretch();
+            labelGraphsScanedXYPosition1 = new QLabel("1");
+            hboxPageScanedFiles->addWidget(labelGraphsScanedXYPosition1);
+            hboxPageScanedFiles->addStretch();
+            labelGraphsScanedXYPosition2 = new QLabel("2");
+            hboxPageScanedFiles->addWidget(labelGraphsScanedXYPosition2);
+            hboxPageScanedFiles->addStretch();
+            QPushButton *pushButtonGraphsFileScansResetGraph = new QPushButton();
+            connect(pushButtonGraphsFileScansResetGraph, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileScansResetGraph_clicked);
+            pushButtonGraphsFileScansResetGraph->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileScansResetGraph->setMaximumWidth(26);
+            pushButtonGraphsFileScansResetGraph->setIcon(QIcon(QPixmap(":/images/reset.png")));
+            hboxPageScanedFiles->addWidget(pushButtonGraphsFileScansResetGraph);
+            QPushButton *pushButtonGraphsFileScansXshiftup = new QPushButton();
+            connect(pushButtonGraphsFileScansXshiftup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileScansXshiftup_clicked);
+            pushButtonGraphsFileScansXshiftup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileScansXshiftup->setMaximumWidth(26);
+            pushButtonGraphsFileScansXshiftup->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+            hboxPageScanedFiles->addWidget(pushButtonGraphsFileScansXshiftup);
+            QPushButton *pushButtonGraphsFileScansXscaleup = new QPushButton();
+            connect(pushButtonGraphsFileScansXscaleup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileScansXscaleup_clicked);
+            pushButtonGraphsFileScansXscaleup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileScansXscaleup->setMaximumWidth(13);
+            pushButtonGraphsFileScansXscaleup->setIcon(QIcon(QPixmap(":/images/left.png")));
+            hboxPageScanedFiles->addWidget(pushButtonGraphsFileScansXscaleup);
+            QPushButton *pushButtonGraphsFileScansXscaledown = new QPushButton();
+            connect(pushButtonGraphsFileScansXscaledown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileScansXscaledown_clicked);
+            pushButtonGraphsFileScansXscaledown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileScansXscaledown->setMaximumWidth(13);
+            pushButtonGraphsFileScansXscaledown->setIcon(QIcon(QPixmap(":/images/right.png")));
+            hboxPageScanedFiles->addWidget(pushButtonGraphsFileScansXscaledown);
+            QPushButton *pushButtonGraphsFileScansXshiftdown = new QPushButton();
+            connect(pushButtonGraphsFileScansXshiftdown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileScansXshiftdown_clicked);
+            pushButtonGraphsFileScansXshiftdown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileScansXshiftdown->setMaximumWidth(26);
+            pushButtonGraphsFileScansXshiftdown->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+            hboxPageScanedFiles->addWidget(pushButtonGraphsFileScansXshiftdown);
+        }
+
+        {
+            QWidget *pageThreatsFound = new QWidget();
+            stackedWidgetGraphs->addWidget(pageThreatsFound);
+
+            QVBoxLayout *vboxPageThreatsFound = new QVBoxLayout();
+            pageThreatsFound->setLayout(vboxPageThreatsFound);
+
+            chartviewThreatsFound = new QChartView();
+            chartviewThreatsFound->setRenderHint(QPainter::Antialiasing);
+            chartviewThreatsFound->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            vboxPageThreatsFound->addWidget(chartviewThreatsFound);
+
+            QHBoxLayout *hboxPageThreatsFound = new QHBoxLayout();
+            vboxPageThreatsFound->addLayout(hboxPageThreatsFound);
+            hboxPageThreatsFound->addStretch();
+            labelGraphsFoundXYPosition1 = new QLabel("1");
+            hboxPageThreatsFound->addWidget(labelGraphsFoundXYPosition1);
+            hboxPageThreatsFound->addStretch();
+            labelGraphsFoundXYPosition2 = new QLabel("2");
+            hboxPageThreatsFound->addWidget(labelGraphsFoundXYPosition2);
+            hboxPageThreatsFound->addStretch();
+            QPushButton *pushButtonGraphsFileFoundResetGraph = new QPushButton();
+            connect(pushButtonGraphsFileFoundResetGraph, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileFoundResetGraph_clicked);
+            pushButtonGraphsFileFoundResetGraph->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileFoundResetGraph->setMaximumWidth(26);
+            pushButtonGraphsFileFoundResetGraph->setIcon(QIcon(QPixmap(":/images/reset.png")));
+            hboxPageThreatsFound->addWidget(pushButtonGraphsFileFoundResetGraph);
+            QPushButton *pushButtonGraphsFileFoundXshiftup = new QPushButton();
+            connect(pushButtonGraphsFileFoundXshiftup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileFoundXshiftup_clicked);
+            pushButtonGraphsFileFoundXshiftup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileFoundXshiftup->setMaximumWidth(26);
+            pushButtonGraphsFileFoundXshiftup->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+            hboxPageThreatsFound->addWidget(pushButtonGraphsFileFoundXshiftup);
+            QPushButton *pushButtonGraphsFileFoundXscaleup = new QPushButton();
+            connect(pushButtonGraphsFileFoundXscaleup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileFoundXscaleup_clicked);
+            pushButtonGraphsFileFoundXscaleup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileFoundXscaleup->setMaximumWidth(13);
+            pushButtonGraphsFileFoundXscaleup->setIcon(QIcon(QPixmap(":/images/left.png")));
+            hboxPageThreatsFound->addWidget(pushButtonGraphsFileFoundXscaleup);
+            QPushButton *pushButtonGraphsFileFoundXscaledown = new QPushButton();
+            connect(pushButtonGraphsFileFoundXscaledown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileFoundXscaledown_clicked);
+            pushButtonGraphsFileFoundXscaledown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileFoundXscaledown->setMaximumWidth(13);
+            pushButtonGraphsFileFoundXscaledown->setIcon(QIcon(QPixmap(":/images/right.png")));
+            hboxPageThreatsFound->addWidget(pushButtonGraphsFileFoundXscaledown);
+            QPushButton *pushButtonGraphsFileFoundXshiftdown = new QPushButton();
+            connect(pushButtonGraphsFileFoundXshiftdown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileFoundXshiftdown_clicked);
+            pushButtonGraphsFileFoundXshiftdown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileFoundXshiftdown->setMaximumWidth(26);
+            pushButtonGraphsFileFoundXshiftdown->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+            hboxPageThreatsFound->addWidget(pushButtonGraphsFileFoundXshiftdown);
+
+        }
+
+        {
+            QWidget *pageQuarantinedFiles = new QWidget();
+            stackedWidgetGraphs->addWidget(pageQuarantinedFiles);
+            QVBoxLayout *vboxPageQuarantinedFiles = new QVBoxLayout();
+            pageQuarantinedFiles->setLayout(vboxPageQuarantinedFiles);
+
+            chartviewQuarantinedFiles = new QChartView();
+            chartviewQuarantinedFiles->setRenderHint(QPainter::Antialiasing);
+            chartviewQuarantinedFiles->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            vboxPageQuarantinedFiles->addWidget(chartviewQuarantinedFiles);
+
+            QHBoxLayout *hboxPageQuarantinedFiles = new QHBoxLayout();
+            vboxPageQuarantinedFiles->addLayout(hboxPageQuarantinedFiles);
+            hboxPageQuarantinedFiles->addStretch();
+            labelGraphsQuarantineXYPosition1 = new QLabel("1");
+            hboxPageQuarantinedFiles->addWidget(labelGraphsQuarantineXYPosition1);
+            hboxPageQuarantinedFiles->addStretch();
+            labelGraphsQuarantineXYPosition2 = new QLabel("2");
+            hboxPageQuarantinedFiles->addWidget(labelGraphsQuarantineXYPosition2);
+            hboxPageQuarantinedFiles->addStretch();
+            QPushButton *pushButtonGraphsFileQuarantineResetGraph = new QPushButton();
+            connect(pushButtonGraphsFileQuarantineResetGraph, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileQuarantineResetGraph_clicked);
+            pushButtonGraphsFileQuarantineResetGraph->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileQuarantineResetGraph->setMaximumWidth(26);
+            pushButtonGraphsFileQuarantineResetGraph->setIcon(QIcon(QPixmap(":/images/reset.png")));
+            hboxPageQuarantinedFiles->addWidget(pushButtonGraphsFileQuarantineResetGraph);
+            QPushButton *pushButtonGraphsFileQuarantineXshiftup = new QPushButton();
+            connect(pushButtonGraphsFileQuarantineXshiftup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileQuarantineXshiftup_clicked);
+            pushButtonGraphsFileQuarantineXshiftup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileQuarantineXshiftup->setMaximumWidth(26);
+            pushButtonGraphsFileQuarantineXshiftup->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+            hboxPageQuarantinedFiles->addWidget(pushButtonGraphsFileQuarantineXshiftup);
+            QPushButton *pushButtonGraphsFileQuarantineXscaleup = new QPushButton();
+            connect(pushButtonGraphsFileQuarantineXscaleup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileQuarantineXscaleup_clicked);
+            pushButtonGraphsFileQuarantineXscaleup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileQuarantineXscaleup->setMaximumWidth(13);
+            pushButtonGraphsFileQuarantineXscaleup->setIcon(QIcon(QPixmap(":/images/left.png")));
+            hboxPageQuarantinedFiles->addWidget(pushButtonGraphsFileQuarantineXscaleup);
+            QPushButton *pushButtonGraphsFileQuarantineXscaledown = new QPushButton();
+            connect(pushButtonGraphsFileQuarantineXscaledown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileQuarantineXscaledown_clicked);
+            pushButtonGraphsFileQuarantineXscaledown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileQuarantineXscaledown->setMaximumWidth(13);
+            pushButtonGraphsFileQuarantineXscaledown->setIcon(QIcon(QPixmap(":/images/right.png")));
+            hboxPageQuarantinedFiles->addWidget(pushButtonGraphsFileQuarantineXscaledown);
+            QPushButton *pushButtonGraphsFileQuarantineXshiftdown = new QPushButton();
+            connect(pushButtonGraphsFileQuarantineXshiftdown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsFileQuarantineXshiftdown_clicked);
+            pushButtonGraphsFileQuarantineXshiftdown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsFileQuarantineXshiftdown->setMaximumWidth(26);
+            pushButtonGraphsFileQuarantineXshiftdown->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+            hboxPageQuarantinedFiles->addWidget(pushButtonGraphsFileQuarantineXshiftdown);
+        }
+
+        {
+            QWidget *pageSnortEvents = new QWidget();
+            stackedWidgetGraphs->addWidget(pageSnortEvents);
+            QVBoxLayout *vboxPageSnortEvents = new QVBoxLayout();
+            pageSnortEvents->setLayout(vboxPageSnortEvents);
+
+            chartviewSnortEvents = new QChartView();
+            chartviewSnortEvents->setRenderHint(QPainter::Antialiasing);
+            chartviewSnortEvents->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            vboxPageSnortEvents->addWidget(chartviewSnortEvents);
+
+            QHBoxLayout *hboxPageSnortEvents = new QHBoxLayout();
+            vboxPageSnortEvents->addLayout(hboxPageSnortEvents);
+            hboxPageSnortEvents->addStretch();
+            labelGraphsSnortEventsXYPosition1 = new QLabel("1");
+            hboxPageSnortEvents->addWidget(labelGraphsSnortEventsXYPosition1);
+            hboxPageSnortEvents->addStretch();
+            labelGraphsSnortEventsXYPosition2 = new QLabel("2");
+            hboxPageSnortEvents->addWidget(labelGraphsSnortEventsXYPosition2);
+            hboxPageSnortEvents->addStretch();
+            QPushButton *pushButtonGraphsSnortEventsResetGraph = new QPushButton();
+            connect(pushButtonGraphsSnortEventsResetGraph, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsSnortEventsResetGraph_clicked);
+            pushButtonGraphsSnortEventsResetGraph->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsSnortEventsResetGraph->setMaximumWidth(26);
+            pushButtonGraphsSnortEventsResetGraph->setIcon(QIcon(QPixmap(":/images/reset.png")));
+            hboxPageSnortEvents->addWidget(pushButtonGraphsSnortEventsResetGraph);
+            QPushButton *pushButtonGraphsSnortEventsXshiftup = new QPushButton();
+            connect(pushButtonGraphsSnortEventsXshiftup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsSnortEventsXshiftup_clicked);
+            pushButtonGraphsSnortEventsXshiftup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsSnortEventsXshiftup->setMaximumWidth(26);
+            pushButtonGraphsSnortEventsXshiftup->setIcon(QIcon(QPixmap(":/images/leftleft.png")));
+            hboxPageSnortEvents->addWidget(pushButtonGraphsSnortEventsXshiftup);
+            QPushButton *pushButtonGraphsSnortEventsXscaleup = new QPushButton();
+            connect(pushButtonGraphsSnortEventsXscaleup, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsSnortEventsXscaleup_clicked);
+            pushButtonGraphsSnortEventsXscaleup->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsSnortEventsXscaleup->setMaximumWidth(13);
+            pushButtonGraphsSnortEventsXscaleup->setIcon(QIcon(QPixmap(":/images/left.png")));
+            hboxPageSnortEvents->addWidget(pushButtonGraphsSnortEventsXscaleup);
+            QPushButton *pushButtonGraphsSnortEventsXscaledown = new QPushButton();
+            connect(pushButtonGraphsSnortEventsXscaledown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsSnortEventsXscaledown_clicked);
+            pushButtonGraphsSnortEventsXscaledown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsSnortEventsXscaledown->setMaximumWidth(13);
+            pushButtonGraphsSnortEventsXscaledown->setIcon(QIcon(QPixmap(":/images/right.png")));
+            hboxPageSnortEvents->addWidget(pushButtonGraphsSnortEventsXscaledown);
+            QPushButton *pushButtonGraphsSnortEventsXshiftdown = new QPushButton();
+            connect(pushButtonGraphsSnortEventsXshiftdown, &QPushButton::clicked, this, &MainWindow::on_pushButtonGraphsSnortEventsXshiftdown_clicked);
+            pushButtonGraphsSnortEventsXshiftdown->setFocusPolicy(Qt::NoFocus);
+            pushButtonGraphsSnortEventsXshiftdown->setMaximumWidth(26);
+            pushButtonGraphsSnortEventsXshiftdown->setIcon(QIcon(QPixmap(":/images/rightright.png")));
+            hboxPageSnortEvents->addWidget(pushButtonGraphsSnortEventsXshiftdown);
+        }
+
+        stackedWidgetGraphs->setCurrentIndex(0);
+        comboBoxGraphsSubTitleSelector->setCurrentIndex(0);
+        connect(comboBoxGraphsSubTitleSelector, QOverload<int>::of(&QComboBox::activated), stackedWidgetGraphs, &QStackedWidget::setCurrentIndex);
+    }
+
     QVBoxLayout *layoutStack09 = new QVBoxLayout();
     widgetStackedConfigure->setLayout(layoutStack09);
-    layoutStack09->addWidget(new QLabel("Nine"));
+    {
+        QLabel *labelSetupTitle = new QLabel("Configure");
+        labelSetupTitle->setStyleSheet("color: #4A4A4A;");
+        fontLabel = labelSetupTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelSetupTitle->setFont(fontLabel);
+        layoutStack09->addWidget(labelSetupTitle);
+
+        QFrame *frameSetup = new QFrame();
+        frameSetup->setStyleSheet("background-color: #b6b6b6;");
+        frameSetup->setFrameShadow(QFrame::Plain);
+        frameSetup->setFrameShape(QFrame::WinPanel);
+        layoutStack09->addWidget(frameSetup);
+        QVBoxLayout *vboxSetup = new QVBoxLayout();
+        frameSetup->setLayout(vboxSetup);
+
+        labelSetupAccessPrefs = new QLabel("<p>Configuration settings for various ClamAV "
+                                                   "related products</p><a href=\"AccessPreferences\">"
+                                                   "Access preferences...</a>");
+        connect(labelSetupAccessPrefs, &QLabel::linkActivated, this, &MainWindow::on_labelSetupAccessPrefs_linkActivated);
+        vboxSetup->addWidget(labelSetupAccessPrefs);
+
+        layoutStack09->addStretch();
+    }
+
     QVBoxLayout *layoutStack10 = new QVBoxLayout();
-    widgetStackedHelp->setLayout(layoutStack10);
-    layoutStack10->addWidget(new QLabel("Ten"));
+    widgetStackedSnort->setLayout(layoutStack10);
+    {
+        QScrollArea *scrollAreaSnort = new QScrollArea();
+        scrollAreaSnort->setStyleSheet("background-color: #ffffff;");
+        scrollAreaSnort->setWidgetResizable(true);
+        layoutStack10->addWidget(scrollAreaSnort);
+
+        QWidget *scrollAreaWidgetSnortContents = new QWidget();
+        scrollAreaSnort->setWidget(scrollAreaWidgetSnortContents);
+
+        QVBoxLayout *vboxScrollAreaWidgetSnortContents = new QVBoxLayout();
+        scrollAreaWidgetSnortContents->setLayout(vboxScrollAreaWidgetSnortContents);
+
+        QLabel *labelSnortTitle = new QLabel("Snort");
+        labelSnortTitle->setStyleSheet("color: #4A4A4A;");
+        fontLabel = labelSnortTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelSnortTitle->setFont(fontLabel);
+        vboxScrollAreaWidgetSnortContents->addWidget(labelSnortTitle);
+
+        QFrame *frameSnort = new QFrame();
+        frameSnort->setStyleSheet("background-color: #b6b6b6;");
+        frameSnort->setFrameShadow(QFrame::Plain);
+        frameSnort->setFrameShape(QFrame::WinPanel);
+        vboxScrollAreaWidgetSnortContents->addWidget(frameSnort);
+        QVBoxLayout *vboxSnort = new QVBoxLayout();
+        frameSnort->setLayout(vboxSnort);
+
+        QHBoxLayout *hboxSnort1 = new QHBoxLayout();
+        vboxSnort->addLayout(hboxSnort1);
+        QLabel *labelSnortLocalVersionName = new QLabel("Local Snort Version: ");
+        hboxSnort1->addWidget(labelSnortLocalVersionName);
+        hboxSnort1->addStretch();
+        labelSnortLocalVersionVal = new QLabel();
+        hboxSnort1->addWidget(labelSnortLocalVersionVal);
+
+        QHBoxLayout *hboxSnort2 = new QHBoxLayout();
+        vboxSnort->addLayout(hboxSnort2);
+        QLabel *labelSnortRemoteVersionName = new QLabel("Remote Snort Version: ");
+        hboxSnort2->addWidget(labelSnortRemoteVersionName);
+        hboxSnort2->addStretch();
+        labelSnortRemoteVersionVal = new QLabel();
+        hboxSnort2->addWidget(labelSnortRemoteVersionVal);
+
+        QFrame *hline1 = new QFrame();
+        hline1->setFrameShape(QFrame::HLine);
+        vboxSnort->addWidget(hline1);
+
+        QHBoxLayout *hboxSnort3 = new QHBoxLayout();
+        vboxSnort->addLayout(hboxSnort3);
+        QLabel *labelSnortLocalRulesName = new QLabel("Local Snort Rules: ");
+        hboxSnort3->addWidget(labelSnortLocalRulesName);
+        hboxSnort3->addStretch();
+        labelSnortLocalRulesVal = new QLabel();
+        hboxSnort3->addWidget(labelSnortLocalRulesVal);
+
+        QHBoxLayout *hboxSnort4 = new QHBoxLayout();
+        vboxSnort->addLayout(hboxSnort4);
+        QLabel *labelSnortRemoteRulesName = new QLabel("Remote Snort Rules: ");
+        hboxSnort4->addWidget(labelSnortRemoteRulesName);
+        hboxSnort4->addStretch();
+        labelSnortRemoteRulesVal = new QLabel();
+        hboxSnort4->addWidget(labelSnortRemoteRulesVal);
+
+        QFrame *hline2 = new QFrame();
+        hline2->setFrameShape(QFrame::HLine);
+        vboxSnort->addWidget(hline2);
+
+        vboxScrollAreaWidgetSnortContents->addStretch();
+    }
+
+    QVBoxLayout *layoutStack11 = new QVBoxLayout();
+    widgetStackedHelp->setLayout(layoutStack11);
+    {
+        QScrollArea *scrollArea = new QScrollArea();
+        scrollArea->setStyleSheet("background-color: #ffffff;");
+        scrollArea->setWidgetResizable(true);
+        layoutStack11->addWidget(scrollArea);
+
+        QWidget *scrollAreaWidgetContents = new QWidget();
+        scrollArea->setWidget(scrollAreaWidgetContents);
+
+        QVBoxLayout *vboxScrollAreaWidgetContents = new QVBoxLayout();
+        scrollAreaWidgetContents->setLayout(vboxScrollAreaWidgetContents);
+
+        QLabel *labelHelpTitle = new QLabel("Help");
+        labelHelpTitle->setStyleSheet("color: #4A4A4A;");
+        fontLabel = labelHelpTitle->font();
+        fontLabel.setPointSize(20);
+        fontLabel.setBold(true);
+        labelHelpTitle->setFont(fontLabel);
+        labelHelpTitle->setWordWrap(true);
+        vboxScrollAreaWidgetContents->addWidget(labelHelpTitle);
+        labelHelpTitleSubtitle = new QLabel("<html><head/><body><p><span style=\" font-weight:600;\">"
+            "Clam One - </span>"
+            "<span style=\" font-weight:600; text-decoration: underline;\"><a href=\"clicked_about\">About</a></span> - "
+            "<span style=\" font-weight:600; text-decoration: underline;\"><a href=\"clicked_home\">Home</a></span> - "
+            "<span style=\" font-weight:600; text-decoration: underline;\"><a href=\"clicked_scanning\">Scanning</a></span> - "
+            "<span style=\" font-weight:600; text-decoration: underline;\"><a href=\"clicked_schedule\">Schedule</a></span>"
+            "</p></body></html>");
+        connect(labelHelpTitleSubtitle, &QLabel::linkActivated, this, &MainWindow::on_labelHelpTitleSubtitle_linkActivated);
+        labelHelpTitleSubtitle->setWordWrap(true);
+        vboxScrollAreaWidgetContents->addWidget(labelHelpTitleSubtitle);
+        labelHelpMain = new QLabel();
+        setLabelHelpMainHome();
+        labelHelpMain->setWordWrap(true);
+        labelHelpMain->setOpenExternalLinks(true);
+        labelHelpMain->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::LinksAccessibleByMouse | Qt::LinksAccessibleByKeyboard);
+        vboxScrollAreaWidgetContents->addWidget(labelHelpMain);
+        vboxScrollAreaWidgetContents->addStretch();
+    }
 
     connect(listWidget, &QListWidget::currentRowChanged, stackedWidget, &QStackedWidget::setCurrentIndex);
     listWidget->setCurrentRow(0);
+}
 
-    /*QNetworkAccessManager *http = new QNetworkAccessManager();
-    QNetworkRequest req;
-    QTimer requestTimer;
+void MainWindow::setLabelHelpMainHome(){
+    labelHelpMain->setText("<html><head/><body><p><br/>This program is desktop frontend "
+                           "application for the popular clamav antivirus engine. The design "
+                           "features of this application allow you to quickly navagative "
+                           "the complex configuration’s of clamav’s design and customize "
+                           "them to your desire, monitor ther status of the detection engine, "
+                           "perform custom virus scans, maintains an individual log of detection "
+                           "and prevention events, quarintines and locks potential threats, and "
+                           "personally alerts you when it detects a problem. </p><p>Source code "
+                           "can be located at <a href=\"https://github.com/ClamOne/ClamOne\"><span "
+                           "style=\" text-decoration: underline; color:#0000ff;\">"
+                           "https://github.com/ClamOne/ClamOne</span></a> and inquiries sent to "
+                           "<a href=\"mailto:clamavone@protonmail.com\"><span style=\" text-decoration: "
+                           "underline; color:#0000ff;\">clamavone@protonmail.com</span></a>."
+                           "</p><p>Documentation is currently lacking, but will be added to the "
+                           "source code webpage in due time.</p><p>If you care to donate to this "
+                           "project:</p><p>BTC: <a href=\"https://clamone.github.io/\"><span "
+                           "style=\" text-decoration: underline; color:#0000ff;\">"
+                           "https://clamone.github.io/</span></a><br/></p></body></html>");
+}
 
-    requestTimer.setSingleShot(true);
-    req.setUrl(QUrl("https://www.snort.org/downloads"));
-    req.setRawHeader("User-Agent", "SnortVersion/0.1.0");
+void MainWindow::setLabelHelpMainScanning(){
+    labelHelpMain->setText("<html><head/>"
+        "<body style=\"max-width:8.5in;margin-top:0.7874in; margin-bottom:0.7874in; margin-left:0.7874in; margin-right:0.7874in; \">"
+        "<p><span>The \"Scanning\" section provides the ability to manually scan single files, multiple files, directorys, or any "
+        "combination of the lot. </span></p><p></p><p>The Quick scan allows a more detailed selection of the files one would "
+        "like to scan.</p><p> </p><p>The Deep scan has a set of predefined directories which encompass most normally readable "
+        "directories.</p></body></html>");
+}
 
-    http->get(req);
-    requestTimer.start(1);
-
-    connect(&requestTimer, &QTimer::timeout, [=](){
-        http->disconnect();
-        http->deleteLater();
-    });
-    connect(http, &QNetworkAccessManager::finished, [=](QNetworkReply *reply) mutable{
-        QString str = reply->readAll();
-
-        QRegularExpression re("^.*(snort-[0-9.]+\\.tar\\.gz).*$");
-        re.setPatternOptions(QRegularExpression::MultilineOption);
-        QRegularExpressionMatch match = re.match(str);
-        if(match.hasMatch()){
-            QString matched = match.captured(1);
-            qDebug() << matched;
-            re.setPattern("^.*snort-([0-9.]+)\\.tar\\.gz.*$");
-            match = re.match(matched);
-            if(match.hasMatch()){
-                matched = match.captured(1);
-                qDebug() << matched;
-            }
-        }else{
-            qDebug() << re.pattern();
-            qDebug() << "Has No Match.";
-        }
-        http->deleteLater();
-    });//*/
+void MainWindow::setLabelHelpMainSchedule(){
+    labelHelpMain->setText("<html></head>"
+    "<body style=\"max-width:8.5in;margin-top:0.7874in; margin-bottom:0.7874in; margin-left:0.7874in; margin-right:0.7874in; \">"
+    "<p><span>The \"</span><span>Schedule</span><span>\" section provides the ability to </span><span>plan for a reocurring scan to "
+    "take place in the future</span><span>. </span></p><p> </p><p> </p></body></html>");
 }
 
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason){
@@ -1753,7 +2552,7 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason){
             allHide();
         }else{
             allShow();
-            ui->listWidget->setCurrentRow(ClamOneMainStackOrder::Scan);
+            listWidget->setCurrentRow(ClamOneMainStackOrder::Scan);
         }
         break;
     default:
@@ -1779,13 +2578,13 @@ void MainWindow::on_labelScanDeepScan_linkActivated(const QString &link){
 
 void MainWindow::on_labelUpdateClickUpdateDefs_linkActivated(const QString &link){
     Q_UNUSED(link)
-    int rClamd = -1, rFresh = -1, rClamonacc = -1;
+    int rClamd = -1, rFresh = -1, rClamonacc = -1, rSnort = -1;
     QByteArray whichPkexec, whichKill;
     if(!find_file(&whichPkexec, "pkexec") || !find_file(&whichKill, "kill"))
         return;
-    ckProc(&rClamd, &rFresh, &rClamonacc);
-    if(rFresh > 0){
-        QProcess::execute(QString(whichPkexec)+" "+QString(whichKill)+" -USR1 "+QString::number(rFresh));
+    ckProc(&rClamd, &rFresh, &rClamonacc, &rSnort);
+    if(!whichPkexec.isEmpty() && !whichKill.isEmpty() && rFresh > 0){
+        QProcess::execute(QString(whichPkexec), QStringList() << QString(whichKill) << "-USR1" << QString::number(rFresh));
         allHide();
     }
 }
@@ -1802,15 +2601,22 @@ void MainWindow::on_labelNumBlockedAttacksVal_linkActivated(const QString &link)
     query.exec();
 
     initializeEventsFoundTableWidget(intEventFoundPageNumber, true);
-    ui->listWidget->setCurrentRow(ClamOneMainStackOrder::Log);
-    ui->comboBoxLog->setCurrentIndex(ClamOneEventsStackOrder::EventFound);
-    ui->stackedWidgetEvents->setCurrentIndex(ClamOneEventsStackOrder::EventFound);
+    listWidget->setCurrentRow(ClamOneMainStackOrder::Log);
+    comboBoxLog->setCurrentIndex(ClamOneEventsStackOrder::EventFound);
+    stackedWidgetEvents->setCurrentIndex(ClamOneEventsStackOrder::EventFound);
     updateNewEventsCount();
 }
 
 void MainWindow::on_labelHelpTitleSubtitle_linkActivated(const QString &link){
     Q_UNUSED(link)
-    aboutLaunch();
+    if(link == "clicked_about")
+        aboutLaunch();
+    else if(link == "clicked_home")
+        setLabelHelpMainHome();
+    else if(link == "clicked_scanning")
+        setLabelHelpMainScanning();
+    else if(link == "clicked_schedule")
+        setLabelHelpMainSchedule();
 }
 
 void MainWindow::on_pushButtonEventGeneralPageForward_clicked(){
@@ -1901,11 +2707,11 @@ void MainWindow::on_pushButtonMessagesPageEnd_clicked(){
 }
 
 void MainWindow::on_pushButtonQuarantineDelete_clicked(){
-    if(ui->tableWidgetQuarantine->selectedItems().isEmpty())
+    if(tableWidgetQuarantine->selectedItems().isEmpty())
         return;
-    qint64 current_row = ui->tableWidgetQuarantine->currentRow();
-    QString fileNameToUnQuarantine = ui->tableWidgetQuarantine->selectedItems().at(0)->text();
-    QString quarantineNameToDelete = ui->tableWidgetQuarantine->selectedItems().at(3)->text();
+    qint64 current_row = tableWidgetQuarantine->currentRow();
+    QString fileNameToUnQuarantine = tableWidgetQuarantine->selectedItems().at(0)->text();
+    QString quarantineNameToDelete = tableWidgetQuarantine->selectedItems().at(3)->text();
     quint32 timestamp = 0;
     QSqlQuery query;
     query.prepare("DELETE FROM quarantine WHERE quarantine_name = :quarantine_name1 ;");
@@ -1925,25 +2731,25 @@ void MainWindow::on_pushButtonQuarantineDelete_clicked(){
     query.prepare("UPDATE counts_table SET num = num + 1 WHERE timestamp = :timestamp1 AND state = 4 ;");
     query.bindValue(":timestamp1", timestamp);
     query.exec();
-    if(!ui->tableWidgetQuarantine->rowCount())
+    if(!tableWidgetQuarantine->rowCount())
         return;
-    if(current_row >= ui->tableWidgetQuarantine->rowCount())
+    if(current_row >= tableWidgetQuarantine->rowCount())
         QTimer::singleShot(250, [=]() {
-            ui->tableWidgetQuarantine->selectRow(ui->tableWidgetQuarantine->rowCount()-1);
+            tableWidgetQuarantine->selectRow(tableWidgetQuarantine->rowCount()-1);
         });
     else
         QTimer::singleShot(250, [=]() {
-            ui->tableWidgetQuarantine->selectRow(current_row);
+            tableWidgetQuarantine->selectRow(current_row);
         });
 }
 
 void MainWindow::on_pushButtonQuarantineUnQuarantine_clicked(){
-    if(ui->tableWidgetQuarantine->selectedItems().isEmpty())
+    if(tableWidgetQuarantine->selectedItems().isEmpty())
         return;
     QString path = getValDB("quarantinefilesdirectory");
-    qint64 current_row = ui->tableWidgetQuarantine->currentRow();
-    QString fileNameToUnQuarantine = ui->tableWidgetQuarantine->selectedItems().at(0)->text();
-    QString quarantineNameToDelete = ui->tableWidgetQuarantine->selectedItems().at(3)->text();
+    qint64 current_row = tableWidgetQuarantine->currentRow();
+    QString fileNameToUnQuarantine = tableWidgetQuarantine->selectedItems().at(0)->text();
+    QString quarantineNameToDelete = tableWidgetQuarantine->selectedItems().at(3)->text();
     QFileInfo qfi(fileNameToUnQuarantine);
     if(qfi.exists()){
         if(qfi.isFile()){
@@ -1979,15 +2785,15 @@ void MainWindow::on_pushButtonQuarantineUnQuarantine_clicked(){
     qf.close();
     on_pushButtonQuarantineDelete_clicked();
     markQuarantineUnQ(fileNameToUnQuarantine.toLocal8Bit());
-    if(!ui->tableWidgetQuarantine->rowCount())
+    if(!tableWidgetQuarantine->rowCount())
         return;
-    if(current_row >= ui->tableWidgetQuarantine->rowCount())
+    if(current_row >= tableWidgetQuarantine->rowCount())
         QTimer::singleShot(250, [=]() {
-            ui->tableWidgetQuarantine->selectRow(ui->tableWidgetQuarantine->rowCount()-1);
+            tableWidgetQuarantine->selectRow(tableWidgetQuarantine->rowCount()-1);
         });
     else
         QTimer::singleShot(250, [=]() {
-            ui->tableWidgetQuarantine->selectRow(current_row);
+            tableWidgetQuarantine->selectRow(current_row);
         });
 }
 
@@ -2178,8 +2984,8 @@ void MainWindow::add_new_schedule(bool enable, QString schedule_name,
     layout->addWidget(stringlistWidget); //8
     layout->addItem(hsp);
     connect(labelDelete, &QLabel::linkActivated, this, &MainWindow::removeScheduleItemAt);
-    ui->listWidgetSchedule->addItem(item);
-    ui->listWidgetSchedule->setItemWidget(item, widget);
+    listWidgetSchedule->addItem(item);
+    listWidgetSchedule->setItemWidget(item, widget);
     item->setSizeHint(widget->sizeHint());
 }
 
@@ -2193,9 +2999,9 @@ void MainWindow::schedule_detected_change(){
     QSqlDatabase::database().transaction();
     query.prepare("DELETE FROM schedule;");
     query.exec();
-    for(int i = 0; i < ui->listWidgetSchedule->count(); i++){
-        QListWidgetItem *item = ui->listWidgetSchedule->item(i);
-        QWidget *widget = ui->listWidgetSchedule->itemWidget(item);
+    for(int i = 0; i < listWidgetSchedule->count(); i++){
+        QListWidgetItem *item = listWidgetSchedule->item(i);
+        QWidget *widget = listWidgetSchedule->itemWidget(item);
         QLayout *layout = widget->layout();
 
         //QLabel *labelDelete = static_cast<QLabel *>(layout->itemAt(0)->widget());
@@ -2418,16 +3224,291 @@ bad_match:
     *num3 = -1;
 }
 
+void MainWindow::snortGetRemoteVersions(){
+    if(getValDB("enablesnort") != "yes")
+        return;
+    snortRVersions.clear();
+    QString lastLookup = getValDB("snortremoteversionts");
+    QString versionsString = getValDB("snortremoteversion");
+    QStringList versionsList;
+    qint64 lastLookupTs = 0;
+    qint64 currentTime = (qint64)time(NULL);
+    if(!QRegExp("\\d").exactMatch(lastLookup)){
+        lastLookupTs = currentTime;
+        setValDB("snortremoteversionts", QString::number(lastLookupTs));
+    }else{
+        lastLookupTs = (qint64)lastLookup.toLongLong();
+    }
+    if((lastLookupTs > currentTime || currentTime - lastLookupTs < 24*60*60) && !versionsString.isEmpty()){
+        versionsList = versionsString.split('\n');
+        snortRVersions.clear();
+        foreach(QString tmp, versionsList)
+            snortRVersions.append(tmp.toLocal8Bit());
+        compareSnortVersions();
+        return;
+    }else{
+        setValDB("snortremoteversionts", QString::number(currentTime));
+    }
+    QNetworkRequest req(QUrl("https://www.snort.org/downloads"));
+    req.setRawHeader("User-Agent", "ClamOne");
+    QTimer reqTimer;
+
+    QNetworkReply *reply = manager->get(req);
+    connect(reply, &QNetworkReply::finished, [=](){
+        if(reply->error() == QNetworkReply::NoError && reply->attribute(QNetworkRequest::RedirectionTargetAttribute) == QVariant::Invalid){
+            snortRVersions.clear();
+            QRegularExpression re("^.*snort-([0-9.]+)\\.tar\\.gz.*$");
+            QString data_str = QString(reply->readAll());
+            data_str = data_str.remove(QRegularExpression("\\r"));
+            QStringList data_list = data_str.split("\n");
+            QStringList resultStringList;
+            resultStringList = data_list.filter(re);
+            if(resultStringList.length() > 0){
+                QRegularExpressionMatch match = re.match(resultStringList.at(0));
+                if(match.hasMatch()){
+                    snortRVersions.append(match.captured(1).toLocal8Bit());
+                }
+            }
+            re.setPattern("^.*snort3-([0-9.]+)\\.tar\\.gz.*$");
+            resultStringList = data_list.filter(re);
+            if(resultStringList.length() > 0){
+                QRegularExpressionMatch match = re.match(resultStringList.at(0));
+                if(match.hasMatch()){
+                    snortRVersions.append(match.captured(1).toLocal8Bit());
+                }
+            }
+        }
+        QByteArray versionsArray = snortRVersions.join('\n');
+        setValDB("snortremoteversion", QString(versionsArray));
+        reply->deleteLater();
+        compareSnortVersions();
+    });
+    connect(&reqTimer, &QTimer::timeout, [=](){
+        manager->disconnect();
+        manager->deleteLater();
+    });
+
+    reqTimer.start(10);
+}
+
+void MainWindow::snortGetLocalVersion(){
+    if(time(NULL) < (snort_local_version_last_lookup_timestamp + 600))
+        return;
+    snort_local_version_last_lookup_timestamp = 0;
+    if(getValDB("enablesnort") != "yes")
+        return;
+    snortLVersion.clear();
+    QRegularExpression re("^.*Version ([0-9.]+) .*$");
+    QByteArray snortPathLocation = "/usr/local/bin/snort";
+    if(!find_file(&snortPathLocation, "snort") || snortPathLocation.isEmpty()){
+        compareSnortVersions();
+        return;
+    }
+    QProcess snortProc;
+    snortProc.start(snortPathLocation, QStringList({"--version"}));
+    snortProc.waitForFinished(3000);
+    if(snortProc.exitCode() == 0){
+        QByteArray snortRet = snortProc.readAllStandardError();
+        QStringList snortList = QString(snortRet).split('\n').filter(re);
+        if(snortList.length() > 0){
+            QRegularExpressionMatch match = re.match(snortList.at(0));
+            if(match.hasMatch()){
+                snortLVersion = match.captured(1).toLocal8Bit();
+                snort_local_version_last_lookup_timestamp = time(NULL);
+            }
+        }
+    }
+    compareSnortVersions();
+}
+
+bool MainWindow::compareSnortVersions(){
+    bool isMatch = false;
+    if(snortLVersion.isEmpty()){
+        labelSnortLocalVersionVal->setText("Can't Find Local Snort");
+        if(snortRVersions.isEmpty()){
+            labelSnortRemoteVersionVal->setText("Can't Find Remote Snort");
+        }else{
+            labelSnortRemoteVersionVal->setText(snortRVersions.join('/'));
+        }
+    }else{
+        if(snortRVersions.isEmpty()){
+            labelSnortLocalVersionVal->setText(snortLVersion);
+            labelSnortRemoteVersionVal->setText("Can't Find Remote Snort");
+        }else{
+            QString match;
+            int n = snortRVersions.length();
+            for(int i = 0; i < n; i++){
+                QByteArray remote = snortRVersions.at(i);
+                if(snortLVersion == remote){
+                    isMatch = true;
+                    remote = "<b>"+remote+"</b>";
+                }
+                match.append(QString(remote)+QString((i<n-1)?"/":""));
+            }
+            if(isMatch)
+                labelSnortLocalVersionVal->setText("<b>"+snortLVersion+"</b>");
+            else
+                labelSnortLocalVersionVal->setText(snortLVersion);
+            labelSnortRemoteVersionVal->setText(match);
+        }
+    }
+    return isMatch;
+}
+
+
+
+void MainWindow::snortGetLocalTimeModifiy(){
+    if(time(NULL) < (snort_local_rules_last_lookup_timestamp + 600))
+        return;
+
+    qint64 snort_etc = snortRecurseTimestamp("/etc/snort/etc"),
+            snort_preproc_rules = snortRecurseTimestamp("/etc/snort/preproc_rules"),
+            snort_rules = snortRecurseTimestamp("/etc/snort/rules"),
+            snort_so_rules = snortRecurseTimestamp("/etc/snort/so_rules");
+    snortLRules = qMax(snort_etc, snort_preproc_rules);
+    snortLRules = qMax(snort_rules, snortLRules);
+    snortLRules = qMax(snort_so_rules, snortLRules);
+    snort_local_version_last_lookup_timestamp = time(NULL);
+    compareSnortRules();
+}
+
+void MainWindow::snortGetRemoteTimeModifiy(){
+    if(getValDB("enablesnort") != "yes")
+        return;
+    if(!snort_version_map.contains(QString(snortLVersion)))
+        return;
+    quint64 version = snort_version_map.value(QString(snortLVersion));
+    QString oinkcode = getValDB("oinkcode");
+    QRegularExpressionMatch match = QRegularExpression("^[0-9a-f]{40}$").match(oinkcode);
+    if(oinkcode.isEmpty() || !match.hasMatch())
+        return;
+    snortRRules = 0;
+    QString lastLookup = getValDB("snortremoterulests");
+    QString rulesString = getValDB("snortremoterules");
+    qint64 rulesNum = 0;
+    qint64 lastLookupTs = 0;
+    qint64 currentTime = (qint64)time(NULL);
+    if(!QRegExp("^\\d+$").exactMatch(lastLookup)){
+        lastLookupTs = currentTime;
+        setValDB("snortremoterulests", QString::number(lastLookupTs));
+    }else{
+        lastLookupTs = (qint64)lastLookup.toLongLong();
+    }
+
+    if(!QRegExp("^\\d+$").exactMatch(rulesString)){
+        setValDB("snortremoterules", "0");
+    }else{
+        rulesNum = rulesString.toLongLong();
+    }
+
+    if((lastLookupTs > currentTime || currentTime - lastLookupTs < 24*60*60) && rulesNum){
+        snortRRules = rulesNum;
+        compareSnortRules();
+        return;
+    }else{
+        setValDB("snortremoterulests", QString::number(currentTime));
+    }
+
+    QNetworkRequest req(QUrl(QStringLiteral("https://snort.org/rules/snortrules-snapshot-%1.tar.gz?oinkcode=%2").arg(version).arg(oinkcode)));
+    req.setRawHeader("User-Agent", "ClamOne");
+
+    QNetworkReply *reply = manager->get(req);
+    QObject::connect(reply,  &QNetworkReply::finished, [=](){
+qDebug() << "QObject::connect(reply,  &QNetworkReply::finished: " << reply->rawHeaderList();
+        if(reply->header(QNetworkRequest::LocationHeader).isValid()){
+            QNetworkRequest req2(reply->header(QNetworkRequest::LocationHeader).toUrl());
+            req2.setRawHeader("User-Agent", "ClamOne");
+            QNetworkReply *reply2 = manager->get(req2);
+            QObject::connect(reply2,  &QNetworkReply::metaDataChanged, [=](){
+qDebug() << "QObject::connect(reply2,  &QNetworkReply::metaDataChanged: " << reply2->rawHeaderList();
+                if(reply2->header(QNetworkRequest::LastModifiedHeader).isValid()){
+                    snortRRules = reply2->header(QNetworkRequest::LastModifiedHeader).toDateTime().toSecsSinceEpoch();
+                    if(snortRRules){
+                        setValDB("snortremoterulests", QString::number(currentTime));
+                        setValDB("snortremoterules", QString::number(snortRRules));
+qDebug() << "Remote Rules: " << snortRRules;
+                    }
+                }
+                compareSnortRules();
+                reply2->deleteLater();
+            });
+        }
+        reply->deleteLater();
+    });
+}
+
+bool MainWindow::compareSnortRules(){
+    QString hexastr1 = QString::number(((snortLRules & 0xFF000000)>>24));
+    QString hexastr2 = QString::number(((snortLRules & 0xFF0000)>>16));
+    QString hexastr3 = QString::number(((snortLRules & 0xFF00)>>8));
+    QString hexastr4 = QString::number((snortLRules & 0xFF));
+    QString hexbstr1 = QString::number(((snortRRules & 0xFF000000)>>24));
+    QString hexbstr2 = QString::number(((snortRRules & 0xFF0000)>>16));
+    QString hexbstr3 = QString::number(((snortRRules & 0xFF00)>>8));
+    QString hexbstr4 = QString::number((snortRRules & 0xFF));
+    QString ra = QDateTime::fromMSecsSinceEpoch(((quint64)snortLRules)*1000).toString("MM/dd/yyyy hh:mm:ss AP - ")
+            +hexastr1+"."+hexastr2+"."+hexastr3+"."+hexastr4;
+    QString rb = QDateTime::fromMSecsSinceEpoch(((quint64)snortRRules)*1000).toString("MM/dd/yyyy hh:mm:ss AP - ")
+            +hexbstr1+"."+hexbstr2+"."+hexbstr3+"."+hexbstr4;
+    if(!snortLRules && !snortRRules){
+        labelSnortLocalRulesVal->setText("Can't Find Local Rules");
+        labelSnortRemoteRulesVal->setText("Can't Find Remote Rules");
+    }else if(snortLRules && !snortRRules){
+        labelSnortLocalRulesVal->setText(ra);
+        labelSnortRemoteRulesVal->setText("Can't Find Remote Rules");
+    }else if(!snortLRules && snortRRules){
+        labelSnortLocalRulesVal->setText("Can't Find Local Rules");
+        labelSnortRemoteRulesVal->setText(rb);
+    }else if(snortLRules == snortRRules){
+        labelSnortLocalRulesVal->setText("<b>"+ra+"</b>");
+        labelSnortRemoteRulesVal->setText("<b>"+rb+"</b>");
+    }else{
+        labelSnortLocalRulesVal->setText(ra);
+        labelSnortRemoteRulesVal->setText(rb);
+    }
+    return true;
+}
+
+
+qint64 MainWindow::snortRecurseTimestamp(const QString path, qint64 ts){
+    QFileInfo initialPath(path);
+    if(initialPath.isSymLink()){
+        return ts;
+    }else if(initialPath.isFile()){
+        QDateTime dt;
+        dt.setTimeSpec(Qt::UTC);
+        dt.setSecsSinceEpoch(initialPath.lastModified().toSecsSinceEpoch());
+        return qMax(dt.toSecsSinceEpoch(), ts);
+    }else if(initialPath.isDir()){
+        qint64 localTs = ts;
+
+        QFileInfoList files = QDir(initialPath.absoluteFilePath(), "", QDir::NoSort, QDir::Files|QDir::NoDotAndDotDot|QDir::NoSymLinks)
+                .entryInfoList(QStringList() << "*.rules" << "*.c" << "*.h" << "*.conf" << "*.config" << "*.map");
+
+        foreach(QFileInfo tmp, files)
+            localTs = snortRecurseTimestamp(tmp.absoluteFilePath(), localTs);
+
+        QFileInfoList dirs = QDir(initialPath.absoluteFilePath(), "", QDir::NoSort, QDir::Dirs|QDir::NoDotAndDotDot|QDir::NoSymLinks).entryInfoList();
+        foreach(QFileInfo tmp, dirs)
+            localTs = qMax(snortRecurseTimestamp(tmp.absoluteFilePath()), localTs);
+
+        return localTs;
+    }else{
+        return 0;
+    }
+}
+
+
 void MainWindow::removeScheduleItemAt(const QString link){
-    int list_count = ui->listWidgetSchedule->count();
+    int list_count = listWidgetSchedule->count();
     bool ok;
     qlonglong remove = link.toLongLong(&ok, 16);
     if(!ok || !list_count)
         return;
-    for(int i = 0; i < ui->listWidgetSchedule->count(); i++){
-        if(ui->listWidgetSchedule->item(i) == (QListWidgetItem *)remove){
-            int row_num = ui->listWidgetSchedule->row((QListWidgetItem *)remove);
-            ui->listWidgetSchedule->takeItem(row_num);
+    for(int i = 0; i < listWidgetSchedule->count(); i++){
+        if(listWidgetSchedule->item(i) == (QListWidgetItem *)remove){
+            int row_num = listWidgetSchedule->row((QListWidgetItem *)remove);
+            listWidgetSchedule->takeItem(row_num);
             schedule_detected_change();
             break;
         }
@@ -2544,6 +3625,39 @@ void MainWindow::on_pushButtonGraphsFileQuarantineResetGraph_clicked(){
     initializeDateTimeLineGraphWidget(3);
 }
 
+void MainWindow::on_pushButtonGraphsSnortEventsXscaleup_clicked(){
+    graphs_snortevents_xscale++;
+    if(graphs_snortevents_xscale>0xff)
+        graphs_snortevents_xscale=0xff;
+    initializeDateTimeLineGraphWidget(4);
+}
+
+void MainWindow::on_pushButtonGraphsSnortEventsXscaledown_clicked(){
+    graphs_snortevents_xscale--;
+    if(graphs_snortevents_xscale<-0xff)
+        graphs_snortevents_xscale=-0xff;
+    initializeDateTimeLineGraphWidget(4);
+}
+
+void MainWindow::on_pushButtonGraphsSnortEventsXshiftup_clicked(){
+    graphs_snortevents_xshift += DELTA_BASE * pow(2., graphs_snortevents_xscale);
+    initializeDateTimeLineGraphWidget(4);
+}
+
+void MainWindow::on_pushButtonGraphsSnortEventsXshiftdown_clicked(){
+    graphs_snortevents_xshift -= DELTA_BASE * pow(2., graphs_snortevents_xscale);
+    if(graphs_snortevents_xshift<0)
+        graphs_snortevents_xshift=0.0;
+    initializeDateTimeLineGraphWidget(4);
+}
+
+void MainWindow::on_pushButtonGraphsSnortEventsResetGraph_clicked(){
+    graphs_snortevents_xscale=0;
+    graphs_snortevents_xshift=0.0;
+    initializeDateTimeLineGraphWidget(4);
+}
+
+
 void MainWindow::on_pushButtonEventFoundPageBack_clicked(){
     if(intEventFoundPageNumber>0)
         intEventFoundPageNumber--;
@@ -2587,7 +3701,7 @@ void MainWindow::on_pushButtonEventFoundPageEnd_clicked(){
 }
 
 void MainWindow::on_pushButtonEventQuarantinedPageBack_clicked(){
-    if(!ui->tableWidgetEventQuarantined->isEnabled())
+    if(!tableWidgetEventQuarantined->isEnabled())
         return;
     if(intEventQuarantinedPageNumber>0)
         intEventQuarantinedPageNumber--;
@@ -2595,7 +3709,7 @@ void MainWindow::on_pushButtonEventQuarantinedPageBack_clicked(){
 }
 
 void MainWindow::on_pushButtonEventQuarantinedPageForward_clicked(){
-    if(!ui->tableWidgetEventQuarantined->isEnabled())
+    if(!tableWidgetEventQuarantined->isEnabled())
         return;
     qint64 entriesperpage = getEntriesPerPage();
 
@@ -2610,14 +3724,14 @@ void MainWindow::on_pushButtonEventQuarantinedPageForward_clicked(){
 }
 
 void MainWindow::on_pushButtonEventQuarantinedPageBegining_clicked(){
-    if(!ui->tableWidgetEventQuarantined->isEnabled())
+    if(!tableWidgetEventQuarantined->isEnabled())
         return;
     intEventQuarantinedPageNumber = 0;
     initializeEventsQuarantinedTableWidget(intEventQuarantinedPageNumber);
 }
 
 void MainWindow::on_pushButtonEventQuarantinedPageEnd_clicked(){
-    if(!ui->tableWidgetEventQuarantined->isEnabled())
+    if(!tableWidgetEventQuarantined->isEnabled())
         return;
     qint64 num = -1;
     qint64 entriesperpage = getEntriesPerPage();
@@ -2637,6 +3751,7 @@ void MainWindow::on_pushButtonEventQuarantinedPageEnd_clicked(){
 }
 
 QString MainWindow::getClamdLocalSocketname(){
+    //nc -lkU /path/to/var/run/clamav/clamd.ctl
     QFile found(getValDB("clamdconf"));
     if(found.exists() && found.open(QIODevice::ReadOnly)){
         QTextStream in(&found);
@@ -2729,6 +3844,13 @@ QString MainWindow::getClamdDatabaseDirectoryName(){
     return ddVar;
 }
 
+QString MainWindow::getSnortName(){
+    QByteArray ret;
+    if(!find_file(&ret, "snort"))
+        return "";
+    return ret;
+}
+
 QString MainWindow::getValDB(QString key){
     QSqlQuery query;
     query.prepare("SELECT val FROM basics WHERE key = ? ;");
@@ -2818,6 +3940,7 @@ bool MainWindow::requestUpdatedcDns(){
     requestLoop.exec();
 
     if (dns->error() != QDnsLookup::NoError) {
+        dnsSuccess = false;
         dns->deleteLater();
         QString res = getValDB("lastlookuptimestamp");
         if(res.isEmpty())
@@ -2850,6 +3973,7 @@ bool MainWindow::requestUpdatedcDns(){
             return false;
         }
     }else{
+        dnsSuccess = true;
         const auto records = dns->textRecords();
         for (const QDnsTextRecord &record : records) {
             QByteArray bytes;
@@ -2872,6 +3996,7 @@ bool MainWindow::requestUpdatedcDns(){
                 setValDB("dailyver", QString::number(cDns.daily_ver));
                 setValDB("mainver", QString::number(cDns.main_ver));
                 setValDB("bytecodever", QString::number(cDns.bytecode_ver));
+                setValDB("dnsclamversion", tmp.at(0));
                 cDns.isReset = false;
             }
             break;
@@ -3011,10 +4136,28 @@ bool MainWindow::checkDefsHeaderByte(){
     return true;
 }
 
+bool MainWindow::requestLocalClamdVersion(){
+    localSocket->abort();
+    localSocket->setServerName(localSocketFilename);
+    localSocket->connectToServer(QLocalSocket::ReadWrite);
+    if(!localSocket->waitForConnected() ||
+        localSocket->write(QByteArray("VERSION", 7)) != (qint64)7 ||
+        !localSocket->waitForReadyRead(250)){
+        statusSetError();
+        setErrorAVReason(tr("clamd failed to respond with clamd version info."));
+        localSocket->abort();
+        labelUpdateLocalEngineVal->setText("");
+    }else{
+        labelUpdateLocalEngineVal->setText(QString(localSocket->readAll()).split("/").at(0).split(" ").at(1));
+    }
+    return true;
+}
+
 void MainWindow::timerSlot(){
     bool isClamdError = false, isFreshclamError = false, isClamonaccError = false, isUpdateError = false, isActiveThreatDetected = false;
-    int rClamd = -1, rFresh = -1, rClamonacc = -1;
-    ckProc(&rClamd, &rFresh, &rClamonacc);
+    bool isSnortError = false;
+    int rClamd = -1, rFresh = -1, rClamonacc = -1, rSnort = -1;
+    ckProc(&rClamd, &rFresh, &rClamonacc, &rSnort);
 
     //CLAMD NOT RUNNING
     if(rClamd < 1){
@@ -3049,115 +4192,168 @@ void MainWindow::timerSlot(){
     }
 
     //CLAMD OK
-    if(!isClamdError)
-        ui->labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/check_16.png"));
+    //if(!isClamdError)
+    //    labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/check_16.png"));
 
     //FRESHCLAM NOT RUNNING
     if(rFresh < 1){
-        ui->labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         isFreshclamError = true;
         if(!isClamdError){
             statusSetError();
-            ui->labelStatusProtectionStateDetails->setText(tr("freshclam is currently not running."));
+            labelStatusProtectionStateDetails->setText(tr("freshclam is currently not running."));
         }
     }else{
-        ui->labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/check_16.png"));
+        labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/check_16.png"));
     }
 
     //ONACCESS NOT RUNNING
     if(getValDB("monitoronaccess")==tr("yes") && rClamonacc < 1){
-        ui->labelStatusEnabledItem3->setText(tr("OnAccess"));
-        ui->labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        labelStatusEnabledItem3->setText(tr("OnAccess"));
+        labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         isClamonaccError = true;
         if(!isClamdError && !isFreshclamError){
             statusSetError();
-            ui->labelStatusProtectionStateDetails->setText(tr("OnAccess is configured, but currently not running."));
+            labelStatusProtectionStateDetails->setText(tr("OnAccess is configured in Clam One, but currently not running."));
         }
     }else if(getValDB("monitoronaccess")==tr("yes")){
-        ui->labelStatusEnabledItem3->setText(tr("OnAccess"));
-        ui->labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/check_16.png"));
+        labelStatusEnabledItem3->setText(tr("OnAccess"));
+        labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/check_16.png"));
     }else{
-        ui->labelStatusEnabledItem3->setText(tr("OnAccess - Disabled in Configure"));
-        ui->labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/ques_16.png"));
+        setEnabledOnAccess(false);
+    }
+
+    //SNORT NOT RUNNING
+    if(getValDB("enablesnort")==tr("yes") && rSnort < 1){
+        labelStatusEnabledItem5->setText(tr("Snort Network Intrusion Detection System"));
+        labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        isSnortError = true;
+        if(!isClamdError && !isFreshclamError && !isClamonaccError){
+            statusSetError();
+            labelStatusProtectionStateDetails->setText(tr("Snort is configured in Clam One, but currently not running."));
+        }
+    }else if(getValDB("enablesnort")==tr("yes")){
+        labelStatusEnabledItem5->setText(tr("Snort Network Intrusion Detection System"));
+        labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/check_16.png"));
+    }else{
+        setEnabledSnort(false);
     }
 
     //CLAMAV DEFS OUTDATED
     if(!checkDefsHeaderDaily()){
-        ui->labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
-        ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
-        ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the daily.cld virus definition database. The file's header looks malformed."));
+        labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
+        labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the daily.cld virus definition database. The file's header looks malformed."));
         isUpdateError = true;
-        if(!isClamdError && !isFreshclamError && !isClamonaccError){
+        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isSnortError){
              statusSetWarn();
-             ui->labelStatusProtectionStateDetails->setText(tr("Unable To Check daily.cld"));
+             labelStatusProtectionStateDetails->setText(tr("Unable To Check daily.cld"));
         }
     }
     if(!isUpdateError && !checkDefsHeaderMain()){
-        ui->labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
-        ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
-        ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the main.cld virus definition database. The file's header looks malformed."));
+        labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
+        labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the main.cld virus definition database. The file's header looks malformed."));
         isUpdateError = true;
-        if(!isClamdError && !isFreshclamError && !isClamonaccError){
+        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isSnortError){
              statusSetWarn();
-             ui->labelStatusProtectionStateDetails->setText(tr("Unable To Check main.cld"));
+             labelStatusProtectionStateDetails->setText(tr("Unable To Check main.cld"));
         }
     }
     if(!isUpdateError && !checkDefsHeaderByte()){
-        ui->labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
-        ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
-        ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the bytecode.cld virus definition database. The file's header looks malformed."));
+        labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
+        labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the bytecode.cld virus definition database. The file's header looks malformed."));
         isUpdateError = true;
-        if(!isClamdError && !isFreshclamError && !isClamonaccError){
+        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isSnortError){
              statusSetWarn();
-             ui->labelStatusProtectionStateDetails->setText(tr("Unable To Check bytecode.cld"));
+             labelStatusProtectionStateDetails->setText(tr("Unable To Check bytecode.cld"));
         }
     }
-    if(!isUpdateError && !requestUpdatedcDns()){
-        ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/ques_16.png"));
-        ui->labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to lookup the DNS TXT current virus definition info. Check your internet connectivity."));
+    requestUpdatedcDns();
+    if(!isUpdateError && !dnsSuccess){
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/ques_16.png"));
+        labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
+        labelUpdateMessageDetails->setText(tr("There was a problem attempting to lookup the DNS TXT current virus definition info. Check your internet connectivity."));
         isUpdateError = true;
-        if(!isClamdError && !isFreshclamError && !isClamonaccError){
-             statusSetWarn();
-             ui->labelStatusProtectionStateDetails->setText(tr("Unable To Establish Internet Connection"));
+        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isSnortError){
+             statusSetCaution();
+             labelStatusProtectionStateDetails->setText(tr("Unable To Establish Internet Connection"));
         }
     }
-    if(!isUpdateError &&
+
+    if(!isUpdateError && dnsSuccess &&
             ( cDns.daily_ver != dailyDefHeader.version ||
               cDns.main_ver != mainDefHeader.version ||
               cDns.bytecode_ver != byteDefHeader.version
             )
         ){
-        ui->labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
-        ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
-        ui->labelUpdateMessage->setText(tr("Virus Definitions Update Failed."));
-        ui->labelUpdateMessageDetails->setText(tr("There was a problem attempting to update the virus definition database to the most current form. The virus definition database is out-of-date"));
+        labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        labelUpdateMessage->setText(tr("Virus Definitions Update Failed."));
+        labelUpdateMessageDetails->setText(tr("There was a problem attempting to update the virus definition database to the most current form. The virus definition database is out-of-date"));
         isUpdateError = true;
-        if(!isClamdError && !isFreshclamError && !isClamonaccError){
+        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isSnortError){
             statusSetWarn();
-            ui->labelStatusProtectionStateDetails->setText(tr("Virus Definitions Are Out Of Date"));
+            labelStatusProtectionStateDetails->setText(tr("Virus Definitions Are Out Of Date"));
         }
     }else if(!isUpdateError){
-        ui->labelStatusEnabledItem4->setText(tr("Definitions Up To Date"));
-        ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/check_16.png"));
-        ui->labelUpdateMessage->setText(tr("Virus Definitions Updated."));
-        ui->labelUpdateMessageDetails->setText(tr("The virus definition database is up-to-date<br /><br />"));
+        labelStatusEnabledItem4->setText(tr("Definitions Up To Date"));
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/check_16.png"));
+        labelUpdateMessage->setText(tr("Virus Definitions Updated."));
+        labelUpdateMessageDetails->setText(tr("The virus definition database is up-to-date<br /><br />"));
     }
 
-    ui->labelUpdateLocalDailyVal->setText(QDateTime::fromMSecsSinceEpoch(((quint64)dailyDefHeader.timestamp)*1000).toString("MM/dd/yyyy hh:mm:ss AP")
-                                          +tr(" d-")+QString::number(dailyDefHeader.version));
-    ui->labelUpdateLocalMainVal->setText(QDateTime::fromMSecsSinceEpoch(((quint64)mainDefHeader.timestamp)*1000).toString("MM/dd/yyyy hh:mm:ss AP")
-                                         +tr(" m-")+QString::number(mainDefHeader.version));
-    ui->labelUpdateLocalByteVal->setText(QDateTime::fromMSecsSinceEpoch(((quint64)byteDefHeader.timestamp)*1000).toString("MM/dd/yyyy hh:mm:ss AP")
-                                         +tr(" b-")+QString::number(byteDefHeader.version));
+    labelUpdateLocalDailyVal->setText(QDateTime::fromMSecsSinceEpoch(((quint64)dailyDefHeader.timestamp)*1000).toString("MM/dd/yyyy hh:mm:ss AP")
+                                          +" d-"+QString::number(dailyDefHeader.version));
+    labelUpdateLocalMainVal->setText(QDateTime::fromMSecsSinceEpoch(((quint64)mainDefHeader.timestamp)*1000).toString("MM/dd/yyyy hh:mm:ss AP")
+                                         +" m-"+QString::number(mainDefHeader.version));
+    labelUpdateLocalByteVal->setText(QDateTime::fromMSecsSinceEpoch(((quint64)byteDefHeader.timestamp)*1000).toString("MM/dd/yyyy hh:mm:ss AP")
+                                         +" b-"+QString::number(byteDefHeader.version));
 
-    ui->labelUpdateRemoteVersionVal->setText(
-                tr("d-")+QString::number(cDns.daily_ver)+
-                tr(", m-")+QString::number(cDns.main_ver)+
-                tr(", b-")+QString::number(cDns.bytecode_ver));
+    if(dnsSuccess){
+        labelUpdateRemoteVersionVal->setText(
+                    "d-"+QString::number(cDns.daily_ver)+
+                    ", m-"+QString::number(cDns.main_ver)+
+                    ", b-"+QString::number(cDns.bytecode_ver));
+
+        labelUpdateRemoteEngineVal->setText(QString::number(cDns.ver_major)+"."+
+                                            QString::number(cDns.ver_minor)+"."+
+                                            QString::number(cDns.ver_build));
+    }else{
+        labelUpdateRemoteVersionVal->setText("");
+        labelUpdateRemoteEngineVal->setText("");
+    }
+
+    //labelUpdateLocalEngineVal
+    requestLocalClamdVersion();
+
+    if(!isUpdateError && dnsSuccess &&
+            QT_VERSION_CHECK(labelUpdateRemoteEngineVal->text().split(".").at(0).toInt(),
+                             labelUpdateRemoteEngineVal->text().split(".").at(1).toInt(),
+                             labelUpdateRemoteEngineVal->text().split(".").at(2).toInt())
+            >
+            QT_VERSION_CHECK(labelUpdateLocalEngineVal->text().split(".").at(0).toInt(),
+                             labelUpdateLocalEngineVal->text().split(".").at(1).toInt(),
+                             labelUpdateLocalEngineVal->text().split(".").at(2).toInt())
+    ){
+        labelStatusEnabledItem1->setText(tr("Clamd Engine Not Up To Date"));
+        labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/ques_16.png"));
+        labelUpdateMessage->setText(tr("AntiVirus Engine Update Failed."));
+        labelUpdateMessageDetails->setText(tr("There was a problem matching the local Antivirus version to the most current form. The Clamd is out-of-date"));
+        isUpdateError = true;
+        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isSnortError){
+            statusSetWarn();
+            labelStatusProtectionStateDetails->setText(tr("AntiVirus Engine Is Out Of Date"));
+        }
+    }else{
+        labelStatusEnabledItem1->setText(tr("Antivirus Engine"));
+        if(!isClamdError)
+            labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/check_16.png"));
+    }
 
     //Update Logfile Display
     ckLogfileDisplay();
@@ -3166,9 +4362,9 @@ void MainWindow::timerSlot(){
     QStringList existsOnFs = ckExistsOnFs();
     if(existsOnFs.length() != 0){
         isActiveThreatDetected = true;
-        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isUpdateError){
+        if(!isClamdError && !isFreshclamError && !isClamonaccError && !isUpdateError && !isSnortError){
             statusSetError();
-            ui->labelStatusProtectionStateDetails->setText(tr("Active threat detected on filesystem."));
+            labelStatusProtectionStateDetails->setText(tr("Active threat detected on filesystem."));
         }
         foreach(QString filename, existsOnFs){
             if(!QFileInfo(filename).exists()){
@@ -3193,11 +4389,112 @@ void MainWindow::timerSlot(){
         }
     }
 
-    if(isClamdError || isFreshclamError || isClamonaccError || isUpdateError || isActiveThreatDetected)
+    snortGetLocalVersion();
+    snortGetLocalTimeModifiy();
+
+    if(isClamdError || isFreshclamError || isClamonaccError || isSnortError || isUpdateError || isActiveThreatDetected)
         return;
 
     //NOMINAL
     statusSetOk();
+}
+
+void MainWindow::timerSlotTmp(){
+    int rClamd = -1, rFresh = -1, rClamonacc = -1, rSnort = -1;
+    quint8 clevel = CLAMONE_UNKNOWN;
+    QString mainMessageString;
+    ckProc(&rClamd, &rFresh, &rClamonacc, &rSnort);
+    if(localSocketFilename.isEmpty()) localSocketFilename = getClamdLocalSocketname();
+
+    if(rClamd < 1){
+        clevel |= CLAMONE_ERROR;
+        labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        if(mainMessageString.isEmpty())
+            mainMessageString = tr("clamd is currently not running.");
+    }else if(localSocketFilename.isEmpty()){
+        clevel |= CLAMONE_ERROR;
+        labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        if(mainMessageString.isEmpty())
+            mainMessageString = tr("clamd must be configured to run locally on a \"local socket\", which is currently not enabled.");
+    }else if(!clamdPingPongCk()){
+        clevel |= CLAMONE_ERROR;
+        labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        if(mainMessageString.isEmpty())
+            mainMessageString = tr("clamd failed to ping back.");
+    }else { //Clamd Ok
+        labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/check_16.png"));
+    }
+
+    if(rFresh < 1){
+        clevel |= CLAMONE_ERROR;
+        labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        if(mainMessageString.isEmpty())
+            mainMessageString = tr("freshclam is currently not running.");
+    }else{ //Freshclam Ok
+        labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/check_16.png"));
+    }
+
+    if(getValDB("monitoronaccess")==tr("yes") && rClamonacc < 1){
+        clevel |= CLAMONE_ERROR;
+        labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        if(mainMessageString.isEmpty())
+            mainMessageString = tr("OnAccess is configured in Clam One, but currently not running.");
+    }else if(getValDB("monitoronaccess")==tr("yes")){ //OnAccess Ok
+        labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/check_16.png"));
+    }else{
+        setEnabledOnAccess(false);
+    }
+
+    if(getValDB("enablesnort")==tr("yes") && rSnort < 1){
+        if(!(static_cast<char>(clevel) & CLAMONE_ERROR))
+            clevel |= CLAMONE_ERROR;
+        labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        if(mainMessageString.isEmpty())
+            mainMessageString = tr("Snort is configured in Clam One, but currently not running.");
+    }else if(getValDB("enablesnort")==tr("yes")){ //Snort Ok
+        labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/check_16.png"));
+    }else{
+        setEnabledSnort(false);
+    }
+
+    if(!checkDefsHeaderDaily()){
+        if(clevel < CLAMONE_ERROR)
+            clevel |= CLAMONE_ERROR;
+        labelStatusEnabledItem4->setText(tr("Definitions Not Up To Date"));
+        labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+        labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
+        labelUpdateMessageDetails->setText(tr("There was a problem attempting to check the daily.cld virus definition database. The file's header looks malformed."));
+
+    }
+
+    if(!(clevel))
+        clevel |= CLAMONE_OK;
+
+    if(clevel & CLAMONE_ERROR){
+        statusSetError();
+    }else if(clevel & CLAMONE_WARN){
+        statusSetWarn();
+    }else if(clevel & CLAMONE_CAUTION){
+        statusSetCaution();
+    }else if(clevel & CLAMONE_OK){
+        statusSetOk();
+    }else{
+        statusSetGrey();
+    }
+    labelStatusProtectionStateDetails->setText(mainMessageString);
+}
+
+bool MainWindow::clamdPingPongCk(){
+    localSocket->abort();
+    localSocket->setServerName(localSocketFilename);
+    localSocket->connectToServer(QLocalSocket::ReadWrite);
+    if(!localSocket->waitForConnected() ||
+        localSocket->write(QByteArray("PING", 4)) != (qint64)4 ||
+        !localSocket->waitForReadyRead(250) ||
+        localSocket->readAll() != QByteArray("PONG\n", 5)){
+        return false;
+    }
+    return true;
 }
 
 void MainWindow::ckLogfileDisplay(){
@@ -3215,11 +4512,11 @@ void MainWindow::ckLogfileDisplay(){
 
 void MainWindow::ckScheduledScans(){
     QDateTime timestamp = QDateTime::currentDateTime();
-    for(int i = 0; i < ui->listWidgetSchedule->count(); i++){
+    for(int i = 0; i < listWidgetSchedule->count(); i++){
         bool ok1, ok2, ok3;
         int num1, num2, num3;
-        QListWidgetItem *item = ui->listWidgetSchedule->item(i);
-        QWidget *widget = ui->listWidgetSchedule->itemWidget(item);
+        QListWidgetItem *item = listWidgetSchedule->item(i);
+        QWidget *widget = listWidgetSchedule->itemWidget(item);
         QLayout *layout = widget->layout();
 
         //QLabel *labelDelete = static_cast<QLabel *>(layout->itemAt(0)->widget());
@@ -3309,13 +4606,14 @@ QStringList MainWindow::ckExistsOnFs(){
     return ret;
 }
 
-void MainWindow::ckProc(int *pidClamd, int *pidFreshclam, int *pidClamonacc){
+void MainWindow::ckProc(int *pidClamd, int *pidFreshclam, int *pidClamonacc, int *pidSnort){
     bool ok;
     QDir procdir("/proc");
 
     (*pidClamd) = -1;
     (*pidFreshclam) = -1;
     (*pidClamonacc) = -1;
+    (*pidSnort) = -1;
 
     procdir.entryList();
     procdir.setFilter(QDir::Dirs | QDir::NoSymLinks);
@@ -3349,6 +4647,9 @@ void MainWindow::ckProc(int *pidClamd, int *pidFreshclam, int *pidClamonacc){
         }else if(freadall == QString("clamonacc")){
             if(pidClamonacc != Q_NULLPTR)
                 (*pidClamonacc) = num;
+        }else if(freadall == QString("snort")){
+            if(pidClamonacc != Q_NULLPTR)
+                (*pidSnort) = num;
         }
     }
 }
@@ -3383,36 +4684,27 @@ quint32 MainWindow::clamdscanVersion(QByteArray *clamdscan_ver){
 
     return QT_VERSION_CHECK(major_i, minor_i, build_i);
 }
-#ifdef CLAMONE_COUNT_ITEMS_SCANNED
 void MainWindow::countTotalScanItems(const QStringList items, quint64 *count){
-    if(count == Q_NULLPTR)
-        return;
     foreach(QString item, items)
-        countScanItem(item, count);
+        (*count) += countScanItem(item);
 }
 
-void MainWindow::countScanItem(const QString item, quint64 *count){
-    QFileInfo qfi(item);
-    if(count == Q_NULLPTR || item == tr(".") || item == tr(".."))
-        return;
-    if(!qfi.exists())
-        return;
-    if(qfi.isDir()){
-        QStringList qsl;
-        QFileInfoList qfil = QDir(qfi.absoluteFilePath()).entryInfoList();
-        foreach(QFileInfo fileinfo, qfil){
-            if(fileinfo.fileName() == tr(".") || fileinfo.fileName() == tr(".."))
-                continue;
-            qsl.append(fileinfo.absoluteFilePath());
-        }
-        countTotalScanItems(qsl, count);
-    }else if(qfi.isFile()){
-        (*count)++;
-    }else if(qfi.isSymLink()){
-        countScanItem(qfi.canonicalFilePath(), count);
+quint64 MainWindow::countScanItem(const QString item){
+    QFileInfo initialPath(item);
+    if(initialPath.isSymLink()){
+        return 0;
+    }else if(initialPath.isFile()){
+        return 1;
+    }else if(initialPath.isDir()){
+        quint64 count = QDir(initialPath.absoluteFilePath(), "", QDir::NoSort, QDir::Files|QDir::NoDotAndDotDot|QDir::NoSymLinks).count();
+        QFileInfoList dirs = QDir(initialPath.absoluteFilePath(), "", QDir::NoSort, QDir::Dirs|QDir::NoDotAndDotDot|QDir::NoSymLinks).entryInfoList();
+        foreach(QFileInfo tmp, dirs)
+            count += countScanItem(tmp.absoluteFilePath());
+        return count;
+    }else{
+        return 0;
     }
 }
-#endif //CLAMONE_COUNT_ITEMS_SCANNED
 
 quint8 MainWindow::getQuarantineFileStatus(QString quarantine_name){
     quint8 ret = 0;
@@ -3444,11 +4736,11 @@ bool MainWindow::getQuarantineInfo(QString quarantine_name, quint32 *timestamp, 
 }
 
 void MainWindow::setErrorAVReason(QString in){
-    ui->labelStatusProtectionStateDetails->setText(in);
-    ui->labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/cross_16.png"));
-    ui->labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/ques_16.png"));
-    ui->labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/ques_16.png"));
-    ui->labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/ques_16.png"));
+    labelStatusProtectionStateDetails->setText(in);
+    labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+    labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/ques_16.png"));
+    labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/ques_16.png"));
+    labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/ques_16.png"));
 }
 
 void MainWindow::statusSetError(){
@@ -3457,16 +4749,16 @@ void MainWindow::statusSetError(){
     setWindowIcon(icon);
     trayIcon->show();
 
-    ui->listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_red.png"));
+    listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_red.png"));
 
-    ui->frameStatus->setStyleSheet("background-color: #fbc2c1;");
+    frameStatus->setStyleSheet("background-color: #fbc2c1;");
 
-    ui->labelTL->setStyleSheet("background-color: #ec1a1a;");
-    ui->labelTM->setStyleSheet("background-color: #ec1a1a;");
-    ui->labelTR->setStyleSheet("background-color: #ec1a1a;");
+    labelTL->setStyleSheet("background-color: #ec1a1a;");
+    labelTM->setStyleSheet("background-color: #ec1a1a;");
+    labelTR->setStyleSheet("background-color: #ec1a1a;");
 
-    ui->labelStatusProtectionState->setText(tr("Error"));
-    ui->labelStatusProtectionStateDetails->setText(tr(""));
+    labelStatusProtectionState->setText(tr("Error"));
+    //labelStatusProtectionStateDetails->setText(tr(""));
 }
 
 void MainWindow::statusSetWarn(){
@@ -3475,17 +4767,35 @@ void MainWindow::statusSetWarn(){
     setWindowIcon(icon);
     trayIcon->show();
 
-    ui->listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_yellow.png"));
+    listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_yellow.png"));
 
-    ui->frameStatus->setStyleSheet("background-color: #fef2d1;");
+    frameStatus->setStyleSheet("background-color: #fef2d1;");
 
-    ui->labelTL->setStyleSheet("background-color: #eaec1a;");
-    ui->labelTM->setStyleSheet("background-color: #eaec1a;");
-    ui->labelTR->setStyleSheet("background-color: #eaec1a;");
+    labelTL->setStyleSheet("background-color: #eaec1a;");
+    labelTM->setStyleSheet("background-color: #eaec1a;");
+    labelTR->setStyleSheet("background-color: #eaec1a;");
 
-    ui->labelStatusProtectionState->setText(tr("Warning"));
-    ui->labelStatusProtectionStateDetails->setText(tr(""));
+    labelStatusProtectionState->setText(tr("Warning"));
+    //labelStatusProtectionStateDetails->setText(tr(""));
 }
+
+void MainWindow::statusSetCaution(){
+    QIcon icon = QIcon(":/images/main_icon_orange.png");
+    trayIcon->setIcon(icon);
+    setWindowIcon(icon);
+    trayIcon->show();
+
+    listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_orange.png"));
+
+    frameStatus->setStyleSheet("background-color: #fef2d1;");
+
+    labelTL->setStyleSheet("background-color: #ec811a;");
+    labelTM->setStyleSheet("background-color: #ec811a;");
+    labelTR->setStyleSheet("background-color: #ec811a;");
+
+    labelStatusProtectionState->setText(tr("Caution"));
+}
+
 
 void MainWindow::statusSetOk(){
     QIcon icon = QIcon(":/images/main_icon_green.png");
@@ -3493,16 +4803,16 @@ void MainWindow::statusSetOk(){
     setWindowIcon(icon);
     trayIcon->show();
 
-    ui->listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_green.png"));
+    listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_green.png"));
 
-    ui->frameStatus->setStyleSheet("background-color: #cbfbd1;");
+    frameStatus->setStyleSheet("background-color: #cbfbd1;");
 
-    ui->labelTL->setStyleSheet("background-color: #12bf12;");
-    ui->labelTM->setStyleSheet("background-color: #12bf12;");
-    ui->labelTR->setStyleSheet("background-color: #12bf12;");
+    labelTL->setStyleSheet("background-color: #12bf12;");
+    labelTM->setStyleSheet("background-color: #12bf12;");
+    labelTR->setStyleSheet("background-color: #12bf12;");
 
-    ui->labelStatusProtectionState->setText(tr("All Systems Nominal"));
-    ui->labelStatusProtectionStateDetails->setText(tr(""));
+    labelStatusProtectionState->setText(tr("All Systems Nominal"));
+    labelStatusProtectionStateDetails->setText(tr(""));
 }
 
 void MainWindow::statusSetGrey(){
@@ -3511,32 +4821,32 @@ void MainWindow::statusSetGrey(){
     setWindowIcon(icon);
     trayIcon->show();
 
-    ui->listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_grey.png"));
+    listWidget->item(ClamOneMainStackOrder::Status)->setIcon(QIcon(":/images/icon_status_grey.png"));
 
-    ui->frameStatus->setStyleSheet("background-color: #b6b6b6;");
+    frameStatus->setStyleSheet("background-color: #b6b6b6;");
 
-    ui->labelTL->setStyleSheet("background-color: #999999;");
-    ui->labelTM->setStyleSheet("background-color: #999999;");
-    ui->labelTR->setStyleSheet("background-color: #999999;");
+    labelTL->setStyleSheet("background-color: #999999;");
+    labelTM->setStyleSheet("background-color: #999999;");
+    labelTR->setStyleSheet("background-color: #999999;");
 
-    ui->labelStatusProtectionState->setText(tr("System Unknown"));
-    ui->labelStatusProtectionStateDetails->setText(tr(""));
+    labelStatusProtectionState->setText(tr("System Unknown"));
+    labelStatusProtectionStateDetails->setText(tr(""));
 }
 
 void MainWindow::updateSetError(){
-    ui->frameUpdate->setStyleSheet("background-color: #fbc2c2;");
+    frameUpdate->setStyleSheet("background-color: #fbc2c2;");
 }
 
 void MainWindow::updateSetWarn(){
-    ui->frameUpdate->setStyleSheet("background-color: #fef2d0;");
+    frameUpdate->setStyleSheet("background-color: #fef2d0;");
 }
 
 void MainWindow::updateSetOk(){
-    ui->frameUpdate->setStyleSheet("background-color: #cbfbd4;");
+    frameUpdate->setStyleSheet("background-color: #cbfbd4;");
 }
 
 void MainWindow::updateSetGrey(){
-    ui->frameUpdate->setStyleSheet("background-color: #b6b6b6;");
+    frameUpdate->setStyleSheet("background-color: #b6b6b6;");
 }
 
 void MainWindow::actionExit(){
@@ -3555,7 +4865,7 @@ void MainWindow::actionExit(){
       case QMessageBox::AcceptRole:
       case QMessageBox::Yes:
           markClamOneStopped();
-          exitProgram();
+          exitProgram(1);
           break;
       default:
         break;

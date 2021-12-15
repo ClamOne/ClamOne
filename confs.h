@@ -4,10 +4,10 @@
 #include <dirent.h>
 #include <sys/types.h>
 
-#define CLAMONE_MAJOR 0
-#define CLAMONE_MINOR 103
-#define CLAMONE_BUILD 3
-#define CLAMONE_VERSION "0.103.3"
+#define CLAMONE_MAJOR 1
+#define CLAMONE_MINOR 0
+#define CLAMONE_BUILD 0
+#define CLAMONE_VERSION "1.0.2"
 #define CLAMONE_VERSION_L QT_VERSION_CHECK(CLAMONE_MAJOR, CLAMONE_MINOR, CLAMONE_BUILD)
 
 #define DELTA_DAY 60*60*24
@@ -61,7 +61,12 @@ enum ClamOneConfigStackOrder {
     ConfigFreshclamconf = 2
 };
 
+#define CLAMONE_UNKNOWN (0)
+#define CLAMONE_OK (1<<0)
+#define CLAMONE_WARN (1<<1)
+#define CLAMONE_CAUTION (1<<2)
+#define CLAMONE_ERROR (1<<3)
+
 //#define CLAMONE_DEBUG
-//#define CLAMONE_COUNT_ITEMS_SCANNED
 
 #endif // CONFS_H

@@ -18,7 +18,7 @@ public:
     ListSpinBoxWidgetPlug(QString name, QString tooltip);
     ~ListSpinBoxWidgetPlug();
     QCheckBox *getEckbox() const;
-    QListSpinBoxWidget *getStringListWidget() const;
+    QListSpinBoxWidget *getListSpinBoxWidget() const;
     QByteArray toConfline() const;
     bool lineGrabber(QByteArray line) const;
 

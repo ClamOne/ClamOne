@@ -12,10 +12,12 @@
         <file>images/icon_status_green.png</file>
         <file>images/icon_status_grey.png</file>
         <file>images/icon_status_red.png</file>
+        <file>images/icon_status_orange.png</file>
         <file>images/icon_status_yellow.png</file>
         <file>images/main_icon_green.png</file>
         <file>images/main_icon_grey.png</file>
         <file>images/main_icon_red.png</file>
+        <file>images/main_icon_orange.png</file>
         <file>images/main_icon_yellow.png</file>
         <file>images/check_16.png</file>
         <file>images/cross_16.png</file>
@@ -33,5 +35,6 @@
         <file>images/icon_marker.png</file>
         <file>images/reset.png</file>
         <file>images/icon_time.png</file>
+        <file>images/icon_snort.png</file>
     </qresource>
 </RCC>

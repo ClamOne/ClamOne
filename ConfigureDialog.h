@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QMessageBox>
 #include <QListWidget>
 #include <QStackedWidget>
 #include <QSpacerItem>
@@ -28,6 +29,7 @@
 #include "qstringlistwidget.h"
 #include "qlistspinboxwidget.h"
 #include "LineEditPlug.h"
+#include "FileDialogPlug.h"
 #include "CheckBoxPlug.h"
 #include "SpinBoxPlug.h"
 #include "StringListWidgetPlug.h"
@@ -54,6 +56,8 @@ signals:
     void refreshMessages(qint64 page);
     void refreshQuarantineDirectory();
     void setEnabledQuarantine(bool state);
+    void setEnabledSnort(bool state);
+    void setEnabledMonitorOnAccess(bool state);
 
 public:
     ConfigureDialog(QString dbLoc, QWidget *parent);
@@ -63,8 +67,11 @@ public:
     void updateEntriesPerPage(QString loc);
     void updateMonitorOnAccess(bool state);
     void updateEnableQuarantine(bool state);
+    void updateEnableSnort(bool state);
     void updateMaximumQuarantineFileSize(quint64 size);
     void updateLocationQuarantineFileDirectory(QString loc);
+    void updateLocationSnortRules(QString loc);
+    void updateSnortOinkcode(QString code);
 
 public slots:
     bool fileClamdconfToUI(QString filename);
@@ -91,9 +98,12 @@ private:
     void freshclam_databases_tab_init();
     void freshclam_http_tab_init();
     void freshclam_misc_tab_init();
+    void snort_tab_init();
+    void snort_support_tab_init();
 
     void disableAllClamdconf();
     void disableAllFreshclamconf();
+    void disableAllSnort();
     //int toClamInt(QString in);
     //QString toClamInt(int in);
     bool matchBoolTrue(QRegularExpression r, QByteArray l);
@@ -114,6 +124,7 @@ private:
     QWidget *pageOptions = Q_NULLPTR;
     QWidget *pageClamd = Q_NULLPTR;
     QWidget *pageFreshclam = Q_NULLPTR;
+    QWidget *pageSnort = Q_NULLPTR;
 
     //Options -> Basics
     QTabWidget *tabWidgetOptions = Q_NULLPTR;
@@ -148,6 +159,10 @@ private:
     QLabel *labelEnableClamOneQuarantine = Q_NULLPTR;
     QCheckBox *checkBoxEnableClamOneQuarantine = Q_NULLPTR;
 
+    QHBoxLayout *horizontalLayoutEnableClamOneSnort = Q_NULLPTR;
+    QLabel *labelEnableClamOneSnort = Q_NULLPTR;
+    QCheckBox *checkBoxEnableClamOneSnort = Q_NULLPTR;
+
     QHBoxLayout *horizontalLayoutMaximumFileSizeToQuarantine = Q_NULLPTR;
     QLabel *labelMaximumFileSizeToQuarantine = Q_NULLPTR;
     QSpinBox *spinBoxMaximumFileSizeToQuarantine = Q_NULLPTR;
@@ -156,6 +171,18 @@ private:
     QLabel *labelLocationOfQuarantineFilesDirectory = Q_NULLPTR;
     QLineEdit *lineEditLocationOfQuarantineFilesDirectory = Q_NULLPTR;
     QPushButton *pushButtonLocationOfQuarantineFilesDirectory = Q_NULLPTR;
+
+    QHBoxLayout *horizontalLayoutAutostartSetup = Q_NULLPTR;
+    QLabel *labelAutostartSetup = Q_NULLPTR;
+    QPushButton *pushButtonAutostartSetup = Q_NULLPTR;
+
+    QHBoxLayout *horizontalLayoutAutostartClamOnAccSetup = Q_NULLPTR;
+    QLabel *labelAutostartClamOnAccSetup = Q_NULLPTR;
+    QPushButton *pushButtonAutostartClamOnAccSetup = Q_NULLPTR;
+
+    QHBoxLayout *horizontalLayoutAutostartSnortSetup = Q_NULLPTR;
+    QLabel *labelAutostartSnortSetup = Q_NULLPTR;
+    QPushButton *pushButtonAutostartSnortSetup = Q_NULLPTR;
 
     //Clamd -> NetSock
     QTabWidget *tabWidgetClamd = Q_NULLPTR;
@@ -429,6 +456,19 @@ private:
     LineEditPlug *cntFreshStatsHostID = Q_NULLPTR;
     SpinBoxPlug *cntFreshStatsTimeout = Q_NULLPTR;
     LineEditPlug *cntFreshSubmitDetectionStats = Q_NULLPTR;
+
+    //Snort -> Support
+    QTabWidget *tabWidgetSnort = Q_NULLPTR;
+    QWidget *tabSnortSupport = Q_NULLPTR;
+    QScrollArea *tabSnortSupportScrollArea = Q_NULLPTR;
+    QWidget *tabSnortSupportScrollAreaWidget = Q_NULLPTR;
+
+    //SnortSupport
+    FileDialogPlug *cntLocationOfSnortRules = Q_NULLPTR;
+    LineEditPlug *cntSnortOinkcode = Q_NULLPTR;
+
+
 };
+
 
 #endif // CONFIGUREDIALOG_H

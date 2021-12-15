@@ -24,12 +24,15 @@ ConfigureDialog::ConfigureDialog(QString dbLoc, QWidget *parent)
     listWidgetMain->addItem(tr("Options"));
     listWidgetMain->addItem(tr("Clamd"));
     listWidgetMain->addItem(tr("Freshclam"));
+    listWidgetMain->addItem(tr("Snort"));
     pageOptions = new QWidget();
     pageClamd = new QWidget();
     pageFreshclam = new QWidget();
+    pageSnort = new QWidget();
     stackedWidget->addWidget(pageOptions);
     stackedWidget->addWidget(pageClamd);
     stackedWidget->addWidget(pageFreshclam);
+    stackedWidget->addWidget(pageSnort);
 
     options_tab_init();
     options_basics_tab_init();
@@ -48,13 +51,15 @@ ConfigureDialog::ConfigureDialog(QString dbLoc, QWidget *parent)
     freshclam_databases_tab_init();
     freshclam_http_tab_init();
     freshclam_misc_tab_init();
+    snort_tab_init();
+    snort_support_tab_init();
 
     pushButtonReloadClamav = new QPushButton(tr("Reload ClamAV"));
     pushButtonApply = new QPushButton(tr("Apply"));
     pushButtonOk = new QPushButton(tr("Ok"));
     pushButtonCancel = new QPushButton(tr("Cancel"));
-    QSpacerItem *horizontalSpacer = new QSpacerItem(0,0, QSizePolicy::Expanding, QSizePolicy::Fixed);
-    horizontalLayoutOkCancel->addItem(horizontalSpacer);
+
+    horizontalLayoutOkCancel->addStretch();
     horizontalLayoutOkCancel->addWidget(pushButtonReloadClamav);
     horizontalLayoutOkCancel->addWidget(pushButtonApply);
     horizontalLayoutOkCancel->addWidget(pushButtonOk);
@@ -72,7 +77,8 @@ ConfigureDialog::ConfigureDialog(QString dbLoc, QWidget *parent)
 }
 
 void ConfigureDialog::setVersion(quint32 version){
-    //clamav-0.*/shared/optparser.c
+    setWindowTitle("Clam One - clamav "+QString::number((version&0xFF0000)>>16)+"."+QString::number((version&0xFF00)>>8)+"."+QString::number(version&0xFF));
+    //clamav-0.*/shared/optparser.c clamav-0.*.0/common/optparser.c
     if(version >= QT_VERSION_CHECK(0, 97, 4) && version <= QT_VERSION_CHECK(0, 97, 8)){
         cntClamAuth->show();
         cntClamAuth->setVersion_parameter(true);
@@ -289,7 +295,7 @@ void ConfigureDialog::setVersion(quint32 version){
         cntFreshSafeBrowsing->setVersion_parameter(false);
     }else{
         cntFreshSafeBrowsing->show();
-        cntFreshSafeBrowsing->setVersion_parameter(false);
+        cntFreshSafeBrowsing->setVersion_parameter(true);
     }
 }
 
@@ -316,12 +322,27 @@ void ConfigureDialog::updateEnableQuarantine(bool state){
     checkBoxEnableClamOneQuarantine->setChecked(state);
 }
 
+void ConfigureDialog::updateEnableSnort(bool state){
+    checkBoxEnableClamOneSnort->setChecked(state);
+    listWidgetMain->item(3)->setHidden(!state);
+}
+
 void ConfigureDialog::updateMaximumQuarantineFileSize(quint64 size){
     spinBoxMaximumFileSizeToQuarantine->setValue(size);
 }
 
 void ConfigureDialog::updateLocationQuarantineFileDirectory(QString loc){
     lineEditLocationOfQuarantineFilesDirectory->setText(loc);
+}
+
+void ConfigureDialog::updateLocationSnortRules(QString loc){
+    cntLocationOfSnortRules->getLineEdit()->setText(loc);
+    cntLocationOfSnortRules->getEckbox()->setChecked(!loc.isEmpty());
+}
+
+void ConfigureDialog::updateSnortOinkcode(QString code){
+    cntSnortOinkcode->getLineEdit()->setText(code);
+    cntSnortOinkcode->getEckbox()->setChecked(!code.isEmpty());
 }
 
 bool ConfigureDialog::fileClamdconfToUI(QString filename)
@@ -893,6 +914,21 @@ void ConfigureDialog::options_basics_tab_init(){
     });
     horizontalLayoutMonitorOnAccess->addWidget(checkBoxMonitorOnAccess);
 
+    //EnableClamOneSnort
+    horizontalLayoutEnableClamOneSnort = new QHBoxLayout();
+    tabBasicScrollAreaWidgetVBox->addLayout(horizontalLayoutEnableClamOneSnort);
+    labelEnableClamOneSnort = new QLabel(tr("Enable Clam One for Snort"));
+    labelEnableClamOneSnort->setToolTip(tr("Enables Clam One to interact with running snort instance."));
+    horizontalLayoutEnableClamOneSnort->addWidget(labelEnableClamOneSnort);
+    horizontalLayoutEnableClamOneSnort->addSpacerItem(new QSpacerItem(0,0, QSizePolicy::Expanding, QSizePolicy::Fixed));
+    checkBoxEnableClamOneSnort = new QCheckBox();
+    checkBoxEnableClamOneSnort->setText(tr("no"));
+    connect(checkBoxEnableClamOneSnort, &QCheckBox::stateChanged, [=](int state) {
+        (state)?checkBoxEnableClamOneSnort->setText(tr("yes")):checkBoxEnableClamOneSnort->setText(tr("no"));
+        listWidgetMain->item(3)->setHidden(!(bool)state);
+    });
+    horizontalLayoutEnableClamOneSnort->addWidget(checkBoxEnableClamOneSnort);
+
     //EnableClamOneQuarantine
     horizontalLayoutEnableClamOneQuarantine = new QHBoxLayout();
     tabBasicScrollAreaWidgetVBox->addLayout(horizontalLayoutEnableClamOneQuarantine);
@@ -928,7 +964,7 @@ void ConfigureDialog::options_basics_tab_init(){
     labelLocationOfQuarantineFilesDirectory = new QLabel(tr("Location of quarantine files directory"));
     labelLocationOfQuarantineFilesDirectory->setToolTip(tr("Chooses the location for where quarantined files are to reside."));
     horizontalLayoutLocationOfQuarantineFilesDirectory->addWidget(labelLocationOfQuarantineFilesDirectory);
-    horizontalLayoutLocationOfQuarantineFilesDirectory->addSpacerItem(new QSpacerItem(0,0, QSizePolicy::Expanding, QSizePolicy::Fixed));
+    horizontalLayoutLocationOfQuarantineFilesDirectory->addStretch(); //addSpacerItem(new QSpacerItem(0,0, QSizePolicy::Expanding, QSizePolicy::Fixed));
     lineEditLocationOfQuarantineFilesDirectory = new QLineEdit();
     horizontalLayoutLocationOfQuarantineFilesDirectory->addWidget(lineEditLocationOfQuarantineFilesDirectory);
     pushButtonLocationOfQuarantineFilesDirectory = new QPushButton();
@@ -943,7 +979,143 @@ void ConfigureDialog::options_basics_tab_init(){
             lineEditLocationOfQuarantineFilesDirectory->setText(tmp);
     });
 
-    tabBasicScrollAreaWidgetVBox->addSpacerItem(new QSpacerItem(0,0, QSizePolicy::Fixed, QSizePolicy::Expanding));
+    horizontalLayoutAutostartSetup = new QHBoxLayout();
+    tabBasicScrollAreaWidgetVBox->addLayout(horizontalLayoutAutostartSetup);
+    labelAutostartSetup = new QLabel(tr("Initialize Autostart ClamOne"));
+    labelAutostartSetup->setToolTip(tr("Install startup file (/etc/xdg/autostart/clamone.desktop) for automoatic startup."));
+    horizontalLayoutAutostartSetup->addWidget(labelAutostartSetup);
+    horizontalLayoutAutostartSetup->addStretch();
+    pushButtonAutostartSetup = new QPushButton("Install...");
+    pushButtonAutostartSetup->setFocusPolicy(Qt::NoFocus);
+    horizontalLayoutAutostartSetup->addWidget(pushButtonAutostartSetup);
+    connect(pushButtonAutostartSetup, &QPushButton::clicked, [=](){
+        QProcess::execute("pkexec", QStringList({"sh", "-c",
+            "cat << EOF > /etc/xdg/autostart/clamone.desktop\n"
+            "[Desktop Entry]\n"
+            "Encoding=UTF-8\n"
+            "Name=ClamOne\n"
+            "Comment=ClamOne - clamav frontend.\n"
+            "Icon=\n"
+            "Exec=/usr/bin/ClamOne\n"
+            "Terminal=false\n"
+            "Type=Application\n"
+            "Categories=\n"
+            "X-GNOME-Autostart-Delay=20\n"
+            "X-MATE-Autostart-Delay=20\n"
+            "Name[C]=clamone\n"
+            "EOF\n"
+            "chmod 644 /etc/xdg/autostart/clamone.desktop\n"
+            "chown root:root /etc/xdg/autostart/clamone.desktop\n"
+        }));
+    });
+
+    horizontalLayoutAutostartClamOnAccSetup = new QHBoxLayout();
+    tabBasicScrollAreaWidgetVBox->addLayout(horizontalLayoutAutostartClamOnAccSetup);
+    labelAutostartClamOnAccSetup = new QLabel(tr("Initialize Autostart ClamOnAccess"));
+    labelAutostartClamOnAccSetup->setToolTip(tr("Install systemd startup file (/lib/systemd/system/clamav-onacc.service) for automoatic startup of ClamOnAccess."));
+    horizontalLayoutAutostartClamOnAccSetup->addWidget(labelAutostartClamOnAccSetup);
+    horizontalLayoutAutostartClamOnAccSetup->addStretch();
+    pushButtonAutostartClamOnAccSetup = new QPushButton("Install...");
+    pushButtonAutostartClamOnAccSetup->setFocusPolicy(Qt::NoFocus);
+    horizontalLayoutAutostartClamOnAccSetup->addWidget(pushButtonAutostartClamOnAccSetup);
+    connect(pushButtonAutostartClamOnAccSetup, &QPushButton::clicked, [=](){
+        if(
+            (!cntOnAccessExcludeUname->getEckbox()->isChecked() || !cntOnAccessExcludeUname->getStringListWidget()->getQStringList().length())
+            &&
+            (!cntOnAccessExcludeUID->getEckbox()->isChecked() || !cntOnAccessExcludeUID->getListSpinBoxWidget()->getQListInt().length())
+            ){
+            QMessageBox::warning(this, tr("OnAccessExcludeUname or OnAccessExcludeUID Required"), tr("The field \"OnAccessExcludeUname\" or the field \"OnAccessExcludeUID\" needs to be enabled and have have entries in order for OnAccess to run. If you are unsure, try setting the OnAccessExcludeUname to have the username you placed in (Scanning >> User) in the configureation. Aborting autostart initialization..."));
+            return;
+        }
+        if(!cntOnAccessIncludePath->getEckbox()->isChecked() || !cntOnAccessIncludePath->getStringListWidget()->getQStringList().length() ){
+            QMessageBox::warning(this, tr("OnAccessIncludePath Required"), tr("The field \"OnAccessIncludePath\" needs to be enabled and have have entries in order for OnAccess to run. Aborting autostart initialization..."));
+            return;
+        }
+        QProcess::execute("pkexec", QStringList({"sh", "-c",
+            "cat << EOF > /lib/systemd/system/clamav-onacc.service\n"
+            "[Unit]\n"
+            "Description=ClamAV On Access Scanner\n"
+            "Requires=clamav-daemon.service\n"
+            "After=clamav-daemon.service syslog.target network.target\n"
+            "\n"
+            "[Service]\n"
+            "Type=simple\n"
+            "User=root\n"
+            "ExecStart=/usr/sbin/clamonacc -F\n"
+            "Restart=on-failure\n"
+            "RestartSec=120s\n"
+            "\n"
+            "[Install]\n"
+            "WantedBy=multi-user.target\n"
+            "EOF\n"
+            "chmod 644 /lib/systemd/system/clamav-onacc.service\n"
+            "chown root:root /lib/systemd/system/clamav-onacc.service\n"
+            "systemctl daemon-reload\n"
+            "systemctl enable clamav-onacc.service\n"
+            "systemctl start clamav-onacc.service\n"
+        }));
+    });
+
+    horizontalLayoutAutostartSnortSetup = new QHBoxLayout();
+    tabBasicScrollAreaWidgetVBox->addLayout(horizontalLayoutAutostartSnortSetup);
+    labelAutostartSnortSetup = new QLabel(tr("Initialize Autostart Snort"));
+    labelAutostartSnortSetup->setToolTip(tr("Install systemd startup file (/lib/systemd/system/snort@.service) for automoatic startup of Snort. Then add each network interface to the start file (i.e. snort@eth0, snort@eth1, snort@wlan0, etc)"));
+    horizontalLayoutAutostartSnortSetup->addWidget(labelAutostartSnortSetup);
+    horizontalLayoutAutostartSnortSetup->addStretch();
+    pushButtonAutostartSnortSetup = new QPushButton("Install...");
+    pushButtonAutostartSnortSetup->setFocusPolicy(Qt::NoFocus);
+    horizontalLayoutAutostartSnortSetup->addWidget(pushButtonAutostartSnortSetup);
+    connect(pushButtonAutostartSnortSetup, &QPushButton::clicked, [=](){
+        QProcess::execute("pkexec", QStringList({"sh", "-c",
+            "cat << EOF > /usr/bin/snort\n"
+            "#!/bin/sh\n"
+            "if [ -n \"\\$1\" ]; then\n"
+            "  NETRANGE=\"\\$(ip address show \"\\$1\" 2>&1 | grep \"inet \" | awk '{print \\$2}')\"\n"
+            "  while [ -z \"\\$NETRANGE\" ]; do\n"
+            "    sleep 20;\n"
+            "    NETRANGE=\"\\$(ip address show \"\\$1\" 2>&1 | grep \"inet \" | awk '{print \\$2}')\"\n"
+            "  done\n"
+            "  /usr/local/bin/snort -m 027 -d -l /var/log/snort -u snort -g snort -c /etc/snort/etc/snort.conf -S HOME_NET=[\\$NETRANGE] -i \"\\$1\"\n"
+            "fi\n"
+            "EOF\n"
+            "chown root:root /usr/bin/snort\n"
+            "chmod 755 /usr/bin/snort\n"
+            "cat << EOF > /lib/systemd/system/snort\\@.service\n"
+            "[Unit]\n"
+            "Description=Snort Network Intrusion Detection System connection to %i\n"
+            "Documentation=man:snort(8) man:snort.conf(5) https://snort.org/documents/\n"
+            "# Check for log directory existence\n"
+            "ConditionPathExists=/var/log/snort\n"
+            "\n"
+            "[Service]\n"
+            "ExecStart=/usr/bin/snort %i\n"
+            "# Reload the ruleset\n"
+            "ExecReload=/bin/kill -HUP \\$MAINPID\n"
+            "StandardOutput=syslog\n"
+            "Restart=on-failure\n"
+            "TimeoutStartSec=350\n"
+            "\n"
+            "[Install]\n"
+            "WantedBy=multi-user.target\n"
+            "EOF\n"
+            "chmod 644 /lib/systemd/system/snort\\@.service\n"
+            "chown root:root /lib/systemd/system/snort\\@.service\n"
+            "systemctl daemon-reload\n"
+            "for iface in $(ip address show | grep '^[^ ]' | awk '{print $2}' | tr -d ':' | tail -n +2); do\n"
+            "  if [ \"$(systemctl is-enabled snort@$iface)\" != \"enabled\" ]; then\n"
+            "    systemctl enable snort@$iface\n"
+            "  fi\n"
+            "  if [ \"$(systemctl is-active snort@$iface)\" != \"active\" ]; then\n"
+            "    systemctl start snort@$iface\n"
+            "  fi\n"
+            "done\n"
+            "if [ -e /etc/clamav/clamd.conf -a ! -e /usr/local/etc/clamd.conf ]; then\n"
+            "  ln -s /etc/clamav/clamd.conf /usr/local/etc/clamd.conf\n"
+            "fi\n"
+        }));
+    });
+
+    tabBasicScrollAreaWidgetVBox->addStretch();
 }
 
 void ConfigureDialog::clamd_tab_init(){
@@ -1385,7 +1557,7 @@ void ConfigureDialog::clamd_filesys_tab_init(){
     //VirusEvent
     cntVirusEvent = new LineEditPlug("VirusEvent",
                            tr("COMMAND<br />"
-                              "Execute a command when a virus is found. In the command string %v will be replaced with the virus name. Additionally, two environment variables will be defined: $CLAM_VIRUSEVENT_FILENAME and $CLAM_VIRUSEVENT_VIRUSNAME.<br />"
+                              "Execute a command when a virus is found. In the command string %v will be<br />replaced with the virus name and %f will be replaced with the file name.<br />Additionally, two environment variables will be defined: $CLAM_VIRUSEVENT_FILENAME<br />and $CLAM_VIRUSEVENT_VIRUSNAME.<br />"
                               "Default: disabled"), "/usr/bin/mailx -s \"ClamAV VIRUS ALERT: %v\" alert < /dev/null");
     tabFileSysScrollAreaWidgetVBox->addWidget(cntVirusEvent);
 
@@ -1527,7 +1699,7 @@ void ConfigureDialog::clamd_scanning_tab_init(){
     //ExcludePUA
     cntExcludePUA = new StringListWidgetPlug("ExcludePUA",
                         tr("CATEGORY<br />"
-                           "Exclude a specific PUA category. This directive can be used multiple times. See https://www.clamav.net/documents/potentially-unwanted-applications-pua for the complete list of PUA categories.<br />"
+                           "Exclude a specific PUA category. This directive can be used multiple times.<br />See https://docs.clamav.net/faq/faq-pua.html for the complete list of PUA\ncategories.<br />"
                            "Default: disabled"));
     tabScanningScrollAreaWidgetVBox->addWidget(cntExcludePUA);
 
@@ -2046,8 +2218,7 @@ void ConfigureDialog::clamd_onaccess_tab_init(){
     //OnAccessExcludeRootUID
     cntOnAccessExcludeRootUID = new CheckBoxPlug("OnAccessExcludeRootUID",
                         tr("BOOL<br />"
-                           "With this option you can whitelist the root UID (0). Processes run under root will be able to access all files without triggering scans or permission denied events.<br />"
-                           "Note that if clamd cannot check the uid of the process that generated an on-access scan event (e.g., because OnAccessPrevention was not enabled, and the process already exited), clamd will perform a scan. Thus, setting OnAccessExcludeRootUID is not guaranteed to prevent every access by the root user from triggering a scan (unless OnAccessPrevention is enabled).<br />"
+                           "Use this option to exclude the root UID (0) and allow any processes run under root to access all watched files without triggering scans.<br />"
                            "Default: no"), false);
     tabOnAccessScrollAreaWidgetVBox->addWidget(cntOnAccessExcludeRootUID);
 
@@ -2064,7 +2235,7 @@ void ConfigureDialog::clamd_onaccess_tab_init(){
     //OnAccessExcludeUname
     cntOnAccessExcludeUname = new StringListWidgetPlug("OnAccessExcludeUname",
                         tr("STRING<br />"
-                           "This option allows exclusions via user names when using the on-access scanning client. It can be used multiple times, and has the same potential race condition limitations of the OnAccessExcludeUID option.<br />"
+                           "This option allows exclusions via user names when using the on-access scanning client. It can be used multiple times, and has the same potential race condition limitations of the OnAccessExcludeUID option.<br />You may wish to set this the same as the username you set under: Scanning >> User<br />"
                            "Default: disabled"));
     tabOnAccessScrollAreaWidgetVBox->addWidget(cntOnAccessExcludeUname);
 
@@ -2702,6 +2873,48 @@ void ConfigureDialog::freshclam_misc_tab_init(){
     tabFreshMiscScrollAreaWidgetVBox->addSpacerItem(new QSpacerItem(0,0, QSizePolicy::Fixed, QSizePolicy::Expanding));
 }
 
+void ConfigureDialog::snort_tab_init(){
+    QVBoxLayout *pageSnortVBox = new QVBoxLayout();
+    pageSnort->setLayout(pageSnortVBox);
+
+    tabWidgetSnort = new QTabWidget();
+    pageSnortVBox->addWidget(tabWidgetSnort);
+}
+
+void ConfigureDialog::snort_support_tab_init(){
+    tabSnortSupport = new QWidget();
+    tabWidgetSnort->addTab(tabSnortSupport, tr("Support"));
+
+    QVBoxLayout *tabSnortSupportVBox = new QVBoxLayout();
+    tabSnortSupport->setLayout(tabSnortSupportVBox);
+
+    tabSnortSupportScrollArea = new QScrollArea();
+    tabSnortSupportScrollArea->setWidgetResizable(true);
+    tabSnortSupportVBox->addWidget(tabSnortSupportScrollArea);
+
+    tabSnortSupportScrollAreaWidget = new QWidget();
+    tabSnortSupportScrollArea->setWidget(tabSnortSupportScrollAreaWidget);
+
+    QVBoxLayout *tabSnortSupportScrollAreaWidgetVBox = new QVBoxLayout();
+    tabSnortSupportScrollAreaWidget->setLayout(tabSnortSupportScrollAreaWidgetVBox);
+
+    //Location of Snort Rules
+    cntLocationOfSnortRules = new FileDialogPlug("Location of snort rules",
+                        tr("STRING<br />"
+                        "Location in the filesystem for the rules directory, including the etc/snort.conf file<br />"
+                        "Default: /etc/snort"), "", "", QFileDialog::ShowDirsOnly);
+    tabSnortSupportScrollAreaWidgetVBox->addWidget(cntLocationOfSnortRules);
+
+    //SnortOinkcode
+    cntSnortOinkcode = new LineEditPlug("Oinkcode",
+                        tr("STRING<br />"
+                        "User code to access/update/and download snort rules from snort.org<br />"
+                        "Default: "), "");
+    tabSnortSupportScrollAreaWidgetVBox->addWidget(cntSnortOinkcode);
+
+    tabSnortSupportScrollAreaWidgetVBox->addStretch();
+}
+
 void ConfigureDialog::disableAllClamdconf(){
     //NetSock
     cntLocalSocket->getEckbox()->setChecked(false);
@@ -2890,48 +3103,11 @@ void ConfigureDialog::disableAllFreshclamconf(){
     cntFreshBytecode->getEckbox()->setChecked(false);
 
 }
-/*
-int ConfigureDialog::toClamInt(QString in){
-    if(in[in.length()-1] == "k" || in[in.length()-1] == "K"){
-        bool ok = false;
-        int base = in.mid(0, in.length()-1).toInt(&ok);
-        if(!ok)
-            return -1;
-        return base*1000;
-    }else if(in[in.length()-1] == "m" || in[in.length()-1] == "M"){
-        bool ok = false;
-        int base = in.mid(0, in.length()-1).toInt(&ok);
-        if(!ok)
-            return -1;
-        return base*1000000;
-    }else if(in[in.length()-1] == "L"){
-        bool ok = false;
-        int base = in.mid(0, in.length()-1).toInt(&ok);
-        if(!ok)
-            return -1;
-        return base;
-    }
-    bool ok = false;
-    int base = in.toInt(&ok);
-    if(ok)
-        return base;
 
-    return -1;
+void ConfigureDialog::disableAllSnort(){
+
 }
 
-QString ConfigureDialog::toClamInt(int in){
-    if(in < 0)
-        return QString();
-    if(!(in % 1000000) && in >= 1000000){
-        int ret = in / 1000000;
-        return QString::number(ret)+tr("M");
-    }else if(!(in % 1000) && in >= 1000){
-        int ret = in / 1000;
-        return QString::number(ret)+tr("K");
-    }
-    return QString::number(in);
-}
-*/
 bool ConfigureDialog::matchBoolTrue(QRegularExpression r, QByteArray l){
     return r.match(l).captured("varname").toLower() == QString("true") ||
             r.match(l).captured("varname").toLower() == QString("yes");
@@ -2962,9 +3138,11 @@ void ConfigureDialog::listen_pushButtonReloadClamAV_clicked(){
 void ConfigureDialog::listen_pushButtonCancel_clicked(){
     lineEditLocationOfClamdconf->setText("");
     lineEditLocationOfFreshclamconf->setText("");
+    cntLocationOfSnortRules->getLineEdit()->setText("");
     spinBoxEntriesPerPage->setValue(40);
     checkBoxMonitorOnAccess->setChecked(false);
     checkBoxEnableClamOneQuarantine->setChecked(false);
+    checkBoxEnableClamOneSnort->setChecked(false);
     tabWidgetClamd->setCurrentIndex(0);
     tabWidgetFreshclam->setCurrentIndex(0);
     listWidgetMain->setCurrentRow(0);
@@ -2983,14 +3161,19 @@ void ConfigureDialog::listen_pushButtonApply_clicked(){
     emit setValDB("entriesperpage", QString::number(spinBoxEntriesPerPage->value()));
     emit setValDB("monitoronaccess", (checkBoxMonitorOnAccess->isChecked())?"yes":"no");
     emit setValDB("enablequarantine", (checkBoxEnableClamOneQuarantine->isChecked())?"yes":"no");
+    emit setValDB("enablesnort", (checkBoxEnableClamOneSnort->isChecked())?"yes":"no");
     emit setValDB("maxquarantinesize", QString::number(spinBoxMaximumFileSizeToQuarantine->value()));
     emit setValDB("quarantinefilesdirectory", lineEditLocationOfQuarantineFilesDirectory->text());
+    emit setValDB("snortconf", cntLocationOfSnortRules->getLineEdit()->text());
+    emit setValDB("oinkcode", cntSnortOinkcode->getLineEdit()->text());
     emit refreshEventGeneral(0);
     emit refreshEventFound(0, true);
     emit refreshEventQuarantined(0);
     emit refreshMessages(0);
     emit refreshQuarantineDirectory();
     emit setEnabledQuarantine(checkBoxEnableClamOneQuarantine->isChecked());
+    emit setEnabledSnort(checkBoxEnableClamOneSnort->isChecked());
+    emit setEnabledMonitorOnAccess(checkBoxMonitorOnAccess->isChecked());
     QByteArray newClamdconf;
     fileUiToClamdconf(&newClamdconf);
     if(oldClamdconf != newClamdconf){

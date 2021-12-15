@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QLineEdit>
 #include <QDoubleSpinBox>
+#include <QStringLiteral>
 #include <QMenu>
 #include <QLocalSocket>
 #include <QFileInfo>
@@ -23,6 +24,8 @@
 #include <QBarSeries>
 #include <QBarSet>
 #include <QBarCategoryAxis>
+#include <QHeaderView>
+#include <QChartView>
 
 #include <QDateTimeAxis>
 #include <QValueAxis>
@@ -53,6 +56,7 @@
 
 #include <cmath>
 
+#include <QtCharts>
 #include <QtCharts/QChartView>
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
@@ -72,10 +76,6 @@
 #include "confs.h"
 #include "gUncompress.h"
 #include "CkProc.h"
-
-namespace Ui {
-class MainWindow;
-}
 
 class MainWindow : public QMainWindow
 {
@@ -106,8 +106,6 @@ class MainWindow : public QMainWindow
     };
 
 private slots:
-    void on_pushButtonTest_clicked();
-
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void allHide();
     void allShow();
@@ -145,6 +143,9 @@ private slots:
     void updateQuaramtineCount(quint32 timestamp);
     void detectedThreatListener(QString msg, QString filename);
     void setEnabledQuarantine(bool state);
+    void setEnabledSnort(bool state);
+    void updateGraphsComboBox();
+    void setEnabledOnAccess(bool state);
     quint64 getEntriesPerPage();
     void setScanActive(bool state);
     void initScanProcess(QStringList listWidgetToStringList);
@@ -198,7 +199,14 @@ private slots:
     void on_pushButtonGraphsFileQuarantineXshiftdown_clicked();
     void on_pushButtonGraphsFileQuarantineResetGraph_clicked();
 
+    void on_pushButtonGraphsSnortEventsXscaleup_clicked();
+    void on_pushButtonGraphsSnortEventsXscaledown_clicked();
+    void on_pushButtonGraphsSnortEventsXshiftup_clicked();
+    void on_pushButtonGraphsSnortEventsXshiftdown_clicked();
+    void on_pushButtonGraphsSnortEventsResetGraph_clicked();
+
     void timerSlot();
+    void timerSlotTmp();
 
     void ckScheduledScans();
     bool ckScheduledScanMatch(const int time_val, const bool ok1, const int num1, const bool ok2, const int num2, const bool ok3, const int num3);
@@ -206,6 +214,7 @@ private slots:
     void actionExit();
     void statusSetError();
     void statusSetWarn();
+    void statusSetCaution();
     void statusSetOk();
     void statusSetGrey();
     void updateSetError();
@@ -230,7 +239,80 @@ public slots:
     void threadKill();
 
 private:
-    Ui::MainWindow *ui;
+    void InitializeMainWindow();
+    void setLabelHelpMainHome();
+    void setLabelHelpMainScanning();
+    void setLabelHelpMainSchedule();
+
+    QTableWidget *tableWidgetEventGeneral;
+    QLabel *labelEventGeneralPagePosition;
+    QStackedWidget *stackedWidget;
+    QListWidget *listWidget;
+    QComboBox *comboBoxGraphsSubTitleSelector;
+    QComboBox *comboBoxLog;
+    QStackedWidget *stackedWidgetGraphs;
+    QStackedWidget *stackedWidgetEvents;
+    QLabel *labelMessagesPagePosition;
+    QTableWidget *tableWidgetMessages;
+    QLabel *labelGraphsScanedXYPosition1;
+    QLabel *labelGraphsScanedXYPosition2;
+    QChartView *chartviewScanedFiles;
+    QLabel *labelGraphsFoundXYPosition1;
+    QLabel *labelGraphsFoundXYPosition2;
+    QChartView *chartviewThreatsFound;
+    QLabel *labelGraphsQuarantineXYPosition1;
+    QLabel *labelGraphsQuarantineXYPosition2;
+    QChartView *chartviewQuarantinedFiles;
+    QLabel *labelGraphsSnortEventsXYPosition1;
+    QLabel *labelGraphsSnortEventsXYPosition2;
+    QChartView *chartviewSnortEvents;
+    QTableWidget *tableWidgetQuarantine;
+    QLabel *labelNumBlockedAttacksVal;
+    QTableWidget *tableWidgetEventFound;
+    QLabel *labelEventFoundPagePosition;
+    QLabel *labelEventQuarantinedPagePosition;
+    QTableWidget *tableWidgetEventQuarantined;
+    QPushButton *pushButtonQuarantineDelete;
+    QPushButton *pushButtonQuarantineUnQuarantine;
+    QListWidget *listWidgetSchedule;
+    QLabel *labelStatusEnabledItem1;
+    QLabel *labelStatusEnabledItem1Icon;
+    QLabel *labelStatusEnabledItem2Icon;
+    QLabel *labelStatusProtectionStateDetails;
+    QLabel *labelStatusEnabledItem3;
+    QLabel *labelStatusEnabledItem3Icon;
+    QLabel *labelStatusEnabledItem4;
+    QLabel *labelStatusEnabledItem4Icon;
+    QLabel *labelStatusEnabledItem5;
+    QLabel *labelStatusEnabledItem5Icon;
+    QLabel *labelUpdateMessage;
+    QLabel *labelUpdateMessageDetails;
+    QLabel *labelUpdateLocalDailyVal;
+    QLabel *labelUpdateLocalMainVal;
+    QLabel *labelUpdateLocalByteVal;
+    QLabel *labelUpdateRemoteVersionVal;
+    QLabel *labelUpdateLocalEngineVal;
+    QLabel *labelUpdateRemoteEngineVal;
+    QFrame *frameStatus;
+    QLabel *labelTL;
+    QLabel *labelTM;
+    QLabel *labelTR;
+    QLabel *labelStatusProtectionState;
+    QFrame *frameUpdate;
+    QListWidgetItem *quarantineListWidgetEntry;
+    QListWidgetItem *snortListWidgetEntry;
+    QPushButton *pushButtonSchedule;
+    QLabel *labelScanQuickScan;
+    QLabel *labelScanDeepScan;
+    QLabel *labelUpdateClickUpdateDefs;
+    QLabel *labelSetupAccessPrefs;
+    QLabel *labelHelpTitleSubtitle;
+    QLabel *labelHelpMain;
+    QLabel *labelSnortLocalVersionVal;
+    QLabel *labelSnortRemoteVersionVal;
+    QLabel *labelSnortLocalRulesVal;
+    QLabel *labelSnortRemoteRulesVal;
+
     QAction *statusAction;
     QAction *scanAction;
     QAction *updateAction;
@@ -243,6 +325,7 @@ private:
     QTimer *timerSchedule;
     QLocalSocket *localSocket;
     QString localSocketFilename;
+    bool dnsSuccess;
     ClamavDNSDataStruct cDns;
     ClamavDefHeader dailyDefHeader;
     ClamavDefHeader mainDefHeader;
@@ -254,6 +337,10 @@ private:
     quint64 intEventFoundPageNumber;
     quint64 intEventQuarantinedPageNumber;
     quint64 intMessagesPageNumber;
+    quint32 snort_local_version_last_lookup_timestamp;
+    quint32 snort_local_rules_last_lookup_timestamp;
+
+    QNetworkAccessManager *manager;
 
     QVector<QThread*> threads_list;
     QQueue<Quarantiner*> queue;
@@ -279,25 +366,50 @@ private:
     qreal graphs_found_xshift = 0;
     qint32 graphs_quarantine_xscale = 0;
     qreal graphs_quarantine_xshift = 0;
+    qint32 graphs_snortevents_xscale = 0;
+    qreal graphs_snortevents_xshift = 0;
+
+    QList<QByteArray> snortRVersions;
+    QByteArray snortLVersion;
+    qint64 snortRRules;
+    qint64 snortLRules;
+    QMap<QString, quint64> snort_version_map =
+        {
+            {"2.9.8.3", 2983},
+            {"2.9.11.1", 29111},
+            {"2.9.13", 29130},
+            {"2.9.14.1", 29141},
+            {"2.9.15.1", 29151},
+            {"2.9.15.1", 29151},
+            {"2.9.16", 29160},
+            {"2.9.16.1", 29161},
+            {"2.9.17", 29170},
+            {"2.9.17.1", 29171},
+            {"2.9.18", 29180},
+            {"2.9.18.1", 29181},
+            {"2.9.19", 29190},
+            {"2.9.19.1", 29191}
+        };
 
     QString getClamdLocalSocketname();
     QString getClamdLogFileName();
     QString getClamdUpdateLogFileName();
     QString getClamdDatabaseDirectoryName();
+    QString getSnortName();
     QString getValDB(QString key);
     bool setUID();
     bool requestUpdatedcDns();
     bool checkDefsHeaderDaily();
     bool checkDefsHeaderMain();
     bool checkDefsHeaderByte();
+    bool requestLocalClamdVersion();
+    bool clamdPingPongCk();
     void ckLogfileDisplay();
     QStringList ckExistsOnFs();
-    void ckProc(int *pidClamd = Q_NULLPTR, int *pidFreshclam = Q_NULLPTR, int *pidClamonacc = Q_NULLPTR);
+    void ckProc(int *pidClamd = Q_NULLPTR, int *pidFreshclam = Q_NULLPTR, int *pidClamonacc = Q_NULLPTR, int *pidSnort = Q_NULLPTR);
     quint32 clamdscanVersion(QByteArray *clamdscan_ver);
-#ifdef CLAMONE_COUNT_ITEMS_SCANNED
     void countTotalScanItems(const QStringList items, quint64 *count = Q_NULLPTR);
-    void countScanItem(const QString item, quint64 *count = Q_NULLPTR);
-#endif //CLAMONE_COUNT_ITEMS_SCANNED
+    quint64 countScanItem(const QString item);
     quint8 getQuarantineFileStatus(QString quarantine_name);
     bool getQuarantineInfo(QString quarantine_name, quint32 *timestamp, quint64 *file_size, QByteArray *file_name);
     void setErrorAVReason(QString in);
@@ -313,13 +425,15 @@ private:
     void parseScheduleHours(QString input, bool *ok1, int *num1, bool *ok2, int *num2, bool *ok3, int *num3);
     void parseScheduleMinutes(QString input, bool *ok1, int *num1, bool *ok2, int *num2, bool *ok3, int *num3);
     void parseScheduleBaseTime(QString input, bool *ok1, int *num1, bool *ok2, int *num2, bool *ok3, int *num3, int limit_min, int limit_max);
+    void snortGetRemoteVersions();
+    void snortGetLocalVersion();
+    bool compareSnortVersions();
+    void snortGetLocalTimeModifiy();
+    void snortGetRemoteTimeModifiy();
+    bool compareSnortRules();
+    qint64 snortRecurseTimestamp(const QString path, qint64 ts = 0);
     void errorMsg(QString msg = "", bool enable_exit = true);
     void exitProgram(int ret = 0);
-
-    //void *handle;
-    //PROCTAB* (*openproc_p)(int, ...);
-    //proc_t* (*readproc_p)(PROCTAB *, proc_t *);
-    //void (*closeproc_p)(PROCTAB*);
 
 protected:
     void closeEvent(QCloseEvent *event) override;

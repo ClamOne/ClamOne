@@ -17,13 +17,12 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(myMessageOutput);
 #endif
     QApplication a(argc, argv);
-    QTranslator translator(NULL);
-    if(translator.load(QLocale(), QLatin1String("co"), QLatin1String("_"), QLatin1String(":/translations")))
-        qApp->installTranslator(&translator);
+    //QTranslator translator(NULL);
+    //if(translator.load(QLocale(), QLatin1String("co"), QLatin1String("_"), QLatin1String(":/translations")))
+    //    qApp->installTranslator(&translator);
 
     MainWindow w;
     QObject::connect(&a, &QApplication::aboutToQuit, &w, &MainWindow::aboutToQuit);
-    //ConfigureDialog w;
 #ifdef CLAMONE_DEBUG
     w.show();
 #else
