@@ -58,6 +58,7 @@ signals:
     void setEnabledQuarantine(bool state);
     void setEnabledSnort(bool state);
     void setEnabledMonitorOnAccess(bool state);
+    void refreshOinkcodeContent();
 
 public:
     ConfigureDialog(QString dbLoc, QWidget *parent);
@@ -72,6 +73,7 @@ public:
     void updateLocationQuarantineFileDirectory(QString loc);
     void updateLocationSnortRules(QString loc);
     void updateSnortOinkcode(QString code);
+    void updateInstallCond();
 
 public slots:
     bool fileClamdconfToUI(QString filename);
@@ -175,6 +177,14 @@ private:
     QHBoxLayout *horizontalLayoutAutostartSetup = Q_NULLPTR;
     QLabel *labelAutostartSetup = Q_NULLPTR;
     QPushButton *pushButtonAutostartSetup = Q_NULLPTR;
+
+    QHBoxLayout *horizontalLayoutAutostartClamavDaemonSetup = Q_NULLPTR;
+    QLabel *labelAutostartClamavDaemonSetup = Q_NULLPTR;
+    QPushButton *pushButtonAutostartClamavDaemonSetup = Q_NULLPTR;
+
+    QHBoxLayout *horizontalLayoutAutostartClamavFreshclamSetup = Q_NULLPTR;
+    QLabel *labelAutostartClamavFreshclamSetup = Q_NULLPTR;
+    QPushButton *pushButtonAutostartClamavFreshclamSetup = Q_NULLPTR;
 
     QHBoxLayout *horizontalLayoutAutostartClamOnAccSetup = Q_NULLPTR;
     QLabel *labelAutostartClamOnAccSetup = Q_NULLPTR;

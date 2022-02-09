@@ -146,6 +146,7 @@ private slots:
     void setEnabledSnort(bool state);
     void updateGraphsComboBox();
     void setEnabledOnAccess(bool state);
+    void refreshOinkcode();
     quint64 getEntriesPerPage();
     void setScanActive(bool state);
     void initScanProcess(QStringList listWidgetToStringList);
@@ -312,6 +313,9 @@ private:
     QLabel *labelSnortRemoteVersionVal;
     QLabel *labelSnortLocalRulesVal;
     QLabel *labelSnortRemoteRulesVal;
+    QLabel *labelSnortExtraInfo;
+    QLabel *labelSnortExtraInfo2;
+    QLabel *labelSnortExtraInfo3;
 
     QAction *statusAction;
     QAction *scanAction;
@@ -373,23 +377,6 @@ private:
     QByteArray snortLVersion;
     qint64 snortRRules;
     qint64 snortLRules;
-    QMap<QString, quint64> snort_version_map =
-        {
-            {"2.9.8.3", 2983},
-            {"2.9.11.1", 29111},
-            {"2.9.13", 29130},
-            {"2.9.14.1", 29141},
-            {"2.9.15.1", 29151},
-            {"2.9.15.1", 29151},
-            {"2.9.16", 29160},
-            {"2.9.16.1", 29161},
-            {"2.9.17", 29170},
-            {"2.9.17.1", 29171},
-            {"2.9.18", 29180},
-            {"2.9.18.1", 29181},
-            {"2.9.19", 29190},
-            {"2.9.19.1", 29191}
-        };
 
     QString getClamdLocalSocketname();
     QString getClamdLogFileName();
@@ -426,9 +413,9 @@ private:
     void parseScheduleMinutes(QString input, bool *ok1, int *num1, bool *ok2, int *num2, bool *ok3, int *num3);
     void parseScheduleBaseTime(QString input, bool *ok1, int *num1, bool *ok2, int *num2, bool *ok3, int *num3, int limit_min, int limit_max);
     void snortGetRemoteVersions();
-    void snortGetLocalVersion();
+    bool snortGetLocalVersion();
     bool compareSnortVersions();
-    void snortGetLocalTimeModifiy();
+    bool snortGetLocalTimeModifiy();
     void snortGetRemoteTimeModifiy();
     bool compareSnortRules();
     qint64 snortRecurseTimestamp(const QString path, qint64 ts = 0);

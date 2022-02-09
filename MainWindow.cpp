@@ -1,5 +1,4 @@
 #include "MainWindow.h"
-//#include "ui_MainWindow.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -94,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(config, &ConfigureDialog::setEnabledQuarantine, this, &MainWindow::setEnabledQuarantine);
     connect(config, &ConfigureDialog::setEnabledSnort, this, &MainWindow::setEnabledSnort);
     connect(config, &ConfigureDialog::setEnabledMonitorOnAccess, this, &MainWindow::setEnabledOnAccess);
+    connect(config, &ConfigureDialog::refreshOinkcodeContent, this, &MainWindow::refreshOinkcode);
     connect(this, &MainWindow::addExclusionClamdconf, config, &ConfigureDialog::addExclusionClamdconf);
     connect(scanDialog, &ScanDialog::parseClamdscanLine, this, &MainWindow::parseClamdscanLine);
     connect(scanDialog, &ScanDialog::initScanProcess, this, &MainWindow::initScanProcess);
@@ -210,6 +210,7 @@ void MainWindow::configLaunch(){
     config->updateLocationQuarantineFileDirectory(getValDB("quarantinefilesdirectory"));
     config->updateLocationSnortRules(getValDB("snortconf"));
     config->updateSnortOinkcode(getValDB("oinkcode"));
+    config->updateInstallCond();
 }
 
 bool MainWindow::find_file(QByteArray *filepath, QString name){
@@ -1419,6 +1420,10 @@ void MainWindow::setEnabledOnAccess(bool state){
     }
 }
 
+void MainWindow::refreshOinkcode(){
+    snortGetRemoteTimeModifiy();
+}
+
 quint64 MainWindow::getEntriesPerPage(){
     qint64 entriesperpage = 40;
     QString res = getValDB("entriesperpage");
@@ -2459,6 +2464,27 @@ void MainWindow::InitializeMainWindow(){
         hline2->setFrameShape(QFrame::HLine);
         vboxSnort->addWidget(hline2);
 
+        QHBoxLayout *hboxSnort5 = new QHBoxLayout();
+        vboxSnort->addLayout(hboxSnort5);
+        labelSnortExtraInfo = new QLabel();
+        labelSnortExtraInfo->setWordWrap(true);
+        hboxSnort5->addWidget(labelSnortExtraInfo);
+        hboxSnort5->addStretch();
+
+        QHBoxLayout *hboxSnort6 = new QHBoxLayout();
+        vboxSnort->addLayout(hboxSnort6);
+        labelSnortExtraInfo2 = new QLabel();
+        labelSnortExtraInfo2->setWordWrap(true);
+        hboxSnort6->addWidget(labelSnortExtraInfo2);
+        hboxSnort6->addStretch();
+
+        QHBoxLayout *hboxSnort7 = new QHBoxLayout();
+        vboxSnort->addLayout(hboxSnort7);
+        labelSnortExtraInfo3 = new QLabel();
+        labelSnortExtraInfo3->setWordWrap(true);
+        hboxSnort7->addWidget(labelSnortExtraInfo3);
+        hboxSnort7->addStretch();
+
         vboxScrollAreaWidgetSnortContents->addStretch();
     }
 
@@ -3291,18 +3317,17 @@ void MainWindow::snortGetRemoteVersions(){
     reqTimer.start(10);
 }
 
-void MainWindow::snortGetLocalVersion(){
-    if(time(NULL) < (snort_local_version_last_lookup_timestamp + 600))
-        return;
+bool MainWindow::snortGetLocalVersion(){
+    if(time(NULL) < (snort_local_version_last_lookup_timestamp + DELTA_TIME_PEROID))
+        return compareSnortVersions();
     snort_local_version_last_lookup_timestamp = 0;
     if(getValDB("enablesnort") != "yes")
-        return;
+        return compareSnortVersions();
     snortLVersion.clear();
     QRegularExpression re("^.*Version ([0-9.]+) .*$");
     QByteArray snortPathLocation = "/usr/local/bin/snort";
     if(!find_file(&snortPathLocation, "snort") || snortPathLocation.isEmpty()){
-        compareSnortVersions();
-        return;
+        return compareSnortVersions();
     }
     QProcess snortProc;
     snortProc.start(snortPathLocation, QStringList({"--version"}));
@@ -3318,7 +3343,7 @@ void MainWindow::snortGetLocalVersion(){
             }
         }
     }
-    compareSnortVersions();
+    return compareSnortVersions();
 }
 
 bool MainWindow::compareSnortVersions(){
@@ -3357,9 +3382,9 @@ bool MainWindow::compareSnortVersions(){
 
 
 
-void MainWindow::snortGetLocalTimeModifiy(){
-    if(time(NULL) < (snort_local_rules_last_lookup_timestamp + 600))
-        return;
+bool MainWindow::snortGetLocalTimeModifiy(){
+    if(time(NULL) < (snort_local_rules_last_lookup_timestamp + DELTA_TIME_PEROID))
+        return compareSnortRules();
 
     qint64 snort_etc = snortRecurseTimestamp("/etc/snort/etc"),
             snort_preproc_rules = snortRecurseTimestamp("/etc/snort/preproc_rules"),
@@ -3369,20 +3394,26 @@ void MainWindow::snortGetLocalTimeModifiy(){
     snortLRules = qMax(snort_rules, snortLRules);
     snortLRules = qMax(snort_so_rules, snortLRules);
     snort_local_version_last_lookup_timestamp = time(NULL);
-    compareSnortRules();
+    return compareSnortRules();
 }
 
 void MainWindow::snortGetRemoteTimeModifiy(){
+    snortRRules = 0;
     if(getValDB("enablesnort") != "yes")
         return;
-    if(!snort_version_map.contains(QString(snortLVersion)))
-        return;
-    quint64 version = snort_version_map.value(QString(snortLVersion));
+    QString tmpSnortLVersion = (QString(snortLVersion).split(".").size()==4)?QString(snortLVersion):
+        ((QString(snortLVersion).split(".").size()==3)?QString(snortLVersion)+".0":"");
+    quint64 version = tmpSnortLVersion.split(".").join("").toInt();
     QString oinkcode = getValDB("oinkcode");
+
     QRegularExpressionMatch match = QRegularExpression("^[0-9a-f]{40}$").match(oinkcode);
-    if(oinkcode.isEmpty() || !match.hasMatch())
+    if(oinkcode.isEmpty() || !match.hasMatch()){
+        labelSnortExtraInfo->setText(tr("Missing Oinkcode, required to check remote version."));
+        compareSnortRules();
         return;
-    snortRRules = 0;
+    }else{
+        labelSnortExtraInfo->setText("");
+    }
     QString lastLookup = getValDB("snortremoterulests");
     QString rulesString = getValDB("snortremoterules");
     qint64 rulesNum = 0;
@@ -3462,11 +3493,12 @@ bool MainWindow::compareSnortRules(){
     }else if(snortLRules == snortRRules){
         labelSnortLocalRulesVal->setText("<b>"+ra+"</b>");
         labelSnortRemoteRulesVal->setText("<b>"+rb+"</b>");
+        return true;
     }else{
         labelSnortLocalRulesVal->setText(ra);
         labelSnortRemoteRulesVal->setText(rb);
     }
-    return true;
+    return false;
 }
 
 
@@ -3908,7 +3940,7 @@ bool MainWindow::setUID(){
 }
 
 bool MainWindow::requestUpdatedcDns(){
-    if(time(NULL) < (cDns.last_lookup_timestamp + 600))
+    if(time(NULL) < (cDns.last_lookup_timestamp + DELTA_TIME_PEROID))
         return true;
     cDns.isReset = true;
     cDns.ver_major = 0;
@@ -3949,7 +3981,7 @@ bool MainWindow::requestUpdatedcDns(){
         int num = res.toInt(&ok, 10);
         if(!ok)
             return false;
-        if(time(NULL) < (num + 7*24*3600) && num < time(NULL)){
+        if(time(NULL) < (num + DELTA_WEEK) && num < time(NULL)){
             res = getValDB("dailyver");
             int num1 = res.toInt(&ok, 10);
             if(!ok)
@@ -4191,10 +4223,6 @@ void MainWindow::timerSlot(){
         }
     }
 
-    //CLAMD OK
-    //if(!isClamdError)
-    //    labelStatusEnabledItem1Icon->setPixmap(QPixmap(":/images/check_16.png"));
-
     //FRESHCLAM NOT RUNNING
     if(rFresh < 1){
         labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/cross_16.png"));
@@ -4208,7 +4236,7 @@ void MainWindow::timerSlot(){
     }
 
     //ONACCESS NOT RUNNING
-    if(getValDB("monitoronaccess")==tr("yes") && rClamonacc < 1){
+    if(getValDB("monitoronaccess")=="yes" && rClamonacc < 1){
         labelStatusEnabledItem3->setText(tr("OnAccess"));
         labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         isClamonaccError = true;
@@ -4216,7 +4244,7 @@ void MainWindow::timerSlot(){
             statusSetError();
             labelStatusProtectionStateDetails->setText(tr("OnAccess is configured in Clam One, but currently not running."));
         }
-    }else if(getValDB("monitoronaccess")==tr("yes")){
+    }else if(getValDB("monitoronaccess")=="yes"){
         labelStatusEnabledItem3->setText(tr("OnAccess"));
         labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/check_16.png"));
     }else{
@@ -4224,17 +4252,45 @@ void MainWindow::timerSlot(){
     }
 
     //SNORT NOT RUNNING
-    if(getValDB("enablesnort")==tr("yes") && rSnort < 1){
-        labelStatusEnabledItem5->setText(tr("Snort Network Intrusion Detection System"));
-        labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/cross_16.png"));
-        isSnortError = true;
-        if(!isClamdError && !isFreshclamError && !isClamonaccError){
-            statusSetError();
-            labelStatusProtectionStateDetails->setText(tr("Snort is configured in Clam One, but currently not running."));
+    if(getValDB("enablesnort")=="yes"){
+        bool snortLocalVResult = snortGetLocalVersion();
+        bool snortLocalTResult = snortGetLocalTimeModifiy();
+        if(rSnort < 1){
+            labelStatusEnabledItem5->setText(tr("Snort Network Intrusion Detection System"));
+            labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+            labelSnortExtraInfo2->setText("");
+            labelSnortExtraInfo3->setText("");
+            isSnortError = true;
+            if(!isClamdError && !isFreshclamError && !isClamonaccError){
+                statusSetError();
+                labelStatusProtectionStateDetails->setText(tr("Snort is configured in Clam One, but currently not running."));
+            }
+        }else if(!snortLocalTResult && !isClamdError && !isFreshclamError && !isClamonaccError){
+            labelStatusEnabledItem5->setText(tr("Snort Rules Not Up To Date"));
+            labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+            labelSnortExtraInfo2->setText(tr("There was a problem attempting to update the snort rules to the most current form. The IDS rules database is out-of-date"));
+            labelSnortExtraInfo3->setText("");
+            isSnortError = true;
+            if(!isClamdError && !isFreshclamError && !isClamonaccError){
+                statusSetWarn();
+                labelStatusProtectionStateDetails->setText(tr("Snort Rules Are Out Of Date"));
+            }
+        }else if(!snortLocalVResult && !isClamdError && !isFreshclamError && !isClamonaccError){
+            labelStatusEnabledItem5->setText(tr("Snort Version Not Up To Date"));
+            labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/cross_16.png"));
+            labelSnortExtraInfo2->setText("");
+            labelSnortExtraInfo3->setText(tr("There was a problem attempting to match the system version of snort to the most current form. The Snort Executable is out-of-date"));
+            isSnortError = true;
+            if(!isClamdError && !isFreshclamError && !isClamonaccError){
+                statusSetWarn();
+                labelStatusProtectionStateDetails->setText(tr("Snort Version Is Out Of Date"));
+            }
+        }else{
+            labelStatusEnabledItem5->setText(tr("Snort Network Intrusion Detection System"));
+            labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/check_16.png"));
+            labelSnortExtraInfo2->setText("");
+            labelSnortExtraInfo3->setText("");
         }
-    }else if(getValDB("enablesnort")==tr("yes")){
-        labelStatusEnabledItem5->setText(tr("Snort Network Intrusion Detection System"));
-        labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/check_16.png"));
     }else{
         setEnabledSnort(false);
     }
@@ -4328,10 +4384,10 @@ void MainWindow::timerSlot(){
         labelUpdateRemoteEngineVal->setText("");
     }
 
-    //labelUpdateLocalEngineVal
     requestLocalClamdVersion();
 
-    if(!isUpdateError && dnsSuccess &&
+    if(!isUpdateError && dnsSuccess && !labelUpdateRemoteEngineVal->text().isEmpty() &&
+            !labelUpdateLocalEngineVal->text().isEmpty() &&
             QT_VERSION_CHECK(labelUpdateRemoteEngineVal->text().split(".").at(0).toInt(),
                              labelUpdateRemoteEngineVal->text().split(".").at(1).toInt(),
                              labelUpdateRemoteEngineVal->text().split(".").at(2).toInt())
@@ -4389,9 +4445,6 @@ void MainWindow::timerSlot(){
         }
     }
 
-    snortGetLocalVersion();
-    snortGetLocalTimeModifiy();
-
     if(isClamdError || isFreshclamError || isClamonaccError || isSnortError || isUpdateError || isActiveThreatDetected)
         return;
 
@@ -4434,24 +4487,24 @@ void MainWindow::timerSlotTmp(){
         labelStatusEnabledItem2Icon->setPixmap(QPixmap(":/images/check_16.png"));
     }
 
-    if(getValDB("monitoronaccess")==tr("yes") && rClamonacc < 1){
+    if(getValDB("monitoronaccess")=="yes" && rClamonacc < 1){
         clevel |= CLAMONE_ERROR;
         labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         if(mainMessageString.isEmpty())
             mainMessageString = tr("OnAccess is configured in Clam One, but currently not running.");
-    }else if(getValDB("monitoronaccess")==tr("yes")){ //OnAccess Ok
+    }else if(getValDB("monitoronaccess")=="yes"){ //OnAccess Ok
         labelStatusEnabledItem3Icon->setPixmap(QPixmap(":/images/check_16.png"));
     }else{
         setEnabledOnAccess(false);
     }
 
-    if(getValDB("enablesnort")==tr("yes") && rSnort < 1){
+    if(getValDB("enablesnort")=="yes" && rSnort < 1){
         if(!(static_cast<char>(clevel) & CLAMONE_ERROR))
             clevel |= CLAMONE_ERROR;
         labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/cross_16.png"));
         if(mainMessageString.isEmpty())
             mainMessageString = tr("Snort is configured in Clam One, but currently not running.");
-    }else if(getValDB("enablesnort")==tr("yes")){ //Snort Ok
+    }else if(getValDB("enablesnort")=="yes"){ //Snort Ok
         labelStatusEnabledItem5Icon->setPixmap(QPixmap(":/images/check_16.png"));
     }else{
         setEnabledSnort(false);
