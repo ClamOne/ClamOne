@@ -3954,6 +3954,8 @@ bool MainWindow::requestUpdatedcDns(){
     cDns.bytecode_ver = 0;
     cDns.last_lookup_timestamp = 0;
 
+    bool override_error = false;
+
     QDnsLookup *dns = new QDnsLookup(this);
     QEventLoop requestLoop;
     QTimer requestTimer;
@@ -3962,6 +3964,9 @@ bool MainWindow::requestUpdatedcDns(){
 
     connect(&requestTimer, &QTimer::timeout, &requestLoop, &QEventLoop::quit);
     connect(dns, &QDnsLookup::finished,  &requestLoop, &QEventLoop::quit);
+    connect(&requestTimer, &QTimer::timeout, [=]()mutable{
+        override_error = true;
+    });
 
     requestTimer.start(5000);
 
@@ -3971,7 +3976,7 @@ bool MainWindow::requestUpdatedcDns(){
 
     requestLoop.exec();
 
-    if (dns->error() != QDnsLookup::NoError) {
+    if (dns->error() != QDnsLookup::NoError || override_error) {
         dnsSuccess = false;
         dns->deleteLater();
         QString res = getValDB("lastlookuptimestamp");
@@ -4330,7 +4335,7 @@ void MainWindow::timerSlot(){
         }
     }
     requestUpdatedcDns();
-    if(!isUpdateError && !dnsSuccess){
+    if( !isUpdateError && (!dnsSuccess || (!cDns.daily_ver && !cDns.main_ver && !cDns.bytecode_ver) ) ){
         labelStatusEnabledItem4Icon->setPixmap(QPixmap(":/images/ques_16.png"));
         labelUpdateMessage->setText(tr("Virus Definitions Check Failed."));
         labelUpdateMessageDetails->setText(tr("There was a problem attempting to lookup the DNS TXT current virus definition info. Check your internet connectivity."));
